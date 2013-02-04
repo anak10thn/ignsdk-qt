@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>js/jquery.js</file>
+        <file>js/ign.js</file>
+    </qresource>
+</RCC>

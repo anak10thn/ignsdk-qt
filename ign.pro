@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkit
+QT       += network core gui webkit
 
 TARGET = ign
 TEMPLATE = app
@@ -14,3 +14,10 @@ SOURCES += main.cpp\
         ign.cpp
 
 HEADERS  += ign.h
+
+OTHER_FILES += \
+    js/jquery.js \
+    js/ign.js
+
+RESOURCES += \
+    ign.qrc

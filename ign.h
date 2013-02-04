@@ -18,9 +18,7 @@ public:
     void show();
 public slots:
     void showMessage(const QString& msg);
-    QString quit();
-signals:
-    void quitRequested();
+    void quit();
 };
 
 #endif // IGN_H

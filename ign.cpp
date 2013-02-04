@@ -21,8 +21,6 @@ void ign::showMessage(const QString &msg)
     QMessageBox::information(0, "Information", msg);
 }
 
-QString ign::quit(){
-    emit quitRequested();
-    QString balik(system("firefox"));
-    return balik;
+void ign::quit(){
+    this->web.close();
 }

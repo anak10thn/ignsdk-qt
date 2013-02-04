@@ -20,7 +20,7 @@ ign::ign(QObject *parent)
     web.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     web.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
     web.settings()->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
-    //web.settings()->setAttribute(QWebSettings::JavascriptEnabled,true);
+    web.settings()->setAttribute(QWebSettings::JavascriptEnabled,true);
     web.settings()->setAttribute(QWebSettings::JavascriptCanOpenWindows,true);
     web.settings()->setAttribute(QWebSettings::JavascriptCanAccessClipboard,true);
     web.settings()->setAttribute(QWebSettings::JavaEnabled,true);

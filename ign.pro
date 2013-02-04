@@ -21,7 +21,16 @@ OTHER_FILES += \
     js/jquery.js \
     js/ign.js \
     examples/index.html \
-    test/index.html
+    test/index.html \
+    js/bootstrap.min.js \
+    js/bootstrap.js \
+    img/glyphicons-halflings.png \
+    img/glyphicons-halflings-white.png \
+    css/bootstrap.min.css \
+    css/bootstrap.css \
+    css/bootstrap-responsive.min.css \
+    css/bootstrap-responsive.css \
+    test/bootstrap/fluid.html
 
 RESOURCES += \
     ign.qrc

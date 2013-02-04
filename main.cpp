@@ -21,11 +21,8 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QWebView w;
-    w.load(QUrl("file:///home/igos/index.html"));
-    QWebFrame *frame = w.page()->mainFrame();
-    frame->addToJavaScriptWindowObject("ign",new ign);
+    ign w;
+    w.render(QUrl(argv[1]));
     w.show();
-    
     return a.exec();
 }

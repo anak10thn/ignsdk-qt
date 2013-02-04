@@ -6,10 +6,12 @@ ign::ign(QObject *parent)
 {
     QWebFrame *frame = web.page()->mainFrame();
     frame->addToJavaScriptWindowObject("ign",this);
+    web.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
+
 }
 
-void ign::render(QUrl w){
-    this->web.load(w);
+void ign::render(QString w){
+    this->web.load(QUrl(w));
 }
 
 void ign::show(){
@@ -23,4 +25,24 @@ void ign::showMessage(const QString &msg)
 
 void ign::quit(){
     this->web.close();
+}
+
+void ign::back(){
+    this->web.back();
+}
+
+void ign::forward(){
+    this->web.forward();
+}
+
+void ign::stop(){
+    this->web.stop();
+}
+
+void ign::reload(){
+    this->web.reload();
+}
+
+void ign::setDev(bool v){
+    this->web.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, v);
 }

@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     ign w;
-    w.render(QUrl(argv[1]));
+    w.render(argv[1]);
     w.show();
     return a.exec();
 }

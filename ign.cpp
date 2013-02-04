@@ -19,18 +19,25 @@ using namespace std;
 ign::ign(QObject *parent)
     : QObject(parent)
 {
-    QFile jqueryfile;
-    jqueryfile.setFileName(":/js/jquery.js");
-    jqueryfile.open(QIODevice::ReadOnly);
-    QString jquery = jqueryfile.readAll();
-    jqueryfile.close();
-
     frame = web.page()->mainFrame();
-
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
 
-    frame->evaluateJavaScript(jquery);
-    //frame->evaluateJavaScript("var head = document.getElementsByTagName('head')[0];var script = document.createElement('script');script.type = 'text/javascript';script.src = 'qrc:///js/jquery.js';head.appendChild(script);");
+    /*QFile jqueryfile;
+    QDir::setCurrent("/usr/share/ign-sdk");
+    jqueryfile.setFileName("js/jquery.js");
+    QString jquery;
+    //jqueryfile.setFileName("qrc:/js/jquery.js");
+    if(jqueryfile.open(QIODevice::ReadOnly)){
+        jquery = jqueryfile.readAll();
+        frame->evaluateJavaScript(jquery);
+    }
+    else{
+        QMessageBox::information(0, "Information","gagal");
+    }
+    jqueryfile.close();
+
+    frame->evaluateJavaScript("$('head').append('<script src=\"qrc:///js/jquery.js\"></script>')");
+    */
     web.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
     web.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     web.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
@@ -40,6 +47,7 @@ ign::ign(QObject *parent)
     web.settings()->setAttribute(QWebSettings::JavascriptCanAccessClipboard,true);
     web.settings()->setAttribute(QWebSettings::JavaEnabled,true);
     web.settings()->setAttribute(QWebSettings::WebGLEnabled,true);
+    web.settings()->setUserStyleSheetUrl(QUrl("file:///usr/share/ign-sdk/css/ign.css"));
     web.page()->action(QWebPage::Reload)->setVisible(false);
 
     fullscreen = false;

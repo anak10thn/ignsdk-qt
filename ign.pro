@@ -30,7 +30,7 @@ OTHER_FILES += \
     css/bootstrap.css \
     css/bootstrap-responsive.min.css \
     css/bootstrap-responsive.css \
-    test/bootstrap/fluid.html
+    test/bootstrap/index.html
 
 RESOURCES += \
     ign.qrc

@@ -19,7 +19,9 @@ HEADERS  += ign.h \
 
 OTHER_FILES += \
     js/jquery.js \
-    js/ign.js
+    js/ign.js \
+    examples/index.html \
+    test/index.html
 
 RESOURCES += \
     ign.qrc

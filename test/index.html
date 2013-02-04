@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="qrc:///js/jquery.js"></script>
+    <meta charset=utf-8 />
+    <title>JS Bin</title>
+    <script>
+      //ign.setDev(true);
+      //ign.WidgetSizeMax(200,200);
+      $(function(){
+        $('#cl').click(function(){
+          ign.quit();
+        });
+        $('#reload').click(function(){
+          ign.reload();
+        });
+        $('#render').click(function(){
+          ign.reload();
+          ign.render($(this).val());
+        });
+      })
+    </script>
+  </head>
+  <body>
+    <input type="submit" onclick="ign.showMessage('ibnu yahya')">
+    <input type="submit" id="cl" onclick="" value="Close">
+    <INPUT type="submit" id="reload" value="Reload">
+    <input type="submit" id="render" value="http://google.com">
+    <input type="submit" onclick="ign.GetFullScreen()" value="Fullscreen">
+    <div id="res"></div>
+    <a href="./index.html">index</a>
+  </body>
+</html>

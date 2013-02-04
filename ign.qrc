@@ -10,6 +10,6 @@
         <file>img/glyphicons-halflings.png</file>
         <file>js/bootstrap.js</file>
         <file>js/bootstrap.min.js</file>
-        <file>ign.css</file>
+        <file>css/ign.css</file>
     </qresource>
 </RCC>

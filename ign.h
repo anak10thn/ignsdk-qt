@@ -50,6 +50,8 @@ public slots:
     void WidgetSizeMax(int w,int h);
     void WidgetSizeMin(int w,int h);
     void GetFullScreen();
+    void showMaximized();
+    void showMinimized();
 };
 
 #endif // IGN_H

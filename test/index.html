@@ -6,27 +6,16 @@
     <title>JS Bin</title>
     <script>
       ign.setDev(true);
-      //ign.WidgetSizeMax(200,200);
-      $(function(){
-        $('#cl').click(function(){
-          ign.quit();
-        });
-        $('#reload').click(function(){
-          ign.reload();
-        });
-        $('#render').click(function(){
-          ign.reload();
-          ign.render($(this).val());
-        });
-      })
     </script>
   </head>
-  <body>
-    <input type="submit" onclick="ign.showMessage('ibnu yahya')">
-    <input type="submit" id="cl" onclick="" value="Close">
-    <INPUT type="submit" id="reload" value="Reload">
-    <input type="submit" id="render" value="http://google.com">
-    <input type="submit" onclick="ign.GetFullScreen()" value="Fullscreen">
+  <body style="background:rgba(0,0,0,0.1);">
+  <h1>Widget</h1><hr>
+    <input type="submit" onclick="ign.showMessage('ibnu yahya')"><br>
+    <input type="submit" id="cl" onclick="ign.quit()" value="Close"><br>
+    <INPUT type="submit" id="reload" onclick="ign.reload()" value="Reload Right Click Active"><br>
+    <input type="submit" onclick="ign.GetFullScreen()" value="Fullscreen"><br>
+    <input type="submit" onclick="ign.showMaximized()" value="Maximize window"><br>
+    <input type="submit" onclick="ign.showMinimized()" value="Manimize window"><br>
     <div id="res"></div>
     <a href="./index.html">index</a>
   </body>

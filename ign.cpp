@@ -77,6 +77,14 @@ void ign::show(){
     this->web.show();
 }
 
+void ign::showMaximized(){
+    this->web.showMaximized();
+}
+
+void ign::showMinimized(){
+    this->web.showMinimized();
+}
+
 void ign::showMessage(const QString &msg)
 {
     QMessageBox::information(0, "Information", msg);

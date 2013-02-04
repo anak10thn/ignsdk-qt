@@ -27,10 +27,23 @@ ign::ign(QObject *parent)
     web.settings()->setAttribute(QWebSettings::WebGLEnabled,true);
     web.page()->action(QWebPage::Reload)->setVisible(false);
 
+    fullscreen = false;
+
 }
 
 void ign::ignJS(){
     this->frame->addToJavaScriptWindowObject("ign",this);
+}
+
+void ign::GetFullScreen(){
+    if(this->fullscreen){
+        this->web.showNormal();
+        this->fullscreen = false;
+    }
+    else{
+        this->web.showFullScreen();
+        this->fullscreen = true;
+    }
 }
 
 void ign::render(QString w){

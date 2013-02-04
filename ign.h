@@ -18,11 +18,13 @@ class ign: public QObject
 private:
     QWebView web;
     QWebFrame *frame;
+    bool fullscreen;
 public:
     ign(QObject *parent = 0);
     void render(QString w);
     void show();
 public slots:
+    void ignJS();
     void showMessage(const QString& msg);
     void setDev(bool v);
     void quit();
@@ -32,7 +34,7 @@ public slots:
     void stop();
     void WidgetSizeMax(int w,int h);
     void WidgetSizeMin(int w,int h);
-    void ignJS();
+    void GetFullScreen();
 };
 
 #endif // IGN_H

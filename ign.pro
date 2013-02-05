@@ -31,7 +31,8 @@ OTHER_FILES += \
     css/bootstrap-responsive.css \
     test/bootstrap/index.html \
     test/widget.ign/index.html \
-    test/bootstrap.ign/index.html
+    test/bootstrap.ign/index.html \
+    README
 
 RESOURCES += \
     ign.qrc

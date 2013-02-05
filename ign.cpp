@@ -47,6 +47,7 @@ ign::ign(QObject *parent)
     web.settings()->setAttribute(QWebSettings::JavascriptCanAccessClipboard,true);
     web.settings()->setAttribute(QWebSettings::JavaEnabled,true);
     web.settings()->setAttribute(QWebSettings::WebGLEnabled,true);
+    web.settings()->setLocalStoragePath("file://~/.ignsdk");
     web.settings()->setUserStyleSheetUrl(QUrl("file:///usr/share/ign-sdk/css/ign.css"));
     web.page()->action(QWebPage::Reload)->setVisible(false);
 

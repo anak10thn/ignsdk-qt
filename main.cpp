@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
 
     ign w;
     QString opt = url;
+    opt += "/index.html";
     if(opt.isNull()){
         w.render("http://www.igos-nusantara.or.id");
     }

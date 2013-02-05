@@ -6,7 +6,7 @@
 
 QT       += network core gui webkit
 
-TARGET = ign
+TARGET = ignsdk
 TEMPLATE = app
 
 
@@ -21,7 +21,6 @@ OTHER_FILES += \
     js/jquery.js \
     js/ign.js \
     examples/index.html \
-    test/index.html \
     js/bootstrap.min.js \
     js/bootstrap.js \
     img/glyphicons-halflings.png \
@@ -30,7 +29,9 @@ OTHER_FILES += \
     css/bootstrap.css \
     css/bootstrap-responsive.min.css \
     css/bootstrap-responsive.css \
-    test/bootstrap/index.html
+    test/bootstrap/index.html \
+    test/widget.ign/index.html \
+    test/bootstrap.ign/index.html
 
 RESOURCES += \
     ign.qrc

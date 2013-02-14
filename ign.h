@@ -38,6 +38,8 @@ public:
     ign(QObject *parent = 0);
     void render(QString w);
     void show();
+    void WidgetNoFrame();
+    void WidgetTransparent();
 public slots:
     void ignJS();
     void showMessage(const QString& msg);

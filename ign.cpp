@@ -7,7 +7,7 @@ ign::ign(QObject *parent)
 {
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
-
+    //connect(frame, SIGNAL(titleChanged(const QString&)), SLOT(setWindowTitle(const QString&)));
     /*QFile jqueryfile;
     QDir::setCurrent("/usr/share/ign-sdk");
     jqueryfile.setFileName("js/jquery.js");
@@ -36,9 +36,10 @@ ign::ign(QObject *parent)
     web.settings()->setLocalStoragePath("file://~/.ignsdk");
     web.settings()->setUserStyleSheetUrl(QUrl("file:///usr/share/ign-sdk/css/ign.css"));
     web.page()->action(QWebPage::Reload)->setVisible(false);
-
+    //set fullscrean mode default to false
     fullscreen = false;
 
+    //web.setWindowOpacity(0.1);
 }
 
 void ign::ignJS(){
@@ -108,3 +109,16 @@ void ign::WidgetSizeMax(int w, int h){
 void ign::WidgetSizeMin(int w, int h){
     this->web.setMinimumSize(w,h);
 }
+
+void ign::WidgetNoFrame(){
+    this->web.setWindowFlags(Qt::FramelessWindowHint);
+}
+
+void ign::WidgetTransparent(){
+    QPalette pal = this->web.palette();
+    pal.setBrush(QPalette::Base, Qt::transparent);
+    this->web.setPalette(pal);
+    this->web.setAttribute(Qt::WA_OpaquePaintEvent, false);
+    this->web.setAttribute(Qt::WA_TranslucentBackground, true);
+}
+

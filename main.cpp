@@ -8,15 +8,28 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    ign w;
+    static int verbose_flag;
     char *url = NULL;
     bool dev = false;
     int index;
     int c;
 
     opterr = 0;
+    static struct option long_options[] =
+                 {
+                   {"verbose", no_argument,       &verbose_flag, 1},
+                   {"brief",   no_argument,       &verbose_flag, 0},
+                   {"dev",     no_argument,       0, 'd'},
+                   {"transparent",  no_argument,       0, 't'},
+                   {"noFrame",  no_argument,       0, 'f'},
+                   {"url",      required_argument, 0, 'u'},
+                   {0, 0, 0, 0}
+                 };
 
-           while ((c = getopt (argc, argv, "du:")) != -1){
+               int option_index = 0;
+
+           while ((c = getopt_long (argc, argv, "dftu:",long_options,&option_index)) != -1){
              switch (c)
                {
                case 'u':
@@ -24,7 +37,14 @@ int main(int argc, char *argv[])
                  break;
                case 'd':
                  dev = true;
+                  w.setDev(dev);
                  break;
+               case 'f':
+                 w.WidgetNoFrame();
+               break;
+               case 't':
+                 w.WidgetTransparent();
+               break;
                case '?':
                  if (optopt == 'c')
                    fprintf (stderr, "Option -%c requires an argument.\n", optopt);
@@ -44,7 +64,6 @@ int main(int argc, char *argv[])
        printf ("Non-option argument %s\n", argv[index]);
     }
 
-    ign w;
     QString opt = url;
     opt += "/index.html";
     if(opt.isNull()){
@@ -52,10 +71,6 @@ int main(int argc, char *argv[])
     }
     else{
         w.render(opt);
-    }
-
-    if(dev){
-        w.setDev(dev);
     }
     w.show();
     return a.exec();

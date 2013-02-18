@@ -26,7 +26,7 @@
     <INPUT class="btn btn-primary" type="submit" onclick="ign.reload()" value="Reload Right Click Active">
     <input class="btn btn-primary" type="submit" onclick="ign.GetFullScreen()" value="Fullscreen">
     <input class="btn btn-primary" type="submit" onclick="ign.showMaximized()" value="Maximize window">
-    <input class="btn btn-primary" type="submit" onclick="ign.showMinimized()" value="Minimize window">
+    <input class="btn btn-primary" type="submit" onclick="ign.showMinimized()" value="Manimize window">
     <br><br>
     <input type='text' id='inputval' value='cat /etc/ign-release'>
     <input class="btn btn-primary" type="submit" id="req" value="cli Output">

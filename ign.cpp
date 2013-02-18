@@ -122,3 +122,9 @@ void ign::WidgetTransparent(){
     this->web.setAttribute(Qt::WA_TranslucentBackground, true);
 }
 
+QString ign::cliOut(const QString& cli){
+    QProcess os;
+    os.start(cli);
+    os.waitForFinished(-1);
+    return os.readAllStandardOutput();
+}

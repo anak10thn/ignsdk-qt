@@ -54,6 +54,7 @@ public slots:
     void GetFullScreen();
     void showMaximized();
     void showMinimized();
+    QString cliOut(const QString& cli);
 };
 
 #endif // IGN_H

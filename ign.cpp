@@ -35,7 +35,11 @@ ign::ign(QObject *parent)
     web.settings()->setAttribute(QWebSettings::WebGLEnabled,true);
     web.settings()->setLocalStoragePath("file://~/.ignsdk");
     web.settings()->setUserStyleSheetUrl(QUrl("file:///usr/share/ign-sdk/css/ign.css"));
+    //config mode disable
+    web.page()->action(QWebPage::Back)->setVisible(false);
+    web.page()->action(QWebPage::Forward)->setVisible(false);
     web.page()->action(QWebPage::Reload)->setVisible(false);
+    web.page()->action(QWebPage::Stop)->setVisible(false);
     //set fullscrean mode default to false
     fullscreen = false;
 
@@ -46,7 +50,7 @@ void ign::ignJS(){
     this->frame->addToJavaScriptWindowObject("ign",this);
 }
 
-void ign::GetFullScreen(){
+void ign::getToggleFullScreen(){
     if(this->fullscreen){
         this->web.showNormal();
         this->fullscreen = false;
@@ -83,18 +87,18 @@ void ign::quit(){
 }
 
 void ign::Back(){
-    this->web.page()->action(QWebPage::Back)->isEnabled();
+    this->web.page()->action(QWebPage::Back)->setVisible(true);
 }
 
 void ign::Forward(){
     this->web.page()->action(QWebPage::Forward)->setVisible(true);
 }
 
-void ign::stop(){
+void ign::Stop(){
     this->web.page()->action(QWebPage::Stop)->setVisible(true);
 }
 
-void ign::reload(){
+void ign::Reload(){
     this->web.page()->action(QWebPage::Reload)->setVisible(true);
 }
 
@@ -128,3 +132,36 @@ QString ign::cliOut(const QString& cli){
     os.waitForFinished(-1);
     return os.readAllStandardOutput();
 }
+
+void ign::mousePressEvent(QMouseEvent *event)
+{
+    qDebug()<<event->type();
+}
+
+
+/*void ign::mousePressEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        QMessageBox::information(0, "Information", "press");
+        mMoving = true;
+        mLastMousePosition = event->pos();
+    }
+}
+
+void ign::mouseMoveEvent(QMouseEvent *event)
+{
+    if( event->buttons().testFlag(Qt::LeftButton) && mMoving)
+    {
+        this->web.move(this->web.pos() + (event->pos() - mLastMousePosition));
+        mLastMousePosition = event->pos();
+    }
+}
+
+void ign::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton)
+    {
+        mMoving = false;
+    }
+}*/

@@ -11,5 +11,7 @@
         <file>js/bootstrap.js</file>
         <file>js/bootstrap.min.js</file>
         <file>css/ign.css</file>
+        <file>js/skulpt.js</file>
+        <file>js/builtin.js</file>
     </qresource>
 </RCC>

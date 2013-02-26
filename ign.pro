@@ -33,7 +33,9 @@ OTHER_FILES += \
     test/widget.ign/index.html \
     test/bootstrap.ign/index.html \
     README.md \
-    css/ign.css
+    css/ign.css \
+    js/skulpt.js \
+    js/builtin.js
 
 RESOURCES += \
     ign.qrc

@@ -1,13 +1,12 @@
-##IGN SDK##
-#Author#
+#IGN SDK#
+##Author##
 Ibnu Yahya (anak10thn@gmail.com)
-#Contributor#
-*Doc :
+##Contributor Wiki##
 Eko Yunianto (eyeyunianto@gmail.com)
-*Debian Version (https://github.com/ubunteroz/ignsdk-debian) :
+##Contributor IGNSDK For Debian (https://github.com/ubunteroz/ignsdk-debian)##
 Surya Handika Putratama (ubunteroz@gmail.com)
-#Build#
-`$sudo yum install qt-devel qtwebkit-devel`
-`$cd ign-sdk-directory`
-`$qmake`
-`$make`
+##Build##
+* `$sudo yum install qt-devel qtwebkit-devel`
+* `$cd ign-sdk-directory`
+* `$qmake`
+* `$make`

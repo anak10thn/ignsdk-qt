@@ -1,6 +1,6 @@
 #IGN SDK#
 ##Author##
-Ibnu Yahya (anak10thn@gmail.com)
+Eka Tresna Irawan/Ibnu Yahya (anak10thn@gmail.com)
 ##Contributor Wiki##
 * Eko Yunianto (eyeyunianto@gmail.com)
 

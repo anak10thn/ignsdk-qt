@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
                int option_index = 0;
 
-           while ((c = getopt_long (argc, argv, "dnhf:tp:",long_options,&option_index)) != -1){
+           while ((c = getopt_long (argc, argv, "vdnhf:tp:",long_options,&option_index)) != -1){
              switch (c)
                {
                case 'p':

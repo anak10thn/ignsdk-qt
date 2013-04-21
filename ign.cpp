@@ -1,5 +1,14 @@
 //ibnu.yahya@toroo.org
+
 #include "ign.h"
+#include "cmath"
+#include <QtCore/QVariant>
+#include <qjson/parser.h>
+#include <qjson/parserrunnable.h>
+#include <qjson/serializer.h>
+#include <qjson/serializerrunnable.h>
+#include <qjson/qjson_export.h>
+#include <qjson/qobjecthelper.h>
 #include <iostream>
 using namespace std;
 ign::ign(QObject *parent)
@@ -62,7 +71,7 @@ void ign::getToggleFullScreen(){
 }
 
 void ign::render(QString w){
-    this->web.load(QUrl(w));
+     this->web.load(QUrl(w));
 }
 
 void ign::show(){
@@ -138,6 +147,59 @@ void ign::mousePressEvent(QMouseEvent *event)
     qDebug()<<event->type();
 }
 
+void ign::config(QString path){
+    QFile config_file;
+    QDir::setCurrent(path);
+    config_file.setFileName("ignsdk.json");
+    QByteArray config;
+    if(config_file.open(QIODevice::ReadOnly)){
+        config = config_file.readAll();
+        QJson::Parser parse;
+        bool ok;
+
+        QVariantMap result = parse.parse(config, &ok).toMap();
+        if (!ok) {
+          qFatal("An error occurred during parsing");
+          exit (1);
+        }
+
+        QVariantMap configure = result["config"].toMap();
+
+        if(configure["debug"].toBool()){
+            this->setDev(true);
+        }
+        QVariantMap window = result["window"].toMap();
+        if(window["transparent"].toBool()){
+            this->WidgetTransparent();
+        }
+        if(window["noframe"].toBool()){
+            this->WidgetNoFrame();
+        }
+        if(window["fullscreen"].toBool()){
+            this->getToggleFullScreen();
+        }
+
+        foreach (QVariant button, result["button"].toList()) {
+
+          if (button.toString() == "back"){
+              this->Back();
+          }
+          if (button.toString() == "forward"){
+              this->Forward();
+          }
+          if (button.toString() == "stop"){
+              this->Stop();
+          }
+          if (button.toString() == "reload"){
+              this->Reload();
+          }
+
+        }
+
+    }
+
+    config_file.close();
+}
 
 /*void ign::mousePressEvent(QMouseEvent *event)
 {

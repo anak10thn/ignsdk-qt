@@ -39,3 +39,4 @@ OTHER_FILES += \
 
 RESOURCES += \
     ign.qrc
+LIBS += -L/usr/lib -lqjson

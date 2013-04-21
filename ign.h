@@ -27,6 +27,7 @@
 #include <QtWebKit/QWebSettings>
 #include <QSize>
 #include <QtGui>
+#include <QVariant>
 
 class ign: public QObject
 {
@@ -64,6 +65,7 @@ public slots:
     void showMaximized();
     void showMinimized();
     QString cliOut(const QString& cli);
+    void config(QString path);
 };
 
 #endif // IGN_H

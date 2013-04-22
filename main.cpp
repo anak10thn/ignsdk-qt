@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     int index;
     int c;
     char version[] = "version 1.0.1 status experiment";
-    char help[] = "Usage: ignsdk -u [PROJECT DIRECTORY]\n\nGeneral Options :\n--version\toutput version information and exit\n--dev\t\tWeb Inspector Enable\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n";
+    char help[] = "Usage: ignsdk -p [PROJECT DIRECTORY]\n\nGeneral Options :\n--version\toutput version information and exit\n--dev\t\tWeb Inspector Enable\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n";
     opterr = 0;
     static struct option long_options[] =
                  {
@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
                  if (optopt == 'c')
                    fprintf (stderr, "Option -%c requires an argument.\n", optopt);
                  else if (isprint (optopt))
-                   fprintf (stderr, "Unknown option `-%c'.\n\nUsage: ignsdk -u [PROJECT DIRECTORY]\n\nGeneral Options :\n--version\toutput version information and exit\n--dev\t\tWeb Inspector Enable\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n", optopt);
+                   fprintf (stderr, "Unknown option `-%c'.\n\nUsage: ignsdk -p [PROJECT DIRECTORY]\n\nGeneral Options :\n--version\toutput version information and exit\n--dev\t\tWeb Inspector Enable\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n", optopt);
                  else
                    fprintf (stderr,
                             "Unknown option character `\\x%x'.\n",

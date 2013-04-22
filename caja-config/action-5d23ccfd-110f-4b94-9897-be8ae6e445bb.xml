@@ -50,7 +50,7 @@
     <entry>
       <key>profile-zero/path</key>
       <value>
-        <string>ignsdk -u </string>
+        <string>ignsdk -p </string>
       </value>
     </entry>
     <entry>

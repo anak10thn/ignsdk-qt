@@ -5,7 +5,7 @@ Release:13.4.22
 License:WTFPL
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
-Source0:%{name}-master.xz
+Source0:%{name}-master.zip
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:qt
 Requires:qtwebkit
@@ -14,7 +14,7 @@ Requires:qtwebkit
 IGN Software Development Kit
 
 %prep
-%setup -q -n %{name}-master
+%setup -q -n %{name}-qt-master
 
 %install
 install -d -m 755 $RPM_BUILD_ROOT/usr/bin

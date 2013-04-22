@@ -1,6 +1,7 @@
 //ibnu.yahya@toroo.org
 
 #include "ign.h"
+#include "fs.h"
 #include "cmath"
 #include <QtCore/QVariant>
 #include <qjson/parser.h>
@@ -41,8 +42,15 @@ ign::ign(QObject *parent)
     web.settings()->setAttribute(QWebSettings::JavascriptCanOpenWindows,true);
     web.settings()->setAttribute(QWebSettings::JavascriptCanAccessClipboard,true);
     web.settings()->setAttribute(QWebSettings::JavaEnabled,true);
+    web.settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled,true);
     web.settings()->setAttribute(QWebSettings::WebGLEnabled,true);
-    web.settings()->setLocalStoragePath("file://~/.ignsdk");
+    //webstorage
+    QString home = QDir::homePath();
+    home += "/.ignsdk";
+    web.settings()->setLocalStoragePath(home);
+    web.settings()->enablePersistentStorage(home);
+    web.settings()->setOfflineWebApplicationCachePath(home);
+    //stylesheet default
     web.settings()->setUserStyleSheetUrl(QUrl("file:///usr/share/ign-sdk/css/ign.css"));
     //config mode disable
     web.page()->action(QWebPage::Back)->setVisible(false);
@@ -57,8 +65,9 @@ ign::ign(QObject *parent)
 
 void ign::ignJS(){
     this->frame->addToJavaScriptWindowObject("ign",this);
+    //fs filesystem;
+    //this->frame->addToJavaScriptWindowObject("fs",filesystem);
 }
-
 void ign::getToggleFullScreen(){
     if(this->fullscreen){
         this->web.showNormal();
@@ -67,6 +76,17 @@ void ign::getToggleFullScreen(){
     else{
         this->web.showFullScreen();
         this->fullscreen = true;
+    }
+}
+
+void ign::getFullScreen(bool screen){
+    if(screen){
+        this->web.showFullScreen();
+        this->fullscreen = true;
+    }
+    else {
+        this->web.showNormal();
+        this->fullscreen = false;
     }
 }
 

@@ -7,12 +7,12 @@ class fs : public QObject
 {
     Q_OBJECT
 public:
-    explicit fs(QObject *parent = 0);
-    
+    fs(QObject *parent = 0);
+
 signals:
-    
+
 public slots:
-    
+    void file();
 };
 
 #endif // FS_H

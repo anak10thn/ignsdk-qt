@@ -1,11 +1,11 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:a1.0.1
-Release:13.2.18
+Version:b1.0.1
+Release:13.4.22
 License:WTFPL
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
-Source0:%{name}-master.zip
+Source0:%{name}-master.xz
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:qt
 Requires:qtwebkit
@@ -14,7 +14,7 @@ Requires:qtwebkit
 IGN Software Development Kit
 
 %prep
-%setup -q -n %{name}-qt-master
+%setup -q -n %{name}-master
 
 %install
 install -d -m 755 $RPM_BUILD_ROOT/usr/bin
@@ -37,5 +37,6 @@ rm -rf $RPM_BUILD_ROOT
 %config %attr(0755,root,root) /usr/share/ign-sdk/*
 
 %changelog
+* Sun Mar 22 2013 ibnu yahya <linux@toroo.org>
 * Mon Feb 18 2013 ibnu yahya <linux@toroo.org>
 - First Build

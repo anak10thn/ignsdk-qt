@@ -15,7 +15,7 @@
 //      by ibnu.yahya@toroo.org
 #ifndef IGN_H
 #define IGN_H
-
+#include "fs.h"
 #include <QtGui/QMainWindow>
 #include <QWidget>
 #include <QLayout>
@@ -62,6 +62,7 @@ public slots:
     void WidgetSizeMax(int w,int h);
     void WidgetSizeMin(int w,int h);
     void getToggleFullScreen();
+    void getFullScreen(bool screen);
     void showMaximized();
     void showMinimized();
     QString cliOut(const QString& cli);

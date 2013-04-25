@@ -34,6 +34,7 @@ ign::ign(QObject *parent)
 
     frame->evaluateJavaScript("$('head').append('<script src=\"qrc:///js/jquery.js\"></script>')");
     */
+    QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
     web.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
     web.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
     web.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
@@ -143,6 +144,10 @@ void ign::WidgetSizeMin(int w, int h){
     this->web.setMinimumSize(w,h);
 }
 
+void ign::WidgetSize(int w, int h){
+    this->web.resize(w,h);
+}
+
 void ign::WidgetNoFrame(){
     this->web.setWindowFlags(Qt::FramelessWindowHint);
 }
@@ -197,6 +202,11 @@ void ign::config(QString path){
         }
         if(window["fullscreen"].toBool()){
             this->getToggleFullScreen();
+        }
+        if(window["width"].toInt() != 0){
+            if(window["height"].toInt() != 0){
+                this->WidgetSize(window["width"].toInt(),window["height"].toInt());
+            }
         }
 
         foreach (QVariant button, result["button"].toList()) {

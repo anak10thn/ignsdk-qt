@@ -19,12 +19,10 @@
 #include <QtGui/QMainWindow>
 #include <QWidget>
 #include <QLayout>
-#include <QtWebKit/QWebView>
 #include <QObject>
 #include <QMessageBox>
-#include <QtWebKit/QWebFrame>
 #include <QProcess>
-#include <QtWebKit/QWebSettings>
+#include <QtWebKit>
 #include <QSize>
 #include <QtGui>
 #include <QVariant>
@@ -61,6 +59,7 @@ public slots:
     void Stop();
     void WidgetSizeMax(int w,int h);
     void WidgetSizeMin(int w,int h);
+    void WidgetSize(int w,int h);
     void getToggleFullScreen();
     void getFullScreen(bool screen);
     void showMaximized();

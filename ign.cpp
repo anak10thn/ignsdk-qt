@@ -280,12 +280,11 @@ void ign::download_signal(qint64 recieved, qint64 total){
     QString t = QString::number(total);
     float pr = (r.toFloat()/t.toFloat())*100;
     qDebug() << recieved << total << pr;
-    //QString prs = pr.toString;
-    //qDebug() << prs;
-    //QString idx = this->id;
-    /*frame->evaluateJavaScript("document.getElementById('"+idx+"').value='"+r+"';");
-    frame->evaluateJavaScript("document.getElementById('"+idx+"').setAttribute('max','"+t+"')")*/
-    //frame->evaluateJavaScript("$('"+idx+" > span').css('width','2.3%');");
+    QString prs = QString::number(pr,'g',5);
+    qDebug() << prs;
+    QString idx = this->id;
+    frame->evaluateJavaScript("document.getElementById('"+idx+"').setAttribute('style','width : "+prs+"%')");
+
 }
 
 /*void ign::mousePressEvent(QMouseEvent *event)

@@ -279,7 +279,6 @@ void ign::download_signal(qint64 recieved, qint64 total){
     QString r = QString::number(recieved);
     QString t = QString::number(total);
     float pr = (r.toFloat()/t.toFloat())*100;
-    qDebug() << recieved << total << pr;
     QString prs = QString::number(pr,'g',5);
     qDebug() << prs;
     QString idx = this->id;

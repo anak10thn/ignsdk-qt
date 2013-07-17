@@ -9,3 +9,12 @@ fs::fs(QObject *parent) :
 void fs::file(){
 
 }
+
+QString fs::app_dir_path(){
+    return QApplication::applicationDirPath();
+}
+
+QString fs::home_path(){
+    QString home = QDir::homePath();
+    return home;
+}

@@ -16,6 +16,7 @@
 #ifndef IGN_H
 #define IGN_H
 #include "fs.h"
+#include "igndownload.h"
 #include <QtGui/QMainWindow>
 #include <QWidget>
 #include <QLayout>
@@ -26,6 +27,7 @@
 #include <QSize>
 #include <QtGui>
 #include <QVariant>
+#include <QCryptographicHash>
 
 class ign: public QObject
 {
@@ -34,7 +36,9 @@ private:
     QWebView web;
     QWebFrame *frame;
     bool fullscreen;
-
+    fs *filesystem;
+    QtDownload *dl;
+    QString id;
     QPoint mLastMousePosition;
     bool mMoving;
 public:
@@ -50,13 +54,17 @@ protected:
 
 public slots:
     void ignJS();
+    //ign message
     void showMessage(const QString& msg);
+    //ign developer mode
     void setDev(bool v);
+    //ign signal
     void quit();
     void Back();
     void Forward();
     void Reload();
     void Stop();
+    //ign window function
     void WidgetSizeMax(int w,int h);
     void WidgetSizeMin(int w,int h);
     void WidgetSize(int w,int h);
@@ -64,8 +72,20 @@ public slots:
     void getFullScreen(bool screen);
     void showMaximized();
     void showMinimized();
+    //ign system
     QString cliOut(const QString& cli);
+    //ign manifest
     void config(QString path);
+    //ign settings
+    void websecurity(bool c);
+    //ign filesystem
+    QString homePath();
+    //ign network
+    void saveFile(const QByteArray &data, QString filename, QString path);
+    void download(QString data, QString path, QString id);
+    void download_signal(qint64 recieved, qint64 total);
+    //hash function
+    QString hash(const QString& data, QString hash_func);
 };
 
 #endif // IGN_H

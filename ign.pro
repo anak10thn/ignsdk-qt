@@ -12,10 +12,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         ign.cpp \
-    fs.cpp
+    fs.cpp \
+    igndownload.cpp
 
 HEADERS  += ign.h \
-    fs.h
+    fs.h \
+    igndownload.h
 
 OTHER_FILES += \
     js/jquery.js \

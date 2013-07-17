@@ -44,5 +44,41 @@
             ign.cliOut("xdg-open /usr/share/applications/"+app+".desktop");
         });
     };
+    
+    $.fn.download = function(url,path) {
+		var xhr = new XMLHttpRequest();
+		  xhr.open('GET', url, true);
+
+		  xhr.onprogress = function(evt){
+				 if (evt.lengthComputable) {
+				   this.val(evt.loaded);
+				   this.attr(evt.total);
+				   console.log(evt.loaded);
+				 }
+			   };
+
+		  xhr.responseType = 'arraybuffer';
+		  xhr.onreadystatechange = function(e) {
+			 if (this.status == 200) {
+				var mime = this.getResponseHeader('Content-Type');
+				var file = url.split('/');
+				var filename = file[file.length - 1];
+				console.log(this.response);
+				var byteArray = new Uint8Array(this.response);
+				var buffer;
+						for (var i = 0; i < byteArray.length; i++) {
+							buffer += String.fromCharCode(byteArray[i]);
+							
+						}
+				 
+				var base64 = window.btoa(buffer);
+				 
+				ign.saveFile(base64,filename,path);
+				 
+			 }
+		  }
+
+		  xhr.send();
+	}
 
 })( jQuery );

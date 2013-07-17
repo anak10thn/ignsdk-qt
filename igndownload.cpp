@@ -19,11 +19,15 @@ void QtDownload::setTarget(const QString &t) {
     this->target = t;
 }
 
+void QtDownload::save(const QString &s) {
+    this->saveto = s;
+}
+
 void QtDownload::downloadFinished(QNetworkReply *data) {
     QUrl file = this->target;
     QFileInfo fileInfo(file.path());
     QString fileName = fileInfo.fileName();
-    QString home = QDir::homePath();
+    QString home = this->saveto;
     home += "/"+fileName;
     QFile localFile(home);
     if (!localFile.open(QIODevice::WriteOnly))
@@ -45,5 +49,5 @@ void QtDownload::download() {
 
 void QtDownload::downloadProgress(qint64 recieved, qint64 total) {
     //qDebug() << recieved << total;
-    emit pst(recieved,total);
+    emit download_signal(recieved,total);
 }

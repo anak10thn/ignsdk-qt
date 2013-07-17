@@ -17,23 +17,19 @@ ign::ign(QObject *parent)
 {
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
-    //connect(frame, SIGNAL(titleChanged(const QString&)), SLOT(setWindowTitle(const QString&)));
-    /*QFile jqueryfile;
-    QDir::setCurrent("/usr/share/ign-sdk");
-    jqueryfile.setFileName("js/jquery.js");
+    this->filesystem = new fs;
+    this->dl = new QtDownload;
+
+    QFile jqueryfile;
+
     QString jquery;
-    //jqueryfile.setFileName("qrc:/js/jquery.js");
+    jqueryfile.setFileName(":/js/jquery.js");
     if(jqueryfile.open(QIODevice::ReadOnly)){
         jquery = jqueryfile.readAll();
         frame->evaluateJavaScript(jquery);
     }
-    else{
-        QMessageBox::information(0, "Information","gagal");
-    }
     jqueryfile.close();
 
-    frame->evaluateJavaScript("$('head').append('<script src=\"qrc:///js/jquery.js\"></script>')");
-    */
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
     web.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
     web.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
@@ -45,6 +41,7 @@ ign::ign(QObject *parent)
     web.settings()->setAttribute(QWebSettings::JavaEnabled,true);
     web.settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled,true);
     web.settings()->setAttribute(QWebSettings::WebGLEnabled,true);
+    web.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,false);
     //webstorage
     QString home = QDir::homePath();
     home += "/.ignsdk";
@@ -52,7 +49,7 @@ ign::ign(QObject *parent)
     web.settings()->enablePersistentStorage(home);
     web.settings()->setOfflineWebApplicationCachePath(home);
     //stylesheet default
-    web.settings()->setUserStyleSheetUrl(QUrl("file:///usr/share/ign-sdk/css/ign.css"));
+    web.settings()->setUserStyleSheetUrl(QUrl("qrc:/css/ign.css"));
     //config mode disable
     web.page()->action(QWebPage::Back)->setVisible(false);
     web.page()->action(QWebPage::Forward)->setVisible(false);
@@ -136,6 +133,10 @@ void ign::setDev(bool v){
     this->web.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, v);
 }
 
+void ign::websecurity(bool c){
+    web.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,c);
+}
+
 void ign::WidgetSizeMax(int w, int h){
     this->web.setMaximumSize(w,h);
 }
@@ -193,6 +194,9 @@ void ign::config(QString path){
         if(configure["debug"].toBool()){
             this->setDev(true);
         }
+        if(configure["websecurity"].toBool()){
+            this->websecurity(true);
+        }
         QVariantMap window = result["window"].toMap();
         if(window["transparent"].toBool()){
             this->WidgetTransparent();
@@ -229,6 +233,59 @@ void ign::config(QString path){
     }
 
     config_file.close();
+}
+
+QString ign::hash(const QString &data,QString hash_func){
+    QByteArray hash;
+    QByteArray byteArray = data.toLatin1();
+    if(hash_func == "md4"){
+        hash=QCryptographicHash::hash(byteArray,QCryptographicHash::Md4);
+    }
+    else if(hash_func == "md5"){
+        hash=QCryptographicHash::hash(byteArray,QCryptographicHash::Md5);
+    }
+    else if(hash_func == "sha1"){
+        hash=QCryptographicHash::hash(byteArray,QCryptographicHash::Sha1);
+    }
+
+    return hash.toHex();
+}
+
+QString ign::homePath(){
+    return this->filesystem->home_path();
+}
+
+void ign::saveFile(const QByteArray &data, QString filename, QString path){
+    QByteArray byteArray = QByteArray::fromBase64(data);
+    QString home;
+    home = path+"/"+filename;
+    QFile localFile(home);
+    if (!localFile.open(QIODevice::WriteOnly))
+        return;
+    localFile.write(byteArray);
+    localFile.close();
+}
+
+void ign::download(QString data,QString path,QString id){
+    this->dl = new QtDownload;
+    this->id = id;
+    this->dl->setTarget(data);
+    this->dl->save(path);
+    this->dl->download();
+    connect(this->dl, SIGNAL(download_signal(qint64,qint64)), this, SLOT(download_signal(qint64,qint64)));
+}
+
+void ign::download_signal(qint64 recieved, qint64 total){
+    QString r = QString::number(recieved);
+    QString t = QString::number(total);
+    float pr = (r.toFloat()/t.toFloat())*100;
+    qDebug() << recieved << total << pr;
+    //QString prs = pr.toString;
+    //qDebug() << prs;
+    //QString idx = this->id;
+    /*frame->evaluateJavaScript("document.getElementById('"+idx+"').value='"+r+"';");
+    frame->evaluateJavaScript("document.getElementById('"+idx+"').setAttribute('max','"+t+"')")*/
+    //frame->evaluateJavaScript("$('"+idx+" > span').css('width','2.3%');");
 }
 
 /*void ign::mousePressEvent(QMouseEvent *event)

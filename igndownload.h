@@ -11,15 +11,17 @@ public:
     ~QtDownload();
 
     void setTarget(const QString& t);
+    void save(const QString& s);
 
 private:
     QNetworkAccessManager manager;
     QString target;
+    QString saveto;
 
 
 signals:
     void done();
-    void pst(qint64 recieved, qint64 total);
+    void download_signal(qint64 recieved, qint64 total);
 public slots:
     void download();
     void downloadFinished(QNetworkReply* data);

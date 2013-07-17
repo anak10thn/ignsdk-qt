@@ -18,12 +18,10 @@ IGN Software Development Kit
 
 %install
 install -d -m 755 $RPM_BUILD_ROOT/usr/bin
-install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/css
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 qmake-qt4
 make
 cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
-cp -rf css/ign.css  $RPM_BUILD_ROOT/usr/share/ign-sdk/css
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -32,7 +30,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %dir 
 /usr/bin
-/usr/share/ign-sdk/css
 /usr/share/ign-sdk/test
 %config %attr(0755,root,root) /usr/share/ign-sdk/*
 

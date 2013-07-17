@@ -1,3 +1,4 @@
+//ibnu.yahya@toroo.org
 #include <QObject>
 #include <QString>
 #include <QtNetwork/QNetworkAccessManager>

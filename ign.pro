@@ -37,7 +37,9 @@ OTHER_FILES += \
     README.md \
     css/ign.css \
     js/skulpt.js \
-    js/builtin.js
+    js/builtin.js \
+    platform/ARCH/PKGBUILD \
+    platform/SPECS/ignsdk.spec
 
 RESOURCES += \
     ign.qrc

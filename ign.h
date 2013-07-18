@@ -3,6 +3,7 @@
 #define IGN_H
 #include "fs.h"
 #include "igndownload.h"
+#include "ignsql.h"
 #include <QtGui/QMainWindow>
 #include <QWidget>
 #include <QLayout>
@@ -14,6 +15,9 @@
 #include <QtGui>
 #include <QVariant>
 #include <QCryptographicHash>
+#include <QPixmap>
+#include <QSplashScreen>
+#include <QTimer>
 
 class ign: public QObject
 {
@@ -24,6 +28,7 @@ private:
     bool fullscreen;
     fs *filesystem;
     QtDownload *dl;
+    ignsql *sqldrv;
     QString id;
     QPoint mLastMousePosition;
     bool mMoving;
@@ -72,6 +77,8 @@ public slots:
     void download_signal(qint64 recieved, qint64 total);
     //hash function
     QString hash(const QString& data, QString hash_func);
+    //ign sql
+    void sql(const QString& drv, QString connect);
 };
 
 #endif // IGN_H

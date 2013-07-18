@@ -83,6 +83,7 @@ int main(int argc, char *argv[])
     }
 
     QString opt = url;
+
     if(opt.isEmpty()){
         w.render("http://www.igos-nusantara.or.id");
     }

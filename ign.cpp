@@ -19,6 +19,7 @@ ign::ign(QObject *parent)
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     this->filesystem = new fs;
     this->dl = new QtDownload;
+    this->sqldrv = new ignsql;
 
     QFile jqueryfile;
 
@@ -284,6 +285,11 @@ void ign::download_signal(qint64 recieved, qint64 total){
     QString idx = this->id;
     frame->evaluateJavaScript("document.getElementById('"+idx+"').setAttribute('style','width : "+prs+"%')");
 
+}
+
+/*IGN SQL*/
+void ign::sql(const QString &drv, QString connect){
+    this->sqldrv->driver(drv,connect);
 }
 
 /*void ign::mousePressEvent(QMouseEvent *event)

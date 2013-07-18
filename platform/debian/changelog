@@ -1,0 +1,33 @@
+ignsdk-debian (1.0.1-5) testing; urgency=low
+
+  * Integrate new class: igndownloader
+  * Various fixes
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 18 Jul 2013 13:01:26 +0700
+
+ignsdk-debian (1.0.1-4) testing; urgency=low
+
+  * Split example apps from binary package
+  * Remove unused CSS' and JS'
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 17 Jun 2013 23:22:33 +0700
+
+ignsdk-debian (1.0.1-3) unstable; urgency=low
+
+  * IGN JQuery plugin
+  * This is a beta release!
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 26 Apr 2013 11:24:12 +0700
+
+ignsdk-debian (1.0.1-2) unstable; urgency=low
+
+  * Webstorage support
+  * Many bugs were fixed
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 22 Apr 2013 19:41:14 +0700
+
+ignsdk-debian (1.0.1-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 18 Mar 2013 23:50:19 +0700

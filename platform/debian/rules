@@ -10,5 +10,7 @@ export DEB_BUILD_HARDENING_FORTIFY=1
 override_dh_auto_install:
 	dh_testdir
 	dh_testroot
+	dh_quilt_patch
 	qmake ign.pro
 	$(MAKE) INSTALL_ROOT=$$(pwd)/debian/ignsdk-debian/ install
+	dh_quilt_unpatch

@@ -1,0 +1,9 @@
+--- a/ign.pro
++++ b/ign.pro
+@@ -53,3 +53,6 @@
+ 
+ INCLUDEPATH += /lib/mysql
+ DEPENDPATH += /lib/mysql
++
++target.path = /usr/bin/
++INSTALLS += target

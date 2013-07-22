@@ -9,8 +9,7 @@
     <meta charset=utf-8 />
     <title>JS Bin</title>
     <script>
-      ign.showMaximized();
-      //ign.setDev(true);
+      ign.setDev(true);
       //ign.WidgetSizeMax(300,450);
       $(function(){
         $('#req').click(function(){
@@ -20,12 +19,12 @@
       })
     </script>
   </head>
-  <body style='background:transparent;background-color:rgba(255,255,255,0.5)'>
+  <body style='background:transparent;background-color:rgba(0,0,0,0.5)'>
   <h1>Widget</h1><hr>
     <input class="btn btn-primary" type="submit" onclick="ign.showMessage('ibnu yahya')" value="Message Box">
     <input class="btn btn-primary" type="submit" onclick="ign.quit()" value="Close">
-    <INPUT class="btn btn-primary" type="submit" onclick="ign.Reload()" value="Reload Right Click Active">
-    <input class="btn btn-primary" type="submit" onclick="ign.GetFullScreen()" value="Fullscreen">
+    <INPUT class="btn btn-primary" type="submit" onclick="ign.reload()" value="Reload Right Click Active">
+    <input class="btn btn-primary" type="submit" onclick="ign.getToggleFullScreen()" value="Fullscreen">
     <input class="btn btn-primary" type="submit" onclick="ign.showMaximized()" value="Maximize window">
     <input class="btn btn-primary" type="submit" onclick="ign.showMinimized()" value="Minimize window">
     <br><br>

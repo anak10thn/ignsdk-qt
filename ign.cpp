@@ -256,6 +256,14 @@ QString ign::homePath(){
     return this->filesystem->home_path();
 }
 
+bool ign::createFile(const QString &path, const QString &data){
+    return this->filesystem->create_file(path,data);
+}
+
+QString ign::readFile(const QString &path){
+    return this->filesystem->read_file(path);
+}
+
 void ign::saveFile(const QByteArray &data, QString filename, QString path){
     QByteArray byteArray = QByteArray::fromBase64(data);
     QString home;

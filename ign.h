@@ -72,6 +72,8 @@ public slots:
     void websecurity(bool c);
     //ign filesystem
     QString homePath();
+    bool createFile(const QString& path, const QString& data);
+    QString readFile(const QString &path);
     //ign network
     void saveFile(const QByteArray &data, QString filename, QString path);
     void download(QString data, QString path, QString id);

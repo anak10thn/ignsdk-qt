@@ -1,0 +1,12 @@
+{
+  "config" : { "debug" : true,
+    "websecurity" : true },
+  "window" : { 
+	"transparent" : false, 
+	"noframe" : false, 
+	"fullscreen" : false,
+	"width":"240", "height":"350" 
+	 },
+  "button" : [
+			]
+}

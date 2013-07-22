@@ -1,3 +1,10 @@
+ignsdk-debian (1.0.5-1) testing; urgency=low
+
+  * 1.0.5 beta 2!
+  * Fix IGNSDK API
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 23 Jul 2013 06:06:30 +0700
+
 ignsdk-debian (1.0.1-6) testing; urgency=low
 
   * Integrate new class: ignsql

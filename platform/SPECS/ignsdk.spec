@@ -1,8 +1,8 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:b1.0.1
+Version:1.0.5b2
 Release:13.4.22
-License:WTFPL
+License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
 Source0:%{name}-qt-master.zip
@@ -34,6 +34,8 @@ rm -rf $RPM_BUILD_ROOT
 %config %attr(0755,root,root) /usr/share/ign-sdk/*
 
 %changelog
+* Thu Jul 23 2013 ibnu yahya <linux@toroo.org>
+- FIX Api
 * Sun Mar 22 2013 ibnu yahya <linux@toroo.org>
 * Mon Feb 18 2013 ibnu yahya <linux@toroo.org>
 - First Build

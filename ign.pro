@@ -41,7 +41,19 @@ OTHER_FILES += \
     js/skulpt.js \
     js/builtin.js \
     platform/ARCH/PKGBUILD \
-    platform/SPECS/ignsdk.spec
+    platform/SPECS/ignsdk.spec \
+    platform/debian/README.Debian \
+    platform/debian/ignsdk-debian.dirs \
+    platform/debian/ignsdk-debian-example.install \
+    platform/debian/docs \
+    platform/debian/copyright \
+    platform/debian/control \
+    platform/debian/compat \
+    platform/debian/changelog \
+    platform/debian/rules \
+    platform/debian/source/format \
+    platform/debian/patches/series \
+    platform/debian/patches/buildtarget.diff
 
 RESOURCES += \
     ign.qrc

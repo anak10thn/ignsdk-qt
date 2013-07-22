@@ -50,10 +50,10 @@ int main(int argc, char *argv[])
                 optional = optarg;
                break;
                case 'n':
-                 w.WidgetNoFrame();
+                 w.widgetNoFrame();
                break;
                case 't':
-                 w.WidgetTransparent();
+                 w.widgetTransparent();
                break;
                case 'v':
                  printf("ignsdk %s\n",version);

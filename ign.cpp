@@ -114,19 +114,19 @@ void ign::quit(){
     this->web.close();
 }
 
-void ign::Back(){
+void ign::back(){
     this->web.page()->action(QWebPage::Back)->setVisible(true);
 }
 
-void ign::Forward(){
+void ign::forward(){
     this->web.page()->action(QWebPage::Forward)->setVisible(true);
 }
 
-void ign::Stop(){
+void ign::stop(){
     this->web.page()->action(QWebPage::Stop)->setVisible(true);
 }
 
-void ign::Reload(){
+void ign::reload(){
     this->web.page()->action(QWebPage::Reload)->setVisible(true);
 }
 
@@ -138,23 +138,23 @@ void ign::websecurity(bool c){
     web.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,c);
 }
 
-void ign::WidgetSizeMax(int w, int h){
+void ign::widgetSizeMax(int w, int h){
     this->web.setMaximumSize(w,h);
 }
 
-void ign::WidgetSizeMin(int w, int h){
+void ign::widgetSizeMin(int w, int h){
     this->web.setMinimumSize(w,h);
 }
 
-void ign::WidgetSize(int w, int h){
+void ign::widgetSize(int w, int h){
     this->web.resize(w,h);
 }
 
-void ign::WidgetNoFrame(){
+void ign::widgetNoFrame(){
     this->web.setWindowFlags(Qt::FramelessWindowHint);
 }
 
-void ign::WidgetTransparent(){
+void ign::widgetTransparent(){
     QPalette pal = this->web.palette();
     pal.setBrush(QPalette::Base, Qt::transparent);
     this->web.setPalette(pal);
@@ -200,33 +200,33 @@ void ign::config(QString path){
         }
         QVariantMap window = result["window"].toMap();
         if(window["transparent"].toBool()){
-            this->WidgetTransparent();
+            this->widgetTransparent();
         }
         if(window["noframe"].toBool()){
-            this->WidgetNoFrame();
+            this->widgetNoFrame();
         }
         if(window["fullscreen"].toBool()){
             this->getToggleFullScreen();
         }
         if(window["width"].toInt() != 0){
             if(window["height"].toInt() != 0){
-                this->WidgetSize(window["width"].toInt(),window["height"].toInt());
+                this->widgetSize(window["width"].toInt(),window["height"].toInt());
             }
         }
 
         foreach (QVariant button, result["button"].toList()) {
 
           if (button.toString() == "back"){
-              this->Back();
+              this->back();
           }
           if (button.toString() == "forward"){
-              this->Forward();
+              this->forward();
           }
           if (button.toString() == "stop"){
-              this->Stop();
+              this->stop();
           }
           if (button.toString() == "reload"){
-              this->Reload();
+              this->reload();
           }
 
         }

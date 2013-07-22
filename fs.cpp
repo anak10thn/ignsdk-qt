@@ -38,8 +38,17 @@ QString fs::read_file(const QString &path){
     QFile file(path);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
         QTextStream out(&file);
+
+        /*while(!out.atEnd()){
+            fields.append(out.readLine());
+
+        }*/
         QString data = out.readLine();
+        /*foreach (const QString text, fields){
+            qDebug() << text.toStdString();
+        }*/
         file.close();
+
         return data;
     }
 }

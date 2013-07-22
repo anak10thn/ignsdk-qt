@@ -14,7 +14,9 @@ Eka Tresna Irawan/Ibnu Yahya (anak10thn@gmail.com)
 * Maintainer : Sofyan Saputra/Iank (meongbego@gmail.com)
 
 ##Build##
-* `$sudo yum install qt-devel qtwebkit-devel qjson`
-* `$cd ign-sdk-directory`
-* `$qmake`
-* `$make`
+```
+$sudo yum install qt-devel qtwebkit-devel qjson
+$cd ign-sdk-directory
+$qmake
+$make
+```

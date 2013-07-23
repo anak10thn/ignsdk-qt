@@ -1,0 +1,18 @@
+{
+  "config" : { "debug" : true,
+  "websecurity" : true,
+  "name" : "tes ign config"
+  },
+  "window" : { 
+	"transparent" : false, 
+	"noframe" : false, 
+	"fullscreen" : false,
+	"width" : 200,
+	"height" : 100},
+  "button" : [
+			"back",
+			"forward",
+			"stop",
+			"reload"
+			]
+}

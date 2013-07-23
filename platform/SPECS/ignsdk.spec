@@ -1,6 +1,6 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.0.5b2
+Version:1.0.7b2
 Release:13.4.22
 License:BSD
 Group:System Environment/Base
@@ -36,6 +36,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Thu Jul 23 2013 ibnu yahya <linux@toroo.org>
 - FIX Api
+- change version build b2
 * Sun Mar 22 2013 ibnu yahya <linux@toroo.org>
 * Mon Feb 18 2013 ibnu yahya <linux@toroo.org>
 - First Build

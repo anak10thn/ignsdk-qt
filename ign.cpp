@@ -169,6 +169,10 @@ QString ign::cliOut(const QString& cli){
     return os.readAllStandardOutput();
 }
 
+void ign::exec(const QString &cli){
+    QProcess::startDetached("/bin/sh -c \""+cli+"\"");
+}
+
 void ign::mousePressEvent(QMouseEvent *event)
 {
     qDebug()<<event->type();

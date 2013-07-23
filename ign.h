@@ -66,6 +66,7 @@ public slots:
     void showMinimized();
     //ign system
     QString cliOut(const QString& cli);
+    void exec(const QString& cli);
     //ign manifest
     void config(QString path);
     //ign settings

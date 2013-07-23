@@ -1,6 +1,7 @@
 {
   "config" : { "debug" : true,
-    "websecurity" : true },
+    "websecurity" : true,
+    "name" : "Calculator" },
   "window" : { 
 	"transparent" : false, 
 	"noframe" : false, 

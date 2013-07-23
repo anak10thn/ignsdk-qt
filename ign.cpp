@@ -198,6 +198,9 @@ void ign::config(QString path){
         if(configure["websecurity"].toBool()){
             this->websecurity(true);
         }
+        if(configure["name"].toString() != ""){
+            this->web.setWindowTitle(configure["name"].toString());
+        }
         QVariantMap window = result["window"].toMap();
         if(window["transparent"].toBool()){
             this->widgetTransparent();

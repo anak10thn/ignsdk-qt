@@ -1,3 +1,11 @@
+ignsdk-debian (1.0.7-1) testing; urgency=low
+
+  * 1.0.7 beta 2!
+  * New class: ignnetwork
+  * New example apps
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 23 Jul 2013 08:17:10 +0700
+
 ignsdk-debian (1.0.5-1) testing; urgency=low
 
   * 1.0.5 beta 2!

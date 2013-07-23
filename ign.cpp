@@ -211,6 +211,9 @@ void ign::config(QString path){
         if(window["fullscreen"].toBool()){
             this->getToggleFullScreen();
         }
+        if(window["maximize"].toBool()){
+            this->showMaximized();
+        }
         if(window["width"].toInt() != 0){
             if(window["height"].toInt() != 0){
                 this->widgetSize(window["width"].toInt(),window["height"].toInt());

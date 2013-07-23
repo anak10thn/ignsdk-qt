@@ -4,7 +4,7 @@
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
 pkgname=ign-sdk
-pkgver=1
+pkgver=1.0.7
 pkgrel=1
 pkgdesc="IGN Software Development Kit" 
 url="https://github.com/anak10thn/ignsdk-qt"
@@ -38,13 +38,4 @@ package() {
   mv $pkgdir/usr/share/ign-sdk/LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
   
   rm -rf *.o
-  cd ../..
-  cp -rf x-ign.desktop $pkgdir/usr/share/applications/
-  cp -rf x-ign.svg $pkgdir/usr/share/applications/zip-ign/
 }
-
-
-
-
-
-

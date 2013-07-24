@@ -1,0 +1,8 @@
+ign-sdk:ign-sdk (Framework For Build Application on Igos Nusantara)
+ign-sdk:
+ign-sdk:IGN SDK API is a collection of some of the command function integrated in the operating system IGN. 
+ign-sdk:This API has several facilities in order to access multiple systems and also other facilities.  
+ign-sdk:This API was created to simplify the creation of applications on IGN
+ign-sdk:http://ignsdk.web.id/ or http://igos-nusantara.or.id/
+ign-sdk:https://github.com/anak10thn/ignsdk-qt 
+ign-sdk:SlackBuild by wajatmaka 

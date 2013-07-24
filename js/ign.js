@@ -41,7 +41,7 @@
     };
     $.fn.applaunch = function(app) {
         this.click(function(){
-            ign.cliOut("xdg-open /usr/share/applications/"+app+".desktop");
+            ign.exec(app);
         });
     };
     

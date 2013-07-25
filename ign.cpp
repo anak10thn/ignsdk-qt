@@ -191,9 +191,15 @@ void ign::exec(const QString &cli){
 
 QString ign::loadBin(const QString &script){
     QStringList list = this->pathApp.split("/");
+
+    QString pwd("");
+    char * PWD;
+    PWD = getenv ("PWD");
+    pwd.append(PWD);
+
     QString path_bin;
     if(list.at(0) != ""){
-        path_bin = QApplication::applicationDirPath()+"/"+this->pathApp;
+        path_bin = pwd+"/"+this->pathApp;
     }
     else{
         path_bin = this->pathApp;

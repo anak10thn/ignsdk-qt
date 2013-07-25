@@ -14,6 +14,7 @@
 using namespace std;
 ign::ign(QObject *parent)
     : QObject(parent)
+    , m_ignsystem(0)
 {
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
@@ -286,9 +287,8 @@ void ign::saveFile(const QByteArray &data, QString filename, QString path){
     localFile.close();
 }
 
-void ign::download(QString data,QString path,QString id){
+void ign::download(QString data,QString path){
     this->dl = new QtDownload;
-    this->id = id;
     this->dl->setTarget(data);
     this->dl->save(path);
     this->dl->download();
@@ -296,19 +296,18 @@ void ign::download(QString data,QString path,QString id){
 }
 
 void ign::download_signal(qint64 recieved, qint64 total){
-    QString r = QString::number(recieved);
-    QString t = QString::number(total);
-    float pr = (r.toFloat()/t.toFloat())*100;
-    QString prs = QString::number(pr,'g',5);
-    qDebug() << prs;
-    QString idx = this->id;
-    frame->evaluateJavaScript("document.getElementById('"+idx+"').setAttribute('style','width : "+prs+"%')");
-
+    emit downloadProgress(recieved,total);
 }
 
 /*IGN SQL*/
 void ign::sql(const QString &drv, QString connect){
     this->sqldrv->driver(drv,connect);
+}
+
+QObject *ign::sys(){
+    if(!m_ignsystem)
+        m_ignsystem = new ignsystem;
+    return m_ignsystem;
 }
 
 /*void ign::mousePressEvent(QMouseEvent *event)

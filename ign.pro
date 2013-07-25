@@ -15,13 +15,15 @@ SOURCES += main.cpp\
     fs.cpp \
     igndownload.cpp \
     ignsql.cpp \
-    ignnetwork.cpp
+    ignnetwork.cpp \
+    ignsystem.cpp
 
 HEADERS  += ign.h \
     fs.h \
     igndownload.h \
     ignsql.h \
-    ignnetwork.h
+    ignnetwork.h \
+    ignsystem.h
 
 OTHER_FILES += \
     js/jquery.js \

@@ -39,6 +39,7 @@ public:
     void show();
     void widgetNoFrame();
     void widgetTransparent();
+    QString pathApp;
 protected:
     //virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void mousePressEvent(QMouseEvent * event);
@@ -71,6 +72,7 @@ public slots:
     //ign system
     QString cliOut(const QString& cli);
     void exec(const QString& cli);
+    QString loadBin(const QString &script);
     /*void bash(QString out, QString err);*/
     //ign manifest
     void config(QString path);

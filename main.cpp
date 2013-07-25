@@ -88,6 +88,7 @@ int main(int argc, char *argv[])
         w.render("http://www.igos-nusantara.or.id");
     }
     else{
+        w.pathApp = opt;
         if(file){
             opt += "/";
             opt += optional;

@@ -189,6 +189,18 @@ void ign::exec(const QString &cli){
     os.startDetached("/bin/sh -c \""+cli+"\"");
 }
 
+QString ign::loadBin(const QString &script){
+    QStringList list = this->pathApp.split("/");
+    QString path_bin;
+    if(list.at(0) != ""){
+        path_bin = QApplication::applicationDirPath()+"/"+this->pathApp;
+    }
+    else{
+        path_bin = this->pathApp;
+    }
+    return path_bin+"/bin/"+script;
+}
+
 void ign::mousePressEvent(QMouseEvent *event)
 {
     qDebug()<<event->type();

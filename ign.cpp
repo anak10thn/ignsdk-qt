@@ -22,15 +22,7 @@ ign::ign(QObject *parent)
     this->dl = new QtDownload;
     this->sqldrv = new ignsql;
 
-    QFile jqueryfile;
 
-    QString jquery;
-    jqueryfile.setFileName(":/js/jquery.js");
-    if(jqueryfile.open(QIODevice::ReadOnly)){
-        jquery = jqueryfile.readAll();
-        frame->evaluateJavaScript(jquery);
-    }
-    jqueryfile.close();
 
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
     web.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
@@ -65,8 +57,6 @@ ign::ign(QObject *parent)
 
 void ign::ignJS(){
     this->frame->addToJavaScriptWindowObject("ign",this);
-    //fs filesystem;
-    //this->frame->addToJavaScriptWindowObject("fs",filesystem);
 }
 void ign::getToggleFullScreen(){
     if(this->fullscreen){
@@ -92,6 +82,27 @@ void ign::getFullScreen(bool screen){
 
 void ign::render(QString w){
      this->web.load(QUrl(w));
+
+    /*QFile jqueryfile;
+
+    QString jquery;
+    jqueryfile.setFileName(":/js/jquery.js");
+    if(jqueryfile.open(QIODevice::ReadOnly)){
+        jquery = jqueryfile.readAll();
+        frame->evaluateJavaScript(jquery);
+    }
+    jqueryfile.close();
+
+    QFile incJsFile;
+    QString incJs;
+    incJsFile.setFileName(":/js/include.js");
+    if(incJsFile.open(QIODevice::ReadOnly)){
+        incJs = incJsFile.readAll();
+        frame->evaluateJavaScript(incJs);
+    }
+    incJsFile.close();
+
+    frame->evaluateJavaScript("include('tes')");*/
 }
 
 void ign::show(){
@@ -166,8 +177,11 @@ void ign::widgetTransparent(){
 QString ign::cliOut(const QString& cli){
     QProcess os;
     os.start(cli);
+    int pid = os.pid();
+    qDebug() << pid;
     os.waitForFinished(-1);
     return os.readAllStandardOutput();
+
 }
 
 void ign::exec(const QString &cli){

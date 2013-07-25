@@ -46,7 +46,7 @@ protected:
 
 signals:
     void downloadProgress(qint64 recieved, qint64 total);
-
+    /*void bash(QString out, QString err);*/
 public slots:
     //main slot
     void ignJS();
@@ -71,6 +71,7 @@ public slots:
     //ign system
     QString cliOut(const QString& cli);
     void exec(const QString& cli);
+    /*void bash(QString out, QString err);*/
     //ign manifest
     void config(QString path);
     //ign settings

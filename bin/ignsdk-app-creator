@@ -1,0 +1,61 @@
+#!/bin/bash
+#  Ibnu Yahya <ibnu.yahya@toroo.org>
+TEMP=`getopt -o vdm: --long create:,dir:,width:,height:,title:,appname:,help \
+             -n 'ignsdk' -- "$@"`
+
+if [ $? != 0 ] ; then cat /usr/share/ign-sdk/help; echo "Terminating..." >&2 ; exit 1 ; fi
+
+eval set -- "$TEMP"
+
+CREATE="gtk"
+DIR="$HOME/Application"
+WIDTH="800"
+HEIGHT="600"
+TITLE="Untitle"
+APPNAME="ignsdkapp"
+HELP=false
+while true; do
+  case "$1" in
+    --create ) CREATE="$2"; shift 2;;
+    --dir ) DIR="$2"; shift 2 ;;
+    --width ) WIDTH="$2"; shift 2 ;;
+    --height ) HEIGHT="$2"; shift 2 ;;
+    --title ) TITLE="$2"; shift 2 ;;
+    --appname ) APPNAME="$2"; shift 2 ;;
+    --help ) HELP=true; shift ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+if [ $HELP == true ]
+then
+cat /usr/share/ign-sdk/help
+exit 0
+fi
+
+create_project ()
+{
+	case "$1" in
+	'gtk')
+		mkdir $2/$3.ign
+		cp -rf /usr/share/ign-sdk/src/gtk/* $2/$3.ign
+		chmod 777 -R $2/$3.ign
+		cat $2/$3.ign/ignhtml5.proj | sed s/size_widgets\(\)/w.set_default_size\($4,$5\)/g \
+		| sed s/set_title\(\)/w.set_title\(\"$6\"\)/g >$2/$3.ign/ignhtml5
+		rm -rf $2/$3.ign/ignhtml5.proj
+		chmod 777 -R $2/$3.ign/ignhtml5
+		echo "IGOS Nusantara APP has been created to $2/$3.ign....[ok]"
+	;;
+	'qt')
+		mkdir $2/$3.ign
+		cp -rf /usr/share/ign-sdk/src/qt/* $2/$3.ign
+		chmod 777 -R $2/$3.ign
+	;;
+	*)
+	break;
+	;;
+	esac
+}
+
+create_project $CREATE $DIR $APPNAME $WIDTH $HEIGHT $TITLE

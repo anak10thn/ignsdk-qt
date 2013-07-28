@@ -19,10 +19,12 @@ IGN Software Development Kit
 %install
 install -d -m 755 $RPM_BUILD_ROOT/usr/bin
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/test
+install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/template
 qmake-qt4
 make
 cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
+cp -rf template/* $RPM_BUILD_ROOT/usr/share/ign-sdk/template
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -31,9 +33,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir 
 /usr/bin
 /usr/share/ign-sdk/test
+/usr/share/ign-sdk/template
 %config %attr(0755,root,root) /usr/share/ign-sdk/*
 
 %changelog
+* Mon Jul 29 2013 ibnu yahya <linux@toroo.org>
+- ADD template
 * Thu Jul 23 2013 ibnu yahya <linux@toroo.org>
 - FIX Api
 - change version build b2

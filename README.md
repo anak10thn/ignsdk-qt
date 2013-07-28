@@ -50,3 +50,5 @@ source : http://sumilab.org/~m-sugiya/kuma/
 ###Planetarium HTML5 app###
 ![Planetarium HTML5 app](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/screenshot8.png)
 source : https://developer.mozilla.org/en-US/demos/detail/the-planetarium
+###Book Reader###
+![book reader](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/reader.png)

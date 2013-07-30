@@ -40,6 +40,7 @@ public:
     void widgetNoFrame();
     void widgetTransparent();
     QString pathApp;
+    QString version;
 protected:
     //virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void mousePressEvent(QMouseEvent * event);
@@ -97,6 +98,8 @@ public slots:
     void sql(const QString& drv, QString connect);
     //experiment
     QObject *sys();
+    //ignsdk version
+    QString sdkVersion();
 };
 
 #endif // IGN_H

@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     bool file = false;
     int index;
     int c;
-    char version[] = "version 1.0.1 status experiment";
+    bool version = false;
     char help[] = "Usage: ignsdk -p [PROJECT DIRECTORY]\n\nGeneral Options :\n--version\toutput version information and exit\n--dev\t\tWeb Inspector Enable\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n";
     opterr = 0;
     static struct option long_options[] =
@@ -56,8 +56,7 @@ int main(int argc, char *argv[])
                  w.widgetTransparent();
                break;
                case 'v':
-                 printf("ignsdk %s\n",version);
-                 exit(0);
+                 version = true;
                break;
                case 'h':
                  printf("%s\n",help);
@@ -80,6 +79,11 @@ int main(int argc, char *argv[])
 
     for (index = optind; index < argc; index++){
        printf ("Non-option argument %s\n", argv[index]);
+    }
+
+    if(version){
+        qDebug() << "IGNSDK Version : "<< w.sdkVersion();
+        exit(0);
     }
 
     QString opt = url;

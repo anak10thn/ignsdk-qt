@@ -1,6 +1,6 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.0.7b2
+Version:1.0.8
 Release:13.4.22
 License:BSD
 Group:System Environment/Base
@@ -37,6 +37,9 @@ rm -rf $RPM_BUILD_ROOT
 %config %attr(0755,root,root) /usr/share/ign-sdk/*
 
 %changelog
+* Tue Jul 30 2013 ibnu yahya <linux@toroo.org>
+- ADD dir API
+- Update File API
 * Mon Jul 29 2013 ibnu yahya <linux@toroo.org>
 - ADD template
 * Thu Jul 23 2013 ibnu yahya <linux@toroo.org>

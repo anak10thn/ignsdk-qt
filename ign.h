@@ -82,6 +82,11 @@ public slots:
     QString homePath();
     bool createFile(const QString& path, const QString& data);
     QString readFile(const QString &path);
+    bool mkdir(const QString& path);
+    bool dirExist(const QString& path);
+    bool fileExist(const QString& path);
+    bool fileRemove(const QString& path);
+    bool rmdir(const QString& path);
     //ign network
     void saveFile(const QByteArray &data, QString filename, QString path);
     void download(QString data, QString path);

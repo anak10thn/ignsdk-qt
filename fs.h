@@ -17,11 +17,12 @@ public:
 signals:
 
 public slots:
-    void file();
+    bool file(const QString& path,const QString& opt);
     QString app_dir_path();
     QString home_path();
     bool create_file(const QString& path, const QString& data);
     QString read_file(const QString& path);
+    bool dir(const QString& path, const QString& opt);
 };
 
 #endif // FS_H

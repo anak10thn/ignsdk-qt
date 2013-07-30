@@ -342,6 +342,26 @@ QObject *ign::sys(){
     return m_ignsystem;
 }
 
+bool ign::mkdir(const QString &path){
+    return this->filesystem->dir(path,"create");
+}
+
+bool ign::dirExist(const QString &path){
+    return this->filesystem->dir(path,"check");
+}
+
+bool ign::rmdir(const QString &path){
+    return this->filesystem->dir(path,"remove");
+}
+
+bool ign::fileExist(const QString &path){
+    return this->filesystem->file(path,"check");
+}
+
+bool ign::fileRemove(const QString &path){
+    return this->filesystem->file(path,"remove");
+}
+
 /*void ign::mousePressEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton)

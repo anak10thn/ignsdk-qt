@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Kuma
+Exec=/usr/bin/ignsdk -p /usr/share/ign-sdk/test/kuma.ign/
+Icon=ignsdk-kuma
+Terminal=false
+Type=Application
+Categories=Game

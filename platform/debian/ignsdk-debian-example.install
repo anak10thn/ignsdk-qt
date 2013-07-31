@@ -1,1 +1,2 @@
-test	/usr/share/ign-sdk/
+test /usr/share/ign-sdk/
+menu/ignsdk-kuma.desktop /usr/share/applications/

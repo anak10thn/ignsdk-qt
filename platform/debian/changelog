@@ -1,3 +1,10 @@
+ignsdk-debian (1.0.8.1) testing; urgency=low
+
+  * 1.0.8 release candidate 1!
+  * New APIs: file operations, loadBin, exec, sdkVersion
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Wed, 31 Jul 2013 15:09:43 +0700
+
 ignsdk-debian (1.0.7-1) testing; urgency=low
 
   * 1.0.7 beta 2!

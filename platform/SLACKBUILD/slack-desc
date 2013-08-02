@@ -5,4 +5,11 @@ ign-sdk:This API has several facilities in order to access multiple systems and 
 ign-sdk:This API was created to simplify the creation of applications on IGN
 ign-sdk:http://ignsdk.web.id/ or http://igos-nusantara.or.id/
 ign-sdk:https://github.com/anak10thn/ignsdk-qt 
-ign-sdk:SlackBuild by wajatmaka 
+ign-sdk:=====================================================================================================
+ign-sdk:IGN SDK API adalah kumpulan beberapa fungsi perintah yang di integrasikan pada sistem operasi IGN.
+ign-sdk:API ini mempunyai beberapa fasilitas untuk mengakses perintah pada sistem dan juga beberapa fasilitas yang lain. 
+ign-sdk:API ini diciptakan untuk mempermudah dalam pembuatan aplikasi pada IGN.
+ign-sdk:http://ignsdk.web.id/ or http://igos-nusantara.or.id/
+ign-sdk:https://github.com/anak10thn/ignsdk-qt
+ign-sdk:SlackBuild by wajatmaka
+ 

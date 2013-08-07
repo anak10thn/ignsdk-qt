@@ -1,0 +1,20 @@
+{
+"config" : {
+	"debug" : true ,
+	"websecurity" : true,
+	"name" : "IGN-Sudoers"
+	},
+"window" : {
+	"transparent" : false,
+	"noframe" : false,
+	"fullscreen" : false,
+	"width" : 400,
+	"height" : 650
+	},
+"button" : [
+	"back",
+	"forward",
+	"stop",
+	"reload"
+	]
+}

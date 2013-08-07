@@ -1,0 +1,103 @@
+<!--
+##IGN-sudoers##
+#version 1.0
+#IGOS Nusantara
+#IGNSDK
+#Dwiyan Galuh W	a.k.a wajatmaka
+#wajatmaka@gmail.com
+-->
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>IGN-SUDOERS</title>
+	<link rel="stylesheet" href="css/accordion.css" type="text/css" media="screen" />
+	<style type="text/css">
+	body { background: url(img/bg.png) center; margin: 0 auto;  padding: 50px }
+	.accordion { position: relative; margin: 0 auto;}
+	.footer {margin-top: 50px;text-align:center;color:#666;font:bold 14px Arial;}.footer a {color:#999;text-decoration:none;}
+	</style>
+	<script type="text/javascript" src="qrc:///js/jquery.js"></script>
+	<script type="text/javascript" src="qrc:///js/ign.js"></script>
+	<link href="qrc:///css/bootstrap.css" rel="stylesheet">
+	<script type="text/javascript">
+	    $(function(){
+			$('#jalan').applaunch('ign-sudo-igos');
+		});
+	    
+	    $(function(){
+        $('#tbh').click(function(){
+            var var_add_sudo = $('#inputval').val();
+            if (var_add_sudo==''){
+				
+            }
+            else{
+            var var_add='ign-sudoers-add ';
+        $('#res').html(ign.cliOut(var_add+var_add_sudo));}
+        });
+		})
+		
+		$(function(){
+        $('#hps').click(function(){
+            var var_rm_sudo = $('#inputval').val();
+              if (var_rm_sudo==''){
+				
+            }
+            else{
+            var var_rm='ign-sudoers-rm ';
+          $('#res').html(ign.cliOut(var_rm+var_rm_sudo));}
+        });
+		})
+	</script>
+</head>
+<body>
+	<center>
+		<img src="img/title.png" alt=""><p>Aplikasi manajemen sudo pengguna</p>
+	</center>
+	<div class="accordion">
+		<div id="tab-1">
+			<a href="#tab-1" class="tab">SUDOERS IGOS</a>
+			<div class="content">
+				<!-- IGOS -->
+				<center>
+			    <div class="ngedip"> 
+				<a href='' id="jalan" onclick="ign.showMessage('IGOS SUDO TELAH AKTIF')" ><img src=img/pengguna.png class="bebas"></a></div><br>
+				<b> AKTIFKAN </b>
+				</center>
+						<h3>Keterangan :</h3>
+						<p>Untuk menonaktifkan sudo igos dapat dilakukan di TAB USER</p>
+			</div>
+		</div>
+		<div id="tab-2">
+			<a href="#tab-2" class="tab">SUDOERS USER</a>
+			<div class="content"><center>
+				<b>Masukan Nama Pengguna</b><br>
+			    <input type='text' id='inputval' value=''><br>
+				<input class="btn btn-primary" type="button" id="tbh" value="Tambah">&nbsp;
+				<input class="btn btn-primary" id="hps" type="button" value="Hapus">
+				<h1>Informasi</h1><hr></center>
+				<div id="res"></div>
+			</div>
+		</div>
+		<div id="tab-3">
+			<a href="#tab-3" class="tab">TENTANG</a>
+			<div class="content">
+						<p>IGN-Sudoers adalah mini aplikasi untuk memanajemen user yang akan ditambahkan atau dihilangkan sebagai pengguna 
+                        biasa yang dapat menggunakan hak root sehingga dapat melakukan perintah perintah milik root.
+                        </p>
+                      
+						<h3>IGOS</h3>
+						<p>IGOS Nusantara mempunyai default pengguna dengan codename IGOS, IGOS dapat melakukan perintah-perintah root dengan
+						tanpa menggunakan password.<br>
+						Cara menggunakannya adalah dengan menekan button aktif pada TAB IGOS.
+						</p>
+						<h3>USER</h3>
+						<p>IGOS Nusantara  menyediakan manajemen pengguna yang lain, agar pengguna lain dapat melakukan perintah-perintah 
+						root dengan menggunakan password. 
+						</p>
+
+			</div>
+		</div>
+	</div>
+	<center><p>IGN-sudoers v.1.0</p></center>
+</body>
+</html>

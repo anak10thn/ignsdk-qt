@@ -64,15 +64,22 @@ VERSION=1.0.8
   make
   mkdir -p $PKG/usr/share/ign-sdk
   mkdir -p $PKG/usr/bin/
+  mkdir -p $PKG/usr/share/applications/
+  mkdir -p $PKG/usr/sbin/
+##IGNSDK
   mv ignsdk $PKG/usr/bin/
   cp -rf css $PKG/usr/share/ign-sdk/
   cp -rf img $PKG/usr/share/ign-sdk/
   cp -rf js $PKG/usr/share/ign-sdk/
   cp -rf test $PKG/usr/share/ign-sdk/
   cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
+##kuma
   cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
-  mkdir -p $PKG/usr/share/applications/
   cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
+##IGN-sudoers
+  cp -rf test/IGN-sudoers/bin/*  $PKG/usr/sbin/
+  cp -rf test/IGN-sudoers/ign-sudoers.desktop  $PKG/usr/share/applications/
+
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc

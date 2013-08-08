@@ -29,13 +29,12 @@ package() {
   mkdir -p $pkgdir/usr/bin/
  
   mv ignsdk $pkgdir/usr/bin/
+  cp -rf bin/ignsdk-app-creator $pkgdir/usr/bin
   cp -rf css $pkgdir/usr/share/ign-sdk/
   cp -rf img $pkgdir/usr/share/ign-sdk/
   cp -rf js $pkgdir/usr/share/ign-sdk/
   cp -rf test $pkgdir/usr/share/ign-sdk/
-  cp -rf LICENSE.BSD $pkgdir/usr/share/ign-sdk/
-  
-  mv $pkgdir/usr/share/ign-sdk/LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
-  
+  cp -rf LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
+    
   rm -rf *.o
 }

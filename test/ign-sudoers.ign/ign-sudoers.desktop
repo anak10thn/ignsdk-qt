@@ -4,6 +4,6 @@ Exec=beesu ignsdk -p /usr/share/ign-sdk/test/IGN-sudoers/
 Icon=/usr/share/ign-sdk/test/IGN-sudoers/logo.png
 Terminal=false
 Type=Application
-Categories=GTK;System;
+Categories=GNOME;System;Filesystem;GTK;
 StartupNotify=true
 

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=IGN-Sudoers
+Exec=beesu ignsdk -p /opt/ign-sudoers.ign
+Icon=/usr/share/ign-sdk/test/ign-sudoers/logo.png
+Terminal=false
+Type=Application
+Categories=GTK;System;
+StartupNotify=true
+

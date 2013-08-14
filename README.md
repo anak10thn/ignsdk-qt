@@ -27,7 +27,7 @@ IGN (IGOS Nusantara) SDK is an app runtime. You can write native apps in HTML an
 
 ##Build##
 ```
-$sudo yum install qt-devel qtwebkit-devel qjson
+$sudo yum install qt-devel qtwebkit-devel qjson-devel
 $cd ign-sdk-directory
 $qmake
 $make

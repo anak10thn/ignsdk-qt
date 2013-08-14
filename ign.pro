@@ -64,9 +64,9 @@ RESOURCES += \
     ign.qrc
 LIBS += -L/usr/lib -lqjson
 
-win32:CONFIG(release, debug|release): LIBS += -L/lib/mysql/release/ -lmysqlclient_r
-else:win32:CONFIG(debug, debug|release): LIBS += -L/lib/mysql/debug/ -lmysqlclient_r
-else:unix: LIBS += -L/lib/mysql/ -lmysqlclient_r
+#win32:CONFIG(release, debug|release): LIBS += -L/lib/mysql/release/ -lmysqlclient_r
+#else:win32:CONFIG(debug, debug|release): LIBS += -L/lib/mysql/debug/ -lmysqlclient_r
+#else:unix: LIBS += -L/lib/mysql/ -lmysqlclient_r
 
-INCLUDEPATH += /lib/mysql
-DEPENDPATH += /lib/mysql
+#INCLUDEPATH += /lib/mysql
+#DEPENDPATH += /lib/mysql

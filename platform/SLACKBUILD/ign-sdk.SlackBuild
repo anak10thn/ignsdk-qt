@@ -51,6 +51,9 @@ cd $TMP
 rm -rf $PRGNAM
 git clone https://github.com/anak10thn/ignsdk-qt.git $PRGNAM
 cd $PRGNAM
+VERSION=`git tag | sort -n | tail -1`
+git checkout $VERSION
+
 chown -R root:root .
 find . \
  \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -58,27 +61,26 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-VERSION=1.0.8
-
   qmake
   make
   mkdir -p $PKG/usr/share/ign-sdk
   mkdir -p $PKG/usr/bin/
   mkdir -p $PKG/usr/share/applications/
   mkdir -p $PKG/usr/sbin/
-##IGNSDK
+  mkdir -p /opt/ignsdk/
+
   mv ignsdk $PKG/usr/bin/
   cp -rf css $PKG/usr/share/ign-sdk/
   cp -rf img $PKG/usr/share/ign-sdk/
   cp -rf js $PKG/usr/share/ign-sdk/
-  cp -rf test $PKG/usr/share/ign-sdk/
+  cp -rf test/*  $PKG/opt/ignsdk/
   cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
-##kuma
+
   cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
   cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
-##IGN-sudoers
-  cp -rf test/IGN-sudoers/bin/*  $PKG/usr/sbin/
-  cp -rf test/IGN-sudoers/ign-sudoers.desktop  $PKG/usr/share/applications/
+
+  cp -rf test/ign-sudoers.ign/bin/*  $PKG/usr/sbin/
+  cp -rf test/ign-sudoers.ign/ign-sudoers.desktop  $PKG/usr/share/applications/
 
 
 mkdir -p $PKG/install

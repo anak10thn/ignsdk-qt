@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=IGN-Sudoers
-Exec=beesu ignsdk -p /opt/ignsdk/ign-sudoers.ign
-Icon=/opt/ignsdk/ign-sudoers.ign/logo.png
+Exec=beesu ignsdk -p /usr/share/ign-sdk/ign-sudoers.ign
+Icon=/usr/share/igns-sdk/ign-sudoers.ign/logo.png
 Terminal=false
 Type=Application
 Categories=GNOME;System;Filesystem;GTK;

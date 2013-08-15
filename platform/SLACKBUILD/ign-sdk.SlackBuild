@@ -63,24 +63,22 @@ find . \
 
   qmake
   make
-  mkdir -p $PKG/usr/share/ign-sdk
+  mkdir -p $PKG/usr/share/ign-sdk/test
   mkdir -p $PKG/usr/bin/
   mkdir -p $PKG/usr/share/applications/
   mkdir -p $PKG/usr/sbin/
-  mkdir -p /opt/ignsdk/
-
-  mv ignsdk $PKG/usr/bin/
+ 
+  cp ignsdk $PKG/usr/bin/
   cp -rf css $PKG/usr/share/ign-sdk/
   cp -rf img $PKG/usr/share/ign-sdk/
   cp -rf js $PKG/usr/share/ign-sdk/
-  cp -rf test/*  $PKG/opt/ignsdk/
+  cp -rf test/*  $PKG/usr/share/ign-sdk/test/
   cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
 
   cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
   cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
-  cp -rf test/ign-sudoers.ign/bin/*  $PKG/usr/sbin/
-  cp -rf test/ign-sudoers.ign/ign-sudoers.desktop  $PKG/usr/share/applications/
+
 
 
 mkdir -p $PKG/install

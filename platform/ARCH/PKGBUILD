@@ -50,7 +50,6 @@ build() {
 package() {
 	ls
   cd ign-sdk
-  ls
   mkdir -p $pkgdir/usr/bin/
   mkdir -p $pkgdir/usr/share/ign-sdk/
     

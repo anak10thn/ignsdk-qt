@@ -27,7 +27,6 @@ pkgver (){
 }
 prepare(){   
 	
-	# Cek jika bukan root maka keluar..
 	ROOTUID=0
 	if [ "$UID" -ne "$ROOTUID" ]
 		then echo "scripts must be run by root"

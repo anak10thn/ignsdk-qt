@@ -52,7 +52,8 @@ rm -rf $PRGNAM
 git clone https://github.com/anak10thn/ignsdk-qt.git $PRGNAM
 cd $PRGNAM
 VERSION=`git tag | sort -n | tail -1`
-git checkout $VERSION
+git branch slack-$VERSION $VERSION
+git checkout slack-$VERSION
 
 chown -R root:root .
 find . \
@@ -61,24 +62,24 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-  qmake
-  make
-  mkdir -p $PKG/usr/share/ign-sdk/test
-  mkdir -p $PKG/usr/bin/
-  mkdir -p $PKG/usr/share/applications/
-  mkdir -p $PKG/usr/sbin/
+
+qmake
+make
+mkdir -p $PKG/usr/share/ign-sdk/test
+mkdir -p $PKG/usr/bin/
+mkdir -p $PKG/usr/man/
+mkdir -p $PKG/usr/share/applications/
+mkdir -p $PKG/usr/sbin/
  
-  cp ignsdk $PKG/usr/bin/
-  cp -rf css $PKG/usr/share/ign-sdk/
-  cp -rf img $PKG/usr/share/ign-sdk/
-  cp -rf js $PKG/usr/share/ign-sdk/
-  cp -rf test/*  $PKG/usr/share/ign-sdk/test/
-  cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
+cp ignsdk $PKG/usr/bin/
+cp -rf css $PKG/usr/share/ign-sdk/
+cp -rf img $PKG/usr/share/ign-sdk/
+cp -rf js $PKG/usr/share/ign-sdk/
+cp -rf test/*  $PKG/usr/share/ign-sdk/test/
+cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
 
-  cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
-  cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
-
-
+cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
+cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 
 mkdir -p $PKG/install

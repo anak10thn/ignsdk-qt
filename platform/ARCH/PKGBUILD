@@ -20,9 +20,7 @@ _gourl=github.com/anak10thn/ignsdk-qt
 
 pkgver (){
 	cd ign-sdk
-	git checkout -b v1.0.8
-	#git describe --always | sed 's|-|.|g'
-	
+	git checkout -b v1.0.8	
 	
 }
 prepare(){   
@@ -35,7 +33,6 @@ prepare(){
 	fi
 
 	cd ign-sdk
-	
 	mkdir -p /usr/share/ign-sdk/ 
 	cp -rf test /usr/share/ign-sdk/ 
 	rm -rf test 
@@ -47,7 +44,6 @@ build() {
 	make
 }
 package() {
-	ls
   cd ign-sdk
   mkdir -p $pkgdir/usr/bin/
   mkdir -p $pkgdir/usr/share/ign-sdk/

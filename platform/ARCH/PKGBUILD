@@ -4,7 +4,7 @@
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
 pkgname=ign-sdk
-pkgver=1.0.9
+pkgver=1.0.8
 pkgrel=1
 pkgdesc="IGN Software Development Kit" 
 url="https://github.com/anak10thn/ignsdk-qt"
@@ -20,13 +20,22 @@ _gourl=github.com/anak10thn/ignsdk-qt
 
 pkgver (){
 	cd ign-sdk
-	git checkout -b v1.0.9
+	git checkout -b v1.0.8	
+	
 }
-prepare(){   #add folder test to /usr/share/ign-sdk/
+prepare(){   
+	
+	ROOTUID=0
+	if [ "$UID" -ne "$ROOTUID" ]
+		then echo "scripts must be run by root"
+			 echo "sudo makepkg -s --asroot"
+	exit 0
+	fi
+
 	cd ign-sdk
 	mkdir -p /usr/share/ign-sdk/ 
 	cp -rf test /usr/share/ign-sdk/ 
-	rm -rf test
+	rm -rf test 
 }
   
 build() {
@@ -36,8 +45,8 @@ build() {
 }
 package() {
   cd ign-sdk
-  
   mkdir -p $pkgdir/usr/bin/
+  mkdir -p $pkgdir/usr/share/ign-sdk/
     
   mv ignsdk $pkgdir/usr/bin/
   cp -rf css $pkgdir/usr/share/ign-sdk/

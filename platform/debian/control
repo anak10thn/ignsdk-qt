@@ -16,7 +16,7 @@ Description: IGOS Nusantara Software Development Kit (IGNSDK)
 
 Package: ignsdk-debian-example
 Architecture: all
-Depends: ${misc:Depends}, ignsdk-debian (>= 1.0.1-4)
+Depends: ${misc:Depends}, ignsdk-debian (>= 1.0.9)
 Description: IGOS Nusantara Software Development Kit (IGNSDK)
  This is Debian-compatible version of IGN Software Development
  Kit (IGNSDK).

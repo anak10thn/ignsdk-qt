@@ -41,6 +41,7 @@ public:
     void widgetTransparent();
     QString pathApp;
     QString version;
+
 protected:
     //virtual void mouseMoveEvent(QMouseEvent *event);
     virtual void mousePressEvent(QMouseEvent * event);

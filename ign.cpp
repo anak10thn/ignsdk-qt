@@ -16,7 +16,7 @@ ign::ign(QObject *parent)
     : QObject(parent)
     , m_ignsystem(0)
 {
-    this->version = "1.0.8";
+    this->version = "1.0.9";
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     this->filesystem = new fs;
@@ -238,6 +238,7 @@ void ign::config(QString path){
         if(configure["name"].toString() != ""){
             this->web.setWindowTitle(configure["name"].toString());
         }
+
         QVariantMap window = result["window"].toMap();
         if(window["transparent"].toBool()){
             this->widgetTransparent();

@@ -87,12 +87,15 @@ int main(int argc, char *argv[])
     }
 
     QString opt = url;
-
+    QString path = url;
     if(opt.isEmpty()){
         w.render("http://www.igos-nusantara.or.id");
     }
     else{
         w.pathApp = opt;
+        /*icon set*/
+        a.setWindowIcon(QIcon(path+"icons/app.png"));
+
         if(file){
             opt += "/";
             opt += optional;
@@ -102,7 +105,6 @@ int main(int argc, char *argv[])
         }
         w.render(opt);
         w.config(url);
-
     }
     w.show();
     return a.exec();

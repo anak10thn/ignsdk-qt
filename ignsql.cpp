@@ -15,10 +15,10 @@ void ignsql::driver(const QString &drv, QString connect){
         db.setDatabaseName(con.value(3));
         if(!db.open()){
             qDebug() << db.lastError();
-            qFatal("Gagal melakukan koneksi.");
+            qFatal("database not connected!");
         }
         else {
-            qDebug() << "database connect";
+            qDebug() << "database connected!";
         }
     }
     else if (drv == "sqlite"){
@@ -26,10 +26,10 @@ void ignsql::driver(const QString &drv, QString connect){
         db.setDatabaseName(connect);
         if(!db.open()){
             qDebug() << db.lastError();
-            qFatal("Gagal melakukan koneksi.");
+            qFatal("database not connected!");
         }
         else {
-            qDebug() << "database connect";
+            qDebug() << "database connected!";
         }
     }
     else if (drv == "sqlite3"){
@@ -37,10 +37,10 @@ void ignsql::driver(const QString &drv, QString connect){
         db.setDatabaseName(connect);
         if(!db.open()){
             qDebug() << db.lastError();
-            qFatal("Gagal melakukan koneksi.");
+            qFatal("database not connected!");
         }
         else {
-            qDebug() << "database connect";
+            qDebug() << "database connected!";
         }
     }
 

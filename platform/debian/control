@@ -2,7 +2,7 @@ Source: ignsdk-debian
 Section: devel
 Priority: optional
 Maintainer: Surya Handika Putratama <ubunteroz@gmail.com>
-Build-Depends: quilt, debhelper (>= 8.0.0), hardening-wrapper (>= 2.3), hardening-includes (>= 2.3), qt4-qmake (>= 4:4.8.2), libqt4-dev (>= 4:4.8.2), libqtwebkit-dev (>= 2.2.1), libqjson-dev (>= 0.7.1-7), libmysqlclient-dev (>= 5.5.31)
+Build-Depends: debhelper (>= 8.0.0), qt4-qmake (>= 4:4.8.2), libqt4-dev (>= 4:4.8.2), libqtwebkit-dev (>= 2.2.1), libqjson-dev (>= 0.7.1-7), libmysqlclient-dev (>= 5.5.31)
 Standards-Version: 3.9.4
 Homepage: http://ignsdk.toroo.org/
 

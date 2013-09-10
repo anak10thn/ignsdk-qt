@@ -18,15 +18,15 @@ IGOS Nusantara  Software Development Kit
 %setup -q -n %{name}-qt-master
 
 %install
-install -d -m 644 $RPM_BUILD_ROOT/usr/bin
-install -d -m 644 $RPM_BUILD_ROOT/usr/share/ign-sdk/test
-install -d -m 644 $RPM_BUILD_ROOT/usr/share/ign-sdk/template
-install -d -m 644 $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
+install -d -m 755 $RPM_BUILD_ROOT/usr/bin
+install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/test
+install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/template
+install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 qmake-qt4
 make
 cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
-cp -rf ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
-cp -rf ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
+cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
+cp -rf bin/ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 cp -rf template/* $RPM_BUILD_ROOT/usr/share/ign-sdk/template
 %clean

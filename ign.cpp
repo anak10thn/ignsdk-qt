@@ -13,15 +13,15 @@
 #include <iostream>
 using namespace std;
 ign::ign(QObject *parent)
-    : QObject(parent)
-    , m_ignsystem(0)
+    : QObject(parent),
+    m_ignsystem(0),
+    m_sqldrv(0)
 {
     this->version = "1.0.9";
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     this->filesystem = new fs;
     this->dl = new QtDownload;
-    this->sqldrv = new ignsql;
 
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
     web.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
@@ -332,16 +332,21 @@ void ign::download_signal(qint64 recieved, qint64 total){
 }
 
 /*IGN SQL*/
-void ign::sql(const QString &drv, QString connect){
-    this->sqldrv->driver(drv,connect);
+QObject *ign::sql(){
+    if(!m_sqldrv)
+        m_sqldrv = new ignsql;
+    return m_sqldrv;
 }
 
+/*IGN SYSTEM*/
 QObject *ign::sys(){
-    if(!m_ignsystem)
+    if(!m_ignsystem){
         m_ignsystem = new ignsystem;
+    }
     return m_ignsystem;
 }
 
+/*IGN FILESYSTEM*/
 bool ign::mkdir(const QString &path){
     return this->filesystem->dir(path,"create");
 }

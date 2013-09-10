@@ -1,0 +1,20 @@
+This document contains the list of Third Party Software included with
+IGNSDK, along with the license information.
+
+Third Party Software may impose additional restrictions and it is the
+user's responsibility to ensure that they have met the licensing
+requirements of IGNSDK and the relevant license of the Third Party
+Software they are using.
+
+
+JQuery - jquery.com
+License: MIT
+Reference: https://jquery.org/license/
+
+Bootstrap - getbootstrap.com
+License: Apache License v2
+Reference: https://github.com/twbs/bootstrap/blob/master/LICENSE
+
+Skulpt - skulpt.org
+License: MIT
+Reference: http://skulpt.org

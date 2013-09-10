@@ -1,27 +1,67 @@
 #!/bin/bash
 #  Ibnu Yahya <ibnu.yahya@toroo.org>
-TEMP=`getopt -o vdm: --long create:,dir:,width:,height:,title:,appname:,help \
-             -n 'ignsdk' -- "$@"`
 
-if [ $? != 0 ] ; then cat /usr/share/ign-sdk/help; echo "Terminating..." >&2 ; exit 1 ; fi
+DESTDIR="$HOME/IGNSDK-APP/"
+DEST=false
+HELP=false
+DISTCHK=`cat /etc/ignsdk-dist`
+APPNAME=""
+
+if [ ! -d $DESTDIR ];then
+	mkdir $DESTDIR
+fi
+
+TEMP=`getopt -o vdm: --long pkgname:,help \
+             -n 'ignsdk-app-creator' -- "$@"`
+
+help ()
+{
+
+cat <<EOF
+Usage: ignsdk-app-creator --pkgname=[PACKAGE NAME]
+
+Example: ignsdk-app-creator --pkgname=control-panel
+
+EOF
+	
+exit 0
+}
+
+create_project ()
+{
+/usr/share/ignsdk/bin/ignsdk-$DIST-creator 
+}
+
+
+if [ $? != 0 ] ; then 
+	help
+fi
+
+if [ $DISTCHK == "debian" -o $DISTCHK == "ign" -o $DISTCHK == "arch" -o $DISTCHK == "slack" ];then
+	DIST=$DISTCHK
+else
+	echo "ERROR : Distribution is not supported!"
+	exit 0
+fi
 
 eval set -- "$TEMP"
 
-CREATE="gtk"
-DIR="$HOME/Application"
-WIDTH="800"
-HEIGHT="600"
-TITLE="Untitle"
-APPNAME="ignsdkapp"
-HELP=false
 while true; do
   case "$1" in
-    --create ) CREATE="$2"; shift 2;;
-    --dir ) DIR="$2"; shift 2 ;;
-    --width ) WIDTH="$2"; shift 2 ;;
-    --height ) HEIGHT="$2"; shift 2 ;;
-    --title ) TITLE="$2"; shift 2 ;;
-    --appname ) APPNAME="$2"; shift 2 ;;
+    --pkgname ) if [ $2 == "" ];then
+		DEST=false
+	 else
+		if [ ! -d "$DESTDIR$2.ign" ];then
+			DEST=true
+			BUILDDEST="$DESTDIR$2.ign"
+			PKGNAME="$2.ign"
+			PROJECT="$2"
+		else
+			echo "Project exist!!"
+			help
+		fi
+	 fi
+    shift 2 ;;
     --help ) HELP=true; shift ;;
     -- ) shift; break ;;
     * ) break ;;
@@ -30,32 +70,76 @@ done
 
 if [ $HELP == true ]
 then
-cat /usr/share/ign-sdk/help
-exit 0
+help
 fi
 
-create_project ()
-{
-	case "$1" in
-	'gtk')
-		mkdir $2/$3.ign
-		cp -rf /usr/share/ign-sdk/src/gtk/* $2/$3.ign
-		chmod 777 -R $2/$3.ign
-		cat $2/$3.ign/ignhtml5.proj | sed s/size_widgets\(\)/w.set_default_size\($4,$5\)/g \
-		| sed s/set_title\(\)/w.set_title\(\"$6\"\)/g >$2/$3.ign/ignhtml5
-		rm -rf $2/$3.ign/ignhtml5.proj
-		chmod 777 -R $2/$3.ign/ignhtml5
-		echo "IGOS Nusantara APP has been created to $2/$3.ign....[ok]"
-	;;
-	'qt')
-		mkdir $2/$3.ign
-		cp -rf /usr/share/ign-sdk/src/qt/* $2/$3.ign
-		chmod 777 -R $2/$3.ign
-	;;
-	*)
-	break;
-	;;
-	esac
-}
+if [ $DEST == true ]
+then
+read -p "Application name :" APPNAME
+cat <<EOF
+Application category :
+1. AudioVideo
+2. Audio
+3. Video
+4. Development
+5. Education
+6. Game
+7. Graphics
+8. Network
+9. Office
+10. Science
+11. Settings
+12. System
+13. Utility [default]
+EOF
+read -p "Choose :" CTGR
+case "$CTGR" in
+    "1" ) MENU="AudioVideo"
+    shift 2 ;;
+    "2" ) MENU="Audio;AudioVideo"
+    shift 2 ;;
+    "3" ) MENU="Video;AudioVideo"
+    shift 2 ;;
+    "4" ) MENU="Development"
+    shift 2 ;;
+    "5" ) MENU="Education"
+    shift 2 ;;
+    "6" ) MENU="Game"
+    shift 2 ;;
+    "7" ) MENU="Graphics"
+    shift 2 ;;
+    "8" ) MENU="Network"
+    shift 2 ;;
+    "9" ) MENU="Office"
+    shift 2 ;;
+    "10" ) MENU="Science"
+    shift 2 ;;
+    "11" ) MENU="Settings"
+    shift 2 ;;
+    "12" ) MENU="System"
+    shift 2 ;;
+    "13" ) MENU="Utility"
+    shift 2 ;;
+    -- ) MENU="Utility"; shift; break ;;
+    * ) MENU="Utility"; shift;;
+  esac
 
-create_project $CREATE $DIR $APPNAME $WIDTH $HEIGHT $TITLE
+if [ "$APPNAME" == "" ]
+then
+echo "ERROR: Application name can't empty!"
+help
+else
+mkdir $BUILDDEST
+tar vxf /usr/share/ign-sdk/template/main.tpl -C $BUILDDEST
+mv $BUILDDEST/menu/ignsdk.desktop $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[package\]/$PKGNAME/" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
+create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU"
+fi
+
+else
+echo "ERROR: name project"
+help
+fi

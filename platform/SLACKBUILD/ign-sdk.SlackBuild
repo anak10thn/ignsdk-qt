@@ -6,13 +6,13 @@
 # All rights reserved.
 #Author##
 #Eka Tresna Irawan/Ibnu Yahya (anak10thn@gmail.com)
-#SLACKBUILD
+#SLACKBUILD##
 #Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
 
 
 PRGNAM=ign-sdk
 VERSION=${VERSION:-git}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-wjt1}
 TAG=${TAG:-_ign}
 
 if [ -z "$ARCH" ]; then
@@ -65,25 +65,29 @@ find . \
 
 qmake
 make
+
 mkdir -p $PKG/usr/share/ign-sdk/test
 mkdir -p $PKG/usr/bin/
 mkdir -p $PKG/usr/man/
 mkdir -p $PKG/usr/share/applications/
 mkdir -p $PKG/usr/sbin/
- 
+mkdir -p $PKG/etc/
+touch  $PKG/etc/ignsdk-dist
+echo "slack" > $PKG/etc/ignsdk-dist
 cp ignsdk $PKG/usr/bin/
 cp -rf css $PKG/usr/share/ign-sdk/
 cp -rf img $PKG/usr/share/ign-sdk/
 cp -rf js $PKG/usr/share/ign-sdk/
 cp -rf test/*  $PKG/usr/share/ign-sdk/test/
 cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
-
-cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
+chmod +x bin/*
+cp -rf bin/*  $PKG/usr/bin/
 cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
+cp -rf $CWD/copyright /$PKG/usr/share/ign-sdk/
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

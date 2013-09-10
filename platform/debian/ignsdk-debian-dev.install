@@ -1,0 +1,3 @@
+bin/ignsdk-app-creator /usr/share/ign-sdk/bin/
+bin/ignsdk-debian-creator /usr/share/ign-sdk/bin/
+bin/ignsdk-debian-builder /usr/share/ign-sdk/bin/

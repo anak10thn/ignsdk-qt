@@ -29,7 +29,7 @@ exit 0
 
 create_project ()
 {
-/usr/share/ign-sdk/bin/ignsdk-$DIST-creator
+/usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4
 }
 
 

@@ -4,36 +4,24 @@
 DESTDIR="$HOME/IGNSDK-APP/"
 DEST=false
 HELP=false
-DIST=`cat /etc/ignsdk-dist`
+DISTCHK=`cat /etc/ignsdk-dist`
+APPNAME=""
 
 if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o vdm: --long name:,help \
+TEMP=`getopt -o vdm: --long pkgname:,help \
              -n 'ignsdk-app-creator' -- "$@"`
-
-if [ $? != 0 ] ; then 
-cat <<EOF
-Usage: ignsdk-app-creator --name=[PROJECT NAME]
-
-Example: ignsdk-app-creator --name=new-project
-
-[PROJECT NAME] :
-	example : new-project
-EOF
-echo "Terminating..." >&2 ; exit 1 ; fi
 
 help ()
 {
 
 cat <<EOF
-Usage: ignsdk-app-creator --name=[PROJECT NAME]
+Usage: ignsdk-app-creator --pkgname=[PACKAGE NAME]
 
-Example: ignsdk-app-creator --name=new-project
+Example: ignsdk-app-creator --pkgname=control-panel
 
-[PROJECT NAME] :
-	example : new-project
 EOF
 	
 exit 0
@@ -41,21 +29,33 @@ exit 0
 
 create_project ()
 {
-	/usr/share/ignsdk/bin/ignsdk-$DIST-creator 
+/usr/share/ignsdk/bin/ignsdk-$DIST-creator 
 }
+
+
+if [ $? != 0 ] ; then 
+	help
+fi
+
+if [ $DISTCHK == "debian" -o $DISTCHK == "ign" -o $DISTCHK == "arch" -o $DISTCHK == "slack" ];then
+	DIST=$DISTCHK
+else
+	echo "ERROR : Distribution is not supported!"
+	exit 0
+fi
 
 eval set -- "$TEMP"
 
 while true; do
   case "$1" in
-    --name ) if [ $2 == "" ];then
+    --pkgname ) if [ $2 == "" ];then
 		DEST=false
 	 else
 		if [ ! -d "$DESTDIR$2.ign" ];then
 			DEST=true
 			BUILDDEST="$DESTDIR$2.ign"
 			PKGNAME="$2.ign"
-			mkdir "$DESTDIR$2.ign"
+			PROJECT="$2"
 		else
 			echo "Project exist!!"
 			help
@@ -75,7 +75,70 @@ fi
 
 if [ $DEST == true ]
 then
-create_project $PKGNAME $BUILDDEST
+read -p "Application name :" APPNAME
+cat <<EOF
+Application category :
+1. AudioVideo
+2. Audio
+3. Video
+4. Development
+5. Education
+6. Game
+7. Graphics
+8. Network
+9. Office
+10. Science
+11. Settings
+12. System
+13. Utility [default]
+EOF
+read -p "Choose :" CTGR
+case "$CTGR" in
+    "1" ) MENU="AudioVideo"
+    shift 2 ;;
+    "2" ) MENU="Audio;AudioVideo"
+    shift 2 ;;
+    "3" ) MENU="Video;AudioVideo"
+    shift 2 ;;
+    "4" ) MENU="Development"
+    shift 2 ;;
+    "5" ) MENU="Education"
+    shift 2 ;;
+    "6" ) MENU="Game"
+    shift 2 ;;
+    "7" ) MENU="Graphics"
+    shift 2 ;;
+    "8" ) MENU="Network"
+    shift 2 ;;
+    "9" ) MENU="Office"
+    shift 2 ;;
+    "10" ) MENU="Science"
+    shift 2 ;;
+    "11" ) MENU="Settings"
+    shift 2 ;;
+    "12" ) MENU="System"
+    shift 2 ;;
+    "13" ) MENU="Utility"
+    shift 2 ;;
+    -- ) MENU="Utility"; shift; break ;;
+    * ) MENU="Utility"; shift;;
+  esac
+
+if [ "$APPNAME" == "" ]
+then
+echo "ERROR: Application name can't empty!"
+help
+else
+mkdir $BUILDDEST
+tar vxf /usr/share/ign-sdk/template/main.tpl -C $BUILDDEST
+mv $BUILDDEST/menu/ignsdk.desktop $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[package\]/$PKGNAME/" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
+create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU"
+fi
+
 else
 echo "ERROR: name project"
 help

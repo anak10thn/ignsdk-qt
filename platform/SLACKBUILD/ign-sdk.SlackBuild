@@ -12,7 +12,7 @@
 
 PRGNAM=ign-sdk
 VERSION=${VERSION:-git}
-BUILD=${BUILD:-GLH2}
+BUILD=${BUILD:-wjt1}
 TAG=${TAG:-_ign}
 
 if [ -z "$ARCH" ]; then
@@ -87,7 +87,7 @@ cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-
+cp -rf $CWD/copyright /$PKG/usr/share/ign-sdk/
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

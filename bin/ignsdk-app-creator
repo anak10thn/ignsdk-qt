@@ -23,17 +23,17 @@ Usage: ignsdk-app-creator --pkgname=[PACKAGE NAME]
 Example: ignsdk-app-creator --pkgname=control-panel
 
 EOF
-	
+
 exit 0
 }
 
 create_project ()
 {
-/usr/share/ignsdk/bin/ignsdk-$DIST-creator 
+/usr/share/ign-sdk/bin/ignsdk-$DIST-creator
 }
 
 
-if [ $? != 0 ] ; then 
+if [ $? != 0 ] ; then
 	help
 fi
 
@@ -57,7 +57,7 @@ while true; do
 			PKGNAME="$2.ign"
 			PROJECT="$2"
 		else
-			echo "Project exist!!"
+			echo "Project exist!"
 			help
 		fi
 	 fi
@@ -75,7 +75,7 @@ fi
 
 if [ $DEST == true ]
 then
-read -p "Application name :" APPNAME
+read -p "Application name: " APPNAME
 cat <<EOF
 Application category :
 1. AudioVideo
@@ -126,7 +126,7 @@ case "$CTGR" in
 
 if [ "$APPNAME" == "" ]
 then
-echo "ERROR: Application name can't empty!"
+echo "ERROR: Application name can't be empty!"
 help
 else
 mkdir $BUILDDEST
@@ -140,6 +140,6 @@ create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU"
 fi
 
 else
-echo "ERROR: name project"
+echo "ERROR: name your project"
 help
 fi

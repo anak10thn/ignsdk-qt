@@ -179,6 +179,7 @@ rm -rf $RPM_BUILD_ROOT
 - Add ignsdk-dist
 - Add test file
 - Add devtools package
+- Add IGNSDK Builder script
 * Tue Sep 10 2013 ibnu yahya <linux@toroo.org>
 - Update version to 1.0.9
 - Add ignsdk project builder

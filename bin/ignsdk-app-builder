@@ -6,11 +6,13 @@ DIR=false
 DISTCHK=`cat /etc/ignsdk-dist`
 IGNSDKAPP="$HOME/IGNSDK-APP"
 HELP=false
+LIST=false
+
 if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hd:p: --long help,dir:,pkgname: \
+TEMP=`getopt -o hld:p: --long help,list,dir:,pkgname: \
              -n 'ignsdk-app-creator' -- "$@"`
 
 help ()
@@ -88,6 +90,7 @@ while true; do
 	 fi
     shift 2 ;;
     -h | --help ) HELP=true; shift ;;
+    -l | --list ) LIST=true; shift ;;
     -- ) shift; break ;;
     * ) break ;;
   esac
@@ -96,6 +99,22 @@ done
 if [ $HELP == true ]
 then
 help
+fi
+
+if [ $LIST == true ]
+then
+find $DESTDIR -name *.ign -exec echo {} > $DESTDIR/.ignsdk-list \;
+echo ""
+echo "Project package exist : "
+while read m
+do
+	if [ -f $m/ignsdk.json ];then
+		echo - $m | sed s/\.ign//g | sed -e "s|$DESTDIR||"
+	fi
+done < $DESTDIR/.ignsdk-list
+echo "Use : ignsdk-app-builder -p [PROJECT PACKAGE NAME]"
+echo ""
+exit 0
 fi
 
 if [ $DIR == false ]

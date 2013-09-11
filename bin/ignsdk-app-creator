@@ -11,16 +11,19 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o vdm: --long pkgname:,help \
+TEMP=`getopt -o hp: --long help,pkgname: \
              -n 'ignsdk-app-creator' -- "$@"`
 
 help ()
 {
 
 cat <<EOF
-Usage: ignsdk-app-creator --pkgname=[PACKAGE NAME]
+Usage: ignsdk-app-creator [OPTION]
 
-Example: ignsdk-app-creator --pkgname=control-panel
+Option :
+		 -p, --pkgname=[PACKAGE NAME]
+
+Example: ignsdk-app-creator -p control-panel
 
 EOF
 
@@ -48,7 +51,7 @@ eval set -- "$TEMP"
 
 while true; do
   case "$1" in
-    --pkgname ) if [ $2 == "" ];then
+    -p | --pkgname ) if [ ! $2 ];then
 		DEST=false
 	 else
 		if [ ! -d "$DESTDIR$2.ign" ];then
@@ -62,7 +65,7 @@ while true; do
 		fi
 	 fi
     shift 2 ;;
-    --help ) HELP=true; shift ;;
+    -h | --help ) HELP=true; shift ;;
     -- ) shift; break ;;
     * ) break ;;
   esac

@@ -1,0 +1,108 @@
+#!/bin/bash
+#  Ibnu Yahya <ibnu.yahya@toroo.org>
+
+DESTDIR="$HOME/IGNSDK-APP/"
+DIR=false
+DISTCHK=`cat /etc/ignsdk-dist`
+IGNSDKAPP="$HOME/IGNSDK-APP"
+HELP=false
+if [ ! -d $DESTDIR ];then
+	mkdir $DESTDIR
+fi
+
+TEMP=`getopt -o hd:p: --long help,dir:,pkgname: \
+             -n 'ignsdk-app-creator' -- "$@"`
+
+help ()
+{
+
+cat <<EOF
+Usage: ignsdk-app-builder [OPTIONS] [PACKAGE NAME or PROJECT DIRECTORY]
+
+OPTION	:
+		
+		-p, --pkgname		Package project name
+		-d, --dir			Project directory
+
+EXAMPLE :
+		
+		$ignsdk-app-builder --pkgname control-panel
+		or
+		$ignsdk-app-builder --dir /home/igos/IGNSDK-APP/control-panel.ign
+EOF
+
+exit 0
+}
+
+build_project ()
+{
+/usr/share/ign-sdk/bin/ignsdk-$DIST-builder $1
+}
+
+checkhelp ()
+{
+	echo "HELP : ignsdk-app-builder --help"
+	echo ""
+	exit 0
+}
+
+if [ $? != 0 ] ; then
+	help
+fi
+
+if [ $DISTCHK == "debian" -o $DISTCHK == "ign" -o $DISTCHK == "arch" -o $DISTCHK == "slack" ];then
+	DIST=$DISTCHK
+else
+	echo "ERROR : Distribution is not supported!"
+	exit 0
+fi
+
+eval set -- "$TEMP"
+
+while true; do
+  case "$1" in
+    -d | --dir ) if [ ! $2 ];then
+		DIR=false
+	 else
+		if [ -d $2 ]
+		then
+			DIR=true
+			PKGBUILD=$2
+		else
+			echo "ERROR : Can't found irectory!"
+			checkhelp
+		fi
+	 fi
+    shift 2 ;;
+    -p | --pkgname ) if [ ! $2 ];then
+		DIR=false
+	 else
+		if [ -d $IGNSDKAPP/$2.ign ]
+		then
+			DIR=true
+			PKGBUILD=$IGNSDKAPP/$2.ign
+		else
+			echo "ERROR : Can't found irectory!"
+			checkhelp
+		fi
+	 fi
+    shift 2 ;;
+    -h | --help ) HELP=true; shift ;;
+    -- ) shift; break ;;
+    * ) break ;;
+  esac
+done
+
+if [ $HELP == true ]
+then
+help
+fi
+
+if [ $DIR == false ]
+then
+	echo ""
+	echo "Directory or project name option not be set!"
+	help
+else
+	build_project $PKGBUILD
+fi

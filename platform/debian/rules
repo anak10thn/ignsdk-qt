@@ -1,8 +1,5 @@
 #!/usr/bin/make -f
 export DH_VERBOSE=1
-export DEB_BUILD_HARDENING=1
-export DEB_BUILD_HARDENING_RELRO=1
-export DEB_BUILD_HARDENING_FORTIFY=1
 
 %:
 	dh $@
@@ -10,7 +7,7 @@ export DEB_BUILD_HARDENING_FORTIFY=1
 override_dh_auto_install:
 	dh_testdir
 	dh_testroot
-	dh_quilt_patch
-	qmake ign.pro
-	$(MAKE) INSTALL_ROOT=$$(pwd)/debian/ignsdk-debian/ install
-	dh_quilt_unpatch
+	qmake-qt4 ign.pro
+	make
+	mv ignsdk $$(pwd)/debian/ignsdk-debian/usr/bin/
+	echo "debian" > $$(pwd)/debian/ignsdk-debian-dev/etc/ignsdk-dist

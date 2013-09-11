@@ -1,0 +1,87 @@
+#!/bin/bash
+
+echo "IGNSDK Package Creator (Debian GNU/Linux)"
+
+package_name=$1
+deb_package_name=$(echo $package_name | sed 's/\.ign//')
+project_dir=$2
+release=$(lsb_release -rs)
+build_deps="dch dh_make"
+read -p 'Enter package version: ' deb_package_version
+read -p 'Enter your name      : ' packagers_name
+read -p 'Enter your email     : ' packagers_mail
+
+
+if [ -d $project_dir/debian ]; then echo "WARNING: debian/ directory is exist!"; exit 1; fi
+
+if [ "$release" == "" ]; then release="testing"; fi
+
+# Check build depends
+_checkBuildDeps(){
+	echo -n "Checking $1... "
+	check=0
+	if [ "$(which $1)" == "" ]
+	then
+		check=$(expr $check + 1)
+		echo "not found!"
+	else
+		echo $(which $1)
+	fi
+}
+
+for dependency in $build_deps
+do
+	_checkBuildDeps $dependency
+	if [[ $check -gt 0 ]]
+	then
+		echo -e "\nCan't continue. Build dependencies were not fully satisfied."
+		exit 1
+	fi
+done
+
+echo ""
+
+pushd $project_dir
+
+echo "-> dh_make"
+DEBFULLNAME="$packagers_name" DEBEMAIL="$packagers_mail" dh_make --single --native --copyright gpl3 --packagename "$deb_package_name"_"$package_version" --yes
+rm debian/*.ex debian/*.EX debian/README.Debian debian/README.source
+
+echo "-> debian/changelog"
+rm debian/changelog
+cat > debian/changelog <<EOF
+$package_name ($package_version) $release; urgency=low
+
+  * Initial release.
+
+ -- $packagers_name <$packagers_mail>  $(date +"%a, %d %b %Y %T %z")
+EOF
+
+echo "-> debian/control"
+sed -i -e "s/Homepage:/#Homepage:/" \
+	-e "s/Architecture: any/Architecture: all/" \
+	-e "s/Depends:/Depends: ignsdk-debian,/" \
+	-e "s/Description:\(.*\)/Description: Another IGN SDK Application/" \
+	-e "s/<insert long description\(.*\)/This is an IGN SDK Application/" \
+	debian/control
+
+echo "-> debian/copyright"
+sed -i -e "s/Source: \(.*\)/Source: http:\/\/ignsdk.web.id/" \
+	-e "s/Copyright: <years>\(.*\)/Copyright: $(date +%Y) $packagers_name <$packagers_mail>/" \
+	-e "s/#\(.*\)//" \
+	debian/copyright
+
+echo "-> debian/README"
+rm debian/README
+cat > debian/README <<EOF
+IGN SDK Application $package_name.ign
+-------------------------------------
+
+This application is built using IGOS Nusantara Software Development Kit
+
+ -- $packagers_name <$packagers_mail> $(date +"%a, %d %b %Y %T %z")
+EOF
+
+popd
+
+echo -e "Debian package control files is successfully created.\nPlease modify files under debian/ directory according to your needs."

@@ -1,1 +1,8 @@
 #!/bin/bash
+APP="$HOME/IGNSDK-APP/"
+DIR=$1
+PKG=`echo $1 | sed "s|$HOME/IGNSDK-APP/||"`
+echo $PKG
+echo $DIR
+cd $APP
+tar cvfz $PKG.tar.gz $PKG

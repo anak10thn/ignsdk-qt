@@ -44,7 +44,7 @@ build_project ()
 
 checkhelp ()
 {
-	echo "HELP: ignsdk-app-builder --help"
+	echo "HELP : ignsdk-app-builder --help"
 	echo ""
 	exit 0
 }
@@ -72,7 +72,7 @@ while true; do
 			DIR=true
 			PKGBUILD=$2
 		else
-			echo "ERROR: Directory is not exist!"
+			echo "ERROR : Can't found irectory!"
 			checkhelp
 		fi
 	 fi
@@ -85,7 +85,7 @@ while true; do
 			DIR=true
 			PKGBUILD=$IGNSDKAPP/$2.ign
 		else
-			echo "ERROR: Directory is not exist!"
+			echo "ERROR : Can't found irectory!"
 			checkhelp
 		fi
 	 fi
@@ -106,14 +106,14 @@ if [ $LIST == true ]
 then
 find $DESTDIR -name *.ign -exec echo {} > $DESTDIR/.ignsdk-list \;
 echo ""
-echo "Project list: "
+echo "Project package exist : "
 while read m
 do
 	if [ -f $m/ignsdk.json ];then
 		echo - $m | sed s/\.ign//g | sed -e "s|$DESTDIR||"
 	fi
 done < $DESTDIR/.ignsdk-list
-echo "Usage: ignsdk-app-builder -p [PROJECT PACKAGE NAME]"
+echo "Use : ignsdk-app-builder -p [PROJECT PACKAGE NAME]"
 echo ""
 exit 0
 fi
@@ -121,7 +121,7 @@ fi
 if [ $DIR == false ]
 then
 	echo ""
-	echo "You must set either directory path or project name."
+	echo "Directory or project name option not be set!"
 	help
 else
 	build_project $PKGBUILD

@@ -11,16 +11,19 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o vdm: --long pkgname:,help \
+TEMP=`getopt -o hp: --long help,pkgname: \
              -n 'ignsdk-app-creator' -- "$@"`
 
 help ()
 {
 
 cat <<EOF
-Usage: ignsdk-app-creator --pkgname=[PACKAGE NAME]
+Usage: ignsdk-app-creator [OPTION]
 
-Example: ignsdk-app-creator --pkgname=control-panel
+Option :
+		 -p, --pkgname		Package name
+
+Example: ignsdk-app-creator -p control-panel
 
 EOF
 
@@ -29,7 +32,7 @@ exit 0
 
 create_project ()
 {
-/usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4
+/usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4 $5
 }
 
 
@@ -40,7 +43,7 @@ fi
 if [ $DISTCHK == "debian" -o $DISTCHK == "ign" -o $DISTCHK == "arch" -o $DISTCHK == "slack" ];then
 	DIST=$DISTCHK
 else
-	echo "ERROR: Distribution is not supported!"
+	echo "ERROR : Distribution is not supported!"
 	exit 0
 fi
 
@@ -48,7 +51,7 @@ eval set -- "$TEMP"
 
 while true; do
   case "$1" in
-    --pkgname ) if [ $2 == "" ];then
+    -p | --pkgname ) if [ ! $2 ];then
 		DEST=false
 	 else
 		if [ ! -d "$DESTDIR$2.ign" ];then
@@ -62,7 +65,7 @@ while true; do
 		fi
 	 fi
     shift 2 ;;
-    --help ) HELP=true; shift ;;
+    -h | --help ) HELP=true; shift ;;
     -- ) shift; break ;;
     * ) break ;;
   esac
@@ -78,9 +81,9 @@ then
 read -p "Application name: " APPNAME
 cat <<EOF
 Application category :
-1. AudioVideo (multimedia)
-2. Audio (audio only)
-3. Video (video only)
+1. AudioVideo
+2. Audio
+3. Video
 4. Development
 5. Education
 6. Game
@@ -92,7 +95,7 @@ Application category :
 12. System
 13. Utility [default]
 EOF
-read -p "Choose one: " CTGR
+read -p "Choose :" CTGR
 case "$CTGR" in
     "1" ) MENU="AudioVideo"
     shift 2 ;;
@@ -136,10 +139,10 @@ sed -i -e "s/\[package\]/$PKGNAME/" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
-create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU"
+create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU" $PROJECT
 fi
 
 else
-echo "ERROR: Please name your project."
+echo "ERROR: name your project"
 help
 fi

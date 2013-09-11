@@ -1,1 +1,61 @@
 #!/bin/bash
+TPL="/usr/share/ign-sdk/template/app.spec"
+PKGNAME=$1
+BUILDDEST=$2
+APPNAME=$3
+MENU=$4
+PROJECT=$5
+RELEASE=""
+VERSION=""
+LICENSE=""
+URL=""
+DESC=""
+
+echo "|----------------------------------------------|"
+echo "|          IGNSDK spec file generator          |"
+echo "|----------------------------------------------|"
+
+read -p "Version [default=1.0] :" VERSION
+if [ ! $VERSION ]
+then
+	VERSION="1.0"
+fi
+
+read -p "Release [default=1] :" RELEASE
+if [ ! $RELEASE ]
+then
+	RELEASE="1"
+fi
+
+read -p "License [MIT/BSD/GPL2/GPL3/etc, default=MIT] :" LICENSE
+if [ ! $LICENSE ]
+then
+	LICENSE="MIT"
+fi
+
+read -p "URL [example:ignsdk.web.id] :" URL
+if [ ! $URL ]
+then
+	URL="ignsdk.web.id"
+fi
+
+read -p "Description application :" DESC
+if [ ! $DESC ]
+then
+	DESC="IGOS Nusantara SDK Application"
+fi
+
+mkdir -p $BUILDDEST/rpm
+cp $TPL $BUILDDEST/rpm
+cat $TPL | sed "s|<name>|$PKGNAME|" | \
+sed "s|<release>|$RELEASE|" | \
+sed "s|<version>|$VERSION|" | \
+sed "s|<license>|$LICENSE|" | \
+sed "s|<url>|$URL|" | \
+sed "s|<desc>|$DESC|" > $BUILDDEST/rpm/app.spec
+
+echo "-----------Application has been created---------"
+echo ""
+echo " PATH : $BUILDDEST"
+echo ""
+echo "|----------------------DONE--------------------|"

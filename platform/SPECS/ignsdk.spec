@@ -40,6 +40,8 @@ make
 cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
+cp -rf bin/ignsdk-app-builder $RPM_BUILD_ROOT/usr/bin
+cp -rf bin/ignsdk-ign-builder $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 echo "ign" > $RPM_BUILD_ROOT/etc/ignsdk-dist
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 cp -rf template/main.tpl $RPM_BUILD_ROOT/usr/share/ign-sdk/template
@@ -157,7 +159,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devtools
 /usr/bin/ignsdk-app-creator
+/usr/bin/ignsdk-app-builder
 /usr/share/ign-sdk/bin/ignsdk-ign-creator
+/usr/share/ign-sdk/bin/ignsdk-ign-builder
 /usr/share/ign-sdk/template/main.tpl
 /usr/share/ign-sdk/template/rpm.tpl
 /etc/ignsdk-dist

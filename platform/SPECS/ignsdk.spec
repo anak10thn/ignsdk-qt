@@ -22,6 +22,7 @@ IGOS Nusantara  Software Development Kit
 Summary:IGOS Nusantara SDK developer tools
 Group:Development/Other
 Requires:ignsdk
+Requires:rpm-build
 
 %description devtools
 IGOS Nusantara  Software Development Kit developer tools
@@ -45,7 +46,7 @@ cp -rf bin/ignsdk-ign-builder $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 echo "ign" > $RPM_BUILD_ROOT/etc/ignsdk-dist
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 cp -rf template/main.tpl $RPM_BUILD_ROOT/usr/share/ign-sdk/template
-cp -rf template/rpm.tpl $RPM_BUILD_ROOT/usr/share/ign-sdk/template
+cp -rf template/app.spec $RPM_BUILD_ROOT/usr/share/ign-sdk/template
 cp LICENSE.BSD $RPM_BUILD_ROOT/usr/share/ign-sdk/
 cp third-party.txt $RPM_BUILD_ROOT/usr/share/ign-sdk/
 %clean
@@ -163,7 +164,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/bin/ignsdk-ign-creator
 /usr/share/ign-sdk/bin/ignsdk-ign-builder
 /usr/share/ign-sdk/template/main.tpl
-/usr/share/ign-sdk/template/rpm.tpl
+/usr/share/ign-sdk/template/app.spec
 /etc/ignsdk-dist
 
 %defattr(-,root,root,-)

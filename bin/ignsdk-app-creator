@@ -32,7 +32,7 @@ exit 0
 
 create_project ()
 {
-/usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4
+/usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4 $5
 }
 
 
@@ -139,7 +139,7 @@ sed -i -e "s/\[package\]/$PKGNAME/" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
-create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU"
+create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU" $PROJECT
 fi
 
 else

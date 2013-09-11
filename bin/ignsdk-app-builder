@@ -23,8 +23,9 @@ Usage: ignsdk-app-builder [OPTIONS] [PACKAGE NAME or PROJECT DIRECTORY]
 
 OPTION	:
 		
-		-p, --pkgname		Package project name
+		-p, --pkgname		Project Package name
 		-d, --dir			Project directory
+		-l, --list			List project exist
 
 EXAMPLE :
 		

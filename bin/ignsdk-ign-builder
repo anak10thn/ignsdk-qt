@@ -4,5 +4,43 @@ DIR=$1
 PKG=`echo $1 | sed "s|$HOME/IGNSDK-APP/||"`
 echo $PKG
 echo $DIR
-cd $APP
-tar cvfz $PKG.tar.gz $PKG
+
+help ()
+{
+
+cat <<EOF
+Usage: ignsdk-app-builder [OPTIONS] [PACKAGE NAME or PROJECT DIRECTORY]
+
+OPTION	:
+		
+		-p, --pkgname		Project Package name
+		-d, --dir			Project directory
+		-l, --list			List project exist
+
+EXAMPLE :
+		
+		$ignsdk-app-builder --pkgname control-panel
+		or
+		$ignsdk-app-builder --dir /home/igos/IGNSDK-APP/control-panel.ign
+EOF
+
+exit 0
+}
+
+if [ -d $HOME/rpmbuild/SOURCES ];then
+	SOURCE="$HOME/rpmbuild/SOURCES"
+else
+	mkdir -p $HOME/rpmbuild/SOURCES
+	SOURCE="$HOME/rpmbuild/SOURCES"
+fi
+
+if [ -d $DIR ];then
+	cd $APP
+	tar cvfz $SOURCE/$PKG.tar.gz $PKG
+	rpmbuild -ba $DIR/rpm/app.spec
+	echo ""
+	echo "Done! PATH : $HOME/rpmbuild/RPMS/noarch/"
+	exit 0
+else
+	help
+fi

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "IGNSDK Package Creator (Debian GNU/Linux)"
+echo -e "\n\nIGNSDK Package Creator (Debian GNU/Linux)"
 
 package_name=$1
 deb_package_name=$(echo $package_name | sed 's/\.ign//')
@@ -44,13 +44,14 @@ echo ""
 pushd $project_dir
 
 echo "-> dh_make"
-DEBFULLNAME="$packagers_name" DEBEMAIL="$packagers_mail" dh_make --single --native --copyright gpl3 --packagename "$deb_package_name"_"$package_version" --yes
+echo "   License is set to GPLv3 (default). You can change it in debian/copyright."
+DEBFULLNAME="$packagers_name" DEBEMAIL="$packagers_mail" dh_make --single --native --copyright gpl3 --packagename "$deb_package_name"_"$deb_package_version" --yes
 rm debian/*.ex debian/*.EX debian/README.Debian debian/README.source
 
 echo "-> debian/changelog"
 rm debian/changelog
 cat > debian/changelog <<EOF
-$package_name ($package_version) $release; urgency=low
+$deb_package_name ($deb_package_version) $release; urgency=low
 
   * Initial release.
 
@@ -74,7 +75,7 @@ sed -i -e "s/Source: \(.*\)/Source: http:\/\/ignsdk.web.id/" \
 echo "-> debian/README"
 rm debian/README
 cat > debian/README <<EOF
-IGN SDK Application $package_name.ign
+IGN SDK Application $deb_package_name.ign
 -------------------------------------
 
 This application is built using IGOS Nusantara Software Development Kit

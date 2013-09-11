@@ -21,7 +21,7 @@ cat <<EOF
 Usage: ignsdk-app-creator [OPTION]
 
 Option :
-		 -p, --pkgname=[PACKAGE NAME]
+		 -p, --pkgname		Package name
 
 Example: ignsdk-app-creator -p control-panel
 

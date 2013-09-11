@@ -11,19 +11,16 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hp: --long help,pkgname: \
+TEMP=`getopt -o vdm: --long pkgname:,help \
              -n 'ignsdk-app-creator' -- "$@"`
 
 help ()
 {
 
 cat <<EOF
-Usage: ignsdk-app-creator [OPTION]
+Usage: ignsdk-app-creator --pkgname=[PACKAGE NAME]
 
-Option :
-		 -p, --pkgname		Package name
-
-Example: ignsdk-app-creator -p control-panel
+Example: ignsdk-app-creator --pkgname=control-panel
 
 EOF
 
@@ -43,7 +40,7 @@ fi
 if [ $DISTCHK == "debian" -o $DISTCHK == "ign" -o $DISTCHK == "arch" -o $DISTCHK == "slack" ];then
 	DIST=$DISTCHK
 else
-	echo "ERROR : Distribution is not supported!"
+	echo "ERROR: Distribution is not supported!"
 	exit 0
 fi
 
@@ -51,7 +48,7 @@ eval set -- "$TEMP"
 
 while true; do
   case "$1" in
-    -p | --pkgname ) if [ ! $2 ];then
+    --pkgname ) if [ $2 == "" ];then
 		DEST=false
 	 else
 		if [ ! -d "$DESTDIR$2.ign" ];then
@@ -65,7 +62,7 @@ while true; do
 		fi
 	 fi
     shift 2 ;;
-    -h | --help ) HELP=true; shift ;;
+    --help ) HELP=true; shift ;;
     -- ) shift; break ;;
     * ) break ;;
   esac
@@ -81,9 +78,9 @@ then
 read -p "Application name: " APPNAME
 cat <<EOF
 Application category :
-1. AudioVideo
-2. Audio
-3. Video
+1. AudioVideo (multimedia)
+2. Audio (audio only)
+3. Video (video only)
 4. Development
 5. Education
 6. Game
@@ -95,7 +92,7 @@ Application category :
 12. System
 13. Utility [default]
 EOF
-read -p "Choose :" CTGR
+read -p "Choose one: " CTGR
 case "$CTGR" in
     "1" ) MENU="AudioVideo"
     shift 2 ;;
@@ -143,6 +140,6 @@ create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU"
 fi
 
 else
-echo "ERROR: name your project"
+echo "ERROR: Please name your project."
 help
 fi

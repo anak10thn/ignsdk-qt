@@ -1,3 +1,4 @@
-bin/ignsdk-app-creator /usr/share/ign-sdk/bin/
+bin/ignsdk-app-creator /usr/bin/
 bin/ignsdk-debian-creator /usr/share/ign-sdk/bin/
 bin/ignsdk-debian-builder /usr/share/ign-sdk/bin/
+template /usr/share/ign-sdk/

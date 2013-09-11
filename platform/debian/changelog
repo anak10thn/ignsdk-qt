@@ -1,8 +1,8 @@
-ignsdk-debian (1.0.9.1) UNRELEASED; urgency=low
+ignsdk-debian (1.0.9.1) testing; urgency=low
 
   * debian/control: remove hardening-wrapper and hardening-includes
-  * debian/rules, debian/control: kill patch system
-  * debian/ignsdk-debian-example.install: RIP Kuma :(
+  * New package: ignsdk-debian-dev
+  * Update Sql API
 
  -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 22 Aug 2013 08:20:06 +0700
 

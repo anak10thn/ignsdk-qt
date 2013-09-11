@@ -10,23 +10,26 @@ Package: ignsdk-debian
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}, libqtwebkit4 (>= 2.2.1), libqtgui4 (>= 4:4.8.2), libqt4-network (>= 4:4.8.2), libqtcore4 (>= 4:4.8.2), libqjson0 (>= 0.7.1-7), libmysqlclient18 (>= 5.5.31)
 Recommends: ignsdk-debian-example
-Description: IGOS Nusantara Software Development Kit (IGNSDK)
+Suggests: ignsdk-debian-dev
+Description: IGOS Nusantara Software Development Kit (IGNSDK) (launcher)
  This is Debian-compatible version of IGN Software Development
  Kit (IGNSDK).
+ .
+ This package provides app launcher.
 
 Package: ignsdk-debian-example
 Architecture: all
 Depends: ${misc:Depends}, ignsdk-debian (>= 1.0.9)
-Description: IGOS Nusantara Software Development Kit (IGNSDK)
+Description: IGOS Nusantara Software Development Kit (IGNSDK) (example apps)
  This is Debian-compatible version of IGN Software Development
  Kit (IGNSDK).
  .
  This package provides example apps.
 
 Package: ignsdk-debian-dev
-Architecture: any
-Depends: ${misc:Depends}, ignsdk-debian (>= 1.0.9)
-Description: IGOS Nusantara Software Development Kit (IGNSDK)
+Architecture: all
+Depends: ${misc:Depends}, fakeroot, debhelper, dh-make, ignsdk-debian (>= 1.0.9)
+Description: IGOS Nusantara Software Development Kit (IGNSDK) (dev tools)
  This is Debian-compatible version of IGN Software 
  .
- This package provides development tools.
+ This package provides development tools for Debian GNU/Linux.

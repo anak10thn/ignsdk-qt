@@ -12,8 +12,8 @@
 
 PRGNAM=ign-sdk
 VERSION=${VERSION:-git}
-BUILD=${BUILD:-wjt1}
-TAG=${TAG:-_ign}
+BUILD=${BUILD:-ign1}
+TAG=${TAG:-_wjt}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -86,6 +86,7 @@ cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
 chmod +x bin/*
 cp -rf bin/*  $PKG/usr/bin/
 cp -rf bin/ignsdk-slack-creator  $PKG/usr/share/ign-sdk/bin/
+cp -rf bin/ignsdk-slack-builder $PKG/usr/share/ign-sdk/bin/
 cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 

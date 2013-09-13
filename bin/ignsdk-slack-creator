@@ -1,0 +1,79 @@
+#!/bin/bash
+#Dwiyan Galuh W (wajatmaka@gmail.com)
+
+
+echo -e "\n\nIGNSDK Package Creator (Slackware)"
+app_name=`echo $1 | sed 's/\.ign//'`
+PRGNAME=$1
+TAG='ignsdk-slack'
+DESTDIR=~/IGNSDK-APP
+HOME_APP=$DESTDIR/$PRGNAME
+read -p 'Name : ' name_dev
+read -p 'Email : ' email_dev
+read -p 'Website : ' website_dev
+read -p 'Application version : ' version_dev
+echo -e '\n\nSucceed.........................'
+echo -e 'Project has been created on '$DESTDIR 
+echo -e '\n\nFor build this Application you can read  file README on directory slackbuild on your project'
+echo -e 'slackbuild/   
+      -README
+      -'$app_name'.info
+      -slack-desc
+      -'$app_name'.slackbuild'
+
+cat > $HOME_APP/README << EOF
+IGN SDK Application 
+-------------------------------------
+Application $app_name.-v.$version_dev.$TAG 
+This application is built using IGOS Nusantara Software Development Kit
+
+Developer $app_name : $name_dev
+Email : $email_dev
+
+$(date +"%a, %d %b %Y %T %z")
+
+For build this Application you can read  file README on directory slackbuild on your project
+EOF
+
+mkdir -p $HOME_APP/slackbuild
+
+cat > $HOME_APP/slackbuild/$app_name.info << EOF
+PRGNAM="$app_name"
+VERSION="$version_dev"
+HOMEPAGE="http://$website_dev"
+DOWNLOAD=""
+MD5SUM=""
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES="webkit qjson bees mariadb"
+MAINTAINER="Dwiyan Galuh W"
+EMAIL="$email_dev"
+EOF
+
+cat > $HOME_APP/slackbuild/slack-desc << EOF
+#Application $app_name 
+####################################################################
+#This Application build with IGOS Nusantara Software Development Kit
+#Name : $name_dev
+#Email : $email_dev
+#website : http://$website_dev
+####################################################################
+#IGOS Nusantara 
+#http://igos-nusantara.or.id/
+#IGNSDK
+#http://ignsdk.web.id/
+#MAINTAINER
+#Dwiyan Galuh W, a.k.a wajatmaka (wajatmaka@gmail.com)
+EOF
+
+cat > $HOME_APP/slackbuild/README << EOF
+If You want build your project you  can using command :
+
+ignsdk-app-builder -pkgname YourApplicationName
+or
+ignsdk-app-builder --dir /home/wajatmaka/IGNSDK-APP/yourApplcaton.ign
+
+Slackbuild : Dwiyan Galuh W (wajatmaka@gmail.com)
+EOF
+
+

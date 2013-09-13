@@ -104,7 +104,8 @@ fi
 
 if [ $LIST == true ]
 then
-find $DESTDIR -name *.ign -exec echo {} > $DESTDIR/.ignsdk-list \;
+#find $DESTDIR -name *.ign -exec echo {} > $DESTDIR/.ignsdk-list \;
+cd $DESTDIR;ls > $DESTDIR/.ignsdk-list 
 echo ""
 echo "Project list: "
 while read m

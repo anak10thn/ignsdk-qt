@@ -9,7 +9,7 @@ RELEASE=""
 VERSION=""
 LICENSE=""
 URL=""
-DESC=""
+#DESC=""
 
 echo "|----------------------------------------------|"
 echo "|          IGNSDK spec file generator          |"
@@ -40,7 +40,8 @@ then
 fi
 
 read -p "Description application :" DESC
-if [ ! $DESC ]
+
+if [ -z "$DESC" ]
 then
 	DESC="IGOS Nusantara SDK Application"
 fi

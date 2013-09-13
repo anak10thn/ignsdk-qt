@@ -10,4 +10,3 @@ override_dh_auto_install:
 	qmake-qt4 ign.pro
 	make
 	mv ignsdk $$(pwd)/debian/ignsdk-debian/usr/bin/
-	echo "debian" > $$(pwd)/debian/ignsdk-debian-dev/etc/ignsdk-dist

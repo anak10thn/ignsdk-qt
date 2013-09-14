@@ -1,6 +1,14 @@
+ignsdk-debian (1.1.0.1) testing; urgency=low
+
+  * IGNSDK 1.1.0 (codename: Alamang)
+  * Small fixes for v1.1.0.1
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 13 Sep 2013 21:34:18 +0700
+
 ignsdk-debian (1.0.9.1) testing; urgency=low
 
   * debian/control: remove hardening-wrapper and hardening-includes
+  * Add dev tools
   * New package: ignsdk-debian-dev
   * Update Sql API
 

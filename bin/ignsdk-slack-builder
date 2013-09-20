@@ -7,15 +7,14 @@ tempat=$1
 app_name=`echo $tempat | sed 's/^.*IGNSDK-APP\///'`
 
 PRGNAM=$app_name
-VERSION=${VERSION:-git}
 BUILD=${BUILD:-wjt1}
 TAG=${TAG:-_ign}
 
 
 CWD=$(pwd)
-TMP=${TMP:-/tmp/ignsdk}
+TMP=${TMP:-$tempat/tmp/ignsdk}
 PKG=$TMP/paket-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}
+OUTPUT=${OUTPUT:-$tempat/tmp}
 
 
 
@@ -35,7 +34,7 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 cp -rf $CWD/copyright /$PKG/usr/share/ign-sdk/
 
 cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$BUILD$TAG.${PKGTYPE:-tgz}
  
  
 

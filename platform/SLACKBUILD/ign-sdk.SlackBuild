@@ -73,6 +73,7 @@ mkdir -p $PKG/usr/share/applications/
 mkdir -p $PKG/usr/sbin/
 mkdir -p $PKG/etc/
 mkdir -p  $PKG/usr/share/ign-sdk/bin/
+mkdir -p $PKG/usr/share/ign-sdk/slack
 touch  $PKG/etc/ignsdk-dist
 echo "slack" > $PKG/etc/ignsdk-dist
 mkdir -p $PKG/usr/share/ign-sdk/template/
@@ -91,7 +92,9 @@ cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cp -rf $CWD/copyright /$PKG/usr/share/ign-sdk/
+cp -rf $CWD/copyright $PKG/usr/share/ign-sdk/
+cp -rf $CWD/application.SlackBuild  $PKG/usr/share/ign-sdk/slack/
+
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

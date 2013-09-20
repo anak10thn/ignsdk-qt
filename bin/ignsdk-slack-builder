@@ -4,8 +4,9 @@
 #Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
 
 tempat=$1
-app_name=``
-PRGNAM=ign-sdk
+app_name=`echo $tempat | sed 's/^.*IGNSDK-APP\///'`
+
+PRGNAM=$app_name
 VERSION=${VERSION:-git}
 BUILD=${BUILD:-wjt1}
 TAG=${TAG:-_ign}

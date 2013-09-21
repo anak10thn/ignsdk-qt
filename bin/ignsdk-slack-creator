@@ -17,9 +17,8 @@ echo -e 'Project has been created on '$DESTDIR
 echo -e '\n\nFor build this Application you can read  file README on directory slackbuild on your project'
 echo -e 'slackbuild/   
       -README
-      -'$app_name'.info
       -slack-desc
-      -'$app_name'.slackbuild'
+      
 
 cat > $HOME_APP/README << EOF
 IGN SDK Application 
@@ -37,18 +36,6 @@ EOF
 
 mkdir -p $HOME_APP/slackbuild
 
-cat > $HOME_APP/slackbuild/$app_name.info << EOF
-PRGNAM="$app_name"
-VERSION="$version_dev"
-HOMEPAGE="http://$website_dev"
-DOWNLOAD=""
-MD5SUM=""
-DOWNLOAD_x86_64=""
-MD5SUM_x86_64=""
-REQUIRES="webkit qjson bees mariadb"
-MAINTAINER="Dwiyan Galuh W"
-EMAIL="$email_dev"
-EOF
 
 cat > $HOME_APP/slackbuild/slack-desc << EOF
 #Application $app_name 
@@ -68,7 +55,7 @@ cat > $HOME_APP/slackbuild/slack-desc << EOF
 EOF
 
 cat > $HOME_APP/slackbuild/README << EOF
-If You want build your project you  can using command :
+If You want build your project to package, you can using command :
 
 ignsdk-app-builder -pkgname YourApplicationName
 or
@@ -78,6 +65,3 @@ Slackbuild : Dwiyan Galuh W (wajatmaka@gmail.com)
 EOF
 
 
-cp  /usr/share/ign-sdk/slack/application.SlackBuild  $HOME_APP/slackbuild/
-mv $HOME_APP/slackbuild/application.SlackBuild $HOME_APP/slackbuild/$app_name.SlackBuild
-chmod +x $HOME_APP/slackbuild/$app_name.SlackBuild  

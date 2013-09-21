@@ -11,7 +11,7 @@ BUILD=${BUILD:-wjt}
 
 
 
-CWD=$(pwd)
+
 TMP=${TMP:-$tempat/tmp/ignsdk}
 PKG=$TMP/paket-$PRGNAM
 OUTPUT=${OUTPUT:-$tempat/tmp}
@@ -23,18 +23,19 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 
 rm -rf $PRGNAM
-cd $PRGNAM
+cd $tempat/
 
 mkdir -p $PKG/opt/ign-sdk/$app_name/
 mkdir -p $PKG/usr/share/applications/
 cp -rf $tempat/* $PKG/opt/ign-sdk/$app_name/
+rm -rf $PKG/opt/ignsdk/$app_name/tmp
 cp -rf $tempat/menu/* $PKG/usr/share/applications/
 
 
 
 
 mkdir -p $PKG/install
-cp -rf  $tempat/slackbuild/slack-desc  $PKG/install/
+cp -rf $tempat/slackbuild/slack-desc   $PKG/install/
 
 
 cd $PKG

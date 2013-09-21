@@ -1,0 +1,45 @@
+
+#!/bin/sh
+#SLACKBUILD##
+#Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
+
+tempat=$1
+app_name=`echo $tempat | sed 's/^.*IGNSDK-APP\///'`
+
+PRGNAM=$app_name
+BUILD=${BUILD:-wjt}
+
+
+
+
+TMP=${TMP:-$tempat/tmp/ignsdk}
+PKG=$TMP/paket-$PRGNAM
+OUTPUT=${OUTPUT:-$tempat/tmp}
+
+
+
+rm -rf $PKG
+mkdir -p $TMP $PKG $OUTPUT
+cd $TMP
+
+rm -rf $PRGNAM
+cd $tempat/
+
+mkdir -p $PKG/opt/ign-sdk/$app_name/
+mkdir -p $PKG/usr/share/applications/
+cp -rf $tempat/* $PKG/opt/ign-sdk/$app_name/
+rm -rf $PKG/opt/ignsdk/$app_name/tmp
+cp -rf $tempat/menu/* $PKG/usr/share/applications/
+
+
+
+
+mkdir -p $PKG/install
+cp -rf $tempat/slackbuild/slack-desc   $PKG/install/
+
+
+cd $PKG
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$BUILD.${PKGTYPE:-tgz}
+ 
+ 
+

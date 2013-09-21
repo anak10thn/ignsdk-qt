@@ -17,9 +17,8 @@ echo -e 'Project has been created on '$DESTDIR
 echo -e '\n\nFor build this Application you can read  file README on directory slackbuild on your project'
 echo -e 'slackbuild/   
       -README
-      -'$app_name'.info
       -slack-desc
-      -'$app_name'.slackbuild'
+      
 
 cat > $HOME_APP/README << EOF
 IGN SDK Application 
@@ -37,18 +36,6 @@ EOF
 
 mkdir -p $HOME_APP/slackbuild
 
-cat > $HOME_APP/slackbuild/$app_name.info << EOF
-PRGNAM="$app_name"
-VERSION="$version_dev"
-HOMEPAGE="http://$website_dev"
-DOWNLOAD=""
-MD5SUM=""
-DOWNLOAD_x86_64=""
-MD5SUM_x86_64=""
-REQUIRES="webkit qjson bees mariadb"
-MAINTAINER="Dwiyan Galuh W"
-EMAIL="$email_dev"
-EOF
 
 cat > $HOME_APP/slackbuild/slack-desc << EOF
 #Application $app_name 
@@ -64,10 +51,11 @@ cat > $HOME_APP/slackbuild/slack-desc << EOF
 #http://ignsdk.web.id/
 #MAINTAINER
 #Dwiyan Galuh W, a.k.a wajatmaka (wajatmaka@gmail.com)
+###################################################################
 EOF
 
 cat > $HOME_APP/slackbuild/README << EOF
-If You want build your project you  can using command :
+If You want build your project to package, you can using command :
 
 ignsdk-app-builder -pkgname YourApplicationName
 or
@@ -76,63 +64,4 @@ ignsdk-app-builder --dir /home/wajatmaka/IGNSDK-APP/yourApplcaton.ign
 Slackbuild : Dwiyan Galuh W (wajatmaka@gmail.com)
 EOF
 
-cat > $HOME_APP/slackbuild/$app_name.slackbuild << EOF
-PRGNAM=$app_name
-VERSION=${VERSION:-$version_dev}
-BUILD=${BUILD:-wjt}
-TAG=${TAG:-_$TAG}
-
-if [ -z "$ARCH" ]; then
-  case "$( uname -m )" in
-    i?86) ARCH=i486 ;;
-    arm*) ARCH=arm ;;
-       *) ARCH=$( uname -m ) ;;
-  esac
-fi
-
-CWD=$(pwd)
-TMP=${TMP:-/tmp/ignsdk}
-PKG=$TMP/paket-$PRGNAM
-OUTPUT=${OUTPUT:-/tmp}
-
-if [ "$ARCH" = "i486" ]; then
-  SLKCFLAGS="-O2 -march=i486 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "i686" ]; then
-  SLKCFLAGS="-O2 -march=i686 -mtune=i686"
-  LIBDIRSUFFIX=""
-elif [ "$ARCH" = "x86_64" ]; then
-  SLKCFLAGS="-O2 -fPIC"
-  LIBDIRSUFFIX="64"
-else
-  SLKCFLAGS="-O2"
-  LIBDIRSUFFIX=""
-fi
-
-set -e
-
-rm -rf $PKG
-mkdir -p $TMP $PKG $OUTPUT
-cd $TMP
-
-rm -rf $PRGNAM
-
-cd $PRGNAM
-
-chown -R root:root .
-find . \
- \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
- -exec chmod 755 {} \; -o \
- \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
- -exec chmod 644 {} \;
-
-
-
-mkdir -p $PKG/install
-cat $CWD/slack-desc > $PKG/install/slack-desc
-
-cd $PKG
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
-
-EOF
 

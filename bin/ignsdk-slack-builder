@@ -12,9 +12,9 @@ BUILD=${BUILD:-wjt}
 
 
 
-TMP=${TMP:-$tempat/tmp/ignsdk}
+TMP=${TMP:-$tempat/slackbuild/tmp/ignsdk}
 PKG=$TMP/paket-$PRGNAM
-OUTPUT=${OUTPUT:-$tempat/tmp}
+OUTPUT=${OUTPUT:-$tempat/package}
 
 
 
@@ -35,7 +35,9 @@ cp -rf $tempat/menu/* $PKG/usr/share/applications/
 
 
 mkdir -p $PKG/install
-cp -rf $tempat/slackbuild/slack-desc   $PKG/install/
+cat  $tempat/slackbuild/slack-desc >  $PKG/install/slack-desc
+
+
 
 
 cd $PKG

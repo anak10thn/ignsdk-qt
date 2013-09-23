@@ -14,8 +14,8 @@
 using namespace std;
 ign::ign(QObject *parent)
     : QObject(parent),
-    m_ignsystem(0),
-    m_sqldrv(0)
+    m_sqldrv(0),
+    m_ignsystem(0)
 {
     this->version = "1.0.9";
     frame = web.page()->mainFrame();

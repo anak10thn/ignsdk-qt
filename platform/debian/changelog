@@ -1,3 +1,10 @@
+ignsdk-debian (1.1.0.2) testing; urgency=low
+
+  * Add devscripts dependency
+  * debian/rules: use clang instead of gcc, if available
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sun, 15 Sep 2013 11:21:49 +0700
+
 ignsdk-debian (1.1.0.1) testing; urgency=low
 
   * IGNSDK 1.1.0 (codename: Alamang)

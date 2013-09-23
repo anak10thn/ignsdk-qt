@@ -15,10 +15,11 @@ read -p 'Application version : ' version_dev
 echo -e '\n\nSucceed.........................'
 echo -e 'Project has been created on '$DESTDIR 
 echo -e '\n\nFor build this Application you can read  file README on directory slackbuild on your project'
-echo -e 'slackbuild/   
+echo -e 'slackbuild
       -README
       -slack-desc
-      
+      -'$app_name.info
+      -copyright
 
 cat > $HOME_APP/README << EOF
 IGN SDK Application 
@@ -62,6 +63,24 @@ or
 ignsdk-app-builder --dir /home/wajatmaka/IGNSDK-APP/yourApplcaton.ign
 
 Slackbuild : Dwiyan Galuh W (wajatmaka@gmail.com)
+EOF
+
+
+cat > $HOME_APP/slackbuild/$app_name.info << EOF
+Application $app_name 
+
+Developer : $name_dev
+Email     : $email_dev
+Website   : $website_dev
+
+Slackbuild : Dwiyan Galuh W (wajatmaka@gmail.com)
+EOF
+
+ 
+
+cat > $HOME_APP/slackbuild/copyright << EOF
+License is set to GPLv3 (default). You can change it in slackbuild/copyright
+copyright 2013-2014 packager Dwiyan Galuh W
 EOF
 
 

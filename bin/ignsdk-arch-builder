@@ -44,5 +44,5 @@ EOF
 cd $tempat/ArchBuild/
 makepkg -s
 
-echo -e "build on Archlinux Packaging Succesfully check your package folder Archbuilder on Your Project"
+echo -e "build on Archlinux Packaging Succesfully now check your package folder Archbuilder on Your Project"
 echo -e "thanks to for usage ignsdk"

@@ -16,7 +16,7 @@ read -p 'Email Developer: ' email_dev
 read -p 'Website Developer: ' website_dev
 echo -e '\n\n###########Succeed###########'
 echo -e 'Project has been created on '$DESTDIR 
-echo -e '\n\nFor build this Application you can read  file README on directory ArchBuild on your project'
+echo -e '\n\nFor build this Application you can check  file README on directory ArchBuild on your project'
 echo -e 'ArchBuild/   
       -README
       -PKGBUILD'

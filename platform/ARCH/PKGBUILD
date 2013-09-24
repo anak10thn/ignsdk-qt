@@ -6,7 +6,7 @@
 pkgname=ign-sdk
 pkgver=1.0.9
 pkgrel=1
-pkgdesc="IGN Software Development Kit For Archlinux"
+pkgdesc="IGN Software Development Kit"
 url="https://github.com/anak10thn/ignsdk-qt"
 arch=('x86_64' 'i686')
 license=('BSD')

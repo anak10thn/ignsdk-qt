@@ -5,7 +5,6 @@
 #builder on ARCH 
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
-
 tempat=$1
 DESTDIR=~/IGNSDK-APP
 HOME_APP=$DESTDIR/$tempat

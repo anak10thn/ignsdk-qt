@@ -3,7 +3,6 @@
 ignsql::ignsql(QObject *parent) :
     QObject(parent)
 {
-
 }
 
 bool ignsql::driver(const QString &drv, QString connect){
@@ -29,7 +28,7 @@ bool ignsql::driver(const QString &drv, QString connect){
 
 }
 
-void ignsql::query(const QString &qr){
+QString ignsql::query(const QString &qr){
     QSqlQuery qry(this->db);
     qry.prepare(qr);
     qry.exec();
@@ -37,21 +36,35 @@ void ignsql::query(const QString &qr){
     QSqlRecord data = qry.record();
     QVariantList datarec;
     QVariantMap map;
+    QVariantMap contentmap;
 
-    for(int index = 0; index < data.count(); ++index) {
-        QString key = data.fieldName(index);
-        QVariant value = data.value(index);
-
-        map.insert(key, value);
+    bool status;
+    while (qry.next()) {
+        for(int index = 0; index < data.count(); index++) {
+            QString key = data.fieldName(index);
+            QVariant value = qry.value(index);
+            map.insert(key, value);
+        }
+        datarec << map;
     }
 
-    datarec << map;
+    contentmap.insert("content",datarec);
+
+    if(qry.size() > 0){
+        status = true;
+    }
+    else {
+        status = false;
+    }
+
+    contentmap.insert("status",status);
 
     QJson::Serializer serializer;
     bool ok;
-    QByteArray json = serializer.serialize(datarec, &ok);
+    QByteArray json = serializer.serialize(contentmap, &ok);
 
     if (ok) {
-      emit record(ok,json);
+        return json;
     }
 }
+

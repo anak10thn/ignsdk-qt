@@ -18,10 +18,12 @@ public:
     //QSqlQuery qry;
     QSqlDatabase db;
 signals:
-    void record(bool err,const QByteArray& data);
+    //void record_sig(bool err,const QByteArray& data);
+    //void record(bool err,const QByteArray& data);
 public slots:
     bool driver(const QString& drv, QString connect);
-    void query(const QString& qr);
+    QString query(const QString& qr);
+    //void record_slot(bool err,const QByteArray& data);
 };
 
 #endif // SQL_H

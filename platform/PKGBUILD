@@ -1,0 +1,59 @@
+##Author##
+#Eka Tresna Irawan/Ibnu Yahya (anak10thn@gmail.com)
+#PKGBUILD
+#Sofyan Saputra/Iank (meongbego@gmail.com)
+
+pkgname=ign-sdk
+pkgver=1.0.9
+pkgrel=1
+pkgdesc="IGN Software Development Kit for Archlinux"
+url="https://github.com/anak10thn/ignsdk-qt"
+arch=('x86_64' 'i686')
+license=('BSD')
+depends=('qt4' 'qtwebkit' 'qjson' 'mariadb')
+makedepends=('qt4' 'qtwebkit' 'qjson' 'git' 'mariadb')
+options=('!strip' '!emptydirs')
+source=('ign-sdk::git://github.com/anak10thn/ignsdk-qt.git')
+md5sums=('SKIP')
+_gourl=github.com/anak10thn/ignsdk-qt
+
+
+pkgver (){
+cd ign-sdk
+git checkout -b v1.0.9
+
+}
+  
+build() {
+cd ign-sdk
+qmake-qt4
+make
+}
+package() {
+  cd ign-sdk
+  mkdir -p $pkgdir/usr/bin/
+  mkdir -p $pkgdir/usr/share/ign-sdk/bin/
+  mkdir -p $pkgdir/etc/
+  
+  mv ignsdk $pkgdir/usr/bin/
+  cp -rf css $pkgdir/usr/share/ign-sdk/
+  cp -rf img $pkgdir/usr/share/ign-sdk/
+  cp -rf js $pkgdir/usr/share/ign-sdk/
+  cp -rf LICENSE.BSD $pkgdir/usr/share/ign-sdk/
+  cp -rf test $pkgdir/usr/share/ign-sdk/
+  cp -rf template $pkgdir/usr/share/ign-sdk/
+  cp -rf bin/ignsdk-app-creator $pkgdir/usr/bin/
+  cp -rf bin/ignsdk-app-builder $pkgdir/usr/bin/
+  
+  cp -rf bin/ignsdk-arch-builder $pkgdir/usr/share/ign-sdk/bin/
+  cp -rf bin/ignsdk-arch-creator $pkgdir/usr/share/ign-sdk/bin/
+  
+  chmod 775 $pkgdir/usr/share/ign-sdk/bin/
+  cp -rf dist $pkgdir/etc/dist/
+  echo "arch" > $pkgdir/etc/ignsdk-dist
+  
+  mv $pkgdir/usr/share/ign-sdk/LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
+  
+  rm -rf *.o
+
+}

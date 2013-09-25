@@ -1,0 +1,40 @@
+#! /bin/bash
+
+##Author##
+#Eka Tresna Irawan/Ibnu Yahya (anak10thn@gmail.com)
+#creator on ARCH 
+#Sofyan Saputra/Iank (meongbego@gmail.com)
+
+echo -e "\n\nIGNSDK Package Creator (Archlinux)"
+app_name=`echo $1 | sed 's/\.ign//'`
+PRGNAME=$1
+TAG='ignsdk-arch'
+DESTDIR=~/IGNSDK-APP
+HOME_APP=$DESTDIR/$PRGNAME
+read -p 'Name Developer: ' name_dev
+read -p 'Email Developer: ' email_dev
+read -p 'Website Developer: ' website_dev
+echo -e '\n\n###########Succeed###########'
+echo -e 'Project has been created on '$DESTDIR 
+echo -e '\n\nFor build this Application you can check file README on directory ArchBuild on your project'
+echo -e 'ArchBuild/   
+      -README
+      -PKGBUILD'
+      
+cat > $HOME_APP/README.build << EOF
+IGN SDK Application 
+-------------------------------------
+Application $app_name.-v.$version_dev.$TAG 
+This application is built using IGOS Nusantara Software Development Kit
+
+Developer $app_name : $name_dev
+Email : $email_dev
+
+$(date +"%a, %d %b %Y %T %z")
+
+For build this Application you can read  file README on directory ArchBuild on your project
+EOF
+
+mkdir -p $HOME_APP/ArchBuild
+
+

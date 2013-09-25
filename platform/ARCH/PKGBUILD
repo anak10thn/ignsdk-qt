@@ -32,14 +32,25 @@ make
 package() {
   cd ign-sdk
   mkdir -p $pkgdir/usr/bin/
-  mkdir -p $pkgdir/usr/share/ign-sdk/
-    
+  mkdir -p $pkgdir/usr/share/ign-sdk/bin/
+  mkdir -p $pkgdir/etc/
+  
   mv ignsdk $pkgdir/usr/bin/
   cp -rf css $pkgdir/usr/share/ign-sdk/
   cp -rf img $pkgdir/usr/share/ign-sdk/
   cp -rf js $pkgdir/usr/share/ign-sdk/
   cp -rf LICENSE.BSD $pkgdir/usr/share/ign-sdk/
-  cp -rf test /$pkgdir/usr/share/ign-sdk/
+  cp -rf test $pkgdir/usr/share/ign-sdk/
+  cp -rf template $pkgdir/usr/share/ign-sdk/
+  cp -rf bin/ignsdk-app-creator $pkgdir/usr/bin/
+  cp -rf bin/ignsdk-app-builder $pkgdir/usr/bin/
+  
+  cp -rf bin/ignsdk-arch-builder $pkgdir/usr/share/ign-sdk/bin/
+  cp -rf bin/ignsdk-arch-creator $pkgdir/usr/share/ign-sdk/bin/
+  
+  chmod 775 $pkgdir/usr/share/ign-sdk/bin/
+  cp -rf dist $pkgdir/etc/dist/
+  echo "arch" > $pkgdir/etc/ignsdk-dist
   
   mv $pkgdir/usr/share/ign-sdk/LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
   

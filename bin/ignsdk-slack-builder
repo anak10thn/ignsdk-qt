@@ -1,7 +1,6 @@
 
 #!/bin/sh
-#SLACKBUILD##
-#Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
+#Dwiyan Galuh W a.k.a Wajatmaka (wajatmaka@gmail.com)
 
 tempat=$1
 app_name=`echo $tempat | sed 's/^.*IGNSDK-APP\///'`

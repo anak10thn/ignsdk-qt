@@ -17,8 +17,10 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 
+
 rm -rf $PRGNAM
 cd $tempat/
+
 
 mkdir -p $PKG/opt/ignsdk/$app_name/
 mkdir -p $PKG/usr/share/applications/
@@ -27,7 +29,6 @@ cp -rf $tempat/menu/* $PKG/usr/share/applications/
 cp -rf $tempat/* $PKG/opt/ignsdk/$app_name/
 rm -rf $PKG/opt/ignsdk/$app_name/package
 rm -rf $PKG/opt/ignsdk/$app_name/menu
-
 
 mkdir -p $PKG/install
 cat  $tempat/slackbuild/slack-desc >  $PKG/install/slack-desc

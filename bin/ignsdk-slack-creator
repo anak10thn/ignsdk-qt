@@ -1,8 +1,8 @@
 #!/bin/bash
-#Dwiyan Galuh W (wajatmaka@gmail.com)
+#Dwiyan Galuh W a.k.a Wajatmaka (wajatmaka@gmail.com)
 
 
-echo -e "\n\nIGNSDK Package Creator (Slackware)"
+echo -e "\n\nIGNSDK Application Creator (Slackware)"
 app_name=`echo $1 | sed 's/\.ign//'`
 PRGNAME=$1
 TAG='ignsdk-slack'
@@ -18,8 +18,8 @@ echo -e '\n\nFor build this Application you can read  file README on directory s
 echo -e 'slackbuild
       -README
       -slack-desc
-      -'$app_name.info
-      -copyright
+      -'$app_name'.info
+      -copyright'
 
 cat > $HOME_APP/README << EOF
 IGN SDK Application 

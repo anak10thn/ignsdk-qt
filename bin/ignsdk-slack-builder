@@ -10,7 +10,7 @@ app_name=`echo $tempat | sed 's/^.*IGNSDK-APP\///'`
 PRGNAM=$app_name
 BUILD=${BUILD:-wjt}
 
-TMP=${TMP:-$tempat/../slackbuild/tmp/ignsdk}
+TMP=${TMP:-$tempat/../tmp/ignsdk}
 PKG=$TMP/paket-$PRGNAM
 OUTPUT=${OUTPUT:-$tempat/package}
 
@@ -29,10 +29,12 @@ cp -rf $tempat/* $PKG/opt/ignsdk/$app_name/
 rm -rf $PKG/opt/ignsdk/$app_name/package
 rm -rf $PKG/opt/ignsdk/$app_name/menu
 
+
 mkdir -p $PKG/install
 cat  $tempat/slackbuild/slack-desc >  $PKG/install/slack-desc
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$BUILD.${PKGTYPE:-tgz}
- 
+
+rm -rf $tempat/../tmp 
 

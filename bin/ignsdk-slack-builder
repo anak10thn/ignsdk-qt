@@ -33,7 +33,7 @@ cp -rf $tempat/icons $PKG/opt/ign-sdk/$app_name/
 cp -rf $tempat/ignsdk.json $PKG/opt/ign-sdk/$app_name/
 cp -rf $tempat/index.html $PKG/opt/ign-sdk/$app_name/
 cp -rf $tempat/README $PKG/opt/ign-sdk/$app_name/
-cp -rf $tempat/slackbuild/$app_name.info  $PKG/opt/ign-sdk/$app_name/slackbuild/
+cp -rf $tempat/slackbuild/*.info  $PKG/opt/ign-sdk/$app_name/slackbuild/
 cp -rf $tempat/slackbuild/copyright  $PKG/opt/ign-sdk/$app_name/slackbuild/
 cp -rf $tempat/slackbuild/README  $PKG/opt/ign-sdk/$app_name/slackbuild/
 cp -rf $tempat/slackbuild/slack-desc  $PKG/opt/ign-sdk/$app_name/slackbuild/

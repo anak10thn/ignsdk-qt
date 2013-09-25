@@ -29,12 +29,12 @@ md5sums=('SKIP')
 package() {
 		cd $tempat
 		ls 
-		mkdir -p $pkgdir/opt/$app_name
+		mkdir -p $pkgdir/opt/ignsdk/$app_name
 		mkdir -p $pkgdir/usr/share/applications/
 		
-		cp -rf bin $pkgdir/opt/$app_name
-		cp -rf icons $pkgdir/opt/$app_name
-		cp -rf *.json *.html $pkgdir/opt/$app_name
+		cp -rf bin $pkgdir/opt/ignsdk/$app_name
+		cp -rf icons $pkgdir/opt/ignsdk/$app_name
+		cp -rf *.json *.html $pkgdir/opt/ignsdk/$app_name
 		cp -rf menu $pkgdir/usr/share/applications/
 }
 

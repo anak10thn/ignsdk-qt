@@ -48,7 +48,7 @@ package() {
   cp -rf bin/ignsdk-arch-builder $pkgdir/usr/share/ign-sdk/bin/
   cp -rf bin/ignsdk-arch-creator $pkgdir/usr/share/ign-sdk/bin/
   
-  chmod 775 $pkgdir/usr/share/ign-sdk/bin/
+  chmod 755 $pkgdir/usr/share/ign-sdk/bin/
   cp -rf dist $pkgdir/etc/dist/
   echo "arch" > $pkgdir/etc/ignsdk-dist
   

@@ -45,4 +45,5 @@ EOF
 pushd $project_dir/ArchBuild/
 echo -e "\nStarting build process..."
 makepkg -s
+popd
 echo -e "\nBuild process is over."

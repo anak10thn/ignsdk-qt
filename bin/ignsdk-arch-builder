@@ -1,47 +1,48 @@
-#! /bin/bash
+#!/bin/bash
 
-##Author##
-#Eka Tresna Irawan/Ibnu Yahya (anak10thn@gmail.com)
-#builder on ARCH 
-#Sofyan Saputra/Iank (meongbego@gmail.com)
+# Sofyan Saputra/Iank (meongbego@gmail.com)
 
-tempat=$1
+project_dir=$1
 DESTDIR=~/IGNSDK-APP
-HOME_APP=$DESTDIR/$tempat
+HOME_APP=$DESTDIR/$project_dir
 
-app_name=`echo $tempat | sed 's/^.*IGNSDK-APP\///'`
-echo -e "\nArchpackaging Name Software on IGNSDK"
-read -p 'Packaging version : ' version_dev
-echo -e "\nRelease Version must be a decimal"
-read -p 'Release Version : ' rel_dev
-read -p 'License : ' licens_dev
+app_name=`echo $project_dir | sed 's/^.*IGNSDK-APP\///'`
+echo -e "\nIGNSDK Package Auto-builder\n"
+read -p 'Package version: ' version_dev
+echo -e "\nRelease must be a decimal"
+read -p 'Release        : ' rel_dev
+read -p 'License        : ' license_dev
 
-pkgdir=$tempat/ArchBuild/pkg/$app_name
+pkgdir=$project_dir/ArchBuild/pkg/$app_name
 
-cat > $tempat/ArchBuild/PKGBUILD << EOF
+cat > $project_dir/ArchBuild/PKGBUILD << EOF
 pkgname=$app_name
 pkgver=$version_dev
 pkgrel=$rel_dev
 arch=('x86_64' 'i686')
-license=('$licens_dev')
+license=('$license_dev')
 md5sums=('SKIP')
 
 package() {
-		cd $tempat
-		ls 
+		cd $project_dir
+		ls
 		mkdir -p $pkgdir/opt/ignsdk/$app_name
 		mkdir -p $pkgdir/usr/share/applications/
-		
-		cp -rf bin $pkgdir/opt/ignsdk/$app_name
-		cp -rf icons $pkgdir/opt/ignsdk/$app_name
-		cp -rf *.json *.html $pkgdir/opt/ignsdk/$app_name
-		cp -rf menu $pkgdir/usr/share/applications/
+
+		for file in $(ls --file-type -xU)
+		do
+			if [ "$file" == "menu/" ]
+			then
+				cp -rf menu/ignsdk-*.desktop $pkgdir/usr/share/applications/
+			else
+				cp -rf $file $pkgdir/opt/ignsdk/$app_name/
+			fi
+		done
 }
 
 EOF
 
-cd $tempat/ArchBuild/
+pushd $project_dir/ArchBuild/
+echo -e "\nStarting build process..."
 makepkg -s
-
-echo -e "build on Archlinux Packaging Succesfully now check your package folder Archbuilder on Your Project"
-echo -e "thanks to for usage ignsdk"
+echo -e "\nBuild process is over."

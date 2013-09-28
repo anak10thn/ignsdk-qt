@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Sofyan Saputra/Iank (meongbego@gmail.com)
+
+project_dir=$1
+DESTDIR=~/IGNSDK-APP
+HOME_APP=$DESTDIR/$project_dir
+
+app_name=`echo $project_dir | sed 's/^.*IGNSDK-APP\///'`
+echo -e "\nIGNSDK Package Auto-builder\n"
+read -p 'Package version: ' version_dev
+echo -e "\nRelease must be a decimal"
+read -p 'Release        : ' rel_dev
+read -p 'License        : ' license_dev
+
+pkgdir=$project_dir/ArchBuild/pkg/$app_name
+
+cat > $project_dir/ArchBuild/PKGBUILD << EOF
+pkgname=$app_name
+pkgver=$version_dev
+pkgrel=$rel_dev
+arch=('x86_64' 'i686')
+license=('$license_dev')
+md5sums=('SKIP')
+
+package() {
+		cd $project_dir
+		ls
+		mkdir -p $pkgdir/opt/ignsdk/$app_name
+		mkdir -p $pkgdir/usr/share/applications/
+
+		for file in $(ls --file-type -xU)
+		do
+			if [ "$file" == "menu/" ]
+			then
+				cp -rf menu/ignsdk-*.desktop $pkgdir/usr/share/applications/
+			else
+				cp -rf $file $pkgdir/opt/ignsdk/$app_name/
+			fi
+		done
+}
+
+EOF
+
+pushd $project_dir/ArchBuild/
+echo -e "\nStarting build process..."
+makepkg -s
+popd
+echo -e "\nBuild process is over."

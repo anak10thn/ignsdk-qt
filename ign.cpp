@@ -17,7 +17,7 @@ ign::ign(QObject *parent)
     m_sqldrv(0),
     m_ignsystem(0)
 {
-    this->version = "1.0.9";
+    this->version = "1.1.0";
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     this->filesystem = new fs;

@@ -1,3 +1,9 @@
+ignsdk-debian (1.1.0.3) testing; urgency=low
+
+  * Source version: 1.1.0 (Alamang)
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sat, 28 Sep 2013 15:21:05 +0700
+
 ignsdk-debian (1.1.0.2) testing; urgency=low
 
   * Add devscripts dependency

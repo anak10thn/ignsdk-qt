@@ -3,19 +3,46 @@
 # Sofyan Saputra/Iank (meongbego@gmail.com)
 
 project_dir=$1
+
 DESTDIR=~/IGNSDK-APP
 HOME_APP=$DESTDIR/$project_dir
 
 app_name=`echo $project_dir | sed 's/^.*IGNSDK-APP\///'`
 echo -e "\nIGNSDK Package Auto-builder\n"
-read -p 'Package version: ' version_dev
+read -p 'Version [default = 1.0] : ' version_dev
+if [ ! $version_dev ]
+then
+	version_dev="1.0"
+fi
+
 echo -e "\nRelease must be a decimal"
-read -p 'Release        : ' rel_dev
-read -p 'License        : ' license_dev
+read -p 'Release [default= 1.0]  : ' rel_dev
 
-pkgdir=$project_dir/ArchBuild/pkg/$app_name
+if [ ! $rel_dev ]
+then
+	rel_dev="1.0"
+fi
 
-cat > $project_dir/ArchBuild/PKGBUILD << EOF
+read -p 'License [default = MIT] : ' license_dev
+
+if [ ! $license_dev ]
+then
+	license_dev="MIT"
+fi
+
+mkdir -p $DESTDIR/build.$app_name/src
+pkgdir=$DESTDIR/build.$app_name/pkg/$app_name
+
+
+if [ -d $project_dir ]; then
+	
+	cp -rf $project_dir $DESTDIR/build.$app_name/src
+else
+	sleep 0
+fi
+
+cat > $DESTDIR/build.$app_name/PKGBUILD << EOF
+
 pkgname=$app_name
 pkgver=$version_dev
 pkgrel=$rel_dev
@@ -24,26 +51,42 @@ license=('$license_dev')
 md5sums=('SKIP')
 
 package() {
-		cd $project_dir
-		ls
+		
 		mkdir -p $pkgdir/opt/ignsdk/$app_name
 		mkdir -p $pkgdir/usr/share/applications/
-
-		for file in $(ls --file-type -xU)
-		do
-			if [ "$file" == "menu/" ]
-			then
-				cp -rf menu/ignsdk-*.desktop $pkgdir/usr/share/applications/
-			else
-				cp -rf $file $pkgdir/opt/ignsdk/$app_name/
-			fi
-		done
+		
+		cp -rf $project_dir/* $pkgdir/opt/ignsdk/$app_name
+		mv $pkgdir/opt/ignsdk/$app_name/menu/* $pkgdir/usr/share/applications/
+		rm -rf $pkgdir/opt/ignsdk/$app_name/menu
+		
 }
 
 EOF
+cat > $DESTDIR/build.$app_name/Changelog << EOF
 
-pushd $project_dir/ArchBuild/
+2013-12-01 Your Name <youremail@domain.com>
+
+	* pkgver-pkgrel :
+	new upstream release.
+	Reason we changed stuff.
+	Another reason we changed stuff.
+
+	* gcc-4.1.patch :
+	Removed, no longer needed.
+
+2013-11-01 Your Name <youremail@domain.com>
+
+	* 1.0-5 :
+	added ChangeLog.
+	the last line should end with just one newline.
+	you can cat the file to check it displays fine.
+
+
+EOF
+pushd $DESTDIR/build.$app_name
 echo -e "\nStarting build process..."
-makepkg -s
-popd
+makepkg -s -A -f
+#popd
 echo -e "\nBuild process is over."
+
+

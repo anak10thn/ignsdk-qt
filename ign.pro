@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network core gui webkit sql
+QT       += network core gui webkitwidgets sql widgets
 
 TARGET = ignsdk
 TEMPLATE = app

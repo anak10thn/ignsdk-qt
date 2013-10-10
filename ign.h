@@ -6,18 +6,19 @@
 #include "ignsql.h"
 #include "ignsystem.h"
 #include <QtGui/QMainWindow>
-#include <QWidget>
-#include <QLayout>
+#include <QtGui/QWidget>
+#include <QtGui/QLayout>
 #include <QObject>
-#include <QMessageBox>
+#include <QtGui/QMessageBox>
 #include <QProcess>
 #include <QtWebKit>
+#include <QtWebKitWidgets/QtWebKitWidgets>
 #include <QSize>
 #include <QtGui>
 #include <QVariant>
 #include <QCryptographicHash>
 #include <QPixmap>
-#include <QSplashScreen>
+#include <QtGui/QSplashScreen>
 #include <QTimer>
 
 class ign: public QObject

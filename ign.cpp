@@ -222,13 +222,13 @@ void ign::config(QString path){
         bool ok;
 
         QVariantMap result = parse.parse(config, &ok).toMap();
+
         if (!ok) {
           qFatal("An error occurred during parsing");
           exit (1);
         }
 
         QVariantMap configure = result["config"].toMap();
-
         if(configure["debug"].toBool()){
             this->setDev(true);
         }

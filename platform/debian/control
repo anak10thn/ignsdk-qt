@@ -2,13 +2,13 @@ Source: ignsdk-debian
 Section: devel
 Priority: optional
 Maintainer: Surya Handika Putratama <ubunteroz@gmail.com>
-Build-Depends: debhelper (>= 8.0.0), qt4-qmake (>= 4:4.8.2), libqt4-dev (>= 4:4.8.2), libqtwebkit-dev (>= 2.2.1), libqjson-dev (>= 0.7.1-7), libmysqlclient-dev (>= 5.5.31)
+Build-Depends: debhelper (>= 8.0.0), qt4-qmake (>= 4:4.8.5), libqt4-dev (>= 4:4.8.5), libqtwebkit-dev (>= 2.2.1), libqjson-dev (>= 0.8.1), libmysqlclient-dev (>= 5.5.33)
 Standards-Version: 3.9.4
 Homepage: http://ignsdk.web.id/
 
 Package: ignsdk-debian
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends}, libqtwebkit4 (>= 2.2.1), libqtgui4 (>= 4:4.8.2), libqt4-network (>= 4:4.8.2), libqtcore4 (>= 4:4.8.2), libqjson0 (>= 0.7.1-7), libmysqlclient18 (>= 5.5.31)
+Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: ignsdk-debian-example
 Suggests: ignsdk-debian-dev
 Description: IGOS Nusantara Software Development Kit (IGNSDK) (launcher)

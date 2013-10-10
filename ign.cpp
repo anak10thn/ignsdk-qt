@@ -86,8 +86,11 @@ void ign::render(QString w){
     else if(url_exp.at(0) == ".."){
         url_fix = "file://"+pwd+"/"+w;
     }
-    else {
+    else if(url_exp.at(0) == ""){
         url_fix = "file://"+w;
+    }
+    else {
+        url_fix = "file://"+pwd+"/"+w;
     }
     QUrl url(w);
     this->web.load(url_fix);

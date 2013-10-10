@@ -94,7 +94,6 @@ void ign::render(QString w){
     }
     QUrl url(w);
     this->web.load(url_fix);
-    qDebug() << w << url;
 }
 
 void ign::show(){

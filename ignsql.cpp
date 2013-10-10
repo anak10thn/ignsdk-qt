@@ -59,12 +59,12 @@ QString ignsql::query(const QString &qr){
 
     contentmap.insert("status",status);
 
-    QJson::Serializer serializer;
-    bool ok;
-    QByteArray json = serializer.serialize(contentmap, &ok);
+    //QJson::Serializer serializer;
 
-    if (ok) {
-        return json;
-    }
+    //bool ok;
+    //QByteArray json = serializer.serialize(contentmap, &ok);
+    QJsonDocument json_enc = QJsonDocument::fromVariant(contentmap);
+    QByteArray json = json_enc.toJson();
+    return json;
 }
 

@@ -4,12 +4,12 @@
 #include "fs.h"
 #include "cmath"
 #include <QtCore/QVariant>
-#include <qjson/parser.h>
+/*#include <qjson/parser.h>
 #include <qjson/parserrunnable.h>
 #include <qjson/serializer.h>
 #include <qjson/serializerrunnable.h>
 #include <qjson/qjson_export.h>
-#include <qjson/qobjecthelper.h>
+#include <qjson/qobjecthelper.h>*/
 #include <iostream>
 using namespace std;
 ign::ign(QObject *parent)
@@ -218,15 +218,20 @@ void ign::config(QString path){
     QByteArray config;
     if(config_file.open(QIODevice::ReadOnly)){
         config = config_file.readAll();
-        QJson::Parser parse;
-        bool ok;
 
-        QVariantMap result = parse.parse(config, &ok).toMap();
+        QJsonParseError *err = new QJsonParseError();
 
-        if (!ok) {
-          qFatal("An error occurred during parsing");
+        QJsonDocument ignjson = QJsonDocument::fromJson(config, err);
+
+        if (err->error != 0) {
+          qDebug() << err->errorString();
           exit (1);
         }
+
+        QJsonObject jObject = ignjson.object();
+
+        //convert the json object to variantmap
+        QVariantMap result = jObject.toVariantMap();
 
         QVariantMap configure = result["config"].toMap();
         if(configure["debug"].toBool()){

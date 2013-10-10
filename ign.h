@@ -20,6 +20,10 @@
 #include <QPixmap>
 #include <QtGui/QSplashScreen>
 #include <QTimer>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonParseError>
 
 class ign: public QObject
 {

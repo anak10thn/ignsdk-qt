@@ -103,6 +103,7 @@ int main(int argc, char *argv[])
         else {
             opt += "/index.html";
         }
+
         w.render(opt);
         w.config(url);
     }

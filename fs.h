@@ -4,7 +4,7 @@
 
 #include <QObject>
 #include <QSize>
-#include <QApplication>
+#include <QtGui/QApplication>
 #include <QDir>
 #include <QFile>
 #include <QTextStream>

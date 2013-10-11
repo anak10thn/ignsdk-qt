@@ -4,12 +4,6 @@
 #include "fs.h"
 #include "cmath"
 #include <QtCore/QVariant>
-#include <qjson/parser.h>
-#include <qjson/parserrunnable.h>
-#include <qjson/serializer.h>
-#include <qjson/serializerrunnable.h>
-#include <qjson/qjson_export.h>
-#include <qjson/qobjecthelper.h>
 #include <iostream>
 using namespace std;
 ign::ign(QObject *parent)
@@ -17,7 +11,7 @@ ign::ign(QObject *parent)
     m_sqldrv(0),
     m_ignsystem(0)
 {
-    this->version = "1.1.0";
+    this->version = "1.1.1";
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     this->filesystem = new fs;
@@ -80,28 +74,25 @@ void ign::getFullScreen(bool screen){
 }
 
 void ign::render(QString w){
-     this->web.load(QUrl(w));
-
-    /*QFile jqueryfile;
-
-    QString jquery;
-    jqueryfile.setFileName(":/js/jquery.js");
-    if(jqueryfile.open(QIODevice::ReadOnly)){
-        jquery = jqueryfile.readAll();
-        frame->evaluateJavaScript(jquery);
+    QString pwd("");
+    QString url_fix;
+    char * PWD;
+    PWD = getenv ("PWD");
+    pwd.append(PWD);
+    QStringList url_exp = w.split("/");
+    if(url_exp.at(0) == "http:"){
+        url_fix = w;
     }
-    jqueryfile.close();
-
-    QFile incJsFile;
-    QString incJs;
-    incJsFile.setFileName(":/js/include.js");
-    if(incJsFile.open(QIODevice::ReadOnly)){
-        incJs = incJsFile.readAll();
-        frame->evaluateJavaScript(incJs);
+    else if(url_exp.at(0) == ".."){
+        url_fix = "file://"+pwd+"/"+w;
     }
-    incJsFile.close();
-
-    frame->evaluateJavaScript("include('tes')");*/
+    else if(url_exp.at(0) == ""){
+        url_fix = "file://"+w;
+    }
+    else {
+        url_fix = "file://"+pwd+"/"+w;
+    }
+    this->web.load(url_fix);
 }
 
 void ign::show(){
@@ -218,17 +209,22 @@ void ign::config(QString path){
     QByteArray config;
     if(config_file.open(QIODevice::ReadOnly)){
         config = config_file.readAll();
-        QJson::Parser parse;
-        bool ok;
 
-        QVariantMap result = parse.parse(config, &ok).toMap();
-        if (!ok) {
-          qFatal("An error occurred during parsing");
+        QJsonParseError *err = new QJsonParseError();
+
+        QJsonDocument ignjson = QJsonDocument::fromJson(config, err);
+
+        if (err->error != 0) {
+          qDebug() << err->errorString();
           exit (1);
         }
 
-        QVariantMap configure = result["config"].toMap();
+        QJsonObject jObject = ignjson.object();
 
+        //convert the json object to variantmap
+        QVariantMap result = jObject.toVariantMap();
+
+        QVariantMap configure = result["config"].toMap();
         if(configure["debug"].toBool()){
             this->setDev(true);
         }

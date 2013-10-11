@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network core gui webkit sql
+QT       += network core gui webkitwidgets sql widgets
 
 TARGET = ignsdk
 TEMPLATE = app
@@ -62,5 +62,4 @@ OTHER_FILES += \
 
 RESOURCES += \
     ign.qrc
-LIBS += -L/usr/lib -lqjson
 

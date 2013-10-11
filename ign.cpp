@@ -92,7 +92,6 @@ void ign::render(QString w){
     else {
         url_fix = "file://"+pwd+"/"+w;
     }
-    QUrl url(w);
     this->web.load(url_fix);
 }
 

@@ -1,7 +1,7 @@
 /*ibnu.yahya@toroo.org*/
-#include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
 #include "ign.h"
-#include <QtWebKit/QWebView>
+#include <QtWebKitWidgets/QWebView>
 #include <iostream>
 #include <getopt.h>
 using namespace std;

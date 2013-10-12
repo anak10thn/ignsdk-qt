@@ -15,13 +15,13 @@ bool ignsql::driver(const QString &drv, QString connect){
         this->db.setDatabaseName(con.value(3));
         return this->db.open();
     }
-    else if (drv == "sqlite"){
-        this->db = QSqlDatabase::addDatabase("QSQLITE");
+    else if (drv == "sqlite2"){
+        this->db = QSqlDatabase::addDatabase("QSQLITE2");
         this->db.setDatabaseName(connect);
         return this->db.open();
     }
-    else if (drv == "sqlite3"){
-        this->db = QSqlDatabase::addDatabase("QSQLITE3");
+    else if (drv == "sqlite"){
+        this->db = QSqlDatabase::addDatabase("QSQLITE");
         this->db.setDatabaseName(connect);
         return this->db.open();
     }

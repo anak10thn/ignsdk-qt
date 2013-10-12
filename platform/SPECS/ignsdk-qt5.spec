@@ -176,6 +176,8 @@ rm -rf $RPM_BUILD_ROOT
 %config %attr(0755,root,root) /usr/share/ign-sdk/*
 
 %changelog
+* Sat Oct 12 2013 ibnu yahya <linux@toroo.org>
+- Porting ignsdk 1.1.1 to Qt 5
 * Wed Sep 25 2013 ibnu yahya <linux@toroo.org>
 - Add SQL API stable 1
 - Release stable minor nightly

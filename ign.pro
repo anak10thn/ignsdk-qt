@@ -58,7 +58,8 @@ OTHER_FILES += \
     platform/debian/source/format \
     platform/debian/patches/series \
     platform/debian/patches/buildtarget.diff \
-    js/include.js
+    js/include.js \
+    platform/SPECS/ignsdk-qt5.spec
 
 RESOURCES += \
     ign.qrc

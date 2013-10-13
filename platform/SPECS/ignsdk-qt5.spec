@@ -5,7 +5,7 @@ Release:13.10.13
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
-Source0:https://github.com/anak10thn/ignsdk-qt/archive/master.zip
+Source0:http://github.com/anak10thn/ignsdk-qt/archive/master.zip
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:qt5-qtwebkit
 BuildRequires:qt5-qtwebkit-devel

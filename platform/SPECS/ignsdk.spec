@@ -53,6 +53,7 @@ cp third-party.txt $RPM_BUILD_ROOT/usr/share/ign-sdk/
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(-,root,root,-)
 /usr/bin/ignsdk
 /usr/share/ign-sdk/LICENSE.BSD
 /usr/share/ign-sdk/third-party.txt
@@ -159,6 +160,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/test/widget.ign/index.html
 
 %files devtools
+%defattr(-,root,root,-)
 /usr/bin/ignsdk-app-creator
 /usr/bin/ignsdk-app-builder
 /usr/share/ign-sdk/bin/ignsdk-ign-creator
@@ -166,14 +168,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/template/main.tpl
 /usr/share/ign-sdk/template/app.spec
 /etc/ignsdk-dist
-
-%defattr(-,root,root,-)
-%dir 
-/usr/bin
-/etc
-/usr/share/ign-sdk/test
-/usr/share/ign-sdk/template
-%config %attr(0755,root,root) /usr/share/ign-sdk/*
 
 %changelog
 * Wed Sep 25 2013 ibnu yahya <linux@toroo.org>

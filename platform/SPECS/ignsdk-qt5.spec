@@ -1,20 +1,15 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
 Version:1.1.1
-Release:13.9.25
+Release:13.10.13
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
-Source0:%{name}-qt-master.zip
+Source0:http://github.com/anak10thn/ignsdk-qt/archive/master.zip
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:qt
-Requires:qtwebkit
-Requires:qjson
-Requires:mysql-server
-BuildRequires:qt-devel
-BuildRequires:qtwebkit-devel
-BuildRequires:qjson-devel
-BuildRequires:mysql-devel
+Requires:qt5-qtwebkit
+BuildRequires:qt5-qtwebkit-devel
+BuildRequires:gcc-c++
 %description
 IGOS Nusantara  Software Development Kit
 
@@ -36,7 +31,7 @@ install -d -m 755 $RPM_BUILD_ROOT/etc
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/template
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
-qmake-qt4
+qmake-qt5
 make
 cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
@@ -53,6 +48,7 @@ cp third-party.txt $RPM_BUILD_ROOT/usr/share/ign-sdk/
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(-,root,root,-)
 /usr/bin/ignsdk
 /usr/share/ign-sdk/LICENSE.BSD
 /usr/share/ign-sdk/third-party.txt
@@ -159,6 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/test/widget.ign/index.html
 
 %files devtools
+%defattr(-,root,root,-)
 /usr/bin/ignsdk-app-creator
 /usr/bin/ignsdk-app-builder
 /usr/share/ign-sdk/bin/ignsdk-ign-creator
@@ -167,15 +164,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/template/app.spec
 /etc/ignsdk-dist
 
-%defattr(-,root,root,-)
-%dir 
-/usr/bin
-/etc
-/usr/share/ign-sdk/test
-/usr/share/ign-sdk/template
-%config %attr(0755,root,root) /usr/share/ign-sdk/*
-
 %changelog
+* Mon Oct 13 2013 ibnu yahya <linux@toroo.org>
+- Build nightly
+- Fix spec file dependency
 * Sat Oct 12 2013 ibnu yahya <linux@toroo.org>
 - Porting ignsdk 1.1.1 to Qt 5
 * Wed Sep 25 2013 ibnu yahya <linux@toroo.org>

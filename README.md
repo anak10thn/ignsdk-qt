@@ -34,7 +34,7 @@ IGN SDK is free software/open source, and is distributed under the BSD license.
 * Eko Yunianto (eyeyunianto@gmail.com)
 * Arif Eko Pratono (arifep2000@gmail.com)
 
-##Contributor## 
+##Contributor##
 ###Kuma HTML5 Game###
 * Creator : Mitsuki Sugiya (metallic.code@gmail.com)
 * Github : Omega014

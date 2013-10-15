@@ -50,16 +50,6 @@ IGN SDK is free software/open source, and is distributed under the BSD license.
 * Github : https://github.com/wajatmaka/Slackbuild-ignsdk
 * Maintainer : Dwiyan Galuh W a.k.a wajatmaka (wajatmaka@gmail.com)
 
-###Build###
-```
-$sudo yum install qt-devel qtwebkit-devel qjson-devel
-$cd ign-sdk-directory
-$qmake
-$make
-```
-###EXAMPLE###
-https://github.com/anak10thn/ignsdk-example
-
 ###SCREENSHOT###
 ####WebGL test####
 ![webGL test](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/screenshot6.png)

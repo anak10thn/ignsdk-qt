@@ -2,16 +2,16 @@
 ![ignsdk](https://raw.github.com/anak10thn/ignsdk-art/master/logos/ignsdk-rocklovecode.png) 
 IGN SDK is a software development kit designed specifically for application developers in IGOS Nusantara. But now also available for other Linux distros such as Arch Linux, Slackware and Debian. You can write native apps in HTML and Javascript with IGNSDK
 
-###Wiki###
+##Wiki##
 https://github.com/anak10thn/ignsdk-qt/wiki
 
-###Example###
+##Example##
 https://github.com/anak10thn/ignsdk-example
 ```
 $ignsdk -d -p /path/to/example.ign
 ```
 
-###Build###
+##Build##
 ```
 $sudo yum install qt5-qtwebkit-devel gcc-c++ git
 $git clone https://github.com/anak10thn/ignsdk-qt.git
@@ -20,51 +20,51 @@ $qmake-qt5
 $make
 ```
 
-###Bugs###
+##Bugs##
 https://github.com/anak10thn/ignsdk-qt/issues/new
 
-###License###
+##License##
 IGN SDK is free software/open source, and is distributed under the BSD license.
 
-###Maintainer###
+##Maintainer##
 * Eka Tresna Irawan a.k.a Ibnu Yahya (anak10thn@gmail.com)
 * Surya Handika Putratama (ubunteroz@gmail.com)
 
-###Wiki And Documentation###
+##Wiki And Documentation##
 * Eko Yunianto (eyeyunianto@gmail.com)
 * Arif Eko Pratono (arifep2000@gmail.com)
 
-###Contributor###
-####Kuma HTML5 Game####
+##Contributor## 
+###Kuma HTML5 Game###
 * Creator : Mitsuki Sugiya (metallic.code@gmail.com)
 * Github : Omega014
 
-####IGNSDK For Debian####
+###IGNSDK For Debian###
 * Github : https://github.com/ubunteroz/ignsdk-debian
 * Maintainer : Surya Handika Putratama (ubunteroz@gmail.com)
 
-####IGNSDK For Arch Linux####
+###IGNSDK For Arch Linux###
 * PKGBUILD Script : http://goo.gl/gdkB0
 * Maintainer : Sofyan Saputra a.k.a Iank (meongbego@gmail.com)
 
-####IGNSDK For Slackware####
+###IGNSDK For Slackware###
 * Github : https://github.com/wajatmaka/Slackbuild-ignsdk
 * Maintainer : Dwiyan Galuh W a.k.a wajatmaka (wajatmaka@gmail.com)
 
-###SCREENSHOT###
-####WebGL test####
+##SCREENSHOT##
+###WebGL test###
 ![webGL test](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/screenshot6.png)
 source : https://developer.mozilla.org/en-US/demos/detail/glass-shader
-####IGN Native API test####
+###IGN Native API test###
 ![Native Api](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/screenshot1.png)
 
 source : https://github.com/anak10thn/ignsdk-example/tree/master/downloadfile.ign
-####Kuma HTML5 Game####
+###Kuma HTML5 Game###
 ![Kuma HTML5 Game](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/screenshot3.png)
 
 source : http://sumilab.org/~m-sugiya/kuma/
-####Planetarium HTML5 app####
+###Planetarium HTML5 app###
 ![Planetarium HTML5 app](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/screenshot8.png)
 source : https://developer.mozilla.org/en-US/demos/detail/the-planetarium
-####Book Reader####
+###Book Reader###
 ![book reader](https://dl.dropboxusercontent.com/u/18000315/readme-ignsdk/reader.png)

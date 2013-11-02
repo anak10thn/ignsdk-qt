@@ -3,9 +3,9 @@
 # Sofyan Saputra/Iank (meongbego@gmail.com)
 
 echo -e "\n\nIGNSDK Package Creator (Archlinux)"
+
 app_name=`echo $1 | sed 's/\.ign//'`
 PRGNAME=$1
-project_dir=$2
 TAG='ignsdk-arch'
 DESTDIR=~/IGNSDK-APP
 HOME_APP=$DESTDIR/$PRGNAME
@@ -21,10 +21,13 @@ This application is built using IGOS Nusantara Software Development Kit
 
 Maintainer: $name_dev
 Email     : $email_dev
-app name  : $app_name
+
 $(date +"%a, %d %b %Y %T %z")
 
 EOF
 
-
-
+if [ -d $HOME_APP/Archbuild ]; then
+	sleep 0
+else
+	mkdir -p $HOME_APP/ArchBuild
+fi

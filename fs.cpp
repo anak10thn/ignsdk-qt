@@ -7,36 +7,12 @@ fs::fs(QObject *parent) :
 
 }
 
-bool fs::file(const QString &path, const QString &opt){
+bool fs::fileRemove(const QString &path){
     QFile file(path);
-    if(opt == "check"){
-        if(file.exists()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    else if(opt == "remove"){
-        if(file.remove()){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+    return file.remove();
 }
 
-QString fs::app_dir_path(){
-    return QApplication::applicationDirPath();
-}
-
-QString fs::home_path(){
-    QString home = QDir::homePath();
-    return home;
-}
-
-bool fs::create_file(const QString &path, const QString &data){
+bool fs::fileWrite(const QString &path, const QString &data){
     QFile file(path);
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream out(&file);
@@ -49,7 +25,7 @@ bool fs::create_file(const QString &path, const QString &data){
     file.close();
 }
 
-QString fs::read_file(const QString &path){
+QString fs::fileRead(const QString &path){
     //QStringList fields;
     QFile file(path);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
@@ -69,31 +45,61 @@ QString fs::read_file(const QString &path){
     }
 }
 
-bool fs::dir(const QString &path, const QString &opt){
+QString fs::appPath(){
+    return QApplication::applicationDirPath();
+}
+
+QString fs::homePath(){
+    QString home = QDir::homePath();
+    return home;
+}
+
+bool fs::dir(const QString &opt, const QString &path){
     QDir dir;
     if(opt == "create"){
-        if(dir.mkdir(path)){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-    else if(opt == "check"){
-        dir = path;
-        if(dir.exists()){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return dir.mkdir(path);
     }
     else if(opt == "remove"){
-        if(dir.rmdir(path)){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return dir.rmdir(path);
     }
+}
+
+bool fs::exists(const QString &path)
+{
+    return QFile::exists(path);
+}
+
+bool fs::isDirectory(const QString &path)
+{
+    return QFileInfo(path).isDir();
+}
+
+bool fs::isFile(const QString &path)
+{
+    return QFileInfo(path).isFile();
+}
+
+bool fs::isAbsolute(const QString &path)
+{
+   return QFileInfo(path).isAbsolute();
+}
+
+bool fs::isExecutable(const QString &path)
+{
+   return QFileInfo(path).isExecutable();
+}
+
+bool fs::isLink(const QString &path)
+{
+   return QFileInfo(path).isSymLink();
+}
+
+bool fs::isReadable(const QString &path)
+{
+   return QFileInfo(path).isReadable();
+}
+
+bool fs::isWritable(const QString &path)
+{
+   return QFileInfo(path).isWritable();
 }

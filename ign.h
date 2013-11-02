@@ -30,7 +30,7 @@ private:
     QWebView web;
     QWebFrame *frame;
     bool fullscreen;
-    fs *filesystem;
+    fs *m_filesystem;
     QtDownload *dl;
     ignsql *m_sqldrv;
     ignsystem *m_ignsystem;
@@ -84,14 +84,15 @@ public slots:
     //ign settings
     void websecurity(bool c);
     //ign filesystem
-    QString homePath();
+    /*QString homePath();
     bool createFile(const QString& path, const QString& data);
     QString readFile(const QString &path);
     bool mkdir(const QString& path);
     bool dirExist(const QString& path);
     bool fileExist(const QString& path);
     bool fileRemove(const QString& path);
-    bool rmdir(const QString& path);
+    bool rmdir(const QString& path);*/
+    QObject *filesystem();
     //ign network
     void saveFile(const QByteArray &data, QString filename, QString path);
     void download(QString data, QString path);

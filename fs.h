@@ -17,12 +17,21 @@ public:
 signals:
 
 public slots:
-    bool file(const QString& path,const QString& opt);
-    QString app_dir_path();
-    QString home_path();
-    bool create_file(const QString& path, const QString& data);
-    QString read_file(const QString& path);
-    bool dir(const QString& path, const QString& opt);
+    bool fileRemove(const QString& path);
+    QString appPath();
+    QString homePath();
+    bool fileWrite(const QString& path, const QString& data);
+    QString fileRead(const QString& path);
+    bool dir(const QString& opt,const QString& path);
+    //checking file or directory
+    bool exists(const QString &path);
+    bool isDirectory(const QString &path);
+    bool isFile(const QString &path);
+    bool isAbsolute(const QString &path);
+    bool isExecutable(const QString &path);
+    bool isReadable(const QString &path);
+    bool isWritable(const QString &path);
+    bool isLink(const QString &path);
 };
 
 #endif // FS_H

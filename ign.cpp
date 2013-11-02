@@ -9,12 +9,13 @@ using namespace std;
 ign::ign(QObject *parent)
     : QObject(parent),
     m_sqldrv(0),
-    m_ignsystem(0)
+    m_ignsystem(0),
+    m_filesystem(0)
 {
     this->version = "1.1.1";
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
-    this->filesystem = new fs;
+    //this->filesystem = new fs;
     this->dl = new QtDownload;
 
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
@@ -292,7 +293,7 @@ QString ign::hash(const QString &data,QString hash_func){
     return hash.toHex();
 }
 
-QString ign::homePath(){
+/*QString ign::homePath(){
     return this->filesystem->home_path();
 }
 
@@ -302,7 +303,7 @@ bool ign::createFile(const QString &path, const QString &data){
 
 QString ign::readFile(const QString &path){
     return this->filesystem->read_file(path);
-}
+}*/
 
 void ign::saveFile(const QByteArray &data, QString filename, QString path){
     QByteArray byteArray = QByteArray::fromBase64(data);
@@ -343,7 +344,14 @@ QObject *ign::sys(){
 }
 
 /*IGN FILESYSTEM*/
-bool ign::mkdir(const QString &path){
+QObject *ign::filesystem(){
+    if(!m_filesystem){
+        m_filesystem = new fs;
+    }
+    return m_filesystem;
+}
+
+/*bool ign::mkdir(const QString &path){
     return this->filesystem->dir(path,"create");
 }
 
@@ -361,7 +369,7 @@ bool ign::fileExist(const QString &path){
 
 bool ign::fileRemove(const QString &path){
     return this->filesystem->file(path,"remove");
-}
+}*/
 
 //Check version
 QString ign::sdkVersion(){

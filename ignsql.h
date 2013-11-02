@@ -8,12 +8,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonParseError>
-/*#include <qjson/parser.h>
-#include <qjson/parserrunnable.h>
-#include <qjson/serializer.h>
-#include <qjson/serializerrunnable.h>
-#include <qjson/qjson_export.h>
-#include <qjson/qobjecthelper.h>*/
 
 class ignsql : public QObject
 {

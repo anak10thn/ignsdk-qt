@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ $(whoami) == "root" ]
+then
+	echo "Error: Don't run this script as root."
+	exit 1
+fi
+
 echo -e "\n\nIGNSDK Package Creator (Debian GNU/Linux)"
 
 package_name=$1
@@ -16,7 +22,7 @@ read -p 'Enter your name: ' packagers_name
 read -p 'Enter your email: ' packagers_mail
 
 
-if [ -d $project_dir/debian ]; then echo "ERROR: debian/ directory is exist!"; exit 1; fi
+if [ -d $project_dir/debian ]; then echo "Error: debian/ directory is already exist!"; exit 1; fi
 
 # Check build depends
 _checkBuildDeps(){
@@ -86,5 +92,3 @@ This application is built using IGOS Nusantara Software Development Kit
 EOF
 
 popd
-
-echo -e "Debian package control files is successfully created.\nPlease modify files under debian/ directory according to your needs."

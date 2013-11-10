@@ -61,12 +61,17 @@ public slots:
     void showMessage(const QString& msg);
     //ign developer mode
     void setDev(bool v);
-    //ign signal
+    //ign action
     void quit();
     void back();
     void forward();
     void reload();
     void stop();
+    void cut();
+    void copy();
+    void paste();
+    void undo();
+    void redo();
     //ign window function
     void widgetSizeMax(int w,int h);
     void widgetSizeMin(int w,int h);
@@ -75,9 +80,7 @@ public slots:
     void getFullScreen(bool screen);
     void showMaximized();
     void showMinimized();
-    //ign system
-    QString cliOut(const QString& cli);
-    void exec(const QString& cli);
+    //ign load external binary
     QString loadBin(const QString &script);
     //ign manifest
     void config(QString path);

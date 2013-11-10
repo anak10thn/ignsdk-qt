@@ -52,27 +52,6 @@ ign::ign(QObject *parent)
 void ign::ignJS(){
     this->frame->addToJavaScriptWindowObject("ign",this);
 }
-void ign::getToggleFullScreen(){
-    if(this->fullscreen){
-        this->web.showNormal();
-        this->fullscreen = false;
-    }
-    else{
-        this->web.showFullScreen();
-        this->fullscreen = true;
-    }
-}
-
-void ign::getFullScreen(bool screen){
-    if(screen){
-        this->web.showFullScreen();
-        this->fullscreen = true;
-    }
-    else {
-        this->web.showNormal();
-        this->fullscreen = false;
-    }
-}
 
 QWebView *ign::createWindow(QWebPage::WebWindowType type){
     QWebView *webView = new QWebView;
@@ -125,7 +104,7 @@ void ign::showMessage(const QString &msg)
     QMessageBox::information(0, "Information", msg);
 }
 
-/*action*/
+/*action trigger*/
 void ign::quit(){
     this->web.close();
 }
@@ -146,14 +125,35 @@ void ign::reload(){
     this->web.page()->triggerAction(QWebPage::Reload,true);
 }
 
+void ign::cut(){
+    this->web.page()->triggerAction(QWebPage::Cut,true);
+}
+
+void ign::copy(){
+    this->web.page()->triggerAction(QWebPage::Copy,true);
+}
+
+void ign::paste(){
+    this->web.page()->triggerAction(QWebPage::Paste,true);
+}
+
+void ign::undo(){
+    this->web.page()->triggerAction(QWebPage::Undo,true);
+}
+
+void ign::redo(){
+    this->web.page()->triggerAction(QWebPage::Redo,true);
+}
+
+/* debuging mode */
 void ign::setDev(bool v){
     this->web.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, v);
 }
-
+/* web security */
 void ign::websecurity(bool c){
     web.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,c);
 }
-
+/* window config */
 void ign::widgetSizeMax(int w, int h){
     this->web.setMaximumSize(w,h);
 }
@@ -178,21 +178,29 @@ void ign::widgetTransparent(){
     this->web.setAttribute(Qt::WA_TranslucentBackground, true);
 }
 
-QString ign::cliOut(const QString& cli){
-    QProcess os;
-    os.start(cli);
-    int pid = os.pid();
-    qDebug() << pid;
-    os.waitForFinished(-1);
-    return os.readAllStandardOutput();
-
+void ign::getToggleFullScreen(){
+    if(this->fullscreen){
+        this->web.showNormal();
+        this->fullscreen = false;
+    }
+    else{
+        this->web.showFullScreen();
+        this->fullscreen = true;
+    }
 }
 
-void ign::exec(const QString &cli){
-    QProcess os;
-    os.startDetached("/bin/sh -c \""+cli+"\"");
+void ign::getFullScreen(bool screen){
+    if(screen){
+        this->web.showFullScreen();
+        this->fullscreen = true;
+    }
+    else {
+        this->web.showNormal();
+        this->fullscreen = false;
+    }
 }
 
+/*load external binary*/
 QString ign::loadBin(const QString &script){
     QStringList list = this->pathApp.split("/");
 

@@ -102,7 +102,6 @@ int main(int argc, char *argv[])
         if (result)
         {
             directory = fd->selectedFiles()[0];
-            qDebug()<<directory;
             w.render(directory+"/index.html");
         }
         else {

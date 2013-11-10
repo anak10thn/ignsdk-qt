@@ -72,7 +72,8 @@ mkdir -p $PKG/usr/man/
 mkdir -p $PKG/usr/share/applications/
 mkdir -p $PKG/usr/sbin/
 mkdir -p $PKG/etc/
-mkdir -p  $PKG/usr/share/ign-sdk/bin/
+mkdir -p $PKG/usr/share/ign-sdk/bin/
+mkdir -p $PKG/usr/share/man/man8
 touch  $PKG/etc/ignsdk-dist
 echo "slack" > $PKG/etc/ignsdk-dist
 mkdir -p $PKG/usr/share/ign-sdk/template/

@@ -2,6 +2,7 @@
 #include <QtWidgets/QApplication>
 #include "ign.h"
 #include <QtWebKitWidgets/QWebView>
+#include <QFileDialog>
 #include <iostream>
 #include <getopt.h>
 using namespace std;
@@ -88,8 +89,25 @@ int main(int argc, char *argv[])
 
     QString opt = url;
     QString path = url;
-    if(opt.isEmpty()){
-        w.render("http://www.igos-nusantara.or.id");
+    if(opt.isEmpty() || opt.isNull()){
+        QFileDialog *fd = new QFileDialog;
+        QTreeView *tree = fd->findChild <QTreeView*>();
+        tree->setRootIsDecorated(true);
+        tree->setItemsExpandable(true);
+        fd->setFileMode(QFileDialog::Directory);
+        fd->setOption(QFileDialog::ShowDirsOnly);
+        fd->setViewMode(QFileDialog::Detail);
+        int result = fd->exec();
+        QString directory;
+        if (result)
+        {
+            directory = fd->selectedFiles()[0];
+            qDebug()<<directory;
+            w.render(directory+"/index.html");
+        }
+        else {
+            w.render("http://www.igos-nusantara.or.id");
+        }
     }
     else{
         w.pathApp = opt;

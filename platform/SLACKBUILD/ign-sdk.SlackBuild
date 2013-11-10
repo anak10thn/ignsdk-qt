@@ -63,7 +63,12 @@ find . \
  -exec chmod 644 {} \;
 
 
+if [ ! -d /opt/Qt5.1.1 ]; then
 qmake
+else
+/opt/Qt5.1.1/5.1.1/gcc_64/bin/qmake
+fi
+
 make
 
 mkdir -p $PKG/usr/share/ign-sdk/test
@@ -96,7 +101,6 @@ cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cp -rf $CWD/copyright $PKG/usr/share/ign-sdk/
-cp -rf $CWD/copyright $PKG/usr/share/man/man8
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

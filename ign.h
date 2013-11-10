@@ -15,7 +15,6 @@
 #include <QWebPage>
 #include <QSize>
 #include <QVariant>
-#include <QCryptographicHash>
 #include <QPixmap>
 #include <QtWidgets/QSplashScreen>
 #include <QTimer>
@@ -80,7 +79,6 @@ public slots:
     QString cliOut(const QString& cli);
     void exec(const QString& cli);
     QString loadBin(const QString &script);
-    /*void bash(QString out, QString err);*/
     //ign manifest
     void config(QString path);
     //ign settings
@@ -91,8 +89,6 @@ public slots:
     void saveFile(const QByteArray &data, QString filename, QString path);
     void download(QString data, QString path);
     void download_signal(qint64 recieved, qint64 total);
-    //hash function
-    QString hash(const QString& data, QString hash_func);
     //ign sql
     QObject *sql();
     //experiment

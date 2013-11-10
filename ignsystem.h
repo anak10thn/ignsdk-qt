@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QtGlobal>
 #include <QProcess>
+#include <QCryptographicHash>
 class ignsystem : public QObject
 {
     Q_OBJECT
@@ -12,6 +13,7 @@ public:
 public slots:
     QString cliOut(const QString& cli);
     void exec(const QString& cli);
+    QString hash(const QString& data, QString hash_func);
 };
 
 #endif // IGNSYSTEM_H

@@ -289,23 +289,6 @@ void ign::config(QString path){
     config_file.close();
 }
 
-QString ign::hash(const QString &data,QString hash_func){
-    QByteArray hash;
-    QByteArray byteArray = data.toLatin1();
-    if(hash_func == "md4"){
-        hash=QCryptographicHash::hash(byteArray,QCryptographicHash::Md4);
-    }
-    else if(hash_func == "md5"){
-        hash=QCryptographicHash::hash(byteArray,QCryptographicHash::Md5);
-    }
-    else if(hash_func == "sha1"){
-        hash=QCryptographicHash::hash(byteArray,QCryptographicHash::Sha1);
-    }
-
-    return hash.toHex();
-}
-
-
 void ign::saveFile(const QByteArray &data, QString filename, QString path){
     QByteArray byteArray = QByteArray::fromBase64(data);
     QString home;

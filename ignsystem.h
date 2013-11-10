@@ -3,14 +3,15 @@
 
 #include <QObject>
 #include <QtGlobal>
-
+#include <QProcess>
 class ignsystem : public QObject
 {
     Q_OBJECT
 public:
     ignsystem(QObject *parent = 0);
 public slots:
-    void tes();
+    QString cliOut(const QString& cli);
+    void exec(const QString& cli);
 };
 
 #endif // IGNSYSTEM_H

@@ -5,13 +5,14 @@
 #include "igndownload.h"
 #include "ignsql.h"
 #include "ignsystem.h"
+#include <QObject>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QWidget>
 #include <QtWidgets/QLayout>
-#include <QObject>
 #include <QtWidgets/QMessageBox>
-#include <QProcess>
 #include <QtWebKitWidgets/QtWebKitWidgets>
+#include <QWebView>
+#include <QWebPage>
 #include <QSize>
 #include <QVariant>
 #include <QCryptographicHash>
@@ -29,6 +30,7 @@ class ign: public QObject
 private:
     QWebView web;
     QWebFrame *frame;
+    QWebView *createWindow(QWebPage::WebWindowType type);
     bool fullscreen;
     fs *m_filesystem;
     QtDownload *dl;
@@ -84,14 +86,6 @@ public slots:
     //ign settings
     void websecurity(bool c);
     //ign filesystem
-    /*QString homePath();
-    bool createFile(const QString& path, const QString& data);
-    QString readFile(const QString &path);
-    bool mkdir(const QString& path);
-    bool dirExist(const QString& path);
-    bool fileExist(const QString& path);
-    bool fileRemove(const QString& path);
-    bool rmdir(const QString& path);*/
     QObject *filesystem();
     //ign network
     void saveFile(const QByteArray &data, QString filename, QString path);

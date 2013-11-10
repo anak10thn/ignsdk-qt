@@ -74,6 +74,18 @@ void ign::getFullScreen(bool screen){
     }
 }
 
+QWebView *ign::createWindow(QWebPage::WebWindowType type){
+    QWebView *webView = new QWebView;
+    QWebPage *newWeb = new QWebPage(webView);
+    if (type == QWebPage::WebModalDialog)
+        webView->setWindowModality(Qt::ApplicationModal);
+    webView->setAttribute(Qt::WA_DeleteOnClose, true);
+    webView->setPage(newWeb);
+    webView->show();
+
+    return webView;
+}
+
 void ign::render(QString w){
     QString pwd("");
     QString url_fix;
@@ -293,17 +305,6 @@ QString ign::hash(const QString &data,QString hash_func){
     return hash.toHex();
 }
 
-/*QString ign::homePath(){
-    return this->filesystem->home_path();
-}
-
-bool ign::createFile(const QString &path, const QString &data){
-    return this->filesystem->create_file(path,data);
-}
-
-QString ign::readFile(const QString &path){
-    return this->filesystem->read_file(path);
-}*/
 
 void ign::saveFile(const QByteArray &data, QString filename, QString path){
     QByteArray byteArray = QByteArray::fromBase64(data);
@@ -351,54 +352,7 @@ QObject *ign::filesystem(){
     return m_filesystem;
 }
 
-/*bool ign::mkdir(const QString &path){
-    return this->filesystem->dir(path,"create");
-}
-
-bool ign::dirExist(const QString &path){
-    return this->filesystem->dir(path,"check");
-}
-
-bool ign::rmdir(const QString &path){
-    return this->filesystem->dir(path,"remove");
-}
-
-bool ign::fileExist(const QString &path){
-    return this->filesystem->file(path,"check");
-}
-
-bool ign::fileRemove(const QString &path){
-    return this->filesystem->file(path,"remove");
-}*/
-
 //Check version
 QString ign::sdkVersion(){
     return this->version;
 }
-
-/*void ign::mousePressEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-    {
-        QMessageBox::information(0, "Information", "press");
-        mMoving = true;
-        mLastMousePosition = event->pos();
-    }
-}
-
-void ign::mouseMoveEvent(QMouseEvent *event)
-{
-    if( event->buttons().testFlag(Qt::LeftButton) && mMoving)
-    {
-        this->web.move(this->web.pos() + (event->pos() - mLastMousePosition));
-        mLastMousePosition = event->pos();
-    }
-}
-
-void ign::mouseReleaseEvent(QMouseEvent *event)
-{
-    if(event->button() == Qt::LeftButton)
-    {
-        mMoving = false;
-    }
-}*/

@@ -165,6 +165,10 @@ rm -rf $RPM_BUILD_ROOT
 /etc/ignsdk-dist
 
 %changelog
+* Sun Nov 10 2013 ibnu yahya <linux@toroo.org>
+- move cliOut(), exec(), hash() to sys() init
+- Open file dialog if project directory option is null
+- update filesystem() ini API
 * Mon Oct 13 2013 ibnu yahya <linux@toroo.org>
 - Build nightly
 - Fix spec file dependency

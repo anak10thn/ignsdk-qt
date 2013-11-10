@@ -125,24 +125,25 @@ void ign::showMessage(const QString &msg)
     QMessageBox::information(0, "Information", msg);
 }
 
+/*action*/
 void ign::quit(){
     this->web.close();
 }
 
 void ign::back(){
-    this->web.page()->action(QWebPage::Back)->setVisible(true);
+    this->web.page()->triggerAction(QWebPage::Back,true);
 }
 
 void ign::forward(){
-    this->web.page()->action(QWebPage::Forward)->setVisible(true);
+    this->web.page()->triggerAction(QWebPage::Forward,true);
 }
 
 void ign::stop(){
-    this->web.page()->action(QWebPage::Stop)->setVisible(true);
+    this->web.page()->triggerAction(QWebPage::Stop,true);
 }
 
 void ign::reload(){
-    this->web.page()->action(QWebPage::Reload)->setVisible(true);
+    this->web.page()->triggerAction(QWebPage::Reload,true);
 }
 
 void ign::setDev(bool v){

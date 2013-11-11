@@ -42,6 +42,7 @@ else
   LIBDIRSUFFIX=""
 fi
 
+
 set -e
 
 rm -rf $PKG

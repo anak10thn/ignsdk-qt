@@ -42,6 +42,7 @@ else
   LIBDIRSUFFIX=""
 fi
 
+
 set -e
 
 rm -rf $PKG
@@ -95,12 +96,12 @@ cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
 cp -rf bin/ignsdk-app-builder  $PKG/usr/bin/
 cp -rf bin/ignsdk-slack-creator  $PKG/usr/share/ign-sdk/bin/
 cp -rf bin/ignsdk-slack-builder $PKG/usr/share/ign-sdk/bin/
-cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cp -rf $CWD/copyright $PKG/usr/share/ign-sdk/
+cp  doc/ignsdk.man.1.gz  $PKG/usr/share/man/man8/
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

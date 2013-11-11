@@ -2,14 +2,29 @@
 
 project_dir=$1
 
-if [ -f $project_dir/debian/control ]; then shift; else echo "Bah, debian/control isn't exist. You must run package creator first."; exit 1; fi
+if [ $(whoami) == "root" ]
+then
+	echo "Error: Don't run this script as root."
+	exit 1
+fi
+
+if [ -f $project_dir/debian/control ]
+then
+	shift
+else
+	echo "Error: debian/control isn't exist. You must run package creator first."
+	exit 1
+fi
 
 deb_package_name=$(fakeroot -u cat $project_dir/debian/control | grep Package | sed -e "s/Package: //")
 
-if [ $deb_package_name == "" ]; then "debian/control seems to be invalid :("; exit 1; fi
+if [ $deb_package_name == "" ]
+then "Error: $project_dir does not contain valid Debian control file"
+	exit 1
+fi
 
 echo -e "IGNSDK Package Auto-builder\n"
-read -p "WARNING: debian/$deb_package_name.install will be overriden! Press [Enter] to continue, Ctrl-C to cancel."
+read -p "Warning: debian/$deb_package_name.install will be overwritten! Press [Enter] to continue, Ctrl-C to cancel."
 
 pushd $project_dir
 

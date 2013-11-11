@@ -11,8 +11,6 @@
 #include <QtWidgets/QLayout>
 #include <QtWidgets/QMessageBox>
 #include <QtWebKitWidgets/QtWebKitWidgets>
-#include <QWebView>
-#include <QWebPage>
 #include <QSize>
 #include <QVariant>
 #include <QPixmap>
@@ -29,7 +27,6 @@ class ign: public QObject
 private:
     QWebView web;
     QWebFrame *frame;
-    QWebView *createWindow(QWebPage::WebWindowType type);
     bool fullscreen;
     fs *m_filesystem;
     QtDownload *dl;

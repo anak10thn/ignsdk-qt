@@ -89,26 +89,7 @@ int main(int argc, char *argv[])
 
     QString opt = url;
     QString path = url;
-    if(opt.isEmpty() || opt.isNull()){
-        QFileDialog *fd = new QFileDialog;
-        QTreeView *tree = fd->findChild <QTreeView*>();
-        tree->setRootIsDecorated(true);
-        tree->setItemsExpandable(true);
-        fd->setFileMode(QFileDialog::Directory);
-        fd->setOption(QFileDialog::ShowDirsOnly);
-        fd->setViewMode(QFileDialog::Detail);
-        int result = fd->exec();
-        QString directory;
-        if (result)
-        {
-            directory = fd->selectedFiles()[0];
-            w.render(directory+"/index.html");
-        }
-        else {
-            w.render("http://www.igos-nusantara.or.id");
-        }
-    }
-    else{
+    if(!opt.isEmpty()){
         w.pathApp = opt;
         /*icon set*/
         a.setWindowIcon(QIcon(path+"icons/app.png"));
@@ -123,7 +104,31 @@ int main(int argc, char *argv[])
 
         w.render(opt);
         w.config(url);
+        w.show();
+
     }
-    w.show();
+    else{
+        QFileDialog *fd = new QFileDialog;
+        QTreeView *tree = fd->findChild <QTreeView*>();
+        tree->setRootIsDecorated(true);
+        tree->setItemsExpandable(true);
+        fd->setFileMode(QFileDialog::Directory);
+        fd->setOption(QFileDialog::ShowDirsOnly);
+        fd->setViewMode(QFileDialog::Detail);
+        int result = fd->exec();
+        QString directory;
+        if (result)
+        {
+            directory = fd->selectedFiles()[0];
+            w.render(directory+"/index.html");
+            w.config(directory);
+            w.show();
+        }
+        else {
+            w.render("http://www.igos-nusantara.or.id");
+            w.show();
+        }
+    }
+
     return a.exec();
 }

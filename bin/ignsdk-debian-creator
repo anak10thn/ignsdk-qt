@@ -1,20 +1,28 @@
 #!/bin/bash
 
+if [ $(whoami) == "root" ]
+then
+	echo "Error: Don't run this script as root."
+	exit 1
+fi
+
 echo -e "\n\nIGNSDK Package Creator (Debian GNU/Linux)"
 
 package_name=$1
 deb_package_name=$(echo $package_name | sed 's/\.ign//')
 project_dir=$2
-release=$(lsb_release -rs)
+lsb_release=$(lsb_release -rs)
+if [ "$lsb_release" == "" ]; then lsb_release="testing"; fi
 build_deps="dch dh_make"
-read -p 'Enter package version: ' deb_package_version
-read -p 'Enter your name      : ' packagers_name
-read -p 'Enter your email     : ' packagers_mail
+read -p 'Enter package version [1.0]: ' deb_package_version
+if [ "$deb_package_version" == "" ]; then deb_package_version="1.0"; fi
+read -p 'Enter release ['$lsb_release']: ' release
+if [ "$release" == "" ]; then release="$lsb_release"; fi
+read -p 'Enter your name: ' packagers_name
+read -p 'Enter your email: ' packagers_mail
 
 
-if [ -d $project_dir/debian ]; then echo "WARNING: debian/ directory is exist!"; exit 1; fi
-
-if [ "$release" == "" ]; then release="testing"; fi
+if [ -d $project_dir/debian ]; then echo "Error: debian/ directory is already exist!"; exit 1; fi
 
 # Check build depends
 _checkBuildDeps(){
@@ -34,7 +42,7 @@ do
 	_checkBuildDeps $dependency
 	if [[ $check -gt 0 ]]
 	then
-		echo -e "\nCan't continue. Build dependencies were not fully satisfied."
+		echo -e "\nCould not continue. Build dependencies were not fully satisfied."
 		exit 1
 	fi
 done
@@ -84,5 +92,3 @@ This application is built using IGOS Nusantara Software Development Kit
 EOF
 
 popd
-
-echo -e "Debian package control files is successfully created.\nPlease modify files under debian/ directory according to your needs."

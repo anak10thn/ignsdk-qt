@@ -12,7 +12,7 @@ ign::ign(QObject *parent)
     m_ignsystem(0),
     m_filesystem(0)
 {
-    this->version = "1.1.1";
+    this->version = "1.1.2-alpha1";
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     //this->filesystem = new fs;
@@ -51,18 +51,6 @@ ign::ign(QObject *parent)
 
 void ign::ignJS(){
     this->frame->addToJavaScriptWindowObject("ign",this);
-}
-
-QWebView *ign::createWindow(QWebPage::WebWindowType type){
-    QWebView *webView = new QWebView;
-    QWebPage *newWeb = new QWebPage(webView);
-    if (type == QWebPage::WebModalDialog)
-        webView->setWindowModality(Qt::ApplicationModal);
-    webView->setAttribute(Qt::WA_DeleteOnClose, true);
-    webView->setPage(newWeb);
-    webView->show();
-
-    return webView;
 }
 
 void ign::render(QString w){
@@ -279,16 +267,16 @@ void ign::config(QString path){
         foreach (QVariant button, result["button"].toList()) {
 
           if (button.toString() == "back"){
-              this->back();
+              web.page()->action(QWebPage::Back)->setVisible(true);
           }
           if (button.toString() == "forward"){
-              this->forward();
+              web.page()->action(QWebPage::Forward)->setVisible(true);
           }
           if (button.toString() == "stop"){
-              this->stop();
+              web.page()->action(QWebPage::Stop)->setVisible(true);
           }
           if (button.toString() == "reload"){
-              this->reload();
+              web.page()->action(QWebPage::Reload)->setVisible(true);
           }
 
         }

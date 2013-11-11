@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
 Version:1.1.1
-Release:10.11.13
+Release:11.11.13
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
@@ -31,6 +31,7 @@ install -d -m 755 $RPM_BUILD_ROOT/etc
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/template
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
+install -d -m 755 $RPM_BUILD_ROOT/usr/share/man/man1
 qmake-qt5
 make
 cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
@@ -38,6 +39,7 @@ cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 cp -rf bin/ignsdk-app-builder $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-builder $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
+cp -rf doc/ignsdk.man.1.gz $RPM_BUILD_ROOT/usr/share/man/man1
 echo "ign" > $RPM_BUILD_ROOT/etc/ignsdk-dist
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 cp -rf template/main.tpl $RPM_BUILD_ROOT/usr/share/ign-sdk/template
@@ -163,8 +165,11 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/template/main.tpl
 /usr/share/ign-sdk/template/app.spec
 /etc/ignsdk-dist
+/usr/share/man/man1/ignsdk.man.1.gz
 
 %changelog
+* Mon Nov 11 2013 ibnu yahya <linux@toroo.org>
+- ADD Manual Page
 * Sun Nov 10 2013 ibnu yahya <linux@toroo.org>
 - move cliOut(), exec(), hash() to sys() init
 - Open file dialog if project directory option is null

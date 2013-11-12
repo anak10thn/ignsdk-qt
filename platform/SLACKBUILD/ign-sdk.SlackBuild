@@ -69,7 +69,9 @@ else
 /opt/Qt5.1.1/5.1.1/gcc_64/bin/qmake
 fi
 
-make
+pros=`cat /proc/cpuinfo | grep processor | wc -l`
+make -j$pros
+
 
 mkdir -p $PKG/usr/share/ign-sdk/test
 mkdir -p $PKG/usr/bin/

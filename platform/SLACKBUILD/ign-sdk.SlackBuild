@@ -63,13 +63,19 @@ find . \
  -exec chmod 644 {} \;
 
 
-if [ ! -d /opt/Qt5.1.1 ]; then
-qmake
-else
+if [ -d /opt/Qt5.1.1/5.1.1/gcc_64/ ]
+then
 /opt/Qt5.1.1/5.1.1/gcc_64/bin/qmake
+elif [ -d /opt/Qt5.1.1/5.1.1/gcc/ ]
+then
+/opt/Qt5.1.1/5.1.1/gcc/bin/qmake
+else
+qmake
 fi
 
-make
+pros=`cat /proc/cpuinfo | grep processor | wc -l`
+make -j$pros
+
 
 mkdir -p $PKG/usr/share/ign-sdk/test
 mkdir -p $PKG/usr/bin/
@@ -78,10 +84,11 @@ mkdir -p $PKG/usr/share/applications/
 mkdir -p $PKG/usr/sbin/
 mkdir -p $PKG/etc/
 mkdir -p $PKG/usr/share/ign-sdk/bin/
-mkdir -p $PKG/usr/share/man/man8
+mkdir -p $PKG/usr/share/ign-sdk/template/
+mkdir -p $PKG/usr/share/man/man1/
+
 touch  $PKG/etc/ignsdk-dist
 echo "slack" > $PKG/etc/ignsdk-dist
-mkdir -p $PKG/usr/share/ign-sdk/template/
 cp  -rf template/* $PKG/usr/share/ign-sdk/template/
 cp ignsdk $PKG/usr/bin/
 cp -rf css $PKG/usr/share/ign-sdk/
@@ -101,6 +108,23 @@ cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cp -rf $CWD/copyright $PKG/usr/share/ign-sdk/
+gunzip doc/ignsdk.man.1.gz
+gzip -9 doc/ignsdk.man.1
+cp doc/ignsdk.man.1.gz  $PKG/usr/share/man/man1
+cp doc/ignsdk.man.1.gz  $PKG/usr/share/man/
+
+
+if [ -d $PKG/usr/man ]; then
+  ( cd $PKG/usr/man
+  find . -type f -exec gzip -9 {} \;
+  for i in $(find . -type l) ; do ln -s $(readlink $i).gz $i.gz ; rm $i ; done
+  ) 
+fi
+
+if [ -d $PKG/usr/info ]; then
+  gzip -9 $PKG/usr/info/*.info
+  rm -f $PKG/usr/info/dir
+fi
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

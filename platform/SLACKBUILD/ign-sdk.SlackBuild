@@ -73,7 +73,9 @@ else
 qmake
 fi
 
-make
+pros=`cat /proc/cpuinfo | grep processor | wc -l`
+make -j$pros
+
 
 mkdir -p $PKG/usr/share/ign-sdk/test
 mkdir -p $PKG/usr/bin/

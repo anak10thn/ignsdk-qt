@@ -17,8 +17,9 @@ int main(int argc, char *argv[])
     bool file = false;
     int index;
     int c;
+    int r;
     bool version = false;
-    char help[] = "Usage: ignsdk -p [PROJECT DIRECTORY]\n\nGeneral Options :\n--version\toutput version information and exit\n--dev\t\tWeb Inspector Enable\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n";
+    char help[] = "Usage: ignsdk -p [PROJECT DIRECTORY]\n\nGeneral Options :\n-v\t--version\t\toutput version information and exit\n-d\t--dev\t\t\tWeb Inspector Enable\n-r\t--dev-remote [port]\tRemote debugging\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n";
     opterr = 0;
     static struct option long_options[] =
                  {
@@ -30,13 +31,14 @@ int main(int argc, char *argv[])
                    {"noFrame",  no_argument,       0, 'n'},
                    {"help",  no_argument,       0, 'h'},
                    {"project",      required_argument, 0, 'p'},
+                   {"dev-remote",      required_argument, 0, 'r'},
                    {"version",  no_argument,       0, 'v'},
                    {0, 0, 0, 0}
                  };
 
                int option_index = 0;
 
-           while ((c = getopt_long (argc, argv, "vdnhf:tp:",long_options,&option_index)) != -1){
+           while ((c = getopt_long (argc, argv, "vdnhf:tp:r:",long_options,&option_index)) != -1){
              switch (c)
                {
                case 'p':
@@ -49,6 +51,10 @@ int main(int argc, char *argv[])
                case 'f':
                 file = true;
                 optional = optarg;
+               break;
+               case 'r':
+                r = atoi(optarg);
+                w.setDevRemote(r);
                break;
                case 'n':
                  w.widgetNoFrame();
@@ -67,7 +73,7 @@ int main(int argc, char *argv[])
                  if (optopt == 'c')
                    fprintf (stderr, "Option -%c requires an argument.\n", optopt);
                  else if (isprint (optopt))
-                   fprintf (stderr, "Unknown option `-%c'.\n\nUsage: ignsdk -p [PROJECT DIRECTORY]\n\nGeneral Options :\n--version\toutput version information and exit\n--dev\t\tWeb Inspector Enable\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n", optopt);
+                   fprintf (stderr, "Unknown option `-%c'.\n\nUsage: ignsdk -p [PROJECT DIRECTORY]\n\nGeneral Options :\n-v\t--version\t\toutput version information and exit\n-d\t--dev\t\t\tWeb Inspector Enable\n-r\t--dev-remote [port]\tRemote debugging\n\nWindow options :\n--transparent\tTransparent Mode\n--noFrame\tFrame Disable\n", optopt);
                  else
                    fprintf (stderr,
                             "Unknown option character `\\x%x'.\n",

@@ -48,3 +48,7 @@ QString ignsystem::hash(const QString &data,QString hash_func){
 
     return hash.toHex();
 }
+
+void ignsystem::desktopService(const QString &link){
+    QDesktopServices ::openUrl(QUrl(link));
+}

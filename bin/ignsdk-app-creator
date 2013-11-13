@@ -6,13 +6,16 @@ DEST=false
 HELP=false
 DISTCHK=`cat /etc/ignsdk-dist`
 APPNAME=""
+GIT=false
 
 if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hp: --long help,pkgname: \
+TEMP=`getopt -o hp:g --long help,pkgname:,git \
              -n 'ignsdk-app-creator' -- "$@"`
+
+eval set -- "$TEMP"
 
 help ()
 {
@@ -21,7 +24,9 @@ cat <<EOF
 Usage: ignsdk-app-creator [OPTION]
 
 Option :
-		 -p, --pkgname		Package name
+		-p, --pkgname		Package name
+		-g, --git			Initialize Git repository
+		-h, --help			Show this help
 
 Example: ignsdk-app-creator -p control-panel
 
@@ -33,6 +38,19 @@ exit 0
 create_project ()
 {
 /usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4 $5
+}
+
+init_git ()
+{
+	pushd $BUILDDEST > /dev/null 2>&1
+	git init > /dev/null 2>&1
+	if [ "$(git config --list | grep user.name)" == "" ]; then
+		read -p "Set user.name for git  : " git_username
+		read -p "Set user.email for git : " git_useremail
+		git config user.name "$git_username"
+		git config user.email "$git_useremail"
+	fi
+	popd > /dev/null 2>&1
 }
 
 
@@ -64,7 +82,16 @@ while true; do
 			help
 		fi
 	 fi
-    shift 2 ;;
+	shift 2 ;;
+	-g | --git )
+		if [ "$(which git)" == ""  ]; then
+			GIT=false
+			echo "Git is not installed."
+			exit 1
+		else
+			GIT=true
+		fi
+	shift ;;
     -h | --help ) HELP=true; shift ;;
     -- ) shift; break ;;
     * ) break ;;
@@ -96,6 +123,9 @@ Application category :
 13. Utility [default]
 EOF
 read -p "Choose one: " CTGR
+
+echo ""
+
 case "$CTGR" in
     "1" ) MENU="AudioVideo"
     shift 2 ;;
@@ -133,7 +163,11 @@ echo "ERROR: Application name can't be empty!"
 help
 else
 mkdir $BUILDDEST
-tar vxf /usr/share/ign-sdk/template/main.tpl -C $BUILDDEST
+if [ "$GIT" == "true"  ]; then
+	echo "Initializing git repository..."
+	init_git
+fi
+tar xf /usr/share/ign-sdk/template/main.tpl -C $BUILDDEST
 mv $BUILDDEST/menu/ignsdk.desktop $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[package\]/$PKGNAME/" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop

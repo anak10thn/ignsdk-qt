@@ -11,6 +11,7 @@
 #include <QtWidgets/QLayout>
 #include <QtWidgets/QMessageBox>
 #include <QtWebKitWidgets/QtWebKitWidgets>
+#include <QtNetwork/QNetworkInterface>
 #include <QSize>
 #include <QVariant>
 #include <QPixmap>
@@ -58,6 +59,7 @@ public slots:
     void showMessage(const QString& msg);
     //ign developer mode
     void setDev(bool v);
+    void setDevRemote(int port);
     //ign action
     void quit();
     void back();

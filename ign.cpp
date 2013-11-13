@@ -6,6 +6,7 @@
 #include <QtCore/QVariant>
 #include <iostream>
 using namespace std;
+
 ign::ign(QObject *parent)
     : QObject(parent),
     m_sqldrv(0),
@@ -137,6 +138,26 @@ void ign::redo(){
 void ign::setDev(bool v){
     this->web.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, v);
 }
+
+void ign::setDevRemote(int port){
+    QString host;
+    Q_FOREACH(QHostAddress address, QNetworkInterface::allAddresses()) {
+      if (!address.isLoopback() && (address.protocol() == QAbstractSocket::IPv4Protocol)) {
+         host = address.toString();
+         break;
+       }
+    }
+    QString server;
+       if (host.isEmpty()) {
+          server = QString::number(port);
+        } else {
+          server = QString("%1:%2").arg(host, QString::number(port));
+        }
+    qDebug() << "Remote debugging is enable : "<< server.toUtf8();
+    qputenv("QTWEBKIT_INSPECTOR_SERVER", server.toUtf8());
+    this->web.page()->setProperty("_q_webInspectorServerPort",port);
+}
+
 /* web security */
 void ign::websecurity(bool c){
     web.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,c);

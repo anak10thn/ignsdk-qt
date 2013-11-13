@@ -12,8 +12,7 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hp:g --long help,pkgname:,git \
-             -n 'ignsdk-app-creator' -- "$@"`
+TEMP=`getopt -o hp:g --long help,pkgname:,git -n 'ignsdk-app-creator' -- "$@"`
 
 eval set -- "$TEMP"
 
@@ -44,7 +43,7 @@ exit 0
 
 create_project ()
 {
-/usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4 $5
+	/usr/share/ign-sdk/bin/ignsdk-$DIST-creator $1 $2 $3 $4 $5
 }
 
 init_git ()
@@ -75,45 +74,56 @@ fi
 eval set -- "$TEMP"
 
 while true; do
-  case "$1" in
-    -p | --pkgname ) if [ ! $2 ];then
-		DEST=false
-	 else
-		if [ ! -d "$DESTDIR$2.ign" ];then
-			DEST=true
-			BUILDDEST="$DESTDIR$2.ign"
-			PKGNAME="$2.ign"
-			PROJECT="$2"
-		else
-			echo "Project exist!"
-			help
-		fi
-	 fi
-	shift 2 ;;
-	-g | --git )
-		if [ "$(which git)" == ""  ]; then
-			GIT=false
-			echo "Git is not installed."
-			exit 1
-		else
-			GIT=true
-		fi
-	shift ;;
-    -h | --help ) HELP=true; shift ;;
-    -- ) shift; break ;;
-    * ) break ;;
-  esac
+	case "$1" in
+		-p | --pkgname )
+			if [ ! $2 ]; then
+				DEST=false
+			else
+				if [ ! -d "$DESTDIR$2.ign" ]; then
+					DEST=true
+					BUILDDEST="$DESTDIR$2.ign"
+					PKGNAME="$2.ign"
+					PROJECT="$2"
+				else
+					echo "Project exist!"
+					help
+				fi
+	 		fi
+			shift 2
+			;;
+		-g | --git )
+			if [ "$(which git)" == ""  ]; then
+				GIT=false
+				echo "Git is not installed."
+				exit 1
+			else
+				GIT=true
+			fi
+			shift
+			;;
+		-h | --help )
+			HELP=true
+			shift
+			;;
+		-- )
+			shift
+			break
+			;;
+		* )
+		break
+		;;
+	esac
 done
 
 if [ $HELP == true ]
 then
-help
+	help
 fi
 
 if [ $DEST == true ]
 then
-read -p "Application name: " APPNAME
-cat <<EOF
+	read -p "Application name: " APPNAME
+	cat <<EOF
 Application category :
 1. AudioVideo (multimedia)
 2. Audio (audio only)
@@ -129,61 +139,63 @@ Application category :
 12. System
 13. Utility [default]
 EOF
-read -p "Choose one: " CTGR
+	read -p "Choose one: " CTGR
 
-echo ""
+	echo ""
 
-case "$CTGR" in
-    "1" ) MENU="AudioVideo"
-    shift 2 ;;
-    "2" ) MENU="Audio;AudioVideo"
-    shift 2 ;;
-    "3" ) MENU="Video;AudioVideo"
-    shift 2 ;;
-    "4" ) MENU="Development"
-    shift 2 ;;
-    "5" ) MENU="Education"
-    shift 2 ;;
-    "6" ) MENU="Game"
-    shift 2 ;;
-    "7" ) MENU="Graphics"
-    shift 2 ;;
-    "8" ) MENU="Network"
-    shift 2 ;;
-    "9" ) MENU="Office"
-    shift 2 ;;
-    "10" ) MENU="Science"
-    shift 2 ;;
-    "11" ) MENU="Settings"
-    shift 2 ;;
-    "12" ) MENU="System"
-    shift 2 ;;
-    "13" ) MENU="Utility"
-    shift 2 ;;
-    -- ) MENU="Utility"; shift; break ;;
-    * ) MENU="Utility"; shift;;
-  esac
+	case "$CTGR" in
+	    "1" ) MENU="AudioVideo"
+		shift 2 ;;
+	    "2" ) MENU="Audio;AudioVideo"
+		shift 2 ;;
+	    "3" ) MENU="Video;AudioVideo"
+		shift 2 ;;
+	    "4" ) MENU="Development"
+		shift 2 ;;
+	    "5" ) MENU="Education"
+		shift 2 ;;
+	    "6" ) MENU="Game"
+		shift 2 ;;
+	    "7" ) MENU="Graphics"
+		shift 2 ;;
+	    "8" ) MENU="Network"
+		shift 2 ;;
+	    "9" ) MENU="Office"
+		shift 2 ;;
+	    "10" ) MENU="Science"
+		shift 2 ;;
+	    "11" ) MENU="Settings"
+		shift 2 ;;
+	    "12" ) MENU="System"
+		shift 2 ;;
+	    "13" ) MENU="Utility"
+		shift 2 ;;
+	    -- ) MENU="Utility"
+		shift; break ;;
+	    * ) MENU="Utility"
+		shift;;
+	esac
 
-if [ "$APPNAME" == "" ]
-then
-echo "ERROR: Application name can't be empty!"
-help
+	if [ "$APPNAME" == "" ]
+	then
+		echo "ERROR: Application name can't be empty!"
+		help
+	else
+		mkdir $BUILDDEST
+		if [ "$GIT" == "true"  ]; then
+			echo "Initializing git repository..."
+			init_git
+		fi
+		tar xf /usr/share/ign-sdk/template/main.tpl -C $BUILDDEST
+		mv $BUILDDEST/menu/ignsdk.desktop $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+		sed -i -e "s/\[package\]/$PKGNAME/" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+		sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+		sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
+		sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
+		create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU" $PROJECT
+	fi
+
 else
-mkdir $BUILDDEST
-if [ "$GIT" == "true"  ]; then
-	echo "Initializing git repository..."
-	init_git
-fi
-tar xf /usr/share/ign-sdk/template/main.tpl -C $BUILDDEST
-mv $BUILDDEST/menu/ignsdk.desktop $BUILDDEST/menu/ignsdk-$PROJECT.desktop
-sed -i -e "s/\[package\]/$PKGNAME/" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
-sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
-sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
-sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
-create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU" $PROJECT
-fi
-
-else
-echo "ERROR: Please name your project."
-help
+	echo "ERROR: Please name your project."
+	help
 fi

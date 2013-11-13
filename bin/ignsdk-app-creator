@@ -24,11 +24,18 @@ cat <<EOF
 Usage: ignsdk-app-creator [OPTION]
 
 Option :
-		-p, --pkgname		Package name
-		-g, --git			Initialize Git repository
-		-h, --help			Show this help
 
-Example: ignsdk-app-creator -p control-panel
+	-p, --pkgname		Package name
+	-g, --git		Initialize Git repository
+	-h, --help		Show this help
+
+Example:
+
+	Create a package
+	$ $0 -p control-panel
+
+	Create a package and initialize git repo
+	$ $0 -p control-panel -g
 
 EOF
 

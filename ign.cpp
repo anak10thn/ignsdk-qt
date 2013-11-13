@@ -259,6 +259,9 @@ void ign::config(QString path){
         if(configure["debug"].toBool()){
             this->setDev(true);
         }
+        if(configure["debug-port"].toInt()){
+            this->setDevRemote(configure["debug-port"].toInt());
+        }
         if(configure["websecurity"].toBool()){
             this->websecurity(true);
         }

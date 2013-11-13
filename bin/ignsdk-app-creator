@@ -59,6 +59,15 @@ init_git ()
 	popd > /dev/null 2>&1
 }
 
+commit_git ()
+{
+	echo ""
+	pushd $BUILDDEST > /dev/null 2>&1
+	git add *
+	echo "Committing changes..."
+	git commit -m "Initial project files" > /dev/null 2>&1
+	popd > /dev/null 2>&1
+}
 
 if [ $? != 0 ] ; then
 	help
@@ -193,6 +202,9 @@ EOF
 		sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 		sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
 		create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU" $PROJECT
+		if [ "$GIT" == "true" ]; then
+			commit_git
+		fi
 	fi
 
 else

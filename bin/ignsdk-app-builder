@@ -12,8 +12,9 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hld:p: --long help,list,dir:,pkgname: \
-             -n 'ignsdk-app-creator' -- "$@"`
+TEMP=`getopt -o hld:p: --long help,list,dir:,pkgname: -n 'ignsdk-app-builder' -- "$@"`
+
+eval set -- "$TEMP"
 
 help ()
 {
@@ -21,17 +22,17 @@ help ()
 cat <<EOF
 Usage: ignsdk-app-builder [OPTIONS] [PACKAGE NAME or PROJECT DIRECTORY]
 
-OPTION	:
+Options:
 		
-		-p, --pkgname		Project Package name
-		-d, --dir			Project directory
-		-l, --list			List project exist
+	-p, --pkgname		Project Package name
+	-d, --dir		Project directory
+	-l, --list		List existing project
 
-EXAMPLE :
+Examples:
 		
-		$ignsdk-app-builder --pkgname control-panel
-		or
-		$ignsdk-app-builder --dir /home/igos/IGNSDK-APP/control-panel.ign
+	$ ignsdk-app-builder --pkgname control-panel
+
+	$ ignsdk-app-builder --dir /home/igos/IGNSDK-APP/control-panel.ign
 EOF
 
 exit 0
@@ -39,7 +40,7 @@ exit 0
 
 build_project ()
 {
-/usr/share/ign-sdk/bin/ignsdk-$DIST-builder $1
+	/usr/share/ign-sdk/bin/ignsdk-$DIST-builder $1
 }
 
 checkhelp ()
@@ -63,60 +64,73 @@ fi
 eval set -- "$TEMP"
 
 while true; do
-  case "$1" in
-    -d | --dir ) if [ ! $2 ];then
-		DIR=false
-	 else
-		if [ -d $2 ]
-		then
-			DIR=true
-			PKGBUILD=$2
-		else
-			echo "ERROR: Directory is not exist!"
-			checkhelp
-		fi
-	 fi
-    shift 2 ;;
-    -p | --pkgname ) if [ ! $2 ];then
-		DIR=false
-	 else
-		if [ -d $IGNSDKAPP/$2.ign ]
-		then
-			DIR=true
-			PKGBUILD=$IGNSDKAPP/$2.ign
-		else
-			echo "ERROR: Directory is not exist!"
-			checkhelp
-		fi
-	 fi
-    shift 2 ;;
-    -h | --help ) HELP=true; shift ;;
-    -l | --list ) LIST=true; shift ;;
-    -- ) shift; break ;;
-    * ) break ;;
-  esac
+	case "$1" in
+		-d | --dir )
+			if [ ! $2 ]; then
+				DIR=false
+			else
+				if [ -d $2 ]; then
+					DIR=true
+					PKGBUILD=$2
+				else
+					echo "ERROR: Directory is not exist!"
+					checkhelp
+				fi
+			fi
+			shift 2
+			;;
+		-p | --pkgname )
+			if [ ! $2 ]; then
+				DIR=false
+			else
+				if [ -d $IGNSDKAPP/$2.ign ]; then
+					DIR=true
+					PKGBUILD=$IGNSDKAPP/$2.ign
+				else
+					echo "ERROR: Directory is not exist!"
+					checkhelp
+				fi
+			fi
+			shift 2
+			;;
+		-h | --help )
+			HELP=true
+			shift
+			;;
+		-l | --list )
+			LIST=true
+			shift
+			;;
+		-- )
+			shift
+			break
+			;;
+		* )
+			break
+			;;
+	esac
 done
 
 if [ $HELP == true ]
 then
-help
+	help
 fi
 
 if [ $LIST == true ]
 then
-#find $DESTDIR -name *.ign -exec echo {} > $DESTDIR/.ignsdk-list \;
-cd $DESTDIR;ls > $DESTDIR/.ignsdk-list 
-echo ""
-echo "Project list: "
-while read m
-do
-	if [ -f $m/ignsdk.json ];then
-		echo - $m | sed s/\.ign//g | sed -e "s|$DESTDIR||"
-	fi
-done < $DESTDIR/.ignsdk-list
-echo "Usage: ignsdk-app-builder -p [PROJECT PACKAGE NAME]"
-echo ""
-exit 0
+	cd $DESTDIR
+	ls > $DESTDIR/.ignsdk-list 
+	echo ""
+	echo "Existing project: "
+	while read m
+	do
+		if [ -f $m/ignsdk.json ];then
+			echo - $m | sed s/\.ign//g | sed -e "s|$DESTDIR||"
+		fi
+	done < $DESTDIR/.ignsdk-list
+	echo "Usage: ignsdk-app-builder -p [PROJECT PACKAGE NAME]"
+	echo ""
+	exit 0
 fi
 
 if [ $DIR == false ]

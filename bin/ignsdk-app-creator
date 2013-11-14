@@ -12,7 +12,7 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hp:g --long help,pkgname:,git -n 'ignsdk-app-creator' -- "$@"`
+TEMP=`getopt -o hp:gr: --long help,pkgname:,git,remote: -n 'ignsdk-app-creator' -- "$@"`
 
 eval set -- "$TEMP"
 
@@ -26,6 +26,7 @@ Option :
 
 	-p, --pkgname		Package name
 	-g, --git		Initialize Git repository
+	-r, --remote		Set Git remote URL
 	-h, --help		Show this help
 
 Example:
@@ -56,6 +57,7 @@ init_git ()
 		git config user.name "$git_username"
 		git config user.email "$git_useremail"
 	fi
+	git remote add origin $GIT_REMOTE
 	popd > /dev/null 2>&1
 }
 
@@ -106,6 +108,10 @@ while true; do
 			else
 				GIT=true
 			fi
+			shift
+			;;
+		-r | --remote )
+			GIT_REMOTE=$2
 			shift
 			;;
 		-h | --help )

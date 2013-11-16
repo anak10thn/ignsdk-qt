@@ -79,7 +79,6 @@ make -j$pros
 
 mkdir -p $PKG/usr/share/ign-sdk/test
 mkdir -p $PKG/usr/bin/
-mkdir -p $PKG/usr/man/
 mkdir -p $PKG/usr/share/applications/
 mkdir -p $PKG/usr/sbin/
 mkdir -p $PKG/etc/

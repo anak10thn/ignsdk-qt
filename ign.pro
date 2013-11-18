@@ -64,3 +64,6 @@ OTHER_FILES += \
 RESOURCES += \
     ign.qrc
 
+macx{
+ICON += icon/ignsdk-logo.icns
+}

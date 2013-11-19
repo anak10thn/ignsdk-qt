@@ -13,8 +13,10 @@
       //ign.WidgetSizeMax(300,450);
       $(function(){
         $('#req').click(function(){
+            //init system module
+            var sys = ign.sys();
             var input = $('#inputval').val();
-          $('#res').html(ign.cliOut(input));
+          $('#res').html(sys.cliOut(input));
         });
       })
     </script>

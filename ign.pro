@@ -25,41 +25,6 @@ HEADERS  += ign.h \
     ignnetwork.h \
     ignsystem.h
 
-OTHER_FILES += \
-    js/jquery.js \
-    js/ign.js \
-    examples/index.html \
-    js/bootstrap.min.js \
-    js/bootstrap.js \
-    img/glyphicons-halflings.png \
-    img/glyphicons-halflings-white.png \
-    css/bootstrap.min.css \
-    css/bootstrap.css \
-    css/bootstrap-responsive.min.css \
-    test/bootstrap/index.html \
-    test/widget.ign/index.html \
-    test/bootstrap.ign/index.html \
-    README.md \
-    css/ign.css \
-    js/skulpt.js \
-    js/builtin.js \
-    platform/ARCH/PKGBUILD \
-    platform/SPECS/ignsdk.spec \
-    platform/debian/README.Debian \
-    platform/debian/ignsdk-debian.dirs \
-    platform/debian/ignsdk-debian-example.install \
-    platform/debian/docs \
-    platform/debian/copyright \
-    platform/debian/control \
-    platform/debian/compat \
-    platform/debian/changelog \
-    platform/debian/rules \
-    platform/debian/source/format \
-    platform/debian/patches/series \
-    platform/debian/patches/buildtarget.diff \
-    js/include.js \
-    platform/SPECS/ignsdk-qt5.spec
-
 RESOURCES += \
     ign.qrc
 

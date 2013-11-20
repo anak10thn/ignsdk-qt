@@ -11,9 +11,6 @@ JQuery - jquery.com
 License: MIT
 Reference: https://jquery.org/license/
 
-Bootstrap - getbootstrap.com
-License: Apache License v2
-Reference: https://github.com/twbs/bootstrap/blob/master/LICENSE
 
 Skulpt - skulpt.org
 License: MIT

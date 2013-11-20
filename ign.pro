@@ -36,7 +36,6 @@ OTHER_FILES += \
     css/bootstrap.min.css \
     css/bootstrap.css \
     css/bootstrap-responsive.min.css \
-    css/bootstrap-responsive.css \
     test/bootstrap/index.html \
     test/widget.ign/index.html \
     test/bootstrap.ign/index.html \

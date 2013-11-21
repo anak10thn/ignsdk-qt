@@ -16,14 +16,16 @@ SOURCES += main.cpp\
     igndownload.cpp \
     ignsql.cpp \
     ignnetwork.cpp \
-    ignsystem.cpp
+    ignsystem.cpp \
+    ignmovedrag.cpp
 
 HEADERS  += ign.h \
     fs.h \
     igndownload.h \
     ignsql.h \
     ignnetwork.h \
-    ignsystem.h
+    ignsystem.h \
+    ignmovedrag.h
 
 RESOURCES += \
     ign.qrc

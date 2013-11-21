@@ -232,11 +232,6 @@ QString ign::loadBin(const QString &script){
     return path_bin+"/bin/"+script;
 }
 
-void ign::mousePressEvent(QMouseEvent *event)
-{
-    qDebug()<<event->type();
-}
-
 void ign::config(QString path){
     QFile config_file;
     QDir::setCurrent(path);
@@ -367,5 +362,3 @@ QObject *ign::filesystem(){
 QString ign::sdkVersion(){
     return this->version;
 }
-
-//mouse move experiment

@@ -33,7 +33,7 @@ private:
     QtDownload *dl;
     ignsql *m_sqldrv;
     ignsystem *m_ignsystem;
-    QPoint mLastMousePosition;
+    QPoint offset;
     bool mMoving;
 public:
     ign(QObject *parent = 0);
@@ -43,11 +43,6 @@ public:
     void widgetTransparent();
     QString pathApp;
     QString version;
-
-protected:
-    /*void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent * event);
-    void mouseReleaseEvent(QMouseEvent *event);*/
 
 signals:
     void downloadProgress(qint64 recieved, qint64 total);

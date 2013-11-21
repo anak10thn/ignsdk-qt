@@ -45,9 +45,9 @@ public:
     QString version;
 
 protected:
-    //virtual void mouseMoveEvent(QMouseEvent *event);
-    virtual void mousePressEvent(QMouseEvent * event);
-    //virtual void mouseReleaseEvent(QMouseEvent *event);
+    /*void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent * event);
+    void mouseReleaseEvent(QMouseEvent *event);*/
 
 signals:
     void downloadProgress(qint64 recieved, qint64 total);
@@ -75,6 +75,7 @@ public slots:
     void widgetSizeMax(int w,int h);
     void widgetSizeMin(int w,int h);
     void widgetSize(int w,int h);
+    void widgetNoTaskbar();
     void getToggleFullScreen();
     void getFullScreen(bool screen);
     void showMaximized();

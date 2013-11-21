@@ -179,6 +179,10 @@ void ign::widgetNoFrame(){
     this->web.setWindowFlags(Qt::FramelessWindowHint);
 }
 
+void ign::widgetNoTaskbar(){
+    this->web.setWindowFlags(this->web.windowFlags() | Qt::Tool);
+}
+
 void ign::widgetTransparent(){
     QPalette pal = this->web.palette();
     pal.setBrush(QPalette::Base, Qt::transparent);
@@ -276,6 +280,9 @@ void ign::config(QString path){
         if(window["noframe"].toBool()){
             this->widgetNoFrame();
         }
+        if(window["notaskbar"].toBool()){
+            this->widgetNoTaskbar();
+        }
         if(window["fullscreen"].toBool()){
             this->getToggleFullScreen();
         }
@@ -360,3 +367,5 @@ QObject *ign::filesystem(){
 QString ign::sdkVersion(){
     return this->version;
 }
+
+//mouse move experiment

@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
 Version:1.1.2
-Release:alpha1
+Release:beta
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
@@ -168,6 +168,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/man/man1/ignsdk.man.1.gz
 
 %changelog
+* Thu Nov 21 2013 ibnu yahya <linux@toroo.org>
+- REMOVE Bootstrap
 * Mon Nov 11 2013 ibnu yahya <linux@toroo.org>
 - ADD Manual Page
 * Sun Nov 10 2013 ibnu yahya <linux@toroo.org>

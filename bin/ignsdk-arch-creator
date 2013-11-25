@@ -26,8 +26,3 @@ $(date +"%a, %d %b %Y %T %z")
 
 EOF
 
-if [ -d $HOME_APP/Archbuild ]; then
-	sleep 0
-else
-	mkdir -p $HOME_APP/ArchBuild
-fi

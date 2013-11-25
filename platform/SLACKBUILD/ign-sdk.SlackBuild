@@ -51,18 +51,16 @@ cd $TMP
 
 rm -rf $PRGNAM
 git clone https://github.com/anak10thn/ignsdk-qt.git $PRGNAM
+cd $PRGNAM
 
-#Check For version release
-VERSION=""
-if  [ $VERSION =="" ]
-then
-	cd $PRGNAM
-	VERSION="v1.1.2"
-elif
-	cd $PRGNAM
+VERSION="ready"
+if [ -z $VERSION ] 
+then 
 	VERSION=`git tag | sort -n | tail -1`
 	git branch slack-$VERSION $VERSION
 	git checkout slack-$VERSION
+else
+	VERSION="v.1.1.2"
 fi
 
 chown -R root:root .
@@ -72,18 +70,32 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
-
+klise(){
 if [ -d /opt/Qt5.1.1/5.1.1/gcc_64/ ]
 then
 /opt/Qt5.1.1/5.1.1/gcc_64/bin/qmake
 elif [ -d /opt/Qt5.1.1/5.1.1/gcc/ ]
 then
-/opt/Qt5.1.1/5.1.1/gcc/bin/qmake
+/opt/Qt5.1.1/5.1.1/gcc/bin/qmake	
 else
 qmake
 fi
+}
 
+klise
 pros=`cat /proc/cpuinfo | grep processor | wc -l`
+
+if [ -f /usr/bin/clang++ ]
+then
+sed -i 's/g++/clang++/g' Makefile
+sed -i 's/gcc/clang++/g' Makefile  
+sed -i 's/clang++_64/gcc_64/g' Makefile
+sed -i 's/qatomic_clang++.h/qatomic_gcc.h/g' Makefile
+else
+klise
+fi
+
+
 make -j$pros
 
 
@@ -110,7 +122,7 @@ cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
 cp -rf bin/ignsdk-app-builder  $PKG/usr/bin/
 cp -rf bin/ignsdk-slack-creator  $PKG/usr/share/ign-sdk/bin/
 cp -rf bin/ignsdk-slack-builder $PKG/usr/share/ign-sdk/bin/
-cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
+cp -rf menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 
 mkdir -p $PKG/install

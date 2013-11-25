@@ -1,11 +1,12 @@
 #!/bin/sh
 
-# Slackware build script for ignSDK
-# 
+# Slackware build script for IGNSDK
 # Copyright 2013-2014 Dwiyan Galuh W <wajatmaka@gmail.com>
 # All rights reserved.
+
 #Author##
 #Eka Tresna Irawan/Ibnu Yahya (anak10thn@gmail.com)
+
 #SLACKBUILD##
 #Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
 
@@ -50,10 +51,19 @@ cd $TMP
 
 rm -rf $PRGNAM
 git clone https://github.com/anak10thn/ignsdk-qt.git $PRGNAM
-cd $PRGNAM
-VERSION=`git tag | sort -n | tail -1`
-git branch slack-$VERSION $VERSION
-git checkout slack-$VERSION
+
+#Check For version release
+VERSION=""
+if  [ $VERSION =="" ]
+then
+	cd $PRGNAM
+	VERSION="v1.1.2"
+elif
+	cd $PRGNAM
+	VERSION=`git tag | sort -n | tail -1`
+	git branch slack-$VERSION $VERSION
+	git checkout slack-$VERSION
+fi
 
 chown -R root:root .
 find . \
@@ -80,7 +90,6 @@ make -j$pros
 mkdir -p $PKG/usr/share/ign-sdk/test
 mkdir -p $PKG/usr/bin/
 mkdir -p $PKG/usr/share/applications/
-mkdir -p $PKG/usr/sbin/
 mkdir -p $PKG/etc/
 mkdir -p $PKG/usr/share/ign-sdk/bin/
 mkdir -p $PKG/usr/share/ign-sdk/template/
@@ -107,14 +116,11 @@ cp -rf  menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cp -rf $CWD/copyright $PKG/usr/share/ign-sdk/
-gunzip doc/ignsdk.man.1.gz
-gzip -9 doc/ignsdk.man.1
 cp doc/ignsdk.man.1.gz  $PKG/usr/share/man/man1
-cp doc/ignsdk.man.1.gz  $PKG/usr/share/man/
 
 
-if [ -d $PKG/usr/man ]; then
-  ( cd $PKG/usr/man
+if [ -d $PKG/usr/man/man1 ]; then
+  ( cd $PKG/usr/man/man1
   find . -type f -exec gzip -9 {} \;
   for i in $(find . -type l) ; do ln -s $(readlink $i).gz $i.gz ; rm $i ; done
   ) 

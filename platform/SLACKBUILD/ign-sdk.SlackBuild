@@ -126,7 +126,6 @@ cp ignsdk $PKG/usr/bin/
 cp -rf css $PKG/usr/share/ign-sdk/
 cp -rf js $PKG/usr/share/ign-sdk/
 cp -rf test/*  $PKG/usr/share/ign-sdk/test/
-rm -rf $PKG/usr/share/ign-sdk/test/kuma.ign
 #cp -rf img/ $PKG/usr/share/ign-sdk/
 cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
 chmod +x bin/*

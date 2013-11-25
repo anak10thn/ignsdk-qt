@@ -60,7 +60,8 @@ then
 	git branch slack-$VERSION $VERSION
 	git checkout slack-$VERSION
 else
-	VERSION="v.1.1.2"
+	VERSION="v.1.1.2-test"
+	git branch slack-$VERSION
 	git checkout slack-$VERSION
 fi
 
@@ -77,28 +78,40 @@ then
 /opt/Qt5.1.1/5.1.1/gcc_64/bin/qmake
 elif [ -d /opt/Qt5.1.1/5.1.1/gcc/ ]
 then
-/opt/Qt5.1.1/5.1.1/gcc/bin/qmake	
+/opt/Qt5.1.1/5.1.1/gcc/bin/qmake        
 else
 qmake
 fi
 }
 
-klise
+cat <<EOF
+Compiler :
+1. GCC
+2. LLVM
+EOF
+
+read -p "Choose Compiler: " ocompile
+
+
 pros=`cat /proc/cpuinfo | grep processor | wc -l`
 
-if [ -f /usr/bin/clang++ ]
+if [ ocompile!=1 ]
 then
-sed -i 's/g++/clang++/g' Makefile
-sed -i 's/gcc/clang++/g' Makefile  
-sed -i 's/clang++_64/gcc_64/g' Makefile
-sed -i 's/qatomic_clang++.h/qatomic_gcc.h/g' Makefile
+	klise
 else
-klise
+	klise
+	if [ -f /usr/bin/clang++ ]
+	then
+	sed -i 's/g++/clang++/g' Makefile
+	sed -i 's/gcc/clang++/g' Makefile  
+	sed -i 's/clang++_64/gcc_64/g' Makefile
+	sed -i 's/qatomic_clang++.h/qatomic_gcc.h/g' Makefile
+	else
+	klise
+	fi
 fi
 
-
 make -j$pros
-
 
 mkdir -p $PKG/usr/share/ign-sdk/test
 mkdir -p $PKG/usr/bin/
@@ -107,6 +120,7 @@ mkdir -p $PKG/etc/
 mkdir -p $PKG/usr/share/ign-sdk/bin/
 mkdir -p $PKG/usr/share/ign-sdk/template/
 mkdir -p $PKG/usr/share/man/man1/
+mkdir -p $PKG/usr/share/ign-sdk/img/
 
 touch  $PKG/etc/ignsdk-dist
 echo "slack" > $PKG/etc/ignsdk-dist
@@ -116,7 +130,7 @@ cp -rf css $PKG/usr/share/ign-sdk/
 cp -rf js $PKG/usr/share/ign-sdk/
 cp -rf test/*  $PKG/usr/share/ign-sdk/test/
 rm -rf $PKG/usr/share/ign-sdk/test/kuma.ign
-cp -rf img $PKG/usr/share/ign-sdk/
+#cp -rf img/ $PKG/usr/share/ign-sdk/
 cp -rf LICENSE.BSD $PKG/usr/share/ign-sdk/
 chmod +x bin/*
 cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/

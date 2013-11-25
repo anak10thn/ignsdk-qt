@@ -60,7 +60,7 @@ then
 	git branch slack-$VERSION $VERSION
 	git checkout slack-$VERSION
 else
-	VERSION="v.1.1.2-test"
+	VERSION="v.1.1.2beta"
 	git branch slack-$VERSION
 	git checkout slack-$VERSION
 fi
@@ -94,12 +94,9 @@ read -p "Choose Compiler: " ocompile
 
 
 pros=`cat /proc/cpuinfo | grep processor | wc -l`
-
-if [ ocompile!=1 ]
+klise
+if [ ocompile==2 ]
 then
-	klise
-else
-	klise
 	if [ -f /usr/bin/clang++ ]
 	then
 	sed -i 's/g++/clang++/g' Makefile

@@ -85,6 +85,7 @@ fi
 }
 pros=`cat /proc/cpuinfo | grep processor | wc -l`
 
+
 echo Your Core Processor is $pros, Use Compilation speed between 1-$pros
 read -p "Compilation Speed : " ospeed
 
@@ -148,7 +149,7 @@ cp -rf menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
 cp -rf $CWD/copyright $PKG/usr/share/ign-sdk/
-cp doc/ignsdk.man.1.gz  $PKG/usr/share/man/man1
+cp doc/*  $PKG/usr/share/man/man1
 
 
 if [ -d $PKG/usr/man/man1 ]; then

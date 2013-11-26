@@ -53,7 +53,7 @@ rm -rf $PRGNAM
 git clone https://github.com/anak10thn/ignsdk-qt.git $PRGNAM
 cd $PRGNAM
 
-VERSION="ready"
+VERSION=""
 if [ -z $VERSION ] 
 then 
 	VERSION=`git tag | sort -n | tail -1`
@@ -83,6 +83,12 @@ else
 qmake
 fi
 }
+pros=`cat /proc/cpuinfo | grep processor | wc -l`
+
+echo Your Core Processor is $pros, Use Compilation speed between 1-$pros
+read -p "Compilation Speed : " ospeed
+
+read -p "Give Your Brand package : " obrand
 
 cat <<EOF
 Compiler :
@@ -92,8 +98,6 @@ EOF
 
 read -p "Choose Compiler: " ocompile
 
-
-pros=`cat /proc/cpuinfo | grep processor | wc -l`
 klise
 if [ ocompile==2 ]
 then
@@ -106,6 +110,11 @@ then
 	else
 	klise
 	fi
+fi
+
+if [ $ospeed>=$pros ]
+then
+pros=2
 fi
 
 make -j$pros
@@ -155,5 +164,9 @@ if [ -d $PKG/usr/info ]; then
 fi
 
 cd $PKG
+if [ -z $obrand ]
+then
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
- 
+else
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$obrand-$BUILD$TAG.${PKGTYPE:-tgz}
+fi

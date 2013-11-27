@@ -4,27 +4,27 @@
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
 pkgname=ign-sdk
-pkgver=1.1.2 #testing alpha
-pkgrel=131212
+pkgver=1.1.2 
+pkgrel=112913
 pkgdesc="IGN Software Development Kit"
 url="https://github.com/anak10thn/ignsdk-qt"
 arch=('x86_64' 'i686')
 license=('BSD')
 depends=('qt5-base' 'qtwebkit' 'qjson' 'mariadb')
 options=('!strip' '!emptydirs')
-source=('ign-sdk::git://github.com/anak10thn/ignsdk-qt.git')
+source=('https://github.com/anak10thn/ignsdk-qt/archive/v1.1.2.tar.gz')
 md5sums=('SKIP')
 _gourl=github.com/anak10thn/ignsdk-qt
 
   
 build() {
-	cd ign-sdk
+	cd ignsdk-qt-1.1.2
 	qmake
 	make
 }
 
 package() {
-  cd ign-sdk
+  cd ignsdk-qt-1.1.2
   mkdir -p $pkgdir/usr/bin/
   mkdir -p $pkgdir/usr/share/ign-sdk
   mkdir -p $pkgdir/usr/share/man/man1

@@ -188,7 +188,7 @@ rm -rf $RPM_BUILD_ROOT
 - FIX trigger action
 - ADD trigger action copy,cut,paste,redo,undo
 
-* Mon Oct 13 2013 ibnu yahya <linux@toroo.org>
+* Sun Oct 13 2013 ibnu yahya <linux@toroo.org>
 - Build nightly
 - Fix spec file dependency
 
@@ -216,7 +216,7 @@ rm -rf $RPM_BUILD_ROOT
 * Mon Jul 29 2013 ibnu yahya <linux@toroo.org>
 - ADD template
 
-* Thu Jul 23 2013 ibnu yahya <linux@toroo.org>
+* Tue Jul 23 2013 ibnu yahya <linux@toroo.org>
 - FIX Api
 - change version build b2
 

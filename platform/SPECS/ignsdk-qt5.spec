@@ -39,20 +39,20 @@ cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 cp -rf bin/ignsdk-app-builder $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-builder $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
+cp -rf doc/ignsdk.man.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
+cp -rf doc/ignsdk-app-builder.man.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
+cp -rf doc/ignsdk-app-creator.man.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
 echo "ign" > $RPM_BUILD_ROOT/etc/ignsdk-dist
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 cp -rf template/main.tpl $RPM_BUILD_ROOT/usr/share/ign-sdk/template
 cp -rf template/app.spec $RPM_BUILD_ROOT/usr/share/ign-sdk/template
-cp LICENSE.BSD $RPM_BUILD_ROOT/usr/share/ign-sdk/
-cp third-party.txt $RPM_BUILD_ROOT/usr/share/ign-sdk/
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
 /usr/bin/ignsdk
-/usr/share/ign-sdk/LICENSE.BSD
-/usr/share/ign-sdk/third-party.txt
 /usr/share/ign-sdk/test/calculator.ign/assets/440-280-tile.png
 /usr/share/ign-sdk/test/calculator.ign/assets/calculator_1280-800.png
 /usr/share/ign-sdk/test/calculator.ign/assets/icon-128x128.png
@@ -154,8 +154,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/test/kuma.ign/index.html
 /usr/share/ign-sdk/test/kuma.ign/main.js
 /usr/share/ign-sdk/test/widget.ign/index.html
-%doc doc/ignsdk.man.1.gz
-%{_mandir}/man1
+%doc LICENSE.BSD third-party.txt README.md
+%doc %{_mandir}/man1/ignsdk.man.1.gz
 
 %files devtools
 %defattr(-,root,root,-)
@@ -166,47 +166,59 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/template/main.tpl
 /usr/share/ign-sdk/template/app.spec
 /etc/ignsdk-dist
-%doc doc/ignsdk-app-builder.man.1.gz doc/ignsdk-app-creator.man.1.gz
-%{_mandir}/man1
+%doc %{_mandir}/man1/ignsdk-app-builder.man.1.gz
+%doc %{_mandir}/man1/ignsdk-app-creator.man.1.gz
 
 %changelog
 * Thu Nov 28 2013 ibnu yahya <linux@toroo.org>
 - UPDATE final version
 - ADD man page app creator and builder
+- ADD doc ignsdk
+
 * Thu Nov 21 2013 ibnu yahya <linux@toroo.org>
 - REMOVE Bootstrap
+
 * Mon Nov 11 2013 ibnu yahya <linux@toroo.org>
 - ADD Manual Page
+
 * Sun Nov 10 2013 ibnu yahya <linux@toroo.org>
 - move cliOut(), exec(), hash() to sys() init
 - Open file dialog if project directory option is null
 - update filesystem() ini API
 - FIX trigger action
 - ADD trigger action copy,cut,paste,redo,undo
+
 * Mon Oct 13 2013 ibnu yahya <linux@toroo.org>
 - Build nightly
 - Fix spec file dependency
+
 * Sat Oct 12 2013 ibnu yahya <linux@toroo.org>
 - Porting ignsdk 1.1.1 to Qt 5
+
 * Wed Sep 25 2013 ibnu yahya <linux@toroo.org>
 - Add SQL API stable 1
 - Release stable minor nightly
+
 * Wed Sep 11 2013 ibnu yahya <linux@toroo.org>
 - Add ignsdk-dist
 - Add test file
 - Add devtools package
 - Add IGNSDK Builder script
+
 * Tue Sep 10 2013 ibnu yahya <linux@toroo.org>
 - Update version to 1.0.9
 - Add ignsdk project builder
+
 * Tue Jul 30 2013 ibnu yahya <linux@toroo.org>
 - ADD dir API
 - Update File API
+
 * Mon Jul 29 2013 ibnu yahya <linux@toroo.org>
 - ADD template
+
 * Thu Jul 23 2013 ibnu yahya <linux@toroo.org>
 - FIX Api
 - change version build b2
-* Sun Mar 22 2013 ibnu yahya <linux@toroo.org>
+
 * Mon Feb 18 2013 ibnu yahya <linux@toroo.org>
 - First Build

@@ -14,6 +14,7 @@ depends=('ignsdk')
 options=('!strip' '!emptydirs')
 md5sums=('SKIP')
 _gourl=github.com/anak10thn/ignsdk-qt
+install='arch-dev-tools.install'
 
 package(){
 	cd ../../src/ignsdk-qt-1.1.2

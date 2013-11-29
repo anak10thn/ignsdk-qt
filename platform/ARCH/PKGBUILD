@@ -4,59 +4,39 @@
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
 pkgname=ign-sdk
-pkgver=
-pkgrel=1
+pkgver=1.1.2 
+pkgrel=112913
 pkgdesc="IGN Software Development Kit"
 url="https://github.com/anak10thn/ignsdk-qt"
 arch=('x86_64' 'i686')
 license=('BSD')
-depends=('qt' 'qtwebkit' 'qjson' 'mariadb')
-makedepends=('qt' 'qtwebkit' 'qjson' 'git' 'mariadb')
+depends=('qt5-base' 'qtwebkit' 'mariadb')
 options=('!strip' '!emptydirs')
-source=('ign-sdk::git://github.com/anak10thn/ignsdk-qt.git')
+source=('https://github.com/anak10thn/ignsdk-qt/archive/v1.1.2.tar.gz')
 md5sums=('SKIP')
 _gourl=github.com/anak10thn/ignsdk-qt
-
-
-pkgver (){
-        cd ign-sdk
-        ${VERSION:-git}
-
-}
+install='ignsdk.install'
   
 build() {
-cd ign-sdk
-qmake
-make
+	cd ignsdk-qt-1.1.2
+	qmake
+	make
 }
+
 package() {
-  cd ign-sdk
+  cd ignsdk-qt-1.1.2
   mkdir -p $pkgdir/usr/bin/
-  mkdir -p $pkgdir/usr/share/ign-sdk/bin/
-  mkdir -p $pkgdir/etc/
+  mkdir -p $pkgdir/usr/share/ign-sdk
   mkdir -p $pkgdir/usr/share/man/man1
   
-  mv ignsdk $pkgdir/usr/bin/
   cp -rf css $pkgdir/usr/share/ign-sdk/
-  cp -rf img $pkgdir/usr/share/ign-sdk/
   cp -rf js $pkgdir/usr/share/ign-sdk/
-  cp -rf LICENSE.BSD $pkgdir/usr/share/ign-sdk/
   cp -rf test $pkgdir/usr/share/ign-sdk/
-  cp -rf template $pkgdir/usr/share/ign-sdk/
-  cp -rf bin/ignsdk-app-creator $pkgdir/usr/bin/
-  cp -rf bin/ignsdk-app-builder $pkgdir/usr/bin/
+    
+  install -Dm 755 ignsdk $pkgdir/usr/bin/
+  install -Dm 644 LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
   
-  cp -rf bin/ignsdk-arch-builder $pkgdir/usr/share/ign-sdk/bin/
-  cp -rf bin/ignsdk-arch-creator $pkgdir/usr/share/ign-sdk/bin/
-  
-  chmod 755 $pkgdir/usr/share/ign-sdk/bin/
-  cp -rf dist $pkgdir/etc/dist/
-  
-  cp -rf doc/ignsdk.man.1.gz $pkgdir/usr/share/man/man1/
-  
-  echo "arch" > $pkgdir/etc/ignsdk-dist
-  
-  mv $pkgdir/usr/share/ign-sdk/LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
+  install -Dm644 doc/ignsdk.man.1.gz $pkgdir/usr/share/man/man1/
   
   rm -rf *.o
 

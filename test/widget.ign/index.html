@@ -11,6 +11,7 @@
     <script>
       ign.setDev(true);
       //ign.WidgetSizeMax(300,450);
+      var sys = ign.sys()
       $(function(){
         $('#req').click(function(){
             //init system module
@@ -21,7 +22,7 @@
       })
     </script>
   </head>
-  <body style='background:transparent;background-color:rgba(0,0,0,0.5)'>
+  <body>
   <h1>Widget</h1><hr>
     <input class="btn btn-primary" type="submit" onclick="ign.showMessage('ibnu yahya')" value="Message Box">
     <input class="btn btn-primary" type="submit" onclick="ign.quit()" value="Close">
@@ -30,7 +31,7 @@
     <input class="btn btn-primary" type="submit" onclick="ign.showMaximized()" value="Maximize window">
     <input class="btn btn-primary" type="submit" onclick="ign.showMinimized()" value="Minimize window">
     <br><br>
-    <input type='text' id='inputval' value='cat /etc/ign-release'>
+    <input type='text' id='inputval' value=''>
     <input class="btn btn-primary" type="submit" id="req" value="cli Output">
     <h1>Output</h1><hr>
     <div id="res"></div>

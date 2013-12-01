@@ -85,10 +85,10 @@ done
 
 echo ""
 
-pushd $project_dir
+pushd $project_dir > /dev/null 2>&1
 
 echo "-> dh_make"
-DEBFULLNAME="$packagers_name" DEBEMAIL="$packagers_mail" dh_make --single --native --copyright $deb_package_license --packagename "$deb_package_name"_"$deb_package_version" --yes
+DEBFULLNAME="$packagers_name" DEBEMAIL="$packagers_mail" dh_make --single --native --copyright $deb_package_license --packagename "$deb_package_name"_"$deb_package_version" --yes > /dev/null 2>&1
 rm debian/*.ex debian/*.EX debian/README.Debian debian/README.source
 
 echo "-> debian/changelog"
@@ -126,4 +126,4 @@ This application is built using IGOS Nusantara Software Development Kit
  -- $packagers_name <$packagers_mail> $(date +"%a, %d %b %Y %T %z")
 EOF
 
-popd
+popd > /dev/null 2>&1

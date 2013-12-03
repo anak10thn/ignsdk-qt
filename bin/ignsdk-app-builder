@@ -12,7 +12,7 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hld:p: --long help,list,dir:,pkgname: -n 'ignsdk-app-builder' -- "$@"`
+TEMP=`getopt -o hld:p:x: --long help,list,dir:,pkgname:,distribution: -n 'ignsdk-app-builder' -- "$@"`
 
 eval set -- "$TEMP"
 
@@ -27,6 +27,7 @@ Options:
 	-p, --pkgname		Project Package name
 	-d, --dir		Project directory
 	-l, --list		List existing project
+	-x, --distribution	Override target distribution (Debian only)
 
 Examples:
 		
@@ -99,6 +100,15 @@ while true; do
 			;;
 		-l | --list )
 			LIST=true
+			shift
+			;;
+		-x | --distribution )
+			if [ ! "$2" == "ign" -a $DISTCHK == "debian" ]; then
+				echo "Invalid/unsupported distribution: $2"
+				exit 1
+			else
+				DIST=$2
+			fi
 			shift
 			;;
 		-- )

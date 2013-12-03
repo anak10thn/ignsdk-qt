@@ -13,7 +13,7 @@ if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hp:gr: --long help,pkgname:,git,remote:,no-packaging -n 'ignsdk-app-creator' -- "$@"`
+TEMP=`getopt -o hp:gr:x: --long help,pkgname:,git,remote:,no-packaging,distribution: -n 'ignsdk-app-creator' -- "$@"`
 
 eval set -- "$TEMP"
 
@@ -29,6 +29,7 @@ Option :
 	-g, --git		Initialize Git repository
 	-r, --remote		Set Git remote URL
 	--no-packaging		Skip packaging process
+	-x, --distribution	Override target distribution (Debian only)
 	-h, --help		Show this help
 
 Example:
@@ -118,6 +119,15 @@ while true; do
 			;;
 		--no-packaging )
 			PACKAGING=false
+			shift
+			;;
+		-x | --distribution )
+			if [ ! "$2" == "ign" -a $DISTCHK == "debian" ]; then
+				echo "Invalid/unsupported distribution: $2"
+				exit 1
+			else
+				DIST=$2
+			fi
 			shift
 			;;
 		-h | --help )

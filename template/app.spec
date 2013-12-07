@@ -24,15 +24,7 @@ BuildArch:noarch
 %setup -q -n %{name}
 
 %install
-install -d -m 755 $RPM_BUILD_ROOT/opt/ignsdk/%{name}
-install -d -m 755 $RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons
-install -d -m 755 $RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin
-install -d -m 755 $RPM_BUILD_ROOT/usr/share/applications
-cp -rf ignsdk.json $RPM_BUILD_ROOT/opt/ignsdk/%{name}
-cp -rf index.html $RPM_BUILD_ROOT/opt/ignsdk/%{name}
-cp -rf bin $RPM_BUILD_ROOT/opt/ignsdk/%{name}
-cp -rf icons/* $RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons
-cp -rf menu/* $RPM_BUILD_ROOT/usr/share/applications
+%include %{buildsubdir}/rpm/install_list.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT

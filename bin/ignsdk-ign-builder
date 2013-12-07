@@ -4,6 +4,10 @@ DIR=$1
 PKG=`echo $1 | sed "s|$HOME/IGNSDK-APP/||"`
 echo $PKG
 echo $DIR
+INSTALL_LIST="install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}\n\
+install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons\n\
+install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin\n\
+install -d -m 744 \$RPM_BUILD_ROOT/usr/share/applications"
 
 help ()
 {
@@ -27,7 +31,32 @@ EOF
 exit 0
 }
 
-if [ -d $HOME/rpmbuild/SOURCES ];then
+_toBeInstalled ()
+{
+	case $1 in
+		"menu/" )
+			INSTALL_LIST="$INSTALL_LIST\ninstall -m 644 menu/ignsdk-*.desktop \$RPM_BUILD_ROOT/usr/share/applications/"
+			;;
+		"icons/" )
+			if [ ! "$(ls icons/)" == ""]; then
+				INSTALL_LIST="$INSTALL_LIST\ncp -rf icons/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons/"
+			fi
+			;;
+		"bin/" )
+			if [ ! "$(ls bin/)" == "" ]; then
+				INSTALL_LIST="$INSTALL_LIST\ncp -rf bin/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin/"
+			fi
+			;;
+		"rpm/" )
+			DO_NOTHING=true
+			;;
+		* )
+			INSTALL_LIST="$INSTALL_LIST\ncp -rf '$1' \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/"
+			;;
+	esac
+}
+
+if [ -d $HOME/rpmbuild/SOURCES ]; then
 	SOURCE="$HOME/rpmbuild/SOURCES"
 else
 	mkdir -p $HOME/rpmbuild/SOURCES
@@ -36,7 +65,12 @@ fi
 
 if [ -d $DIR ];then
 	cd $APP
-	tar cvfz $SOURCE/$PKG.tar.gz $PKG
+	for file in $(ls $PKG --file-type -xU )
+	do
+		_toBeInstalled $file
+	done
+	echo -e $INSTALL_LIST > $DIR/rpm/install_list.txt
+	tar cfz $SOURCE/$PKG.tar.gz $PKG
 	rpmbuild -ba $DIR/rpm/app.spec
 	echo ""
 	echo "Done! PATH : $HOME/rpmbuild/RPMS/noarch/"

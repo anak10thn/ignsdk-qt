@@ -7,12 +7,13 @@ HELP=false
 DISTCHK=`cat /etc/ignsdk-dist`
 APPNAME=""
 GIT=false
+PACKAGING=true
 
 if [ ! -d $DESTDIR ];then
 	mkdir $DESTDIR
 fi
 
-TEMP=`getopt -o hp:gr: --long help,pkgname:,git,remote: -n 'ignsdk-app-creator' -- "$@"`
+TEMP=`getopt -o hp:gr:x: --long help,pkgname:,git,remote:,no-packaging,distribution: -n 'ignsdk-app-creator' -- "$@"`
 
 eval set -- "$TEMP"
 
@@ -27,6 +28,8 @@ Option :
 	-p, --pkgname		Package name
 	-g, --git		Initialize Git repository
 	-r, --remote		Set Git remote URL
+	--no-packaging		Skip packaging process
+	-x, --distribution	Override target distribution (Debian only)
 	-h, --help		Show this help
 
 Example:
@@ -112,6 +115,19 @@ while true; do
 			;;
 		-r | --remote )
 			GIT_REMOTE=$2
+			shift
+			;;
+		--no-packaging )
+			PACKAGING=false
+			shift
+			;;
+		-x | --distribution )
+			if [ ! "$2" == "ign" -a $DISTCHK == "debian" ]; then
+				echo "Invalid/unsupported distribution: $2"
+				exit 1
+			else
+				DIST=$2
+			fi
 			shift
 			;;
 		-h | --help )
@@ -205,7 +221,9 @@ EOF
 		sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 		sed -i -e "s/\[category\]/$MENU/g" $BUILDDEST/menu/ignsdk-$PROJECT.desktop
 		sed -i -e "s/\[appname\]/$APPNAME/g" $BUILDDEST/ignsdk.json
-		create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU" $PROJECT
+		if [ "$PACKAGING" == "true" ]; then
+			create_project $PKGNAME $BUILDDEST "$APPNAME" "$MENU" $PROJECT
+		fi
 		if [ "$GIT" == "true" ]; then
 			commit_git
 		fi

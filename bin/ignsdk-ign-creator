@@ -15,31 +15,31 @@ echo "|----------------------------------------------|"
 echo "|          IGNSDK spec file generator          |"
 echo "|----------------------------------------------|"
 
-read -p "Version [default=1.0] :" VERSION
+read -p "Version [1.0]: " VERSION
 if [ ! $VERSION ]
 then
 	VERSION="1.0"
 fi
 
-read -p "Release [default=1] :" RELEASE
+read -p "Release [1]: " RELEASE
 if [ ! $RELEASE ]
 then
 	RELEASE="1"
 fi
 
-read -p "License [MIT/BSD/GPL2/GPL3/etc, default=MIT] :" LICENSE
+read -p "License [MIT/BSD/GPL2/GPL3/etc, default=MIT]: " LICENSE
 if [ ! $LICENSE ]
 then
 	LICENSE="MIT"
 fi
 
-read -p "URL [example:ignsdk.web.id] :" URL
+read -p "URL [example.com]: " URL
 if [ ! $URL ]
 then
-	URL="ignsdk.web.id"
+	URL="example.com"
 fi
 
-read -p "Description application :" DESC
+read -p "Description: " DESC
 
 if [ -z "$DESC" ]
 then

@@ -4,6 +4,10 @@ DIR=$1
 PKG=`echo $1 | sed "s|$HOME/IGNSDK-APP/||"`
 echo $PKG
 echo $DIR
+INSTALL_LIST="install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}\n\
+install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons\n\
+install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin\n\
+install -d -m 744 \$RPM_BUILD_ROOT/usr/share/applications"
 
 help ()
 {
@@ -27,7 +31,45 @@ EOF
 exit 0
 }
 
-if [ -d $HOME/rpmbuild/SOURCES ];then
+_toBeInstalled ()
+{
+	case $1 in
+		"menu" )
+			_mustBeADirectory "$DIR/$1"
+			INSTALL_LIST="$INSTALL_LIST\ninstall -m 644 menu/ignsdk-*.desktop \$RPM_BUILD_ROOT/usr/share/applications/"
+			;;
+		"icons" )
+			_mustBeADirectory "$DIR/$1"
+			if [ ! "$(ls $DIR/icons/)" == "" ]; then
+				INSTALL_LIST="$INSTALL_LIST\ncp -rf icons/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons/"
+			fi
+			;;
+		"bin" )
+			_mustBeADirectory "$DIR/$1"
+			if [ ! "$(ls $DIR/bin/)" == "" ]; then
+				INSTALL_LIST="$INSTALL_LIST\ncp -rf bin/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin/"
+			fi
+			;;
+		"rpm" )
+			_mustBeADirectory "$DIR/$1"
+			DO_NOTHING=true
+			;;
+		* )
+			INSTALL_LIST="$INSTALL_LIST\ncp -rf '$1' \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/"
+			;;
+	esac
+}
+
+_mustBeADirectory ()
+{
+	if [ ! -d "$1" ]
+	then
+		echo "ERROR: $1 must be a directory!"
+		exit 1
+	fi
+}
+
+if [ -d $HOME/rpmbuild/SOURCES ]; then
 	SOURCE="$HOME/rpmbuild/SOURCES"
 else
 	mkdir -p $HOME/rpmbuild/SOURCES
@@ -36,7 +78,13 @@ fi
 
 if [ -d $DIR ];then
 	cd $APP
-	tar cvfz $SOURCE/$PKG.tar.gz $PKG
+	for file in $PKG/*
+	do
+		file=$(echo $file | sed "s/$PKG\///")
+		_toBeInstalled "$file"
+	done
+	echo -e $INSTALL_LIST > $DIR/rpm/install_list.txt
+	tar cfz $SOURCE/$PKG.tar.gz $PKG
 	rpmbuild -ba $DIR/rpm/app.spec
 	echo ""
 	echo "Done! PATH : $HOME/rpmbuild/RPMS/noarch/"

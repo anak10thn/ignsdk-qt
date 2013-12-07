@@ -4,10 +4,10 @@ DIR=$1
 PKG=`echo $1 | sed "s|$HOME/IGNSDK-APP/||"`
 echo $PKG
 echo $DIR
-INSTALL_LIST="install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}\n\
-install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons\n\
-install -d -m 744 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin\n\
-install -d -m 744 \$RPM_BUILD_ROOT/usr/share/applications"
+INSTALL_LIST="install -d -m 755 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}\n\
+install -d -m 755 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons\n\
+install -d -m 755 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin\n\
+install -d -m 755 \$RPM_BUILD_ROOT/usr/share/applications"
 
 help ()
 {

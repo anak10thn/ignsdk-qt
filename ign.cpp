@@ -61,7 +61,7 @@ void ign::render(QString w){
     PWD = getenv ("PWD");
     pwd.append(PWD);
     QStringList url_exp = w.split("/");
-    if(url_exp.at(0) == "http:"){
+    if(url_exp.at(0) == "http:" || url_exp.at(0) == "https:"){
         url_fix = w;
     }
     else if(url_exp.at(0) == ".."){

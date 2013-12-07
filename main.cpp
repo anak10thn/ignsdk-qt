@@ -126,8 +126,8 @@ int main(int argc, char *argv[])
         if (result)
         {
             directory = fd->selectedFiles()[0];
-            w.render(directory+"/index.html");
             w.config(directory);
+            w.render(directory+"/index.html");
             w.show();
         }
         else {

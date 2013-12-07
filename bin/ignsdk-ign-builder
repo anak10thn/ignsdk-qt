@@ -35,25 +35,38 @@ _toBeInstalled ()
 {
 	case $1 in
 		"menu" )
+			_mustBeADirectory "$DIR/$1"
 			INSTALL_LIST="$INSTALL_LIST\ninstall -m 644 menu/ignsdk-*.desktop \$RPM_BUILD_ROOT/usr/share/applications/"
 			;;
 		"icons" )
+			_mustBeADirectory "$DIR/$1"
 			if [ ! "$(ls icons/)" == ""]; then
 				INSTALL_LIST="$INSTALL_LIST\ncp -rf icons/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons/"
 			fi
 			;;
 		"bin" )
+			_mustBeADirectory "$DIR/$1"
 			if [ ! "$(ls bin/)" == "" ]; then
 				INSTALL_LIST="$INSTALL_LIST\ncp -rf bin/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin/"
 			fi
 			;;
 		"rpm" )
+			_mustBeADirectory "$DIR/$1"
 			DO_NOTHING=true
 			;;
 		* )
 			INSTALL_LIST="$INSTALL_LIST\ncp -rf '$1' \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/"
 			;;
 	esac
+}
+
+_mustBeADirectory ()
+{
+	if [ ! -d "$1" ]
+	then
+		echo "ERROR: $1 must be a directory!"
+		exit 1
+	fi
 }
 
 if [ -d $HOME/rpmbuild/SOURCES ]; then

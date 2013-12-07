@@ -34,20 +34,20 @@ exit 0
 _toBeInstalled ()
 {
 	case $1 in
-		"menu/" )
+		"menu" )
 			INSTALL_LIST="$INSTALL_LIST\ninstall -m 644 menu/ignsdk-*.desktop \$RPM_BUILD_ROOT/usr/share/applications/"
 			;;
-		"icons/" )
+		"icons" )
 			if [ ! "$(ls icons/)" == ""]; then
 				INSTALL_LIST="$INSTALL_LIST\ncp -rf icons/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons/"
 			fi
 			;;
-		"bin/" )
+		"bin" )
 			if [ ! "$(ls bin/)" == "" ]; then
 				INSTALL_LIST="$INSTALL_LIST\ncp -rf bin/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin/"
 			fi
 			;;
-		"rpm/" )
+		"rpm" )
 			DO_NOTHING=true
 			;;
 		* )
@@ -65,9 +65,10 @@ fi
 
 if [ -d $DIR ];then
 	cd $APP
-	for file in $(ls $PKG --file-type -xU )
+	for file in $PKG/*
 	do
-		_toBeInstalled $file
+		file=$(echo $file | sed "s/$PKG\///")
+		_toBeInstalled "$file"
 	done
 	echo -e $INSTALL_LIST > $DIR/rpm/install_list.txt
 	tar cfz $SOURCE/$PKG.tar.gz $PKG

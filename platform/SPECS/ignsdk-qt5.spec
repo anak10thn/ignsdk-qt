@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.1.2
-Release:11282013
+Version:1.1.3
+Release:12082013
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
@@ -170,6 +170,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.man.1.gz
 
 %changelog
+* Sun Dec 08 2013 ibnu yahya <linux@toroo.org>
+- UPDATE version to 1.1.3
+- UPDATE ignsdk app creator and builder
+
 * Thu Nov 28 2013 ibnu yahya <linux@toroo.org>
 - UPDATE final version
 - ADD man page app creator and builder

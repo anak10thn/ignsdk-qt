@@ -13,7 +13,7 @@ ign::ign(QObject *parent)
     m_ignsystem(0),
     m_filesystem(0)
 {
-    this->version = "1.1.2";
+    this->version = "1.1.3";
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     //this->filesystem = new fs;

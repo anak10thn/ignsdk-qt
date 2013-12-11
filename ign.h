@@ -50,6 +50,7 @@ signals:
 public slots:
     //main slot
     void ignJS();
+    void setUrl(const QString& url);
     //ign message
     void showMessage(const QString& msg);
     //ign developer mode

@@ -76,6 +76,10 @@ void ign::render(QString w){
     this->web.load(url_fix);
 }
 
+void ign::setUrl(const QString &url){
+    this->web.setUrl(QUrl(url));
+}
+
 void ign::show(){
     this->web.show();
 }

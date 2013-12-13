@@ -32,6 +32,7 @@ public slots:
     bool isReadable(const QString &path);
     bool isWritable(const QString &path);
     bool isLink(const QString &path);
+    bool copy(const QString &src, const QString &des);
 };
 
 #endif // FS_H

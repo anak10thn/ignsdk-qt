@@ -103,3 +103,10 @@ bool fs::isWritable(const QString &path)
 {
    return QFileInfo(path).isWritable();
 }
+
+bool fs::copy(const QString &src, const QString &des){
+    if(QFile::exists(des)){
+        QFile::remove(des);
+    }
+    return QFile::copy(src,des);
+}

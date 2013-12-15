@@ -3,7 +3,7 @@
 #PKGBUILD
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
-pkgname=ign-sdk
+pkgname=ignsdk
 pkgver=1.1.2 
 pkgrel=112913
 pkgdesc="IGN Software Development Kit"
@@ -16,7 +16,22 @@ source=('https://github.com/anak10thn/ignsdk-qt/archive/v1.1.2.tar.gz')
 md5sums=('SKIP')
 _gourl=github.com/anak10thn/ignsdk-qt
 install='ignsdk.install'
-  
+
+prepare(){
+	echo -e "press [y] if you want to install the package ign-sdk-dev-tools package download now \n"
+	echo -e "press any key to next step"
+	read -p 'choose your select : ' select
+	if [ $select == 'y' ]
+		then
+			mkdir /tmp/ignsdk-dev/
+			wget -P /tmp/ignsdk-dev/ http://arch.ignsdk.web.id/archlinux/i686/arch-dev-tools/PKGBUILD
+			wget -P /tmp/ignsdk-dev/ http://arch.ignsdk.web.id/archlinux/i686/arch-dev-tools/arch-dev-tools.install
+			echo -e "Download Success\n"
+			echo -e "Next Process.."
+		else 
+			echo -e "process completed without equipment ignsdk-dev-tools\n"
+	fi
+} 
 build() {
 	cd ignsdk-qt-1.1.2
 	qmake

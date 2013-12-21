@@ -18,9 +18,45 @@ read -p 'Enter package version [1.0]: ' deb_package_version
 if [ "$deb_package_version" == "" ]; then deb_package_version="1.0"; fi
 read -p 'Enter release ['$lsb_release']: ' release
 if [ "$release" == "" ]; then release="$lsb_release"; fi
+cat <<EOF
+License:
+1. GNU GPL
+2. GNU GPL version 2
+3. GNU GPL version 3
+4. GNU Lesser GPL
+5. GNU Lesser GPL version 2
+6. GNU Lesser GPL version 3
+7. Apache
+8. BSD
+9. MIT
+EOF
+read -p 'Choose [3]: ' LCSE
+echo ''
 read -p 'Enter your name: ' packagers_name
 read -p 'Enter your email: ' packagers_mail
 
+case "$LCSE" in
+	"1" ) deb_package_license="gpl"
+	shift 2 ;;
+	"2" ) deb_package_license="gpl2"
+	shift 2 ;;
+	"3" ) deb_package_license="gpl3"
+	shift 2 ;;
+	"4" ) deb_package_license="lgpl"
+	shift 2 ;;
+	"5" ) deb_package_license="lgpl2"
+	shift 2 ;;
+	"6" ) deb_package_license="lgpl3"
+	shift 2 ;;
+	"7" ) deb_package_license="artistic"
+	shift 2 ;;
+	"8" ) deb_package_license="bsd"
+	shift 2 ;;
+	"9" ) deb_package_license="mit"
+	shift 2 ;;
+	* ) deb_package_license="gpl3"
+	shift 2 ;;
+esac
 
 if [ -d $project_dir/debian ]; then echo "Error: debian/ directory is already exist!"; exit 1; fi
 
@@ -52,8 +88,7 @@ echo ""
 pushd $project_dir > /dev/null 2>&1
 
 echo "-> dh_make"
-echo "   License is set to GPLv3 (default). You can change it in debian/copyright."
-DEBFULLNAME="$packagers_name" DEBEMAIL="$packagers_mail" dh_make --single --native --copyright gpl3 --packagename "$deb_package_name"_"$deb_package_version" --yes > /dev/null 2>&1
+DEBFULLNAME="$packagers_name" DEBEMAIL="$packagers_mail" dh_make --single --native --copyright $deb_package_license --packagename "$deb_package_name"_"$deb_package_version" --yes > /dev/null 2>&1
 rm debian/*.ex debian/*.EX debian/README.Debian debian/README.source
 
 echo "-> debian/changelog"

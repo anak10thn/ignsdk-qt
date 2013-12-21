@@ -1,3 +1,15 @@
+ignsdk-debian (1.1.3.2) testing; urgency=low
+
+  * Update IGNSDK App Creator and Builder for IGN 
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 10 Dec 2013 08:30:54 +0700
+
+ignsdk-debian (1.1.3.1) testing; urgency=low
+
+  * IGNSDK App Creator and Builder now supports RPM packaging
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 05 Dec 2013 22:27:52 +0700
+
 ignsdk-debian (1.1.2.4) testing; urgency=low
 
   * css/ign.css: delete unnecessary styles

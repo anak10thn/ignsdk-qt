@@ -75,7 +75,7 @@ find . \
 klise(){
 if [ -d /opt/Qt5.2.0/5.2.0/gcc_64/ ]
 then
-/opt/Qt5.2.1/5.1.1/gcc_64/bin/qmake
+/opt/Qt5.2.0/5.2.0/gcc_64/bin/qmake
 elif [ -d /opt/Qt5.2.0/5.2.0/gcc/ ]
 then
 /opt/Qt5.2.0/5.2.0/gcc/bin/qmake        

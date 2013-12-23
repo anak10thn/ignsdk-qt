@@ -36,7 +36,7 @@ package() {
   install -Dm 755 ignsdk $pkgdir/usr/bin/
   install -Dm 644 LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
   
-  install -Dm644 doc/ignsdk.man.1.gz $pkgdir/usr/share/man/man1/
+  install -Dm644 doc/ignsdk.1.gz $pkgdir/usr/share/man/man1/
   
   rm -rf *.o
 

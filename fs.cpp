@@ -123,3 +123,20 @@ QString fs::openFileDialog(){
         return false;
     }
 }
+
+QString fs::openDirDialog(){
+    QFileDialog *fd = new QFileDialog;
+    QTreeView *tree = fd->findChild <QTreeView*>();
+    tree->setRootIsDecorated(true);
+    tree->setItemsExpandable(true);
+    fd->setFileMode(QFileDialog::Directory);
+    fd->setOption(QFileDialog::ShowDirsOnly);
+    fd->setViewMode(QFileDialog::Detail);
+    int result = fd->exec();
+    QString directory;
+    if (result)
+    {
+        directory = fd->selectedFiles()[0];
+        return directory;
+    }
+}

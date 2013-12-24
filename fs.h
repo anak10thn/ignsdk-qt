@@ -8,6 +8,8 @@
 #include <QDir>
 #include <QFile>
 #include <QTextStream>
+#include <QFileDialog>
+#include <QTreeView>
 class fs : public QObject
 {
     Q_OBJECT
@@ -34,6 +36,7 @@ public slots:
     bool isLink(const QString &path);
     bool copy(const QString &src, const QString &des);
     QString openFileDialog();
+    QString openDirDialog();
 };
 
 #endif // FS_H

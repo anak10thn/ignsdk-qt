@@ -33,6 +33,7 @@ public slots:
     bool isWritable(const QString &path);
     bool isLink(const QString &path);
     bool copy(const QString &src, const QString &des);
+    QString openFileDialog();
 };
 
 #endif // FS_H

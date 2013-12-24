@@ -110,3 +110,16 @@ bool fs::copy(const QString &src, const QString &des){
     }
     return QFile::copy(src,des);
 }
+
+QString fs::openFileDialog(){
+    QFileDialog *fd = new QFileDialog;
+    int result = fd->exec();
+    if (result)
+    {
+        QString directory = fd->selectedFiles()[0];
+        return directory;
+    }
+    else {
+        return false;
+    }
+}

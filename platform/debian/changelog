@@ -1,3 +1,11 @@
+ignsdk-debian (1.1.3.3) testing; urgency=medium
+
+  * New API: ign.fs.copy()
+  * New API: ign.fs.openFileDialog()
+  * New API: ign.fs.openDirDialog()
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 24 Dec 2013 08:33:35 +0700
+
 ignsdk-debian (1.1.3.2) testing; urgency=low
 
   * Update IGNSDK App Creator and Builder for IGN 

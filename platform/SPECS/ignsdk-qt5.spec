@@ -39,9 +39,9 @@ cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 cp -rf bin/ignsdk-app-builder $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-builder $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
-cp -rf doc/ignsdk.man.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
-cp -rf doc/ignsdk-app-builder.man.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
-cp -rf doc/ignsdk-app-creator.man.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
+cp -rf doc/ignsdk.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
+cp -rf doc/ignsdk-app-builder.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
+cp -rf doc/ignsdk-app-creator.1.gz $RPM_BUILD_ROOT/%{_mandir}/man1
 echo "ign" > $RPM_BUILD_ROOT/etc/ignsdk-dist
 cp -rf test/* $RPM_BUILD_ROOT/usr/share/ign-sdk/test
 cp -rf template/main.tpl $RPM_BUILD_ROOT/usr/share/ign-sdk/template
@@ -155,7 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/test/kuma.ign/main.js
 /usr/share/ign-sdk/test/widget.ign/index.html
 %doc LICENSE.BSD third-party.txt README.md
-%doc %{_mandir}/man1/ignsdk.man.1.gz
+%doc %{_mandir}/man1/ignsdk.1.gz
 
 %files devtools
 %defattr(-,root,root,-)
@@ -166,10 +166,14 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/ign-sdk/template/main.tpl
 /usr/share/ign-sdk/template/app.spec
 /etc/ignsdk-dist
-%doc %{_mandir}/man1/ignsdk-app-builder.man.1.gz
-%doc %{_mandir}/man1/ignsdk-app-creator.man.1.gz
+%doc %{_mandir}/man1/ignsdk-app-builder.1.gz
+%doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
+* Sun Dec 29 2013 ibnu yahya <linux@toroo.org>
+- ADD: new filesystem API
+- FIX: MAN page
+
 * Sun Dec 08 2013 ibnu yahya <linux@toroo.org>
 - UPDATE version to 1.1.3
 - UPDATE ignsdk app creator and builder

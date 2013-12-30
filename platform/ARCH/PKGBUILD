@@ -3,43 +3,28 @@
 #PKGBUILD
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
-pkgname=ignsdk
-pkgver=1.1.2 
-pkgrel=112913
+pkgname=ign-sdk
+pkgver=1.1.3 
+pkgrel=122813
 pkgdesc="IGN Software Development Kit"
 url="https://github.com/anak10thn/ignsdk-qt"
 arch=('x86_64' 'i686')
 license=('BSD')
 depends=('qt5-base' 'qtwebkit' 'mariadb')
 options=('!strip' '!emptydirs')
-source=('https://github.com/anak10thn/ignsdk-qt/archive/v1.1.2.tar.gz')
+source=('https://github.com/anak10thn/ignsdk-qt/archive/v1.1.3.tar.gz')
 md5sums=('SKIP')
 _gourl=github.com/anak10thn/ignsdk-qt
 install='ignsdk.install'
-
-prepare(){
-	echo -e "press [y] if you want to install the package ign-sdk-dev-tools package download now \n"
-	echo -e "press any key to next step"
-	read -p 'choose your select : ' select
-	if [ $select == 'y' ]
-		then
-			mkdir /tmp/ignsdk-dev/
-			wget -P /tmp/ignsdk-dev/ http://arch.ignsdk.web.id/archlinux/i686/arch-dev-tools/PKGBUILD
-			wget -P /tmp/ignsdk-dev/ http://arch.ignsdk.web.id/archlinux/i686/arch-dev-tools/arch-dev-tools.install
-			echo -e "Download Success\n"
-			echo -e "Next Process.."
-		else 
-			echo -e "process completed without equipment ignsdk-dev-tools\n"
-	fi
-} 
+  
 build() {
-	cd ignsdk-qt-1.1.2
+	cd ignsdk-qt-1.1.3
 	qmake
 	make
 }
 
 package() {
-  cd ignsdk-qt-1.1.2
+  cd ignsdk-qt-1.1.3
   mkdir -p $pkgdir/usr/bin/
   mkdir -p $pkgdir/usr/share/ign-sdk
   mkdir -p $pkgdir/usr/share/man/man1
@@ -51,7 +36,7 @@ package() {
   install -Dm 755 ignsdk $pkgdir/usr/bin/
   install -Dm 644 LICENSE.BSD $pkgdir/usr/share/ign-sdk/license
   
-  install -Dm644 doc/ignsdk.man.1.gz $pkgdir/usr/share/man/man1/
+  install -Dm644 doc/ignsdk.1.gz $pkgdir/usr/share/man/man1/
   
   rm -rf *.o
 

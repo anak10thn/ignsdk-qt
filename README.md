@@ -1,6 +1,6 @@
 ##Welcome to IGOS Nusantara SDK Pages##
 ![ignsdk](https://raw.github.com/anak10thn/ignsdk-art/master/logos/ignsdk-rocklovecode.png) 
-IGN SDK is a software development kit designed specifically for application developers in IGOS Nusantara. But now also available for other Linux distros such as Arch Linux, Slackware and Debian. You can write native apps in HTML and Javascript with IGNSDK
+IGN SDK is a software development kit designed specifically for application developers in IGOS Nusantara. But now also available for other Linux distros such as Arch Linux, Slackware, Open SUSE and Debian. You can write native apps in HTML and Javascript with IGNSDK
 
 ##Wiki##
 https://github.com/anak10thn/ignsdk-qt/wiki
@@ -40,16 +40,24 @@ IGN SDK is free software/open source, and is distributed under the BSD license.
 * Github : Omega014
 
 ###IGNSDK For Debian###
+* Maintainer : Surya Handika Putratama (ubunteroz@gmail.com) 
 * Github : https://github.com/ubunteroz/ignsdk-debian
-* Maintainer : Surya Handika Putratama (ubunteroz@gmail.com)
+* Download : http://debian.ignsdk.web.id
 
 ###IGNSDK For Arch Linux###
-* PKGBUILD Script : http://goo.gl/gdkB0
 * Maintainer : Sofyan Saputra a.k.a Iank (meongbego@gmail.com)
+* PKGBUILD Script : http://goo.gl/gdkB0
+* Download : http://arch.ignsdk.web.id
 
 ###IGNSDK For Slackware###
-* Github : https://github.com/wajatmaka/Slackbuild-ignsdk
 * Maintainer : Dwiyan Galuh W a.k.a wajatmaka (wajatmaka@gmail.com)
+* Github : https://github.com/wajatmaka/Slackbuild-ignsdk
+* Download : http://slack.ignsdk.web.id
+
+###IGNSDK For Open SUSE###
+* Maintainer : Andi Sugandi (andisugandi@opensuse.org)
+* Web : http://andi.opensuse-id.org
+* Download : http://blog.ignsdk.web.id/?p=860
 
 ##SCREENSHOT##
 ###WebGL test###

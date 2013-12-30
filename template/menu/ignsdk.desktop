@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=[appname]
+Exec=/usr/bin/ignsdk -p /opt/ignsdk/[package]
+Icon=/opt/ignsdk/[package]/icons/app.png
+Terminal=false
+Type=Application
+Categories=[category]

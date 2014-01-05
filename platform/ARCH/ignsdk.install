@@ -1,25 +1,4 @@
 post_install(){
-	echo -e "if you select the installation ign-sdk-dev-tools do the packaging immediately after the process is completed\n"
-	echo -e "The Packaging process will use root mode if you Agree Press Y\n"
-	echo -e "choose your select [y] to build :"
-	read -p '' select
-	if [ $select == 'y' ]
-		then
-				
-				cd /tmp/ignsdk-dev/
-				makepkg -sf --asroot
-				echo -e "Build Package Sucess\n"		
-				echo -e "making package is over see /tmp/ignsdk-dev/"
-				echo -e "installing package when istalling this software"
-				echo -e "go command :\n"
-				echo -e "sudo pacman -U /tmp/ignsdk-dev/ignsdk-dev-tools-1.1.2-112913-i686.pkg.tar.xz\n"
-				
-		else 
-			rm -rf /tmp/ignsdk-dev/
-			echo -e "Next to make package-dev-tools ignsdk please download here https://aur.archlinux.org/packages/ig/ignsdk-dev-tools/ignsdk-dev-tools.tar.gz\n"
-	fi
-	
-	
 	echo -e "see the following users guides"
 	man -u -a ignsdk
 	echo -e "Thank You For Installations"

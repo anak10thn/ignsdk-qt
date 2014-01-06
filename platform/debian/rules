@@ -10,4 +10,4 @@ override_dh_auto_build:
 override_dh_auto_install:
 	dh_testdir
 	dh_testroot
-	mv ignsdk $$(pwd)/debian/ignsdk-debian/usr/bin/
+	mv ignsdk $$(pwd)/debian/ignsdk/usr/bin/

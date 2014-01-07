@@ -54,7 +54,7 @@ IGN SDK is free software/open source, and is distributed under the BSD license.
 * Github : https://github.com/wajatmaka/Slackbuild-ignsdk
 * Download : http://slack.ignsdk.web.id
 
-###IGNSDK For Open SUSE###
+###IGNSDK For openSUSE###
 * Maintainer : Andi Sugandi (andisugandi@opensuse.org)
 * Web : http://andi.opensuse-id.org
 * Download : http://blog.ignsdk.web.id/?p=860

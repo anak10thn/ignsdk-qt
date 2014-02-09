@@ -265,6 +265,18 @@ void ign::config(QString path){
         if(configure["debug-port"].toInt()){
             this->setDevRemote(configure["debug-port"].toInt());
         }
+        if(configure["set-system-proxy"].toBool()){
+            QNetworkProxyFactory::setUseSystemConfiguration(true);
+        }
+        if(configure["set-http-proxy"].toString() != ""){
+            QString url = configure["set-http-proxy"].toString();
+            QStringList url_proxy = url.split(":");
+            QNetworkProxy proxy;
+            proxy.setType(QNetworkProxy::HttpProxy);
+            proxy.setHostName(url_proxy.at(0));
+            proxy.setPort(url_proxy.at(1).toInt());
+            QNetworkProxy::setApplicationProxy(proxy);
+        }
         if(configure["websecurity"].toBool()){
             this->websecurity(true);
         }

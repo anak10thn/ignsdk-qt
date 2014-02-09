@@ -1,6 +1,6 @@
 #ifndef IGNNETWORK_H
 #define IGNNETWORK_H
-
+#include <QNetworkProxy>
 class ignnetwork
 {
 public:

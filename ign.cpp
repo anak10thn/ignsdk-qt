@@ -312,21 +312,32 @@ void ign::config(QString path){
             QNetworkProxy::setApplicationProxy(proxy);
         }
 
-        /*if(configure["set-http-proxy"].toString() != ""){
-            QString url = configure["set-http-proxy"].toString();
-            QStringList url_proxy = url.split(":");
-            QNetworkProxy proxy;
-            proxy.setType(QNetworkProxy::HttpProxy);
-            proxy.setHostName(url_proxy.at(0));
-            proxy.setPort(url_proxy.at(1).toInt());
-            if(url_proxy.at(2) == ""){
-                proxy.setUser(url_proxy.at(2));
+        if(configure["set-ignsdk-proxy"].toBool()){
+            QFile file("/etc/ignsdk-proxy.conf");
+            QString data_ign_proxy;
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text)){
+                QTextStream out(&file);
+
+                data_ign_proxy = out.readLine();
+
+                file.close();
+
+                qDebug()<< "Enable IGNSDK global proxy setting : " << data_ign_proxy;
+                QStringList url_proxy = data_ign_proxy.split(":");
+                QNetworkProxy proxy;
+                proxy.setType(QNetworkProxy::HttpProxy);
+                proxy.setHostName(url_proxy.at(0));
+                proxy.setPort(url_proxy.at(1).toInt());
+                if(url_proxy.at(2) == ""){
+                    proxy.setUser(url_proxy.at(2));
+                }
+                if(url_proxy.at(3) == ""){
+                    proxy.setPassword(url_proxy.at(3));
+                }
+                QNetworkProxy::setApplicationProxy(proxy);
+
             }
-            if(url_proxy.at(3) == ""){
-                proxy.setPassword(url_proxy.at(3));
-            }
-            QNetworkProxy::setApplicationProxy(proxy);
-        }*/
+        }
 
         if(configure["websecurity"].toBool()){
             this->websecurity(true);

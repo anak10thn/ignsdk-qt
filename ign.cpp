@@ -267,15 +267,67 @@ void ign::config(QString path){
         if(configure["set-system-proxy"].toBool()){
             QNetworkProxyFactory::setUseSystemConfiguration(true);
         }
-        if(configure["set-http-proxy"].toString() != ""){
+        /*proxy set*/
+        QVariantMap set_proxy = configure["set-proxy"].toMap();
+
+        if(set_proxy["type"].toString() != ""){
+            QNetworkProxy proxy;
+            QString proxy_type = set_proxy["type"].toString();
+            if(proxy_type == "http"){
+                proxy.setType(QNetworkProxy::HttpProxy);
+            }
+            else if(proxy_type == "socks5"){
+                proxy.setType(QNetworkProxy::Socks5Proxy);
+            }
+            else if(proxy_type == "ftp"){
+                proxy.setType(QNetworkProxy::FtpCachingProxy);
+            }
+            else if(proxy_type == "httpCaching"){
+                proxy.setType(QNetworkProxy::HttpCachingProxy);
+            }
+            else{
+                qDebug()<<"Please input your type proxy (http,socks5,ftp,httpCaching)!";
+                exit(0);
+            }
+
+            if(set_proxy["url"].toString() != ""){
+                QString url = set_proxy["url"].toString();
+                QStringList url_proxy = url.split(":");
+                proxy.setHostName(url_proxy.at(0));
+                proxy.setPort(url_proxy.at(1).toInt());
+            }
+            else{
+                qDebug()<<"Please input your hostname:port Ex: 127.0.0.1:8080!";
+                exit(0);
+            }
+
+            if(set_proxy["username"].toString() != ""){
+                proxy.setUser(set_proxy["username"].toString());
+            }
+
+            if(set_proxy["password"].toString() != ""){
+                proxy.setPassword(set_proxy["password"].toString());
+            }
+
+            QNetworkProxy::setApplicationProxy(proxy);
+        }
+
+        /*if(configure["set-http-proxy"].toString() != ""){
             QString url = configure["set-http-proxy"].toString();
             QStringList url_proxy = url.split(":");
             QNetworkProxy proxy;
             proxy.setType(QNetworkProxy::HttpProxy);
             proxy.setHostName(url_proxy.at(0));
             proxy.setPort(url_proxy.at(1).toInt());
+            if(url_proxy.at(2) == ""){
+                proxy.setUser(url_proxy.at(2));
+            }
+            if(url_proxy.at(3) == ""){
+                proxy.setPassword(url_proxy.at(3));
+            }
             QNetworkProxy::setApplicationProxy(proxy);
-        }
+        }*/
+
         if(configure["websecurity"].toBool()){
             this->websecurity(true);
         }

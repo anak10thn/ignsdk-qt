@@ -1,0 +1,182 @@
+ignsdk-debian (1.1.4.3trusty1) trusty; urgency=medium
+
+  * New API: Proxy config
+  * Add global proxy setting
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sun, 16 Mar 2014 12:56:47 +0700
+
+ignsdk-debian (1.1.3.4trusty1) trusty; urgency=high
+
+  * Rename packages
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 30 Dec 2013 00:15:42 +0700
+
+ignsdk-debian (1.1.3.3trusty1) trusty; urgency=low
+
+  * New API: ign.fs.openFileDialog()
+  * New API: ign.fs.openDirDialog()
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Wed, 25 Dec 2013 05:03:09 +0700
+
+ignsdk-debian (1.1.3.1trusty2) trusty; urgency=medium
+
+  * Package for Trusty
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sat, 21 Dec 2013 12:45:16 +0700
+
+ignsdk-debian (1.1.3.1trusty1) trusty; urgency=low
+
+  * IGNSDK App Creator and Builder now supports RPM packaging
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 05 Dec 2013 22:59:36 +0700
+
+ignsdk-debian (1.1.2.4trusty1) trusty; urgency=low
+
+  * Package for Trusty
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Wed, 27 Nov 2013 23:22:07 +0700
+
+ignsdk-debian (1.1.2.2trusty1) trusty; urgency=low
+
+  * Source version: 1.1.2 beta (Alamang)
+  * Delete Bootstrap
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 21 Nov 2013 22:43:17 +0700
+
+ignsdk-debian (1.1.2.1trusty1) trusty; urgency=low
+
+  * Package for Trusty
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 15 Nov 2013 21:46:32 +0700
+
+ignsdk-debian (1.1.2.1saucy1) saucy; urgency=low
+
+  * Source version: 1.1.2 alpha (Alamang)
+  * Remote debugging
+  * IGNSDK App Creator and Builder with Git support
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 15 Nov 2013 10:40:18 +0700
+
+ignsdk-debian (1.1.1.3saucy1) saucy; urgency=low
+
+  * Source version: 1.1.1 (Alamang)
+  * New API structure
+  * Add manual page for ignsdk
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 11 Nov 2013 08:09:58 +0700
+
+ignsdk-debian (1.1.1.2saucy1) saucy; urgency=low
+
+  * Update ignsdk-debian-creator and ignsdk-debian-builder
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Wed, 30 Oct 2013 17:13:28 +0700
+
+ignsdk-debian (1.1.1.1saucy2) saucy; urgency=low
+
+  * Initial Qt5 port
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 11 Oct 2013 18:55:33 +0700
+
+ignsdk-debian (1.1.0.3saucy1) saucy; urgency=low
+
+  * Source version: 1.1.0 (Alamang)
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sat, 28 Sep 2013 15:25:10 +0700
+
+ignsdk-debian (1.1.0.2saucy1) saucy; urgency=low
+
+  * Package for saucy
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 24 Sep 2013 07:48:06 +0700
+
+ignsdk-debian (1.1.0.2) testing; urgency=low
+
+  * Add devscripts dependency
+  * debian/rules: use clang instead of gcc, if available
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sun, 15 Sep 2013 11:21:49 +0700
+
+ignsdk-debian (1.1.0.1) testing; urgency=low
+
+  * IGNSDK 1.1.0 (codename: Alamang)
+  * Small fixes for v1.1.0.1
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 13 Sep 2013 21:34:18 +0700
+
+ignsdk-debian (1.0.9.1) testing; urgency=low
+
+  * debian/control: remove hardening-wrapper and hardening-includes
+  * Add dev tools
+  * New package: ignsdk-debian-dev
+  * Update Sql API
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 22 Aug 2013 08:20:06 +0700
+
+ignsdk-debian (1.0.8.2) testing; urgency=low
+
+  * Tidy ign.css
+  * Set /opt/ignsdk as default application directory
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 16 Aug 2013 20:57:00 +0700
+
+ignsdk-debian (1.0.8.1) testing; urgency=low
+
+  * 1.0.8 release candidate 1!
+  * New APIs: file operations, loadBin, exec, sdkVersion
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Wed, 31 Jul 2013 15:09:43 +0700
+
+ignsdk-debian (1.0.7-1) testing; urgency=low
+
+  * 1.0.7 beta 2!
+  * New class: ignnetwork
+  * New example apps
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 23 Jul 2013 08:17:10 +0700
+
+ignsdk-debian (1.0.5-1) testing; urgency=low
+
+  * 1.0.5 beta 2!
+  * Fix IGNSDK API
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 23 Jul 2013 06:06:30 +0700
+
+ignsdk-debian (1.0.1-6) testing; urgency=low
+
+  * Integrate new class: ignsql
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 19 Jul 2013 16:53:40 +0700
+
+ignsdk-debian (1.0.1-5) testing; urgency=low
+
+  * Integrate new class: igndownloader
+  * Various fixes
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 18 Jul 2013 13:01:26 +0700
+
+ignsdk-debian (1.0.1-4) testing; urgency=low
+
+  * Split example apps from binary package
+  * Remove unused CSS' and JS'
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 17 Jun 2013 23:22:33 +0700
+
+ignsdk-debian (1.0.1-3) unstable; urgency=low
+
+  * IGN JQuery plugin
+  * This is a beta release!
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Fri, 26 Apr 2013 11:24:12 +0700
+
+ignsdk-debian (1.0.1-2) unstable; urgency=low
+
+  * Webstorage support
+  * Many bugs were fixed
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 22 Apr 2013 19:41:14 +0700
+
+ignsdk-debian (1.0.1-1) unstable; urgency=low
+
+  * Initial release
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 18 Mar 2013 23:50:19 +0700

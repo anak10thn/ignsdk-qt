@@ -11,7 +11,7 @@ Vcs-Git: git://github.com/ubunteroz/ignsdk-debian.git
 Package: ignsdk
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Recommends: ignsdk-examples
+Recommends: ignsdk-examples, libqt5sql5-sqlite (>= 5.1.1), libqt5mysql5-mysql (>= 5.1.1)
 Suggests: ignsdk-devtools
 Replaces: ignsdk-debian
 Breaks: ignsdk-debian

@@ -135,7 +135,7 @@ then
 	while read m
 	do
 		if [ -f $m/ignsdk.json ];then
-			echo - $m | sed s/\.ign//g | sed -e "s|$DESTDIR||"
+			echo - $m | sed s/\(.\)ign//g | sed -e "s|$DESTDIR||"
 		fi
 	done < $DESTDIR/.ignsdk-list
 	echo "Usage: ignsdk-app-builder -p [PROJECT PACKAGE NAME]"

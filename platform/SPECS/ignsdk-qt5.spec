@@ -1,13 +1,14 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.1.3
-Release:12292013
+Version:1.1.4
+Release:20140317
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
 Source0:http://github.com/anak10thn/ignsdk-qt/archive/master.zip
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:qt5-qtwebkit
+Requires:qt5-qtbase-mysql
 BuildRequires:qt5-qtwebkit-devel
 BuildRequires:gcc-c++
 %description
@@ -170,6 +171,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
+* Mon Mar 17 2013 ibnu yahya <linux@toroo.org>
+- ADD: proxy API
+- Version 1.1.4
+- FIX: bugs ignsdk-app-builder
+
 * Sun Dec 29 2013 ibnu yahya <linux@toroo.org>
 - ADD: new filesystem API
 - FIX: MAN page

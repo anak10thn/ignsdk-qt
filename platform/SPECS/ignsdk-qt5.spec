@@ -171,7 +171,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
-* Mon Mar 17 2013 ibnu yahya <linux@toroo.org>
+* Mon Mar 17 2014 ibnu yahya <linux@toroo.org>
 - ADD: proxy API
 - Version 1.1.4
 - FIX: bugs ignsdk-app-builder

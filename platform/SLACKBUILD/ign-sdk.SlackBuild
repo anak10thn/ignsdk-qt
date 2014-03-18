@@ -9,7 +9,7 @@
 
 #SLACKBUILD##
 #Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
-
+#script 1.1.4
 
 PRGNAM=ign-sdk
 VERSION=${VERSION:-git}
@@ -60,7 +60,7 @@ then
 	git branch slack-$VERSION $VERSION
 	git checkout slack-$VERSION
 else
-	VERSION="v.1.1.3"
+	VERSION="v.1.1.4"
 	git branch slack-$VERSION
 	git checkout slack-$VERSION
 fi
@@ -150,7 +150,6 @@ cp -rf bin/ignsdk-app-creator  $PKG/usr/bin/
 cp -rf bin/ignsdk-app-builder  $PKG/usr/bin/
 cp -rf bin/ignsdk-slack-creator  $PKG/usr/share/ign-sdk/bin/
 cp -rf bin/ignsdk-slack-builder $PKG/usr/share/ign-sdk/bin/
-cp -rf menu/ignsdk-kuma.desktop  $PKG/usr/share/applications/
 
 
 mkdir -p $PKG/install

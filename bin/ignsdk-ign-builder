@@ -7,6 +7,7 @@ echo $DIR
 INSTALL_LIST="install -d -m 755 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}\n\
 install -d -m 755 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/icons\n\
 install -d -m 755 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/bin\n\
+install -d -m 755 \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/rpm\n\
 install -d -m 755 \$RPM_BUILD_ROOT/usr/share/applications"
 
 help ()
@@ -52,7 +53,7 @@ _toBeInstalled ()
 			;;
 		"rpm" )
 			_mustBeADirectory "$DIR/$1"
-			DO_NOTHING=true
+				INSTALL_LIST="$INSTALL_LIST\ncp -rf rpm/* \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/rpm/"
 			;;
 		* )
 			INSTALL_LIST="$INSTALL_LIST\ncp -rf '$1' \$RPM_BUILD_ROOT/opt/ignsdk/%{name}/"
@@ -83,9 +84,9 @@ if [ -d $DIR ];then
 		file=$(echo $file | sed "s/$PKG\///")
 		_toBeInstalled "$file"
 	done
-	echo -e $INSTALL_LIST > $DIR/rpm/install_list.txt
+	echo -e $INSTALL_LIST > $SOURCE/$PKG.txt
 	tar cfz $SOURCE/$PKG.tar.gz $PKG
-	rpmbuild -ba $DIR/rpm/app.spec
+	rpmbuild -ba $DIR/rpm/$PKG.spec
 	echo ""
 	echo "Done! PATH : $HOME/rpmbuild/RPMS/noarch/"
 	exit 0

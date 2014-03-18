@@ -13,6 +13,7 @@ License:%{license}
 Group:%{group}
 URL:%{url}
 Source0:%{name}.tar.gz
+Source1:%{name}.txt
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:ignsdk
 BuildArch:noarch
@@ -24,7 +25,7 @@ BuildArch:noarch
 %setup -q -n %{name}
 
 %install
-%include %{buildsubdir}/rpm/install_list.txt
+%include %{SOURCE1}
 
 %clean
 rm -rf $RPM_BUILD_ROOT

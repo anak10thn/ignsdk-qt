@@ -53,7 +53,7 @@ sed "s|<release>|$RELEASE|" | \
 sed "s|<version>|$VERSION|" | \
 sed "s|<license>|$LICENSE|" | \
 sed "s|<url>|$URL|" | \
-sed "s|<desc>|$DESC|" > $BUILDDEST/rpm/app.spec
+sed "s|<desc>|$DESC|" > $BUILDDEST/rpm/$PKGNAME.spec
 
 echo "-----------Application has been created---------"
 echo ""

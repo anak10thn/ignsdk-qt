@@ -44,6 +44,7 @@ public:
     void widgetTransparent();
     QString pathApp;
     QString version;
+    bool debugging;
 
 signals:
     void downloadProgress(qint64 recieved, qint64 total);

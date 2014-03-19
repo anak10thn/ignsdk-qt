@@ -14,6 +14,7 @@ ign::ign(QObject *parent)
     m_filesystem(0)
 {
     this->version = "1.1.4";
+    this->debugging = false;
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     this->dl = new QtDownload;
@@ -140,6 +141,7 @@ void ign::redo(){
 /* debuging mode */
 void ign::setDev(bool v){
     this->web.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, v);
+    this->debugging = true;
 }
 
 void ign::setDevRemote(int port){
@@ -321,17 +323,18 @@ void ign::config(QString path){
                 data_ign_proxy = out.readLine();
 
                 file.close();
-
-                qDebug()<< "Enable IGNSDK global proxy setting : " << data_ign_proxy;
+                if(this->debugging){
+                    qDebug()<< "Enable IGNSDK global proxy setting : " << data_ign_proxy;
+                }
                 QStringList url_proxy = data_ign_proxy.split(":");
                 QNetworkProxy proxy;
                 proxy.setType(QNetworkProxy::HttpProxy);
                 proxy.setHostName(url_proxy.at(0));
                 proxy.setPort(url_proxy.at(1).toInt());
-                if(url_proxy.at(2) == ""){
+                if(url_proxy.at(2) != ""){
                     proxy.setUser(url_proxy.at(2));
                 }
-                if(url_proxy.at(3) == ""){
+                if(url_proxy.at(3) != ""){
                     proxy.setPassword(url_proxy.at(3));
                 }
                 QNetworkProxy::setApplicationProxy(proxy);

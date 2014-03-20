@@ -22,6 +22,8 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QNetworkProxy>
+#include <QFileSystemWatcher>
+#include <QThread>
 
 class ign: public QObject
 {
@@ -36,19 +38,30 @@ private:
     ignsystem *m_ignsystem;
     QPoint offset;
     bool mMoving;
+
 public:
     ign(QObject *parent = 0);
     void render(QString w);
     void show();
     void widgetNoFrame();
     void widgetTransparent();
+    void liveCode();
+    QString pathLive;
     QString pathApp;
     QString version;
     bool debugging;
+    QFileSystemWatcher live;
 
 signals:
     void downloadProgress(qint64 recieved, qint64 total);
-    /*void bash(QString out, QString err);*/
+
+private slots:
+    void fileChanged(const QString& path) {
+        qDebug() << "file changed: " << path;
+        QThread::msleep(50);
+        this->web.page()->triggerAction(QWebPage::Reload,true);
+    }
+
 public slots:
     //main slot
     void ignJS();

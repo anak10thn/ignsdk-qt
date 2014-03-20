@@ -64,14 +64,17 @@ void ign::render(QString w){
     if(url_exp.at(0) == "http:" || url_exp.at(0) == "https:"){
         url_fix = w;
     }
-    else if(url_exp.at(0) == ".."){
+    else if(url_exp.at(0) == ".." || url_exp.at(0) == "."){
         url_fix = "file://"+pwd+"/"+w;
+        this->pathLive = pwd+"/"+w;
     }
     else if(url_exp.at(0) == ""){
         url_fix = "file://"+w;
+        this->pathLive = w;
     }
     else {
         url_fix = "file://"+pwd+"/"+w;
+        this->pathLive = pwd+"/"+w;
     }
     this->web.load(url_fix);
 }
@@ -262,6 +265,7 @@ void ign::config(QString path){
         QVariantMap configure = result["config"].toMap();
         if(configure["debug"].toBool()){
             this->setDev(true);
+            this->liveCode();
         }
         if(configure["debug-port"].toInt()){
             this->setDevRemote(configure["debug-port"].toInt());
@@ -439,7 +443,17 @@ QObject *ign::filesystem(){
     return m_filesystem;
 }
 
-//Check version
+/*live coding*/
+void ign::liveCode(){
+    QString file = this->pathLive;
+    QDir dirApp = QFileInfo(file).absoluteDir();
+    qDebug() << dirApp.absolutePath();
+    this->live.addPath(dirApp.absolutePath());
+    connect(&live,SIGNAL(directoryChanged(const QString &)),
+            this, SLOT(fileChanged(const QString &)));
+}
+
+/*Check version*/
 QString ign::sdkVersion(){
     return this->version;
 }

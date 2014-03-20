@@ -4,21 +4,21 @@
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
 pkgname=ignsdk-dev-tools
-pkgver=1.1.3
-pkgrel=122813
+pkgver=1.1.4
+pkgrel=041814
 pkgdesc="IGN Software Development Kit Developer Tools"
 url="https://github.com/anak10thn/ignsdk-qt"
 arch=('x86_64' 'i686')
 license=('BSD')
-depends=('ignsdk')
+depends=('ign-sdk')
 options=('!strip' '!emptydirs')
-source=('http://arch.ignsdk.web.id/archlinux/i686/arch-dev.tar.gz')
+source=('http://arch.ignsdk.web.id/archlinux/i686/arch-dev-1.1.4.tar.gz')
 md5sums=('SKIP')
 _gourl=github.com/anak10thn/ignsdk-qt
 install='arch-dev-tools.install'
 
 package(){
-	cd arch-dev
+	cd $srcdir
 	mkdir -p $pkgdir/usr/bin
 	mkdir -p $pkgdir/usr/share/ign-sdk/bin/
 	mkdir -p $pkgdir/usr/share/man/man1/

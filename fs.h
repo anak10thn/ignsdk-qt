@@ -11,9 +11,15 @@
 #include <QFileDialog>
 #include <QTreeView>
 #include <QDirIterator>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonParseError>
+#include <QDateTime>
 class fs : public QObject
 {
     Q_OBJECT
+
 public:
     fs(QObject *parent = 0);
 
@@ -39,6 +45,7 @@ public slots:
     QString openFileDialog();
     QString openDirDialog();
     QStringList list(const QString &path);
+    QVariant info(const QString &path);
 };
 
 #endif // FS_H

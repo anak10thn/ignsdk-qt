@@ -457,48 +457,10 @@ QObject *ign::net(){
 void ign::liveCode(){
     QString file = this->pathLive;
     QDir dirApp = QFileInfo(file).absoluteDir();
-    QString css = dirApp.absolutePath()+"/css";
-    QString js = dirApp.absolutePath()+"/js";
-    QString images = dirApp.absolutePath()+"/images";
-    QString img = dirApp.absolutePath()+"/img";
-    QString acss = dirApp.absolutePath()+"/assets/css";
-    QString ajs = dirApp.absolutePath()+"/assets/js";
-    QString aimages = dirApp.absolutePath()+"/assets/images";
-    QString aimg = dirApp.absolutePath()+"/assets/img";
-    qDebug() << "live preview enable on " << dirApp.absolutePath();
-    this->live.addPath(dirApp.absolutePath());
-    this->live.addPath(dirApp.absolutePath()+"/index.html");
-    if(this->m_filesystem->isDirectory(css)){
-        this->live.addPath(css);
-        qDebug() << "live preview enable on " << css;
-    }
-    if(this->m_filesystem->isDirectory(acss)){
-        this->live.addPath(acss);
-        qDebug() << "live preview enable on " << acss;
-    }
-    if(this->m_filesystem->isDirectory(js)){
-        this->live.addPath(js);
-        qDebug() << "live preview enable on " << js;
-    }
-    if(this->m_filesystem->isDirectory(ajs)){
-        this->live.addPath(ajs);
-        qDebug() << "live preview enable on " << ajs;
-    }
-    if(this->m_filesystem->isDirectory(images)){
-        this->live.addPath(images);
-        qDebug() << "live preview enable on " << images;
-    }
-    if(this->m_filesystem->isDirectory(aimages)){
-        this->live.addPath(aimages);
-        qDebug() << "live preview enable on " << aimages;
-    }
-    if(this->m_filesystem->isDirectory(img)){
-        this->live.addPath(img);
-        qDebug() << "live preview enable on " << img;
-    }
-    if(this->m_filesystem->isDirectory(aimg)){
-        this->live.addPath(aimg);
-        qDebug() << "live preview enable on " << aimg;
+    QStringList list = this->m_filesystem->list(dirApp.absolutePath());
+    foreach (const QString &file, list) {
+        this->live.addPath(file);
+        qDebug() << "live preview enable on " << file;
     }
     connect(&live,SIGNAL(directoryChanged(const QString &)),
             this, SLOT(fileChanged(const QString &)));

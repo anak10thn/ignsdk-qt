@@ -11,7 +11,8 @@ ign::ign(QObject *parent)
     : QObject(parent),
     m_sqldrv(0),
     m_ignsystem(0),
-    m_filesystem(0)
+    m_filesystem(0),
+    m_ignnetwork(0)
 {
     this->version = "1.1.5";
     this->debugging = false;
@@ -441,6 +442,15 @@ QObject *ign::filesystem(){
         m_filesystem = new fs;
     }
     return m_filesystem;
+}
+
+/*IGN NETWORK*/
+
+QObject *ign::net(){
+    if(!m_ignnetwork){
+        m_ignnetwork = new ignnetwork;
+    }
+    return m_ignnetwork;
 }
 
 /*live coding*/

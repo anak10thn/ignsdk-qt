@@ -8,24 +8,24 @@ QT       += network core webkitwidgets sql
 
 TARGET = ignsdk
 TEMPLATE = app
-
+CONFIG += qt
 
 SOURCES += main.cpp\
         ign.cpp \
     fs.cpp \
     igndownload.cpp \
     ignsql.cpp \
-    ignnetwork.cpp \
     ignsystem.cpp \
-    ignmovedrag.cpp
+    ignmovedrag.cpp \
+    ignnetwork.cpp
 
 HEADERS  += ign.h \
     fs.h \
     igndownload.h \
     ignsql.h \
-    ignnetwork.h \
     ignsystem.h \
-    ignmovedrag.h
+    ignmovedrag.h \
+    ignnetwork.h
 
 RESOURCES += \
     ign.qrc

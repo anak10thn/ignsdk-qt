@@ -5,6 +5,7 @@
 #include "igndownload.h"
 #include "ignsql.h"
 #include "ignsystem.h"
+#include "ignnetwork.h"
 #include <QObject>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QWidget>
@@ -36,6 +37,7 @@ private:
     QtDownload *dl;
     ignsql *m_sqldrv;
     ignsystem *m_ignsystem;
+    ignnetwork *m_ignnetwork;
     QPoint offset;
     bool mMoving;
 
@@ -97,16 +99,18 @@ public slots:
     void config(QString path);
     //ign settings
     void websecurity(bool c);
-    //ign filesystem
-    QObject *filesystem();
     //ign network
     void saveFile(const QByteArray &data, QString filename, QString path);
     void download(QString data, QString path);
     void download_signal(qint64 recieved, qint64 total);
+    //ign filesystem
+    QObject *filesystem();
     //ign sql
     QObject *sql();
-    //experiment
+    //ign system
     QObject *sys();
+    //ign network
+    QObject *net();
     //ignsdk version
     QString sdkVersion();
 };

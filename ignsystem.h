@@ -11,7 +11,7 @@ class ignsystem : public QObject
 {
     Q_OBJECT
 public:
-    ignsystem(QObject *parent = 0);
+    explicit ignsystem(QObject *parent = 0);
 public slots:
     QString cliOut(const QString& cli);
     void exec(const QString& cli);

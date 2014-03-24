@@ -10,7 +10,7 @@ class ignnetwork : public QObject
 public:
     explicit ignnetwork(QObject *parent = 0);
 public slots:
-    QString myIp();
+    QString myIP();
 };
 
 #endif // IGNNETWORK_H

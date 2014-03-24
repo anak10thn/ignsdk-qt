@@ -5,7 +5,7 @@ ignnetwork::ignnetwork(QObject *parent):
 {
 }
 
-QString ignnetwork::myIp(){
+QString ignnetwork::myIP(){
     QString host;
     Q_FOREACH(QHostAddress address, QNetworkInterface::allAddresses()) {
       if (!address.isLoopback() && (address.protocol() == QAbstractSocket::IPv4Protocol)) {

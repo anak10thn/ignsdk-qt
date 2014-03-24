@@ -64,7 +64,7 @@ bool fs::dir(const QString &opt, const QString &path){
     }
 }
 
-bool fs::exists(const QString &path)
+bool fs::isExist(const QString &path)
 {
     return QFile::exists(path);
 }
@@ -89,7 +89,7 @@ bool fs::isExecutable(const QString &path)
    return QFileInfo(path).isExecutable();
 }
 
-bool fs::isLink(const QString &path)
+bool fs::isSymlink(const QString &path)
 {
    return QFileInfo(path).isSymLink();
 }

@@ -2,6 +2,7 @@
 #define IGNNETWORK_H
 
 #include <QObject>
+#include <QNetworkInterface>
 
 class ignnetwork : public QObject
 {

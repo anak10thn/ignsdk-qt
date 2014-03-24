@@ -20,7 +20,7 @@ signals:
     //void record(bool err,const QByteArray& data);
 public slots:
     bool driver(const QString& drv, QString connect);
-    QString query(const QString& qr);
+    QVariant query(const QString& qr);
     //void record_slot(bool err,const QByteArray& data);
 };
 

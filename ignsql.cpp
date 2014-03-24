@@ -28,7 +28,7 @@ bool ignsql::driver(const QString &drv, QString connect){
 
 }
 
-QString ignsql::query(const QString &qr){
+QVariant ignsql::query(const QString &qr){
     QSqlQuery qry(this->db);
     qry.prepare(qr);
     qry.exec();
@@ -64,7 +64,6 @@ QString ignsql::query(const QString &qr){
     //bool ok;
     //QByteArray json = serializer.serialize(contentmap, &ok);
     QJsonDocument json_enc = QJsonDocument::fromVariant(contentmap);
-    QByteArray json = json_enc.toJson();
-    return json;
+    return json_enc.toVariant();
 }
 

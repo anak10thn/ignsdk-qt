@@ -10,6 +10,7 @@
 #include <QTextStream>
 #include <QFileDialog>
 #include <QTreeView>
+#include <QDirIterator>
 class fs : public QObject
 {
     Q_OBJECT
@@ -37,6 +38,7 @@ public slots:
     bool copy(const QString &src, const QString &des);
     QString openFileDialog();
     QString openDirDialog();
+    QStringList list(const QString &path);
 };
 
 #endif // FS_H

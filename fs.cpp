@@ -1,5 +1,6 @@
 //ibnu.yahya@toroo.org
 #include "fs.h"
+#include <QDebug>
 
 fs::fs(QObject *parent) :
     QObject(parent)
@@ -139,4 +140,15 @@ QString fs::openDirDialog(){
         directory = fd->selectedFiles()[0];
         return directory;
     }
+}
+
+//experimental api
+QStringList fs::list(const QString &path){
+    QDirIterator dirIt(path,QDirIterator::Subdirectories);
+    QStringList list;
+    while (dirIt.hasNext()) {
+        dirIt.next();
+        list.push_front(dirIt.filePath());
+    }
+    return list;
 }

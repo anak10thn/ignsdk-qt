@@ -59,7 +59,7 @@ signals:
 
 private slots:
     void fileChanged(const QString& path) {
-        qDebug() << "file changed: " << path;
+        qDebug() << "directory changed: " << path;
         QThread::msleep(50);
         this->web.page()->triggerAction(QWebPage::Reload,true);
     }

@@ -29,16 +29,26 @@ bool ignsql::driver(const QString &drv, QString connect){
 }
 
 QVariant ignsql::query(const QString &qr){
-    QSqlQuery qry(this->db);
-    qry.prepare(qr);
-    qry.exec();
-
-    QSqlRecord data = qry.record();
+    bool status;
+    int size;
     QVariantList datarec;
     QVariantMap map;
     QVariantMap contentmap;
+    QSqlQuery qry(this->db);
 
-    bool status;
+    qry.prepare(qr);
+    if(qry.exec()){
+        status = true;
+    }
+    else{
+        status = false;
+        contentmap.insert("error",qry.lastError().text());
+    }
+
+    contentmap.insert("status",status);
+
+    QSqlRecord data = qry.record();
+
     while (qry.next()) {
         for(int index = 0; index < data.count(); index++) {
             QString key = data.fieldName(index);
@@ -51,18 +61,10 @@ QVariant ignsql::query(const QString &qr){
     contentmap.insert("content",datarec);
 
     if(qry.size() > 0){
-        status = true;
-    }
-    else {
-        status = false;
+        size = qry.size();
+        contentmap.insert("size",size);
     }
 
-    contentmap.insert("status",status);
-
-    //QJson::Serializer serializer;
-
-    //bool ok;
-    //QByteArray json = serializer.serialize(contentmap, &ok);
     QJsonDocument json_enc = QJsonDocument::fromVariant(contentmap);
     return json_enc.toVariant();
 }

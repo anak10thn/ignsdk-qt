@@ -115,9 +115,11 @@ int main(int argc, char *argv[])
     }
     else{
         QFileDialog *fd = new QFileDialog;
+#ifdef Linux
         QTreeView *tree = fd->findChild <QTreeView*>();
         tree->setRootIsDecorated(true);
         tree->setItemsExpandable(true);
+#endif
         fd->setFileMode(QFileDialog::Directory);
         fd->setOption(QFileDialog::ShowDirsOnly);
         fd->setViewMode(QFileDialog::Detail);

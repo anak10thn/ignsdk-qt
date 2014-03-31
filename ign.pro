@@ -33,6 +33,3 @@ RESOURCES += \
 macx{
 ICON += icon/ignsdk-logo.icns
 }
-
-OTHER_FILES += \
-    bar-descriptor.xml

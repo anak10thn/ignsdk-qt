@@ -127,9 +127,11 @@ QString fs::openFileDialog(){
 
 QString fs::openDirDialog(){
     QFileDialog *fd = new QFileDialog;
+#ifdef Linux
     QTreeView *tree = fd->findChild <QTreeView*>();
     tree->setRootIsDecorated(true);
     tree->setItemsExpandable(true);
+#endif
     fd->setFileMode(QFileDialog::Directory);
     fd->setOption(QFileDialog::ShowDirsOnly);
     fd->setViewMode(QFileDialog::Detail);

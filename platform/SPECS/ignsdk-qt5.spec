@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.1.5
-Release:a20140327
+Version:1.1.4
+Release:20140319
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
@@ -171,19 +171,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
-* Thu Mar 27 2014 ibnu yahya <linux@toroo.org>
-- UPDATE: ignsdk alpha 1.1.5
-- FIX BUGS : Open dir dialog OSX (fs API)
-- FIX BUGS : error handling query SQL (sql API)
-- CHANGE : convert output Query SQL API to JSON (sql API)
-- ADD API : Info (filesystem api)
-- ADD API : list (filesystem api)
-- FIX : list all file watcher to live preview
-- ADD CLASS : network
-- ADD Function : Live preview
-- ADD API : Check Your IP (network api)
-- FIX : API name
-
 * Wed Mar 19 2014 ibnu yahya <linux@toroo.org>
 - FIX: bugs global settings
 - ADD: debugging parameter

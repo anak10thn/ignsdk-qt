@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
 Version:1.1.5
-Release:a20140327
+Release:b20140407
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
@@ -171,6 +171,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
+* Mon Apr 07 2014 ibnu yahya <linux@toroo.org>
+- ADD: proxy API
+
 * Thu Mar 27 2014 ibnu yahya <linux@toroo.org>
 - UPDATE: ignsdk alpha 1.1.5
 - FIX BUGS : Open dir dialog OSX (fs API)

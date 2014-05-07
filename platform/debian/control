@@ -3,7 +3,7 @@ Section: devel
 Priority: optional
 Maintainer: Surya Handika Putratama <ubunteroz@gmail.com>
 Build-Depends: debhelper (>= 8.0.0), qt5-qmake (>= 5.1.1), qt5-default (>= 5.1.1), qtbase5-dev (>= 5.1.1), qtdeclarative5-dev (>= 5.1.1), libqt5opengl5-dev (>= 5.1.1), libqt5webkit5-dev (>= 5.1.1), libxslt1-dev (>= 1.1.28), libxml2-dev (>= 2.9.1), libgstreamer0.10-dev (>= 0.10.36), libglib2.0-dev (>= 2.36.4), libsqlite3-dev (>= 3.8.0), libgstreamer-plugins-base0.10-dev (>= 0.10.36)
-Standards-Version: 3.9.4
+Standards-Version: 3.9.5
 Homepage: http://ignsdk.web.id/
 Vcs-Browser: https://github.com/ubunteroz/ignsdk-debian
 Vcs-Git: git://github.com/ubunteroz/ignsdk-debian.git

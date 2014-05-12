@@ -460,7 +460,7 @@ void ign::liveCode(){
     QStringList list = this->m_filesystem->list(dirApp.absolutePath());
     foreach (const QString &file, list) {
         this->live.addPath(file);
-        qDebug() << "live preview enable on " << file;
+        //qDebug() << "live preview enable on " << file;
     }
     connect(&live,SIGNAL(directoryChanged(const QString &)),
             this, SLOT(fileChanged(const QString &)));

@@ -104,7 +104,7 @@ EOF
 echo "-> debian/control"
 sed -i -e "s/Homepage:/#Homepage:/" \
 	-e "s/Architecture: any/Architecture: all/" \
-	-e "s/Depends:/Depends: ignsdk-debian,/" \
+	-e "s/Depends:/Depends: ignsdk-debian | ignsdk,/" \
 	-e "s/Description:\(.*\)/Description: Another IGN SDK Application/" \
 	-e "s/<insert long description\(.*\)/This is an IGN SDK Application/" \
 	debian/control

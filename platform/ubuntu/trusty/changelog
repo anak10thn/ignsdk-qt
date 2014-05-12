@@ -1,3 +1,16 @@
+ignsdk-debian (1.1.5.2trusty1) trusty; urgency=medium
+
+  * Packages for Trusty
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Thu, 17 Apr 2014 10:05:57 +0700
+
+ignsdk-debian (1.1.4.4trusty1) trusty; urgency=medium
+
+  * ignsdk-app-builder: fix error in project listing
+  * main.tpl: exclude app.spec from default app template
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 17 Mar 2014 00:44:44 +0700
+
 ignsdk-debian (1.1.4.3trusty1) trusty; urgency=medium
 
   * New API: Proxy config

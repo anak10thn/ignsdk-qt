@@ -9,16 +9,12 @@ ignsystem::ignsystem(QObject *parent)
 
 QString ignsystem::cliOut(const QString& cli){
     QProcess os;
+    os.setProcessChannelMode(QProcess::MergedChannels);
     os.start(cli);
     int pid = os.pid();
     qDebug() << pid;
     os.waitForFinished(-1);
     return os.readAllStandardOutput();
-}
-
-void ignsystem::exec(const QString &cli){
-    QProcess os;
-    os.startDetached("/bin/sh -c \""+cli+"\"");
 }
 
 QString ignsystem::hash(const QString &data,QString hash_func){
@@ -51,4 +47,19 @@ QString ignsystem::hash(const QString &data,QString hash_func){
 
 void ignsystem::desktopService(const QString &link){
     QDesktopServices ::openUrl(QUrl(link));
+}
+
+void ignsystem::exec(const QString& cli){
+    proc = new QProcess( this );
+    proc->setReadChannelMode(QProcess::MergedChannels);
+    connect( proc, SIGNAL(readyReadStandardOutput()), this, SLOT( _out()) );
+    proc->start(cli);
+}
+
+void ignsystem::_out(){
+    emit out(proc->readAllStandardOutput());
+}
+
+void ignsystem::kill(){
+    proc->kill();
 }

@@ -42,6 +42,8 @@ before_install:
 
 script:
   - cd ~/ignsdk
+  - ls
+  - pwd
   - ~/Qt5.2.0/5.2.0/gcc_64/bin/qmake -v
   - ~/Qt5.2.0/5.2.0/gcc_64/bin/qmake -spec linux-$CC -Wall ignsdk.pro
   - make -j$(nproc)

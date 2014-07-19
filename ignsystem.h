@@ -7,6 +7,7 @@
 #include <QCryptographicHash>
 #include <QDesktopServices>
 #include <QUrl>
+
 class ignsystem : public QObject
 {
     Q_OBJECT

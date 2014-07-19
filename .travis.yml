@@ -3,7 +3,7 @@ language: cpp
 compiler: gcc
 
 install:
-  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo add-apt-repository --yes ppa:canonical-qt5-edgers/ppa
   - sudo apt-get update -qq
   - sudo apt-get install -qq debhelper qt5-qmake qt5-default qtbase5-dev qtdeclarative5-dev libqt5opengl5-dev libqt5webkit5-dev libxslt1-dev libxml2-dev libgstreamer0.10-dev libglib2.0-dev libsqlite3-dev libgstreamer-plugins-base0.10-dev
 

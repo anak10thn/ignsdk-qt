@@ -2,19 +2,14 @@ language: cpp
 
 compiler: gcc
 
-script: pdebuild --use-pdebuild-internal --architecture $PKGARCH
+install:
+  - sudo apt-get update
+  - sudo apt-get install debhelper qt5-qmake qt5-default qtbase5-dev qtdeclarative5-dev libqt5opengl5-dev libqt5webkit5-dev libxslt1-dev libxml2-dev libgstreamer0.10-dev libglib2.0-dev libsqlite3-dev libgstreamer-plugins-base0.10-dev
 
-install: true
-
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq pbuilder devscripts eatmydata
-  - wget http://debian.ignsdk.web.id/pkg/debootstrap_1.0.55_all.deb -O /home/travis/debootstrap.deb
-  - wget http://debian.ignsdk.web.id/pkg/debian-archive-keyring_2012.4_all.deb -O /home/travis/debian-archive-keyring.deb
-  - sudo dpkg -i /home/travis/*.deb
-  - mkdir -p /home/travis/builder/result/$PKGARCH
-  - echo "BUILDRESULT=/home/travis/builder/result/$PKGARCH" > /home/travis/.pbuilderrc
-  - sudo pbuilder create --distribution testing --architecture $PKGARCH --mirror http://ftp.us.debian.org/debian/ --allow-untrusted --debootstrapopts --no-check-gpg --debootstrapopts --variant=buildd
+script:
+  - qmake -project
+  - qmake hello.pro
+  - make
 
 branches:
   only:
@@ -23,8 +18,3 @@ branches:
 notifications:
   email:
     - anak10thn@gmail.com
-
-env:
-  matrix:
-    - PKGARCH=i386
-    - PKGARCH=amd64

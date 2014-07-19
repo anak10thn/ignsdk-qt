@@ -3,12 +3,13 @@ language: cpp
 compiler: gcc
 
 install:
-  - sudo apt-get update
-  - sudo apt-get install debhelper qt5-qmake qt5-default qtbase5-dev qtdeclarative5-dev libqt5opengl5-dev libqt5webkit5-dev libxslt1-dev libxml2-dev libgstreamer0.10-dev libglib2.0-dev libsqlite3-dev libgstreamer-plugins-base0.10-dev
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq debhelper qt5-qmake qt5-default qtbase5-dev qtdeclarative5-dev libqt5opengl5-dev libqt5webkit5-dev libxslt1-dev libxml2-dev libgstreamer0.10-dev libglib2.0-dev libsqlite3-dev libgstreamer-plugins-base0.10-dev
 
 script:
-  - qmake -project
-  - qmake hello.pro
+  - qmake -qt=qt5 -v
+  - qmake -qt=qt5
   - make
 
 branches:

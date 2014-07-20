@@ -1,51 +1,20 @@
 language: cpp
-compiler:
-  - gcc
-  - clang
+
+compiler: gcc
+
+script: pdebuild --use-pdebuild-internal --architecture $PKGARCH
+
+install: true
 
 before_install:
-  - if [ "$CXX" = "g++" ]; then sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y; fi
-  - if [ "$CXX" = "g++" ]; then sudo apt-get update -qq; fi
-  - if [ "$CXX" = "g++" ]; then sudo apt-get install g++-4.8; fi
-  - if [ "$CXX" = "g++" ]; then sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50; fi
-  - if [ "$CXX" = "g++" ]; then sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50; fi
-  - wget -O Qt5.2.0.tar.xz https://dl.dropboxusercontent.com/u/20447449/Qt5.2.0.tar.xz
-  - mkdir ~/Qt5.2.0
-  - tar -xJf Qt5.2.0.tar.xz -C ~/Qt5.2.0
-  - sudo chmod -R 777 ~/Qt5.2.0/
-  - ln -s ~/Qt5.2.0/5.2.0/gcc_64/mkspecs/linux-g++ ~/Qt5.2.0/5.2.0/gcc_64/mkspecs/linux-gcc
-  - wget http://downloads.xiph.org/releases/opus/opus-1.1.tar.gz
-  - tar -xf opus-1.1.tar.gz
-  - cd opus-1.1
-  - ./configure --disable-extra-programs --disable-doc
-  - make -j$(nproc)
-  - sudo make install
-  - cd ..
-  - git clone http://git.chromium.org/webm/libvpx.git
-  - cd libvpx
-  - git checkout tags/v1.3.0
-  - sudo apt-get install yasm -y
-  - ./configure --disable-examples --disable-unit-tests --enable-shared --enable-static
-  - make -j$(nproc)
-  - sudo make install
-  - cd ..
-  - git clone git://github.com/jedisct1/libsodium.git
-  - cd libsodium
-  - git checkout tags/0.5.0
-  - ./autogen.sh
-  - ./configure
-  - make -j$(nproc)
-  - sudo make install
-  - sudo ldconfig
-  - cd ..
-  - git clone https://github.com/anak10thn/ignsdk-qt.git ~/ignsdk
-
-script:
-  - cd ~/ignsdk
-  - ~/Qt5.2.0/5.2.0/gcc_64/bin/qmake -v
-  - ~/Qt5.2.0/5.2.0/gcc_64/bin/qmake -spec linux-$CC -Wall ign.pro
-  - make -j$(nproc)
-
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq pbuilder devscripts eatmydata
+  - wget http://debian.ignsdk.web.id/pkg/debootstrap_1.0.55_all.deb -O /home/travis/debootstrap.deb
+  - wget http://debian.ignsdk.web.id/pkg/debian-archive-keyring_2012.4_all.deb -O /home/travis/debian-archive-keyring.deb
+  - sudo dpkg -i /home/travis/*.deb
+  - mkdir -p /home/travis/builder/result/$PKGARCH
+  - echo "BUILDRESULT=/home/travis/builder/result/$PKGARCH" > /home/travis/.pbuilderrc
+  - sudo pbuilder create --distribution testing --architecture $PKGARCH --mirror http://ftp.us.debian.org/debian/ --allow-untrusted --debootstrapopts --no-check-gpg --debootstrapopts --variant=buildd
 
 branches:
   only:
@@ -54,3 +23,8 @@ branches:
 notifications:
   email:
     - anak10thn@gmail.com
+
+env:
+  matrix:
+    - PKGARCH=i386
+    - PKGARCH=amd64

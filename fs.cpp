@@ -44,6 +44,9 @@ QString fs::fileRead(const QString &path){
         //return fields;
         return data;
     }
+    else {
+        qDebug()<< "Err : File not found";
+    }
 }
 
 QString fs::appPath(){

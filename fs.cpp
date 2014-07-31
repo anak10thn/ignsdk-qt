@@ -147,6 +147,12 @@ QString fs::openDirDialog(){
     }
 }
 
+QString fs::saveFileDialog(){
+    QFileDialog *fd = new QFileDialog;
+    QString directory = fd->getSaveFileName();
+    return directory;
+}
+
 QStringList fs::list(const QString &path){
     QDirIterator dirIt(path,QDirIterator::Subdirectories);
     QStringList list;

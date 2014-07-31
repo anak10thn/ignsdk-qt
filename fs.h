@@ -44,6 +44,7 @@ public slots:
     bool copy(const QString &src, const QString &des);
     QString openFileDialog();
     QString openDirDialog();
+    QString saveFileDialog();
     QStringList list(const QString &path);
     QVariant info(const QString &path);
 };

@@ -34,6 +34,7 @@ void ignnetwork::setProxy(const QVariant &config){
 
     QJsonObject jObject = json.object();
     QVariantMap set_proxy = jObject.toVariantMap();
+
     if(set_proxy["type"].toString() != ""){
         QNetworkProxy proxy;
         QString proxy_type = set_proxy["type"].toString();

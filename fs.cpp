@@ -36,12 +36,12 @@ QString fs::fileRead(const QString &path){
             fields.append(out.readLine());
 
         }*/
-        QString data = out.readLine();
+        QString data = out.readAll();
         /*foreach (const QString text, fields){
-            qDebug() << text.toStdString();
+            qDebug() << text.toUtf8();
         }*/
         file.close();
-
+        //return fields;
         return data;
     }
 }

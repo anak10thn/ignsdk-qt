@@ -421,6 +421,12 @@ void ign::download_signal(qint64 recieved, qint64 total){
     emit downloadProgress(recieved,total);
 }
 
+/*javascript evaluate include external script*/
+void ign::include(QString path){
+    QString script = this->m_filesystem->fileRead(path);
+    this->web.page()->mainFrame()->evaluateJavaScript(script);
+}
+
 /*IGN SQL*/
 QObject *ign::sql(){
     if(!m_sqldrv)

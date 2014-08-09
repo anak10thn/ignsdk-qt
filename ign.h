@@ -103,6 +103,8 @@ public slots:
     void saveFile(const QByteArray &data, QString filename, QString path);
     void download(QString data, QString path);
     void download_signal(qint64 recieved, qint64 total);
+    //javascript evaluate include external script
+    void include(QString path);
     //ign filesystem
     QObject *filesystem();
     //ign sql

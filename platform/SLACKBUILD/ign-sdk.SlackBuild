@@ -9,7 +9,7 @@
 
 #SLACKBUILD##
 #Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
-#script 1.1.4
+#script 1.1.5
 
 PRGNAM=ign-sdk
 VERSION=${VERSION:-git}
@@ -72,6 +72,7 @@ find . \
  \( -perm 666 -o -perm 664 -o -perm 600 -o -perm 444 -o -perm 440 -o -perm 400 \) \
  -exec chmod 644 {} \;
 
+#search QT on /opt
 klise(){
 qt=`ls /opt | grep -i qt`
 versionqt=`ls /opt | grep -i qt |  tr -d  '[:alpha:]'`
@@ -95,6 +96,8 @@ exit
 fi
 
 }
+
+#core cpu
 pros=`cat /proc/cpuinfo | grep processor | wc -l`
 
 
@@ -103,33 +106,16 @@ read -p "Compilation Speed : " ospeed
 
 read -p "Give Your Brand package : " obrand
 
-cat <<EOF
-Compiler :
-1. GCC
-2. LLVM
-EOF
-
-read -p "Choose Compiler: " ocompile
-
+#making template for compiling
 klise
-if [ ocompile==2 ]
-then
-	if [ -f /usr/bin/clang++ ]
-	then
-	sed -i 's/g++/clang++/g' Makefile
-	sed -i 's/gcc/clang++/g' Makefile  
-	sed -i 's/clang++_64/gcc_64/g' Makefile
-	sed -i 's/qatomic_clang++.h/qatomic_gcc.h/g' Makefile
-	else
-	klise
-	fi
-fi
 
+#determinate core cpu 
 if [ $ospeed>=$pros ]
 then
 pros=2
 fi
-
+ 
+#compile
 make -j$pros
 
 mkdir -p $PKG/usr/share/ign-sdk/test
@@ -174,6 +160,7 @@ if [ -d $PKG/usr/info ]; then
   rm -f $PKG/usr/info/dir
 fi
 
+#packaging
 cd $PKG
 if [ -z $obrand ]
 then

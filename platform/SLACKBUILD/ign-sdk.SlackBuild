@@ -73,23 +73,27 @@ find . \
  -exec chmod 644 {} \;
 
 klise(){
-if [ -d /opt/Qt5.2.0/5.2.0/gcc_64/ ]
+qt=`ls /opt | grep -i qt`
+versionqt=`ls /opt | grep -i qt |  tr -d  '[:alpha:]'`
+
+if [ -d /opt/$qt/$versionqt/gcc_64/ ]
 then
-/opt/Qt5.2.0/5.2.0/gcc_64/bin/qmake
-elif [ -d /opt/Qt5.2.0/5.2.0/gcc/ ]
+	/opt/$qt/$versionqt/gcc_64/bin/qmake
+elif [ -d /opt/$qt/$versionqt/gcc/ ]
 then
-/opt/Qt5.2.0/5.2.0/gcc/bin/qmake        
+	/opt/$qt/$versionqt/gcc/bin/qmake        
 elif [ -d /usr/lib64/qt/ ]
 then
-qmake
+	qmake
 elif [ /usr/lib/qt/bin ]
 then
-qmake
+	qmake
 else
-echo "update your QT5 to version QT5.2.0"
-read -p " Press Enter to Exit " 
+	echo "update your QT"
+	read -p " Press Enter to Exit " 
 exit 
 fi
+
 }
 pros=`cat /proc/cpuinfo | grep processor | wc -l`
 

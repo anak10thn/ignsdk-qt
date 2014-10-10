@@ -11,6 +11,7 @@
 #Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
 #script 1.1.5
 
+#Initialitation
 PRGNAM=ignsdk
 VERSION=${VERSION:-git}
 BUILD=${BUILD:-ign1}

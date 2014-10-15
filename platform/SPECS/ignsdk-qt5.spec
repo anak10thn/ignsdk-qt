@@ -9,8 +9,11 @@ Source0:http://github.com/anak10thn/ignsdk-qt/archive/master.zip
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:qt5-qtwebkit
 Requires:qt5-qtbase-mysql
+Requires:qt5-qtdeclarative
+Requires:qt5-qtxmlpatterns
 BuildRequires:qt5-qtwebkit-devel
 BuildRequires:gcc-c++
+BuildRequires:qt5-qtdeclarative-devel
 %description
 IGOS Nusantara  Software Development Kit
 

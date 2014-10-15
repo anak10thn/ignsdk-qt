@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.1.5
-Release:20140512
+Version:1.1.6
+Release:20141015
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
@@ -171,6 +171,14 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
+* Wed Oct 15 2014 ibnu yahya <linux@toroo.org>
+- UPDATE : version 1.1.6
+- NEW API : Include Javascript Evaluate #138
+- NEW API : Save File Dialog #137
+- FIX BUGS : Read File #136
+- FIX BUGS : Exec Function #133
+- FIX BUGS : setUrl #132
+
 * Mon May 12 2014 ibnu yahya <linux@toroo.org>
 - FIX : live preview
 - UDPATE : final version 1.1.5 

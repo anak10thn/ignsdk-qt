@@ -1,3 +1,29 @@
+ignsdk-debian (1.1.6) testing; urgency=medium
+
+  * Fix bug on readFile() API (Closed #136)
+  * New API: saveFileDialog() (Closed #137)
+  * Include JavascriptEvaluate (Closed #138)
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sun, 02 Nov 2014 10:40:17 +0700
+
+ignsdk-debian (1.1.5.99+build3) testing; urgency=medium
+
+  * debian/control: Remove unnecessary lines (Breaks, Replaces, Provides)
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sun, 14 Sep 2014 07:58:22 +0700
+
+ignsdk-debian (1.1.5.99+build2) testing; urgency=medium
+
+  * Rebuild against new Qt version
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 17 Jun 2014 19:28:50 +0700
+
+ignsdk-debian (1.1.5.99+build1) testing; urgency=medium
+
+  * Improved API: concurrent .exec() output
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Wed, 28 May 2014 14:14:45 +0700
+
 ignsdk-debian (1.1.5.1) testing; urgency=medium
 
   * Add live preview feature

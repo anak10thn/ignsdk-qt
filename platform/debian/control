@@ -13,10 +13,6 @@ Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Recommends: ignsdk-examples, libqt5sql5-sqlite (>= 5.1.1), libqt5mysql5-mysql (>= 5.1.1)
 Suggests: ignsdk-devtools
-Replaces: ignsdk-debian
-Breaks: ignsdk-debian
-Conflicts: ignsdk-debian
-Provides: ignsdk-debian
 Description: IGOS Nusantara Software Development Kit (IGNSDK) (launcher)
  This is Debian-compatible version of IGN Software Development
  Kit (IGNSDK).
@@ -26,9 +22,6 @@ Description: IGOS Nusantara Software Development Kit (IGNSDK) (launcher)
 Package: ignsdk-examples
 Architecture: all
 Depends: ${misc:Depends}, ignsdk (>= 1.1.3.4)
-Breaks: ignsdk-debian-example
-Replaces: ignsdk-debian-example
-Conflicts: ignsdk-debian-example
 Description: IGOS Nusantara Software Development Kit (IGNSDK) (example apps)
  This is Debian-compatible version of IGN Software Development
  Kit (IGNSDK).
@@ -39,9 +32,6 @@ Package: ignsdk-devtools
 Architecture: all
 Depends: ${misc:Depends}, fakeroot, debhelper, devscripts, dh-make, ignsdk (>= 1.1.3.4)
 Suggests: git, rpm
-Breaks: ignsdk-debian-dev
-Replaces: ignsdk-debian-dev
-Conflicts: ignsdk-debian-dev
 Description: IGOS Nusantara Software Development Kit (IGNSDK) (development tools)
  This is Debian-compatible version of IGN Software Development
  Kit (IGNSDK).

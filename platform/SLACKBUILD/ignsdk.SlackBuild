@@ -62,7 +62,7 @@ then
 	git branch slack-$VERSION $VERSION
 	git checkout slack-$VERSION
 else
-	VERSION="v.1.1.5"
+	VERSION="v.1.1.6"
 	git branch slack-$VERSION
 	git checkout slack-$VERSION
 fi

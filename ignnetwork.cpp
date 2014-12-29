@@ -51,7 +51,7 @@ void ignnetwork::setProxy(const QVariant &config){
             proxy.setType(QNetworkProxy::HttpCachingProxy);
         }
         else{
-            qDebug()<<"Please input your type proxy (http,socks5,ftp,httpCaching)!";
+            qDebug()<<"Proxy type is not specified. Available options: http, socks5, ftp, httpCaching.";
         }
 
         if(set_proxy["url"].toString() != ""){
@@ -61,7 +61,7 @@ void ignnetwork::setProxy(const QVariant &config){
             proxy.setPort(url_proxy.at(1).toInt());
         }
         else{
-            qDebug()<<"Please input your hostname:port Ex: 127.0.0.1:8080!";
+            qDebug()<<"Proxy address is not specified.";
         }
 
         if(set_proxy["username"].toString() != ""){

@@ -12,7 +12,7 @@ QString ignsystem::cliOut(const QString& cli){
     os.setProcessChannelMode(QProcess::MergedChannels);
     os.start(cli);
     int pid = os.pid();
-    qDebug() << pid;
+    qDebug() << "Executing process with PID" << pid;
     os.waitForFinished(-1);
     return os.readAllStandardOutput();
 }

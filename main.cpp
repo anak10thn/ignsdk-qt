@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <iostream>
 #include <getopt.h>
+#include "version.h"
 using namespace std;
 int main(int argc, char *argv[])
 {
@@ -89,7 +90,7 @@ int main(int argc, char *argv[])
     }
 
     if(version){
-        qDebug() << "IGNSDK Version : "<< w.sdkVersion();
+        printf("IGNSDK version %s (%s). Compiled on %s %s. Maintained by %s.\n", IGNSDK_VERSION, IGNSDK_CODENAME, __DATE__, __TIME__, IGNSDK_MAINTAINER);
         exit(0);
     }
 

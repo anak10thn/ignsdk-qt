@@ -108,9 +108,14 @@ int main(int argc, char *argv[])
             opt += "/index.html";
         }
 
-        w.render(opt);
-        w.config(url);
-        w.show();
+        if (QFile::exists(opt)){
+          w.render(opt);
+          w.config(url);
+          w.show();
+        } else {
+          qDebug() << "Error:" << opt << "is not exist.";
+          exit(1);
+        }
 
     }
     else{
@@ -128,13 +133,18 @@ int main(int argc, char *argv[])
         if (result)
         {
             directory = fd->selectedFiles()[0];
-            w.config(directory);
-            w.render(directory+"/index.html");
-            w.show();
+            if (QFile::exists(directory + "/index.html"))
+            {
+              w.config(directory);
+              w.render(directory+"/index.html");
+              w.show();
+            } else {
+              qDebug() << "Error:" << (directory + "/index.html") << "is not exist.";
+              exit(1);
+            }
         }
         else {
-            w.render("http://www.igos-nusantara.or.id");
-            w.show();
+            exit(1);
         }
     }
 

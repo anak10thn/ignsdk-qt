@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
 
     QCommandLineOption cmd_project(QStringList() << "p" << "project", "Specify project directory", "directory");
     cmd_parser.addOption(cmd_project);
-    QCommandLineOption cmd_file(QStringList() << "f" << "file", "Load specific HTML file", "file");
+    QCommandLineOption cmd_file(QStringList() << "f" << "file", "Load specific HTML file instead of index.html", "file");
     cmd_parser.addOption(cmd_file);
     QCommandLineOption cmd_dev(QStringList() << "d" << "development", "Activate development mode");
     cmd_parser.addOption(cmd_dev);
@@ -46,8 +46,13 @@ int main(int argc, char *argv[])
     }
 
     if (cmd_parser.isSet(cmd_file)) {
-      file = true;
-      optional = cmd_parser.value(cmd_file);
+      if (cmd_parser.isSet(cmd_project)) {
+        file = true;
+        optional = cmd_parser.value(cmd_file);
+      } else {
+        qDebug() << "Error: Project directory must be specified.";
+        exit(1);
+      }
     }
 
     QString opt = url;

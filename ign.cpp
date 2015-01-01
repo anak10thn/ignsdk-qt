@@ -466,8 +466,11 @@ void ign::liveCode(){
     QDir dirApp = QFileInfo(file).absoluteDir();
     QStringList list = this->m_filesystem->list(dirApp.absolutePath());
     foreach (const QString &file, list) {
-        this->live.addPath(file);
-        //qDebug() << "live preview enable on " << file;
+        if (file != dirApp.absolutePath() + "/.."){
+            this->live.addPath(file);
+            qDebug() << "Monitoring changes on" << file;
+        }
+
     }
     connect(&live,SIGNAL(directoryChanged(const QString &)),
             this, SLOT(fileChanged(const QString &)));

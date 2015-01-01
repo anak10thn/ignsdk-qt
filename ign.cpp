@@ -5,6 +5,7 @@
 #include "cmath"
 #include <QtCore/QVariant>
 #include <iostream>
+#include "version.h"
 using namespace std;
 
 ign::ign(QObject *parent)
@@ -14,7 +15,7 @@ ign::ign(QObject *parent)
     m_filesystem(0),
     m_ignnetwork(0)
 {
-    this->version = "1.1.6";
+    this->version = QString(IGNSDK_VERSION);
     this->debugging = false;
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));

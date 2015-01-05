@@ -25,7 +25,8 @@ HEADERS  += ign.h \
     ignsql.h \
     ignsystem.h \
     ignmovedrag.h \
-    ignnetwork.h
+    ignnetwork.h \
+    version.h
 
 RESOURCES += \
     ign.qrc

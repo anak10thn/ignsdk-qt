@@ -8,6 +8,11 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QNetworkProxy>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QUrl>
+#include <QUrlQuery>
+#include <QEventLoop>
 
 class ignnetwork : public QObject
 {
@@ -17,6 +22,7 @@ public:
 public slots:
     QString myIP();
     void setProxy(const QVariant &config);
+    QString get(const QString &url);
 };
 
 #endif // IGNNETWORK_H

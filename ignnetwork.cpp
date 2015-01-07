@@ -75,3 +75,21 @@ void ignnetwork::setProxy(const QVariant &config){
         QNetworkProxy::setApplicationProxy(proxy);
     }
 }
+
+QString ignnetwork::get(const QString &url){
+    QEventLoop eventLoop;
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+    QUrl uri(url);
+    QNetworkRequest req(uri);
+    QNetworkReply *reply = mgr.get(req);
+    eventLoop.exec();
+    if(reply->error() == QNetworkReply::NoError){
+        return reply->readAll();
+        delete reply;
+    }
+    else{
+        return reply->errorString();
+        delete reply;
+    }
+}

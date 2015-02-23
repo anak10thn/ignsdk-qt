@@ -7,6 +7,12 @@
 #include <QCryptographicHash>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QDebug>
+#include <QTextDocument>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include "ignjson.h"
 
 class ignsystem : public QObject
 {
@@ -14,6 +20,7 @@ class ignsystem : public QObject
 public:
     explicit ignsystem(QObject *parent = 0);
     QProcess *proc;
+    ignjson *jsonParse;
 
 public slots:
     QString cliOut(const QString& cli);
@@ -22,6 +29,7 @@ public slots:
     void desktopService(const QString& link);
     void _out();
     void kill();
+    bool print(const QVariant &config);
 
 signals:
     void out(const QString& link);

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network core webkitwidgets sql
+QT       += network core webkitwidgets sql printsupport
 
 TARGET = ignsdk
 TEMPLATE = app
@@ -26,7 +26,8 @@ HEADERS  += src/ign.h \
     src/ignsystem.h \
     src/ignmovedrag.h \
     src/ignnetwork.h \
-    src/version.h
+    src/version.h \
+    src/ignjson.h
 
 RESOURCES += \
     ign.qrc

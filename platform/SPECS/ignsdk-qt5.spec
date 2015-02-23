@@ -38,7 +38,7 @@ install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/man/man1
 qmake-qt5
 make
-cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
+cp -rf bin/ignsdk $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 cp -rf bin/ignsdk-app-builder $RPM_BUILD_ROOT/usr/bin
@@ -174,6 +174,11 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
+* Tue Feb 24 2015 ibnu yahya <anak10thn@gmail.com>
+- UPDATE : version 1.1.7 alpha
+- NEW API : print
+- NEW API : json parser
+
 * Wed Oct 15 2014 ibnu yahya <linux@toroo.org>
 - UPDATE : version 1.1.6
 - NEW API : Include Javascript Evaluate #138

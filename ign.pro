@@ -37,3 +37,7 @@ ICON += icon/ignsdk-logo.icns
 
 OTHER_FILES += \
     bar-descriptor.xml
+
+OBJECTS_DIR = ./build
+MOC_DIR = ./build
+DESTDIR = ./bin

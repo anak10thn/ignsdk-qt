@@ -2,7 +2,8 @@
 #include <QDebug>
 
 ignsystem::ignsystem(QObject *parent)
-    : QObject(parent)
+    : QObject(parent),
+      jsonParse(0)
 {
 
 }
@@ -62,4 +63,39 @@ void ignsystem::_out(){
 
 void ignsystem::kill(){
     proc->kill();
+}
+
+bool ignsystem::print(const QVariant &config){
+    QVariantMap conf = jsonParse->jsonParser(config).toVariantMap();
+    QPrinter print;
+    QTextDocument *doc = new QTextDocument();
+
+    QString type = conf["type"].toString();
+    QString txt = conf["content"].toString();
+    QString out = conf["out"].toString();
+
+    if(type == "html")
+    {
+        doc->setHtml(txt);
+    }
+    else
+    {
+        doc->setPlainText(txt);
+    }
+
+    if(out == "pdf"){
+        print.setOutputFormat(QPrinter::PdfFormat);
+    }
+
+    QPrintDialog *dialog = new QPrintDialog(&print);
+    if (dialog->exec() != QDialog::Accepted)
+    {
+        return false;
+    }
+    else
+    {
+        doc->print(&print);
+        delete doc;
+        return true;
+    }
 }

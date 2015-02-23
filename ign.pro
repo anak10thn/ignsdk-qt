@@ -10,23 +10,23 @@ TARGET = ignsdk
 TEMPLATE = app
 CONFIG += qt
 
-SOURCES += main.cpp\
-        ign.cpp \
-    fs.cpp \
-    igndownload.cpp \
-    ignsql.cpp \
-    ignsystem.cpp \
-    ignmovedrag.cpp \
-    ignnetwork.cpp
+SOURCES += src/main.cpp\
+        src/ign.cpp \
+    src/fs.cpp \
+    src/igndownload.cpp \
+    src/ignsql.cpp \
+    src/ignsystem.cpp \
+    src/ignmovedrag.cpp \
+    src/ignnetwork.cpp
 
-HEADERS  += ign.h \
-    fs.h \
-    igndownload.h \
-    ignsql.h \
-    ignsystem.h \
-    ignmovedrag.h \
-    ignnetwork.h \
-    version.h
+HEADERS  += src/ign.h \
+    src/fs.h \
+    src/igndownload.h \
+    src/ignsql.h \
+    src/ignsystem.h \
+    src/ignmovedrag.h \
+    src/ignnetwork.h \
+    src/version.h
 
 RESOURCES += \
     ign.qrc

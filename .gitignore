@@ -2,3 +2,4 @@
 ign.pro.user*
 build/
 bin/ignsdk
+Makefile

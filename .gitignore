@@ -1,2 +1,4 @@
 .DS_Store
 ign.pro.user*
+build/
+bin/ignsdk

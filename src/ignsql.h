@@ -7,6 +7,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonParseError>
+#include "ignjson.h"
 
 class ignsql : public QObject
 {
@@ -15,11 +16,13 @@ public:
     explicit ignsql(QObject *parent = 0);
     //QSqlQuery qry;
     QSqlDatabase db;
+    ignjson *json;
 signals:
     //void record_sig(bool err,const QByteArray& data);
     //void record(bool err,const QByteArray& data);
 public slots:
     bool driver(const QString& drv, QString connect);
+    bool driver(const QVariant &config);
     QVariant query(const QString& qr);
     //void record_slot(bool err,const QByteArray& data);
 };

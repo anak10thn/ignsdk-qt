@@ -1,0 +1,32 @@
+.TH IGNSDK-APP-CREATOR 1 "February 21, 2013" "Version 1.1.6" "IGNSDK App Creator - General Commands Manual"
+.SH NAME
+IGNSDK App Creator \- IGOS Nusantara Software Development Kit (Application Creator)
+.SH SYNOPSIS
+ignsdk-app-creator [-p|--pkgname \fBpackage_name\fR] [-g|--git] [-r|--remote \fBremote_url\fR]
+.SH DESCRIPTION
+.PP
+IGNSDK App Creator is a tool that assists you to create a new IGNSDK-based application. This application will create a new application in $HOME/IGNSDK-APP/ with default template.
+.PP
+IGNSDK is a Software Development Kit (SDK) designed specifically for developing hybrid applications in IGOS Nusantara. But, now also available for other Linux distributions, 
+such as Archlinux, Slackware, Ubuntu, and Debian. You can write desktop applications in HTML and Javascript language with IGNSDK.
+.SH OPTIONS
+.IP "-p, --pkgname \fBpackage_name\fR" 32
+Specify package name.
+.IP "-g, --git" 32
+Initialize Git repository and commit initial project files. Git binary must be located in PATH.
+.IP "-r, --remote \fBremote_url\fR" 32
+Set Git remote URL.
+.IP "--no-packaging" 32
+Just extract and configure default template, skip packaging process.
+.IP "-x, --distribution \fBdistribution\fR" 32
+(Debian-only) Use other distribution's package format instead of system's. Supported distribution is \fBign\fR (RPM format).
+.IP "-h, --help" 32
+Show help.
+.SH BUGS
+.PP
+See https://github.com/anak10thn/ignsdk-qt/issues/
+.SH "SEE ALSO"
+.PP
+\fBignsdk\fR(1), \fBignsdk-app-builder\fR(1)
+.SH AUTHOR
+This manual page was written by Surya Handika Putratama <ubunteroz@gmail.com>.

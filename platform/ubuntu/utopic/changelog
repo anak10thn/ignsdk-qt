@@ -1,14 +1,14 @@
-ignsdk-debian (1.1.6.99+trusty2) trusty; urgency=medium
+ignsdk-debian (1.1.6.99+utopic2) utopic; urgency=medium
 
-  * Build for Trusty
+  * Build for Utopic
 
- -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 24 Feb 2015 07:59:37 +0700
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 24 Feb 2015 08:00:37 +0700
 
-ignsdk-debian (1.1.6.99+trusty1) trusty; urgency=medium
+ignsdk-debian (1.1.6.99+utopic1) utopic; urgency=medium
 
-  * Build for Trusty
+  * Build for Utopic
 
- -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 23 Feb 2015 03:19:11 +0700
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 23 Feb 2015 03:23:08 +0700
 
 ignsdk-debian (1.1.6.99+build1) testing; urgency=medium
 

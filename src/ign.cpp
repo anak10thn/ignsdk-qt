@@ -482,3 +482,22 @@ void ign::liveCode(){
 QString ign::sdkVersion(){
     return this->version;
 }
+
+/*Print API*/
+bool ign::print(const QVariant &config){
+    return this->m_ignsystem->print(config);
+}
+
+bool ign::print(){
+    QPrinter print;
+    QPrintDialog *dialog = new QPrintDialog(&print);
+    if (dialog->exec() != QDialog::Accepted)
+    {
+        return false;
+    }
+    else
+    {
+        frame->print(&print);
+        return true;
+    }
+}

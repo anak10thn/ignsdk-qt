@@ -115,6 +115,9 @@ public slots:
     QObject *net();
     //ignsdk version
     QString sdkVersion();
+    //ignsdk print
+    bool print(const QVariant &config);
+    bool print();
 };
 
 #endif // IGN_H

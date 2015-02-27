@@ -51,6 +51,7 @@ OTHER_FILES += \
 
 OBJECTS_DIR = ./build
 MOC_DIR = ./build
+RCC_DIR = ./build
 DESTDIR = ./bin
 
 DISTFILES += \

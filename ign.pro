@@ -17,7 +17,8 @@ SOURCES += src/main.cpp\
     src/ignsql.cpp \
     src/ignsystem.cpp \
     src/ignmovedrag.cpp \
-    src/ignnetwork.cpp
+    src/ignnetwork.cpp \
+    src/ignprocess.cpp
 
 HEADERS  += src/ign.h \
     src/fs.h \
@@ -27,7 +28,8 @@ HEADERS  += src/ign.h \
     src/ignmovedrag.h \
     src/ignnetwork.h \
     src/version.h \
-    src/ignjson.h
+    src/ignjson.h \
+    src/ignprocess.h
 
 RESOURCES += \
     ign.qrc

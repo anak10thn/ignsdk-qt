@@ -3,7 +3,8 @@
 
 ignsystem::ignsystem(QObject *parent)
     : QObject(parent),
-      jsonParse(0)
+      jsonParse(0),
+      proc(0)
 {
 
 }
@@ -50,20 +51,10 @@ void ignsystem::desktopService(const QString &link){
     QDesktopServices ::openUrl(QUrl(link));
 }
 
-int ignsystem::exec(const QString& cli){
-    proc = new QProcess( this );
-    proc->setReadChannelMode(QProcess::MergedChannels);
-    connect( proc, SIGNAL(readyReadStandardOutput()), this, SLOT( _out()) );
-    proc->start(cli);
-    return proc->pid();
-}
-
-void ignsystem::_out(){
-    emit out(proc->readAllStandardOutput());
-}
-
-void ignsystem::kill(){
-    proc->kill();
+QObject *ignsystem::exec(const QString& cli){
+    proc = new ignprocess;
+    proc->exec(cli);
+    return proc;
 }
 
 bool ignsystem::print(const QVariant &config){

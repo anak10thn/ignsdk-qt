@@ -1,0 +1,39 @@
+Source: ignsdk-debian
+Section: devel
+Priority: optional
+Maintainer: Surya Handika Putratama <ubunteroz@gmail.com>
+Build-Depends: debhelper (>= 8.0.0), qt5-qmake (>= 5.1.1), qt5-default (>= 5.1.1), qtbase5-dev (>= 5.1.1), qtdeclarative5-dev (>= 5.1.1), libqt5opengl5-dev (>= 5.1.1), libqt5webkit5-dev (>= 5.1.1), libxslt1-dev (>= 1.1.28), libxml2-dev (>= 2.9.1), libgstreamer0.10-dev (>= 0.10.36), libglib2.0-dev (>= 2.36.4), libsqlite3-dev (>= 3.8.0), libgstreamer-plugins-base0.10-dev (>= 0.10.36)
+Standards-Version: 3.9.5
+Homepage: http://ignsdk.web.id/
+Vcs-Browser: https://github.com/ubunteroz/ignsdk-debian
+Vcs-Git: git://github.com/ubunteroz/ignsdk-debian.git
+
+Package: ignsdk
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: ignsdk-examples, libqt5sql5-sqlite (>= 5.1.1), libqt5mysql5-mysql (>= 5.1.1)
+Suggests: ignsdk-devtools
+Description: IGOS Nusantara Software Development Kit (IGNSDK) (launcher)
+ This is Debian-compatible version of IGN Software Development
+ Kit (IGNSDK).
+ .
+ This package provides application launcher.
+
+Package: ignsdk-examples
+Architecture: all
+Depends: ${misc:Depends}, ignsdk (>= 1.1.3.4)
+Description: IGOS Nusantara Software Development Kit (IGNSDK) (example apps)
+ This is Debian-compatible version of IGN Software Development
+ Kit (IGNSDK).
+ .
+ This package provides example apps.
+
+Package: ignsdk-devtools
+Architecture: all
+Depends: ${misc:Depends}, fakeroot, debhelper, devscripts, dh-make, ignsdk (>= 1.1.3.4)
+Suggests: git, rpm
+Description: IGOS Nusantara Software Development Kit (IGNSDK) (development tools)
+ This is Debian-compatible version of IGN Software Development
+ Kit (IGNSDK).
+ .
+ This package provides development tools for Debian GNU/Linux.

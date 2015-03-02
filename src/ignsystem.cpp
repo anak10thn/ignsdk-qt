@@ -50,11 +50,12 @@ void ignsystem::desktopService(const QString &link){
     QDesktopServices ::openUrl(QUrl(link));
 }
 
-void ignsystem::exec(const QString& cli){
+int ignsystem::exec(const QString& cli){
     proc = new QProcess( this );
     proc->setReadChannelMode(QProcess::MergedChannels);
     connect( proc, SIGNAL(readyReadStandardOutput()), this, SLOT( _out()) );
     proc->start(cli);
+    return proc->pid();
 }
 
 void ignsystem::_out(){

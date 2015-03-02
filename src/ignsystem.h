@@ -13,26 +13,25 @@
 #include <QPrintDialog>
 #include <QPrintPreviewDialog>
 #include "ignjson.h"
+#include "ignprocess.h"
 
 class ignsystem : public QObject
 {
     Q_OBJECT
 public:
     explicit ignsystem(QObject *parent = 0);
-    QProcess *proc;
     ignjson *jsonParse;
+    ignprocess *proc;
 
 public slots:
     QString cliOut(const QString& cli);
-    void exec(const QString& cli);
+    QObject *exec(const QString& cli);
     QString hash(const QString& data, QString hash_func);
     void desktopService(const QString& link);
-    void _out();
-    void kill();
     bool print(const QVariant &config);
 
 signals:
-    void out(const QString& link);
+
 };
 
 #endif // IGNSYSTEM_H

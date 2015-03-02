@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.1.6
-Release:20141015
+Version:1.1.7
+Release:20150226
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id

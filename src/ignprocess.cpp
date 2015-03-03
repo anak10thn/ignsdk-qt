@@ -21,3 +21,6 @@ void ignprocess::kill(){
     this->proc.kill();
 }
 
+int ignprocess::pid(){
+    return this->proc.pid();
+}

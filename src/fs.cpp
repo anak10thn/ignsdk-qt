@@ -46,6 +46,7 @@ QString fs::fileRead(const QString &path){
     }
     else {
         qDebug()<< "Err : File not found";
+        return "";
     }
 }
 
@@ -65,6 +66,9 @@ bool fs::dir(const QString &opt, const QString &path){
     }
     else if(opt == "remove"){
         return dir.rmdir(path);
+    }
+    else{
+        return false;
     }
 }
 
@@ -124,7 +128,7 @@ QString fs::openFileDialog(){
         return directory;
     }
     else {
-        return false;
+        return "";
     }
 }
 
@@ -145,11 +149,37 @@ QString fs::openDirDialog(){
         directory = fd->selectedFiles()[0];
         return directory;
     }
+    else {
+        return "";
+    }
 }
 
 QString fs::saveFileDialog(){
     QFileDialog *fd = new QFileDialog;
     QString directory = fd->getSaveFileName();
+    return directory;
+}
+
+QString fs::saveFileDialog(const QVariant &config){
+    QVariantMap conf = json->jsonParser(config).toVariantMap();
+    QString title = "Save File",
+            path = this->homePath(),
+            ext = "";
+    if(conf["title"].toString() != ""){
+        title = conf["title"].toString();
+    }
+
+    if(conf["path"].toString() != ""){
+        path = conf["path"].toString();
+    }
+
+    if(conf["info"].toString() != ""){
+        ext = conf["info"].toString();
+    }
+
+    QFileDialog *fd = new QFileDialog;
+    QWidget *widget = new QWidget();
+    QString directory = fd->getSaveFileName(widget, title,path,ext);
     return directory;
 }
 

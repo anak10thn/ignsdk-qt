@@ -5,6 +5,5 @@
         <file>css/ign.css</file>
         <file>js/skulpt.js</file>
         <file>js/builtin.js</file>
-        <file>js/include.js</file>
     </qresource>
 </RCC>

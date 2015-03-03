@@ -25,6 +25,9 @@ bool ignsql::driver(const QString &drv, QString connect){
         this->db.setDatabaseName(connect);
         return this->db.open();
     }
+    else{
+        return false;
+    }
 
 }
 

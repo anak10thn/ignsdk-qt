@@ -42,3 +42,6 @@ OTHER_FILES += \
 OBJECTS_DIR = ./build
 MOC_DIR = ./build
 DESTDIR = ./bin
+
+DISTFILES += \
+    LICENSE.BSD

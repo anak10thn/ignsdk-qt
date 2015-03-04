@@ -18,12 +18,12 @@ bool fs::fileWrite(const QString &path, const QString &data){
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream out(&file);
         out << data;
+        file.close();
         return true;
     }
     else {
         return false;
     }
-    file.close();
 }
 
 QString fs::fileRead(const QString &path){

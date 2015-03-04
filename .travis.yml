@@ -7,6 +7,7 @@ script: pdebuild --use-pdebuild-internal --architecture $PKGARCH
 install: true
 
 before_install:
+  - ln -s platform/debian/ .
   - sudo apt-get update -qq
   - sudo apt-get install -qq pbuilder devscripts eatmydata
   - wget http://ftp.tw.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.48+deb7u1_all.deb -O /home/travis/debootstrap.deb

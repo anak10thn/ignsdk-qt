@@ -10,7 +10,7 @@ before_install:
   - ln -s platform/debian/ .
   - sudo apt-get update -qq
   - sudo apt-get install -qq pbuilder devscripts eatmydata
-  - wget http://ftp.tw.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.48+deb7u1_all.deb -O /home/travis/debootstrap.deb
+  - wget http://ftp.tw.debian.org/debian/pool/main/d/debootstrap/debootstrap_1.0.48+deb7u2_all.deb -O /home/travis/debootstrap.deb
   - wget http://ftp.tw.debian.org/debian/pool/main/d/debian-archive-keyring/debian-archive-keyring_2014.1~deb7u1_all.deb -O /home/travis/debian-archive-keyring.deb
   - sudo dpkg -i /home/travis/*.deb
   - mkdir -p /home/travis/builder/result/$PKGARCH

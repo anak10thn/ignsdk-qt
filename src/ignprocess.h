@@ -12,7 +12,7 @@ public:
     QProcess proc;
 
 signals:
-    void out(const QString& link);
+    void out(const QString& out,const QString& err);
 
 public slots:
     void exec(const QString& cli);

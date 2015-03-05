@@ -7,14 +7,14 @@ ignprocess::ignprocess(QObject *parent) :
 }
 
 void ignprocess::exec(const QString &cli){
-    //proc = new QProcess( this );
     proc.setReadChannelMode(QProcess::MergedChannels);
     connect( &proc, SIGNAL(readyReadStandardOutput()), this, SLOT( _out()) );
+    connect( &proc, SIGNAL(readyReadStandardError()), this, SLOT( _out()) );
     proc.start(cli);
 }
 
 void ignprocess::_out(){
-    emit this->out(proc.readAllStandardOutput());
+    emit this->out(proc.readAllStandardOutput(),proc.readAllStandardError());
 }
 
 void ignprocess::kill(){

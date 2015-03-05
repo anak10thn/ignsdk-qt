@@ -48,7 +48,7 @@ QString ignsystem::hash(const QString &data,QString hash_func){
 }
 
 void ignsystem::desktopService(const QString &link){
-    QDesktopServices ::openUrl(QUrl(link));
+    QDesktopServices::openUrl(QUrl(link));
 }
 
 QObject *ignsystem::exec(const QString& cli){

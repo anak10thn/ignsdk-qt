@@ -173,8 +173,8 @@ QString fs::saveFileDialog(const QVariant &config){
         path = conf["path"].toString();
     }
 
-    if(conf["info"].toString() != ""){
-        ext = conf["info"].toString();
+    if(conf["type"].toString() != ""){
+        ext = conf["type"].toString();
     }
 
     QFileDialog *fd = new QFileDialog;

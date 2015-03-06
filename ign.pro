@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += network core webkitwidgets sql printsupport
+QT       += network core webkitwidgets sql printsupport serialport
 
 TARGET = ignsdk
 TEMPLATE = app
@@ -17,7 +17,8 @@ SOURCES += src/main.cpp\
     src/ignsql.cpp \
     src/ignsystem.cpp \
     src/ignnetwork.cpp \
-    src/ignprocess.cpp
+    src/ignprocess.cpp \
+    src/ignserial.cpp
 
 HEADERS  += src/ign.h \
     src/fs.h \
@@ -27,7 +28,8 @@ HEADERS  += src/ign.h \
     src/ignnetwork.h \
     src/version.h \
     src/ignjson.h \
-    src/ignprocess.h
+    src/ignprocess.h \
+    src/ignserial.h
 
 RESOURCES += \
     ign.qrc

@@ -4,10 +4,8 @@
 ignsystem::ignsystem(QObject *parent)
     : QObject(parent),
       jsonParse(0),
-      proc(0)
-{
-
-}
+      proc(0),
+      m_serial(0){}
 
 QString ignsystem::cliOut(const QString& cli){
     QProcess os;
@@ -55,6 +53,11 @@ QObject *ignsystem::exec(const QString& cli){
     proc = new ignprocess;
     proc->exec(cli);
     return proc;
+}
+
+QObject *ignsystem::serial(){
+    m_serial = new ignserial;
+    return m_serial;
 }
 
 bool ignsystem::print(const QVariant &config){

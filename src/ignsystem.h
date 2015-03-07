@@ -28,7 +28,8 @@ public:
 public slots:
     QString cliOut(const QString& cli);
     QObject *exec(const QString& cli);
-    QObject *serial();
+    QVariant serial();
+    QObject *serial(const QVariant &config);
     QString hash(const QString& data, QString hash_func);
     void desktopService(const QString& link);
     bool print(const QVariant &config);

@@ -55,8 +55,14 @@ QObject *ignsystem::exec(const QString& cli){
     return proc;
 }
 
-QObject *ignsystem::serial(){
+QVariant ignsystem::serial(){
     m_serial = new ignserial;
+    return m_serial->info();
+}
+
+QObject *ignsystem::serial(const QVariant &config){
+    m_serial = new ignserial;
+    m_serial->Read(config);
     return m_serial;
 }
 

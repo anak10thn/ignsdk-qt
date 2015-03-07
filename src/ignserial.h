@@ -6,6 +6,7 @@
 #include <QSerialPortInfo>
 #include <QTextStream>
 #include <QList>
+#include <QTimer>
 #include "ignjson.h"
 
 class ignserial : public QObject
@@ -14,9 +15,17 @@ class ignserial : public QObject
 public:
     explicit ignserial(QObject *parent = 0);
     ignjson *json;
+    QSerialPort read;
+    QTimer time;
 
 public slots:
     QVariant info();
+    void Read(const QVariant &config);
+    void readOut();
+
+signals:
+    void out(const QString& out,const QString& err);
+
 };
 
 #endif // IGNSERIAL_H

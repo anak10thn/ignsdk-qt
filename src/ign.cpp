@@ -104,7 +104,7 @@ void ign::showMessage(const QString &msg)
 
 /*action trigger*/
 void ign::quit(){
-    this->web.close();
+    exit(1);
 }
 
 void ign::back(){

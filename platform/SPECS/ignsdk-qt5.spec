@@ -11,9 +11,11 @@ Requires:qt5-qtwebkit
 Requires:qt5-qtbase-mysql
 Requires:qt5-qtdeclarative
 Requires:qt5-qtxmlpatterns
+Requires:qt5-qtserialport
 BuildRequires:qt5-qtwebkit-devel
 BuildRequires:gcc-c++
 BuildRequires:qt5-qtdeclarative-devel
+BuildRequires:qt5-qtserialport-devel
 %description
 IGOS Nusantara  Software Development Kit
 

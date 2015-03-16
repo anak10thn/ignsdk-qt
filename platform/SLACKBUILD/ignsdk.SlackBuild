@@ -9,11 +9,11 @@
 
 #SLACKBUILD##
 #Dwiyan Galuh W/wajatmaka (wajatmaka@gmail.com)
-#script 1.1.6
+#script 1.1.7
 
 #Initialitation
 PRGNAM=ignsdk
-VERSION=${VERSION:-git}
+VERSION=${VERSION:-v1.1.7}
 BUILD=${BUILD:-ign1}
 TAG=${TAG:-_wjt}
 
@@ -51,22 +51,54 @@ mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 
 rm -rf $PRGNAM
-git clone https://github.com/anak10thn/ignsdk-qt.git $PRGNAM
-cd $PRGNAM
 
-#Tester Beta and Release Tag
-VERSION="ready"
-if [ -z $VERSION ] 
-then 
-	VERSION=`git tag | sort -n | tail -1`
-	git branch slack-$VERSION $VERSION
-	git checkout slack-$VERSION
-else
-	VERSION="v.1.1.6"
-	git branch slack-$VERSION
-	git checkout slack-$VERSION
-fi
+#choose download source code
+menu_download(){
+	echo -e "#########IGNSDK BUILD SLACKWARE#########
+	1. Clone github
+	2. Compress zip github
+	3. Cancel Download Build ";
+	read -p 'Choose Download Source Code Method : ' dm
+	case $dm in
+		1 )
+			CHECK_ZIP=`ls $TMP/master.zip | wc -l 2> /dev/null`;
+			if [ "$CHECK_ZIP" -gt 0 ];then
+			unzip master.zip
+			mv ignsdk-qt-master $PRGNAM
+			cd $PRGNAM
+			else
+			git clone https://github.com/anak10thn/ignsdk-qt.git $PRGNAM
+			cd $PRGNAM
+			VERSION=`git tag | sort -n | tail -1`
+			git branch slack-$VERSION $VERSION
+			git checkout slack-$VERSION
+			fi
+		;;
+		2 )
+			CHECK_ZIP=`ls $TMP/master.zip | wc -l 2> /dev/null`;
+			if [ "$CHECK_ZIP" -gt 0 ];then
+			unzip master.zip
+			mv ignsdk-qt-master $PRGNAM
+			cd $PRGNAM
+			else
+			wget https://github.com/anak10thn/ignsdk-qt/archive/master.zip --no-check-certificate
+			unzip master.zip
+			mv ignsdk-qt-master $PRGNAM
+			cd $PRGNAM
+			fi
+		;;
+		3 ) 
+			exit 0
+		;;
+		* )
+			clear
+			menu_download
+		;;
+esac
+}
+menu_download;
 
+#change access
 chown -R root:root .
 find . \
  \( -perm 777 -o -perm 775 -o -perm 711 -o -perm 555 -o -perm 511 \) \
@@ -77,14 +109,14 @@ find . \
 #search QT on /opt and lib
 klise(){
 	qt=`ls /opt | grep -i qt`
-	versionqt=`ls /opt | grep -i qt |  tr -d  '[:alpha:]'`
+	versionqt=`ls /opt | grep -i qt |  tr -d  '[:alpha:]' | sed 's/..$//g'`
 
 	if [ -d /opt/$qt/$versionqt/gcc_64/ ]
 	then
-		/opt/$qt/$versionqt/gcc_64/bin/qmake
+		/opt/$qt/$versionqt/gcc_64/bin/qmake 
 	elif [ -d /opt/$qt/$versionqt/gcc/ ]
 	then
-		/opt/$qt/$versionqt/gcc/bin/qmake        
+		/opt/$qt/$versionqt/gcc/bin/qmake         
 	elif [ -d /usr/lib64/qt/ ]
 	then
 		qmake
@@ -98,8 +130,6 @@ klise(){
 	fi
 }
 
-#core cpu
-pros=`cat /proc/cpuinfo | grep processor | wc -l`
 
 #message
 echo Your Core Processor is $pros, Use Compilation speed between 1-$pros
@@ -107,15 +137,17 @@ read -p "Compilation Speed : " ospeed
 read -p "Give Your Brand package : " obrand
 
 
-#making template for compiling
-klise
-
-
-#determinate core cpu 
+#determinate core cpu
+pros=`cat /proc/cpuinfo | grep processor | wc -l`
 if [ $ospeed>=$pros ]
 then
 pros=2
 fi
+
+
+
+#making template for compiling
+klise
 
 
 #compile
@@ -139,7 +171,7 @@ cat $CWD/slack-desc > $PKG/install/slack-desc
 
 #Process copy file
 cp  -rf template/* $PKG/usr/share/ignsdk/template/
-cp ignsdk $PKG/usr/bin/
+cp bin/ignsdk $PKG/usr/bin/
 cp -rf css $PKG/usr/share/ignsdk/
 cp -rf js $PKG/usr/share/ignsdk/
 cp -rf test/*  $PKG/usr/share/ignsdk/test/

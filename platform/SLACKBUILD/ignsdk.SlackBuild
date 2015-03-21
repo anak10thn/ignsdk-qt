@@ -54,7 +54,7 @@ rm -rf $PRGNAM
 
 #choose download source code
 menu_download(){
-	echo -e "#########IGNSDK BUILD SLACKWARE#########
+	echo -e "#########IGNSDK BUILD SLACKWARE##########
 	1. Clone github
 	2. Compress zip github
 	3. Cancel Download Build ";
@@ -85,6 +85,8 @@ menu_download(){
 			unzip master.zip
 			mv ignsdk-qt-master $PRGNAM
 			cd $PRGNAM
+			git branch slack-$VERSION $VERSION
+			git checkout slack-$VERSION
 			fi
 		;;
 		3 ) 
@@ -108,8 +110,8 @@ find . \
 
 #search QT on /opt and lib
 klise(){
-	qt=`ls /opt | grep -i qt`
-	versionqt=`ls /opt | grep -i qt |  tr -d  '[:alpha:]' | sed 's/..$//g'`
+	qt=`ls /opt | grep -i qt5`
+	versionqt=`ls /opt | grep -i qt5 |  tr -d  '[:alpha:]' | sed 's/..$//g'`
 
 	if [ -d /opt/$qt/$versionqt/gcc_64/ ]
 	then
@@ -124,7 +126,7 @@ klise(){
 	then
 		qmake
 	else
-		echo "update your QT"
+		echo "update your QT 5.4.1"
 		read -p " Press Enter to Exit " 
 	exit 
 	fi
@@ -132,14 +134,14 @@ klise(){
 
 
 #message
+pros=`cat /proc/cpuinfo | grep processor | wc -l`;
 echo Your Core Processor is $pros, Use Compilation speed between 1-$pros
 read -p "Compilation Speed : " ospeed
 read -p "Give Your Brand package : " obrand
 
 
 #determinate core cpu
-pros=`cat /proc/cpuinfo | grep processor | wc -l`
-if [ $ospeed>=$pros ]
+if [ $ospeed -gt $pros ]
 then
 pros=2
 fi
@@ -201,7 +203,7 @@ fi
 cd $PKG
 if [ -z $obrand ]
 then
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tlz}
 else
-/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$obrand-$BUILD$TAG.${PKGTYPE:-tgz}
+/sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$obrand-$BUILD$TAG.${PKGTYPE:-tlz}
 fi

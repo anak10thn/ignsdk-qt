@@ -119,6 +119,8 @@ public slots:
     //ignsdk print
     bool print(const QVariant &config);
     bool print();
+    //init new window
+    void window(const QString &url);
 };
 
 #endif // IGN_H

@@ -35,8 +35,11 @@ int main(int argc, char *argv[])
     cmd_parser.process(a);
 
     if (cmd_parser.isSet(cmd_version)) {
-      printf("IGNSDK version %s (%s). Compiled on %s %s. Maintained by %s.\n", IGNSDK_VERSION, IGNSDK_CODENAME, __DATE__, __TIME__, IGNSDK_MAINTAINER);
-      exit(0);
+        printf("IGNSDK version %s (%s). Compiled on %s %s. Maintained by %s.\n", IGNSDK_VERSION, IGNSDK_CODENAME, __DATE__, __TIME__, IGNSDK_MAINTAINER);
+        exit(0);
+    }
+    else{
+        w.init();
     }
 
     url = cmd_parser.value(cmd_project);
@@ -70,10 +73,6 @@ int main(int argc, char *argv[])
             opt += "/";
             opt += optional;
         }
-        else {
-            opt += "/index.html";
-        }
-        w.init();
         w.render(opt);
         w.config(url);
         w.show();
@@ -94,13 +93,11 @@ int main(int argc, char *argv[])
         if (result)
         {
             directory = fd->selectedFiles()[0];
-            w.init();
             w.config(directory);
-            w.render(directory+"/index.html");
+            w.render(directory);
             w.show();
         }
         else {
-            w.init();
             w.render("http://www.igos-nusantara.or.id");
             w.show();
         }

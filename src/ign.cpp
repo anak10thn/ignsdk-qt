@@ -53,31 +53,34 @@ void ign::init(){
     web->page()->action(QWebPage::Stop)->setVisible(false);
 }
 
+void ign::window(const QString &url){
+    QVariantMap uri = m_filesystem->info(url).toMap();
+    QString path = uri["absoluteFilePath"].toString();
+    this->init();
+    this->config(path);
+    this->render(url);
+    this->show();
+}
+
 void ign::ignJS(){
     this->frame->addToJavaScriptWindowObject("ign",this);
 }
 
 void ign::render(QString w){
-    QString pwd("");
     QString url_fix;
-    char * PWD;
-    PWD = getenv ("PWD");
-    pwd.append(PWD);
     QStringList url_exp = w.split("/");
+    QVariantMap uri = m_filesystem->info(w).toMap();
+    QString path = uri["absoluteFilePath"].toString();
     if(url_exp.at(0) == "http:" || url_exp.at(0) == "https:"){
         url_fix = w;
     }
-    else if(url_exp.at(0) == ".." || url_exp.at(0) == "."){
-        url_fix = "file://"+pwd+"/"+w;
-        this->pathLive = pwd+"/"+w;
-    }
-    else if(url_exp.at(0) == ""){
-        url_fix = "file://"+w;
-        this->pathLive = w;
-    }
-    else {
-        url_fix = "file://"+pwd+"/"+w;
-        this->pathLive = pwd+"/"+w;
+    else{
+        if(uri["isDir"].toBool()){
+            url_fix = "file://"+path+"/index.html";
+        }
+        else{
+            url_fix = "file://"+path;
+        }
     }
     this->web->load(url_fix);
 }

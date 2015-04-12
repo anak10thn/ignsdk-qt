@@ -17,39 +17,40 @@ ign::ign(QObject *parent)
 {
     this->version = QString(IGNSDK_VERSION);
     this->debugging = false;
-    frame = web.page()->mainFrame();
-    connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
     this->dl = new QtDownload;
+    fullscreen = false;
+}
 
+void ign::init(){
+    web = new QWebView;
+    frame = web->page()->mainFrame();
+    connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
+    //settings
     QWebSettings::globalSettings()->setAttribute(QWebSettings::PluginsEnabled, true);
-    web.settings()->setAttribute(QWebSettings::PluginsEnabled, true);
-    web.settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
-    web.settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
-    web.settings()->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
-    web.settings()->setAttribute(QWebSettings::JavascriptEnabled,true);
-    web.settings()->setAttribute(QWebSettings::JavascriptCanOpenWindows,true);
-    web.settings()->setAttribute(QWebSettings::JavascriptCanAccessClipboard,true);
-    web.settings()->setAttribute(QWebSettings::JavaEnabled,true);
-    web.settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled,true);
-    web.settings()->setAttribute(QWebSettings::WebGLEnabled,true);
-    web.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,false);
+    web->settings()->setAttribute(QWebSettings::PluginsEnabled, true);
+    web->settings()->setAttribute(QWebSettings::LocalStorageEnabled, true);
+    web->settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, true);
+    web->settings()->setAttribute(QWebSettings::OfflineWebApplicationCacheEnabled, true);
+    web->settings()->setAttribute(QWebSettings::JavascriptEnabled,true);
+    web->settings()->setAttribute(QWebSettings::JavascriptCanOpenWindows,true);
+    web->settings()->setAttribute(QWebSettings::JavascriptCanAccessClipboard,true);
+    web->settings()->setAttribute(QWebSettings::JavaEnabled,true);
+    web->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled,true);
+    web->settings()->setAttribute(QWebSettings::WebGLEnabled,true);
+    web->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,false);
     //webstorage
     QString home = QDir::homePath();
     home += "/.ignsdk";
-    web.settings()->setLocalStoragePath(home);
-    web.settings()->enablePersistentStorage(home);
-    web.settings()->setOfflineWebApplicationCachePath(home);
+    web->settings()->setLocalStoragePath(home);
+    web->settings()->enablePersistentStorage(home);
+    web->settings()->setOfflineWebApplicationCachePath(home);
     //stylesheet default
-    web.settings()->setUserStyleSheetUrl(QUrl("qrc:/css/ign.css"));
+    web->settings()->setUserStyleSheetUrl(QUrl("qrc:/css/ign.css"));
     //config mode disable
-    web.page()->action(QWebPage::Back)->setVisible(false);
-    web.page()->action(QWebPage::Forward)->setVisible(false);
-    web.page()->action(QWebPage::Reload)->setVisible(false);
-    web.page()->action(QWebPage::Stop)->setVisible(false);
-    //set fullscrean mode default to false
-    fullscreen = false;
-
-    //web.setWindowOpacity(0.1);
+    web->page()->action(QWebPage::Back)->setVisible(false);
+    web->page()->action(QWebPage::Forward)->setVisible(false);
+    web->page()->action(QWebPage::Reload)->setVisible(false);
+    web->page()->action(QWebPage::Stop)->setVisible(false);
 }
 
 void ign::ignJS(){
@@ -78,23 +79,23 @@ void ign::render(QString w){
         url_fix = "file://"+pwd+"/"+w;
         this->pathLive = pwd+"/"+w;
     }
-    this->web.load(url_fix);
+    this->web->load(url_fix);
 }
 
 void ign::setUrl(const QString &url){
-    this->web.setUrl(QUrl(url));
+    this->web->setUrl(QUrl(url));
 }
 
 void ign::show(){
-    this->web.show();
+    this->web->show();
 }
 
 void ign::showMaximized(){
-    this->web.showMaximized();
+    this->web->showMaximized();
 }
 
 void ign::showMinimized(){
-    this->web.showMinimized();
+    this->web->showMinimized();
 }
 
 void ign::showMessage(const QString &msg)
@@ -108,44 +109,44 @@ void ign::quit(){
 }
 
 void ign::back(){
-    this->web.page()->triggerAction(QWebPage::Back,true);
+    this->web->page()->triggerAction(QWebPage::Back,true);
 }
 
 void ign::forward(){
-    this->web.page()->triggerAction(QWebPage::Forward,true);
+    this->web->page()->triggerAction(QWebPage::Forward,true);
 }
 
 void ign::stop(){
-    this->web.page()->triggerAction(QWebPage::Stop,true);
+    this->web->page()->triggerAction(QWebPage::Stop,true);
 }
 
 void ign::reload(){
-    this->web.page()->triggerAction(QWebPage::Reload,true);
+    this->web->page()->triggerAction(QWebPage::Reload,true);
 }
 
 void ign::cut(){
-    this->web.page()->triggerAction(QWebPage::Cut,true);
+    this->web->page()->triggerAction(QWebPage::Cut,true);
 }
 
 void ign::copy(){
-    this->web.page()->triggerAction(QWebPage::Copy,true);
+    this->web->page()->triggerAction(QWebPage::Copy,true);
 }
 
 void ign::paste(){
-    this->web.page()->triggerAction(QWebPage::Paste,true);
+    this->web->page()->triggerAction(QWebPage::Paste,true);
 }
 
 void ign::undo(){
-    this->web.page()->triggerAction(QWebPage::Undo,true);
+    this->web->page()->triggerAction(QWebPage::Undo,true);
 }
 
 void ign::redo(){
-    this->web.page()->triggerAction(QWebPage::Redo,true);
+    this->web->page()->triggerAction(QWebPage::Redo,true);
 }
 
 /* debuging mode */
 void ign::setDev(bool v){
-    this->web.settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, v);
+    this->web->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, v);
     this->debugging = true;
 }
 
@@ -165,60 +166,60 @@ void ign::setDevRemote(int port){
         }
     qDebug() << "Remote debugging is enable : "<< server.toUtf8();
     qputenv("QTWEBKIT_INSPECTOR_SERVER", server.toUtf8());
-    this->web.page()->setProperty("_q_webInspectorServerPort",port);
+    this->web->page()->setProperty("_q_webInspectorServerPort",port);
 }
 
 /* web security */
 void ign::websecurity(bool c){
-    web.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,c);
+    web->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,c);
 }
 /* window config */
 void ign::widgetSizeMax(int w, int h){
-    this->web.setMaximumSize(w,h);
+    this->web->setMaximumSize(w,h);
 }
 
 void ign::widgetSizeMin(int w, int h){
-    this->web.setMinimumSize(w,h);
+    this->web->setMinimumSize(w,h);
 }
 
 void ign::widgetSize(int w, int h){
-    this->web.resize(w,h);
+    this->web->resize(w,h);
 }
 
 void ign::widgetNoFrame(){
-    this->web.setWindowFlags(Qt::FramelessWindowHint);
+    this->web->setWindowFlags(Qt::FramelessWindowHint);
 }
 
 void ign::widgetNoTaskbar(){
-    this->web.setWindowFlags(this->web.windowFlags() | Qt::Tool);
+    this->web->setWindowFlags(this->web->windowFlags() | Qt::Tool);
 }
 
 void ign::widgetTransparent(){
-    QPalette pal = this->web.palette();
+    QPalette pal = this->web->palette();
     pal.setBrush(QPalette::Base, Qt::transparent);
-    this->web.setPalette(pal);
-    this->web.setAttribute(Qt::WA_OpaquePaintEvent, false);
-    this->web.setAttribute(Qt::WA_TranslucentBackground, true);
+    this->web->setPalette(pal);
+    this->web->setAttribute(Qt::WA_OpaquePaintEvent, false);
+    this->web->setAttribute(Qt::WA_TranslucentBackground, true);
 }
 
 void ign::getToggleFullScreen(){
     if(this->fullscreen){
-        this->web.showNormal();
+        this->web->showNormal();
         this->fullscreen = false;
     }
     else{
-        this->web.showFullScreen();
+        this->web->showFullScreen();
         this->fullscreen = true;
     }
 }
 
 void ign::getFullScreen(bool screen){
     if(screen){
-        this->web.showFullScreen();
+        this->web->showFullScreen();
         this->fullscreen = true;
     }
     else {
-        this->web.showNormal();
+        this->web->showNormal();
         this->fullscreen = false;
     }
 }
@@ -352,7 +353,7 @@ void ign::config(QString path){
             this->websecurity(true);
         }
         if(configure["name"].toString() != ""){
-            this->web.setWindowTitle(configure["name"].toString());
+            this->web->setWindowTitle(configure["name"].toString());
         }
 
         QVariantMap window = result["window"].toMap();
@@ -380,16 +381,16 @@ void ign::config(QString path){
         foreach (QVariant button, result["button"].toList()) {
 
           if (button.toString() == "back"){
-              web.page()->action(QWebPage::Back)->setVisible(true);
+              web->page()->action(QWebPage::Back)->setVisible(true);
           }
           if (button.toString() == "forward"){
-              web.page()->action(QWebPage::Forward)->setVisible(true);
+              web->page()->action(QWebPage::Forward)->setVisible(true);
           }
           if (button.toString() == "stop"){
-              web.page()->action(QWebPage::Stop)->setVisible(true);
+              web->page()->action(QWebPage::Stop)->setVisible(true);
           }
           if (button.toString() == "reload"){
-              web.page()->action(QWebPage::Reload)->setVisible(true);
+              web->page()->action(QWebPage::Reload)->setVisible(true);
           }
 
         }
@@ -425,7 +426,7 @@ void ign::download_signal(qint64 recieved, qint64 total){
 /*javascript evaluate include external script*/
 void ign::include(QString path){
     QString script = this->m_filesystem->fileRead(path);
-    this->web.page()->mainFrame()->evaluateJavaScript(script);
+    this->web->page()->mainFrame()->evaluateJavaScript(script);
 }
 
 /*IGN SQL*/

@@ -30,7 +30,7 @@ class ign: public QObject
 {
     Q_OBJECT
 private:
-    QWebView web;
+    QWebView *web;
     QWebFrame *frame;
     bool fullscreen;
     QtDownload *dl;
@@ -43,6 +43,7 @@ private:
 
 public:
     ign(QObject *parent = 0);
+    void init();
     void render(QString w);
     void show();
     void widgetNoFrame();
@@ -61,7 +62,7 @@ private slots:
     void fileChanged(const QString& path) {
         qDebug() << "Changes detected on" << path;
         QThread::msleep(50);
-        this->web.page()->triggerAction(QWebPage::Reload,true);
+        web->page()->triggerAction(QWebPage::Reload,true);
     }
 
 public slots:

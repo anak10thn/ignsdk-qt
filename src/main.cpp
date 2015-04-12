@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
         else {
             opt += "/index.html";
         }
-
+        w.init();
         w.render(opt);
         w.config(url);
         w.show();
@@ -94,11 +94,13 @@ int main(int argc, char *argv[])
         if (result)
         {
             directory = fd->selectedFiles()[0];
+            w.init();
             w.config(directory);
             w.render(directory+"/index.html");
             w.show();
         }
         else {
+            w.init();
             w.render("http://www.igos-nusantara.or.id");
             w.show();
         }

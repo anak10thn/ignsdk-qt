@@ -241,3 +241,16 @@ QVariant fs::info(const QString &path){
     QJsonDocument json_enc = QJsonDocument::fromVariant(map);
     return json_enc.toVariant();
 }
+
+void fs::watcher(const QString &path){
+    QFileInfo PATH(path);
+    if(PATH.exists()){
+        WATCH.addPath(path);
+        connect(&WATCH,SIGNAL(fileChanged(QString)),this,SLOT(SLOT_WATCH(QString)));
+        connect(&WATCH,SIGNAL(directoryChanged(QString)),this,SLOT(SLOT_WATCH(QString)));
+    }
+}
+
+void fs::SLOT_WATCH(const QString &path){
+    emit watch(path);
+}

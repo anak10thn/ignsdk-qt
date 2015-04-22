@@ -16,6 +16,7 @@
 #include <QJsonArray>
 #include <QJsonParseError>
 #include <QDateTime>
+#include <QFileSystemWatcher>
 #include "ignjson.h"
 
 class fs : public QObject
@@ -25,9 +26,10 @@ class fs : public QObject
 public:
     fs(QObject *parent = 0);
     ignjson *json;
+    QFileSystemWatcher WATCH;
 
 signals:
-
+    void watch(const QString &path);
 public slots:
     bool fileRemove(const QString& path);
     QString appPath();
@@ -51,6 +53,8 @@ public slots:
     QString saveFileDialog(const QVariant &config);
     QStringList list(const QString &path);
     QVariant info(const QString &path);
+    void watcher(const QString &path);
+    void SLOT_WATCH(const QString &path);
 };
 
 #endif // FS_H

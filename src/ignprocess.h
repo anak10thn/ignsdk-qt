@@ -16,6 +16,7 @@ signals:
 
 public slots:
     void exec(const QString& cli);
+    void write(const QString &str);
     void _out();
     void kill();
     int pid();

@@ -15,7 +15,7 @@ void ignprocess::exec(const QString &cli){
 
 void ignprocess::write(const QString &str){
     QByteArray data(str.toStdString().c_str());
-    //qDebug() << "Write " << this->proc.write(data) << "byte data";
+    qDebug() << "Write " << this->proc.write(data) << "byte data";
 }
 
 void ignprocess::_out(){

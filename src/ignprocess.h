@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QDebug>
 
 class ignprocess : public QObject
 {

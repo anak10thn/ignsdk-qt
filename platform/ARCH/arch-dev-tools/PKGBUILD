@@ -4,8 +4,8 @@
 #Sofyan Saputra/Iank (meongbego@gmail.com)
 
 pkgname=ignsdk-dev-tools
-pkgver=1.1.6
-pkgrel=021114
+pkgver=1.1.7
+pkgrel=160815
 pkgdesc="IGN Software Development Kit Developer Tools"
 url="https://github.com/anak10thn/ignsdk-qt"
 arch=('x86_64' 'i686')

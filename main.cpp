@@ -4,7 +4,11 @@
 #include <QtWebKitWidgets/QWebView>
 #include <QFileDialog>
 #include <iostream>
+#if WIN32
+#include "wingetopt.h"
+#else
 #include <getopt.h>
+#endif
 using namespace std;
 int main(int argc, char *argv[])
 {

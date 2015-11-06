@@ -18,7 +18,7 @@ public slots:
     void exec(const QString& cli);
     void _out();
     void kill();
-    int pid();
+    Q_PID pid();
 };
 
 #endif // IGNPROCESS_H

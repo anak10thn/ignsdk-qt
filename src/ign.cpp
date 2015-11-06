@@ -38,9 +38,14 @@ ign::ign(QObject *parent)
     home += "/.ignsdk";
     web.settings()->setLocalStoragePath(home);
     web.settings()->enablePersistentStorage(home);
+#ifdef WIN32
+    // todo : wejick temporary disable application caches, it's crashing on windows
+#else
     web.settings()->setOfflineWebApplicationCachePath(home);
+#endif
     //stylesheet default
     web.settings()->setUserStyleSheetUrl(QUrl("qrc:/css/ign.css"));
+
     //config mode disable
     web.page()->action(QWebPage::Back)->setVisible(false);
     web.page()->action(QWebPage::Forward)->setVisible(false);
@@ -59,8 +64,8 @@ void ign::ignJS(){
 void ign::render(QString w){
     QString pwd("");
     QString url_fix;
-    char * PWD;
-    PWD = getenv ("PWD");
+    QString  PWD;
+    PWD = qgetenv ("PWD");
     pwd.append(PWD);
     QStringList url_exp = w.split("/");
     if(url_exp.at(0) == "http:" || url_exp.at(0) == "https:"){
@@ -73,6 +78,11 @@ void ign::render(QString w){
     else if(url_exp.at(0) == ""){
         url_fix = "file://"+w;
         this->pathLive = w;
+    }
+    else if(url_exp.at(0).contains(":")) // for windows' full path, drive letter with ":" eg. "E:"
+    {
+        url_fix = "file:///"+w;
+        this->pathLive = pwd+"/"+w;
     }
     else {
         url_fix = "file://"+pwd+"/"+w;

@@ -1,2 +1,8 @@
 .DS_Store
 ign.pro.user*
+build/
+bin/ignsdk
+bin/ignsdk.app/
+Makefile
+.qmake.stash
+qrc_ign.cpp

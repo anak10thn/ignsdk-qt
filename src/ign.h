@@ -33,10 +33,10 @@ private:
     QWebView web;
     QWebFrame *frame;
     bool fullscreen;
-    fs *m_filesystem;
     QtDownload *dl;
     ignsql *m_sqldrv;
     ignsystem *m_ignsystem;
+    fs *m_filesystem;
     ignnetwork *m_ignnetwork;
     QPoint offset;
     bool mMoving;
@@ -59,7 +59,7 @@ signals:
 
 private slots:
     void fileChanged(const QString& path) {
-        qDebug() << "directory changed: " << path;
+        qDebug() << "Changes detected on" << path;
         QThread::msleep(50);
         this->web.page()->triggerAction(QWebPage::Reload,true);
     }
@@ -103,6 +103,8 @@ public slots:
     void saveFile(const QByteArray &data, QString filename, QString path);
     void download(QString data, QString path);
     void download_signal(qint64 recieved, qint64 total);
+    //javascript evaluate include external script
+    void include(QString path);
     //ign filesystem
     QObject *filesystem();
     //ign sql
@@ -113,6 +115,9 @@ public slots:
     QObject *net();
     //ignsdk version
     QString sdkVersion();
+    //ignsdk print
+    bool print(const QVariant &config);
+    bool print();
 };
 
 #endif // IGN_H

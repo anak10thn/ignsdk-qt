@@ -1,7 +1,7 @@
 Summary:IGOS Nusantara SDK
 Name:ignsdk
-Version:1.1.5
-Release:20140512
+Version:1.1.7
+Release:20150311
 License:BSD
 Group:System Environment/Base
 URL:http://igos-nusantara.or.id
@@ -9,8 +9,13 @@ Source0:http://github.com/anak10thn/ignsdk-qt/archive/master.zip
 BuildRoot:%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:qt5-qtwebkit
 Requires:qt5-qtbase-mysql
+Requires:qt5-qtdeclarative
+Requires:qt5-qtxmlpatterns
+Requires:qt5-qtserialport
 BuildRequires:qt5-qtwebkit-devel
 BuildRequires:gcc-c++
+BuildRequires:qt5-qtdeclarative-devel
+BuildRequires:qt5-qtserialport-devel
 %description
 IGOS Nusantara  Software Development Kit
 
@@ -35,7 +40,7 @@ install -d -m 755 $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 install -d -m 755 $RPM_BUILD_ROOT/usr/share/man/man1
 qmake-qt5
 make
-cp -rf ignsdk $RPM_BUILD_ROOT/usr/bin
+cp -rf bin/ignsdk $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-app-creator $RPM_BUILD_ROOT/usr/bin
 cp -rf bin/ignsdk-ign-creator $RPM_BUILD_ROOT/usr/share/ign-sdk/bin
 cp -rf bin/ignsdk-app-builder $RPM_BUILD_ROOT/usr/bin
@@ -171,6 +176,24 @@ rm -rf $RPM_BUILD_ROOT
 %doc %{_mandir}/man1/ignsdk-app-creator.1.gz
 
 %changelog
+* Wed Mar 11 2015 ibnu yahya <anak10thn@gmail.com>
+- UPDATE : version 1.1.7
+- NEW API : SQL
+- NEW API : SERIAL PORT
+
+* Tue Feb 24 2015 ibnu yahya <anak10thn@gmail.com>
+- UPDATE : version 1.1.7 alpha
+- NEW API : print
+- NEW API : json parser
+
+* Wed Oct 15 2014 ibnu yahya <linux@toroo.org>
+- UPDATE : version 1.1.6
+- NEW API : Include Javascript Evaluate #138
+- NEW API : Save File Dialog #137
+- FIX BUGS : Read File #136
+- FIX BUGS : Exec Function #133
+- FIX BUGS : setUrl #132
+
 * Mon May 12 2014 ibnu yahya <linux@toroo.org>
 - FIX : live preview
 - UDPATE : final version 1.1.5 

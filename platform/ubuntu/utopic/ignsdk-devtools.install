@@ -6,5 +6,5 @@ bin/ignsdk-ign-creator /usr/share/ign-sdk/bin/
 bin/ignsdk-ign-builder /usr/share/ign-sdk/bin/
 dist/ignsdk-dist /etc/
 template /usr/share/ign-sdk/
-doc/ignsdk-app-creator.1.gz /usr/share/man/man1/
-doc/ignsdk-app-builder.1.gz /usr/share/man/man1/
+doc/ignsdk-app-creator.1 /usr/share/man/man1/
+doc/ignsdk-app-builder.1 /usr/share/man/man1/

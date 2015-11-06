@@ -1,3 +1,48 @@
+ignsdk-debian (1.1.6.99+build2) testing; urgency=medium
+
+  * Add test/print.ign to demonstrate print support API
+  * Add test/basic.ign to demonstrate basic APIs
+  * Move *.cpp and *.h to src/
+  * Move build objects to build/ and resulting binary to bin/ignsdk
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 24 Feb 2015 07:54:12 +0700
+
+ignsdk-debian (1.1.6.99+build1) testing; urgency=medium
+
+  * New API: print()
+  * New API: hashFile()
+  * New API: showMessageBox()
+  * Use UTF8 instead of Latin1 in hash() API
+  * Add SHA3 algorithm in hash() API
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 23 Feb 2015 03:03:56 +0700
+
+ignsdk-debian (1.1.6) testing; urgency=medium
+
+  * Fix bug on readFile() API (Closed #136)
+  * New API: saveFileDialog() (Closed #137)
+  * Include JavascriptEvaluate (Closed #138)
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sun, 02 Nov 2014 10:40:17 +0700
+
+ignsdk-debian (1.1.5.99+build3) testing; urgency=medium
+
+  * debian/control: Remove unnecessary lines (Breaks, Replaces, Provides)
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Sun, 14 Sep 2014 07:58:22 +0700
+
+ignsdk-debian (1.1.5.99+build2) testing; urgency=medium
+
+  * Rebuild against new Qt version
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 17 Jun 2014 19:28:50 +0700
+
+ignsdk-debian (1.1.5.99+build1) testing; urgency=medium
+
+  * Improved API: concurrent .exec() output
+
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Wed, 28 May 2014 14:14:45 +0700
+
 ignsdk-debian (1.1.5.1) testing; urgency=medium
 
   * Add live preview feature

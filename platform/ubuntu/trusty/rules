@@ -4,10 +4,13 @@ export DH_VERBOSE=1
 %:
 	dh $@
 
+override_dh_auto_configure:
+	qmake
+
 override_dh_auto_build:
-	if [ -f /usr/bin/clang++ ]; then CXX=clang++ LINK=clang++ make -j2 -e; else make -j2; fi
+	make
 
 override_dh_auto_install:
 	dh_testdir
 	dh_testroot
-	mv ignsdk $$(pwd)/debian/ignsdk/usr/bin/
+	mv bin/ignsdk $$(pwd)/debian/ignsdk/usr/bin/

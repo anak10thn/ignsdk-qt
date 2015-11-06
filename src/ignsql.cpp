@@ -25,7 +25,40 @@ bool ignsql::driver(const QString &drv, QString connect){
         this->db.setDatabaseName(connect);
         return this->db.open();
     }
+    else{
+        return false;
+    }
 
+}
+
+bool ignsql::driver(const QVariant &config){
+    QVariantMap conf = json->jsonParser(config).toVariantMap();
+    QString drv = conf["driver"].toString();
+    QString host = conf["hostname"].toString();
+    QString user = conf["username"].toString();
+    QString pass = conf["password"].toString();
+    QString dbase = conf["db"].toString();
+    if(drv == "mysql"){
+        this->db = QSqlDatabase::addDatabase("QMYSQL");
+        this->db.setHostName(host);
+        this->db.setUserName(user);
+        this->db.setPassword(pass);
+        this->db.setDatabaseName(dbase);
+        return this->db.open();
+    }
+    else if (drv == "sqlite2"){
+        this->db = QSqlDatabase::addDatabase("QSQLITE2");
+        this->db.setDatabaseName(dbase);
+        return this->db.open();
+    }
+    else if (drv == "sqlite"){
+        this->db = QSqlDatabase::addDatabase("QSQLITE");
+        this->db.setDatabaseName(dbase);
+        return this->db.open();
+    }
+    else{
+        return false;
+    }
 }
 
 QVariant ignsql::query(const QString &qr){

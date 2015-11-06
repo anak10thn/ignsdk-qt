@@ -1,14 +1,14 @@
-ignsdk-debian (1.1.6.99+trusty2) trusty; urgency=medium
+ignsdk-debian (1.1.6.99+vivid2) vivid; urgency=medium
 
-  * Build for Trusty
+  * Build for Vivid
 
- -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 24 Feb 2015 07:59:37 +0700
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Tue, 24 Feb 2015 08:01:22 +0700
 
-ignsdk-debian (1.1.6.99+trusty1) trusty; urgency=medium
+ignsdk-debian (1.1.6.99+vivid1) vivid; urgency=medium
 
-  * Build for Trusty
+  * Build for Vivid
 
- -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 23 Feb 2015 03:19:11 +0700
+ -- Surya Handika Putratama <ubunteroz@gmail.com>  Mon, 23 Feb 2015 03:40:01 +0700
 
 ignsdk-debian (1.1.6.99+build1) testing; urgency=medium
 

@@ -18,12 +18,12 @@ bool fs::fileWrite(const QString &path, const QString &data){
     if (file.open(QIODevice::WriteOnly | QIODevice::Text)){
         QTextStream out(&file);
         out << data;
+        file.close();
         return true;
     }
     else {
         return false;
     }
-    file.close();
 }
 
 QString fs::fileRead(const QString &path){
@@ -36,13 +36,17 @@ QString fs::fileRead(const QString &path){
             fields.append(out.readLine());
 
         }*/
-        QString data = out.readLine();
+        QString data = out.readAll();
         /*foreach (const QString text, fields){
-            qDebug() << text.toStdString();
+            qDebug() << text.toUtf8();
         }*/
         file.close();
-
+        //return fields;
         return data;
+    }
+    else {
+        qDebug()<< "Err : File not found";
+        return "";
     }
 }
 
@@ -62,6 +66,9 @@ bool fs::dir(const QString &opt, const QString &path){
     }
     else if(opt == "remove"){
         return dir.rmdir(path);
+    }
+    else{
+        return false;
     }
 }
 
@@ -121,7 +128,7 @@ QString fs::openFileDialog(){
         return directory;
     }
     else {
-        return false;
+        return "";
     }
 }
 
@@ -142,6 +149,38 @@ QString fs::openDirDialog(){
         directory = fd->selectedFiles()[0];
         return directory;
     }
+    else {
+        return "";
+    }
+}
+
+QString fs::saveFileDialog(){
+    QFileDialog *fd = new QFileDialog;
+    QString directory = fd->getSaveFileName();
+    return directory;
+}
+
+QString fs::saveFileDialog(const QVariant &config){
+    QVariantMap conf = json->jsonParser(config).toVariantMap();
+    QString title = "Save File",
+            path = this->homePath(),
+            ext = "";
+    if(conf["title"].toString() != ""){
+        title = conf["title"].toString();
+    }
+
+    if(conf["path"].toString() != ""){
+        path = conf["path"].toString();
+    }
+
+    if(conf["type"].toString() != ""){
+        ext = conf["type"].toString();
+    }
+
+    QFileDialog *fd = new QFileDialog;
+    QWidget *widget = new QWidget();
+    QString directory = fd->getSaveFileName(widget, title,path,ext);
+    return directory;
 }
 
 QStringList fs::list(const QString &path){

@@ -7,23 +7,35 @@
 #include <QCryptographicHash>
 #include <QDesktopServices>
 #include <QUrl>
+#include <QDebug>
+#include <QTextDocument>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include "ignjson.h"
+#include "ignprocess.h"
+#include "ignserial.h"
+
 class ignsystem : public QObject
 {
     Q_OBJECT
 public:
     explicit ignsystem(QObject *parent = 0);
-    QProcess *proc;
+    ignjson *jsonParse;
+    ignprocess *proc;
+    ignserial *m_serial;
 
 public slots:
     QString cliOut(const QString& cli);
-    void exec(const QString& cli);
+    QObject *exec(const QString& cli);
+    QVariant serial();
+    QObject *serial(const QVariant &config);
     QString hash(const QString& data, QString hash_func);
     void desktopService(const QString& link);
-    void _out();
-    void kill();
+    bool print(const QVariant &config);
 
 signals:
-    void out(const QString& link);
+
 };
 
 #endif // IGNSYSTEM_H

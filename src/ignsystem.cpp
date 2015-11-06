@@ -2,17 +2,17 @@
 #include <QDebug>
 
 ignsystem::ignsystem(QObject *parent)
-    : QObject(parent)
-{
-
-}
+    : QObject(parent),
+      jsonParse(0),
+      proc(0),
+      m_serial(0){}
 
 QString ignsystem::cliOut(const QString& cli){
     QProcess os;
     os.setProcessChannelMode(QProcess::MergedChannels);
     os.start(cli);
     int pid = os.pid();
-    qDebug() << pid;
+    qDebug() << "Executing process with PID" << pid;
     os.waitForFinished(-1);
     return os.readAllStandardOutput();
 }
@@ -46,20 +46,57 @@ QString ignsystem::hash(const QString &data,QString hash_func){
 }
 
 void ignsystem::desktopService(const QString &link){
-    QDesktopServices ::openUrl(QUrl(link));
+    QDesktopServices::openUrl(QUrl(link));
 }
 
-void ignsystem::exec(const QString& cli){
-    proc = new QProcess( this );
-    proc->setReadChannelMode(QProcess::MergedChannels);
-    connect( proc, SIGNAL(readyReadStandardOutput()), this, SLOT( _out()) );
-    proc->start(cli);
+QObject *ignsystem::exec(const QString& cli){
+    proc = new ignprocess;
+    proc->exec(cli);
+    return proc;
 }
 
-void ignsystem::_out(){
-    emit out(proc->readAllStandardOutput());
+QVariant ignsystem::serial(){
+    m_serial = new ignserial;
+    return m_serial->info();
 }
 
-void ignsystem::kill(){
-    proc->kill();
+QObject *ignsystem::serial(const QVariant &config){
+    m_serial = new ignserial;
+    m_serial->Read(config);
+    return m_serial;
+}
+
+bool ignsystem::print(const QVariant &config){
+    QVariantMap conf = jsonParse->jsonParser(config).toVariantMap();
+    QPrinter print;
+    QTextDocument *doc = new QTextDocument();
+
+    QString type = conf["type"].toString();
+    QString txt = conf["content"].toString();
+    QString out = conf["out"].toString();
+
+    if(type == "html")
+    {
+        doc->setHtml(txt);
+    }
+    else
+    {
+        doc->setPlainText(txt);
+    }
+
+    if(out == "pdf"){
+        print.setOutputFormat(QPrinter::PdfFormat);
+    }
+
+    QPrintDialog *dialog = new QPrintDialog(&print);
+    if (dialog->exec() != QDialog::Accepted)
+    {
+        return false;
+    }
+    else
+    {
+        doc->print(&print);
+        delete doc;
+        return true;
+    }
 }

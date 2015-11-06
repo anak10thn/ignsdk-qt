@@ -5,6 +5,7 @@
 #include "cmath"
 #include <QtCore/QVariant>
 #include <iostream>
+#include "version.h"
 using namespace std;
 
 ign::ign(QObject *parent)
@@ -14,7 +15,7 @@ ign::ign(QObject *parent)
     m_filesystem(0),
     m_ignnetwork(0)
 {
-    this->version = "1.1.6";
+    this->version = QString(IGNSDK_VERSION);
     this->debugging = false;
     frame = web.page()->mainFrame();
     connect(frame,SIGNAL(javaScriptWindowObjectCleared()), SLOT(ignJS()));
@@ -103,7 +104,7 @@ void ign::showMessage(const QString &msg)
 
 /*action trigger*/
 void ign::quit(){
-    this->web.close();
+    exit(1);
 }
 
 void ign::back(){
@@ -421,6 +422,12 @@ void ign::download_signal(qint64 recieved, qint64 total){
     emit downloadProgress(recieved,total);
 }
 
+/*javascript evaluate include external script*/
+void ign::include(QString path){
+    QString script = this->m_filesystem->fileRead(path);
+    this->web.page()->mainFrame()->evaluateJavaScript(script);
+}
+
 /*IGN SQL*/
 QObject *ign::sql(){
     if(!m_sqldrv)
@@ -459,8 +466,11 @@ void ign::liveCode(){
     QDir dirApp = QFileInfo(file).absoluteDir();
     QStringList list = this->m_filesystem->list(dirApp.absolutePath());
     foreach (const QString &file, list) {
-        this->live.addPath(file);
-        //qDebug() << "live preview enable on " << file;
+        if (file != dirApp.absolutePath() + "/.."){
+            this->live.addPath(file);
+            qDebug() << "Monitoring changes on" << file;
+        }
+
     }
     connect(&live,SIGNAL(directoryChanged(const QString &)),
             this, SLOT(fileChanged(const QString &)));
@@ -471,4 +481,23 @@ void ign::liveCode(){
 /*Check version*/
 QString ign::sdkVersion(){
     return this->version;
+}
+
+/*Print API*/
+bool ign::print(const QVariant &config){
+    return this->m_ignsystem->print(config);
+}
+
+bool ign::print(){
+    QPrinter print;
+    QPrintDialog *dialog = new QPrintDialog(&print);
+    if (dialog->exec() != QDialog::Accepted)
+    {
+        return false;
+    }
+    else
+    {
+        frame->print(&print);
+        return true;
+    }
 }

@@ -11,12 +11,23 @@ TEMPLATE = app
 CONFIG += qt
 
 DEFINES *= _FORTIFY_SOURCE=2
+
+!win32{
 QMAKE_CFLAGS_RELEASE -= -O2
 QMAKE_CFLAGS_RELEASE += -O3 -Wformat -Wformat-security -fstack-protector
 QMAKE_CXXFLAGS_RELEASE -= -O2
 QMAKE_CXXFLAGS_RELEASE += -O3 -Wformat -Wformat-security -fstack-protector
 QMAKE_LFLAGS_RELEASE -= -Wl,-O1
 QMAKE_LFLAGS_RELEASE += -Wl,-O3 -Wl,-z,relro -Wl,-z,now -pie
+}
+
+win32 {
+QMAKE_CFLAGS_RELEASE -= -O2
+QMAKE_CFLAGS_RELEASE += /Ox /sdl /Zc:strictStrings-
+QMAKE_CXXFLAGS_RELEASE -= -O2
+QMAKE_CXXFLAGS_RELEASE += /Ox /sdl /Zc:strictStrings-
+QMAKE_LFLAGS_RELEASE -= -Wl,-O1
+}
 
 SOURCES += src/main.cpp\
         src/ign.cpp \

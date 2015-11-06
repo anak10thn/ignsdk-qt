@@ -4,9 +4,15 @@
 #include <QtWebKitWidgets/QWebView>
 #include <QFileDialog>
 #include <iostream>
-#include <getopt.h>
 #include "version.h"
 #include <QCommandLineParser>
+
+#ifdef WIN32
+#include "winopt.h"
+#else
+#include <getopt.h>
+#endif
+
 using namespace std;
 int main(int argc, char *argv[])
 {

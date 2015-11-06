@@ -38,9 +38,14 @@ ign::ign(QObject *parent)
     home += "/.ignsdk";
     web.settings()->setLocalStoragePath(home);
     web.settings()->enablePersistentStorage(home);
+#ifdef WIN32
+    // todo : wejick temporary disable application caches, it's crashing on windows
+#else
     web.settings()->setOfflineWebApplicationCachePath(home);
+#endif
     //stylesheet default
     web.settings()->setUserStyleSheetUrl(QUrl("qrc:/css/ign.css"));
+
     //config mode disable
     web.page()->action(QWebPage::Back)->setVisible(false);
     web.page()->action(QWebPage::Forward)->setVisible(false);

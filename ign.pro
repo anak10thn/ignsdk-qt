@@ -37,7 +37,8 @@ HEADERS  += src/ign.h \
     src/version.h \
     src/ignjson.h \
     src/ignprocess.h \
-    src/ignserial.h
+    src/ignserial.h \
+    src/winopt.h
 
 RESOURCES += \
     ign.qrc

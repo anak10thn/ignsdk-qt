@@ -1,0 +1,26 @@
+var classfs =
+[
+    [ "fs", "classfs.html#adbbad497a915ae736bf292a5cb5fb92b", null ],
+    [ "appPath", "classfs.html#ae50e46a87f55a514d8404333329c44d9", null ],
+    [ "copy", "classfs.html#ab8c21db33725b9b2cfef37bbf6f2ad57", null ],
+    [ "dir", "classfs.html#a08f783ad08037d8354608d4af9716b1a", null ],
+    [ "fileRead", "classfs.html#a3d159962ee52b310e72abfd24983aabb", null ],
+    [ "fileRemove", "classfs.html#a487615943788e2ad877f8cb34b57f732", null ],
+    [ "fileWrite", "classfs.html#a3a0ce4b04c726976116b2e1dae2b1b3a", null ],
+    [ "homePath", "classfs.html#ab559e7e373c8ebd53eb0386fae24d1c1", null ],
+    [ "info", "classfs.html#a37e6dafe50bbf4053b085898e5a71dde", null ],
+    [ "isAbsolute", "classfs.html#a0d45b5a194ff656110610b2006acb53d", null ],
+    [ "isDirectory", "classfs.html#acac108ab097b2d8a94922dcbbbf81e78", null ],
+    [ "isExecutable", "classfs.html#aad7468eea1d4449322bd37e3a7b4beef", null ],
+    [ "isExist", "classfs.html#a41100616e59c2a7a88023572c8209402", null ],
+    [ "isFile", "classfs.html#a324a03ab0030d92e96cb506dda256d55", null ],
+    [ "isReadable", "classfs.html#a0b4f76e24045f591f5c2194f51eff3b7", null ],
+    [ "isSymlink", "classfs.html#a38c3fa6196b926c2104b67de98af96eb", null ],
+    [ "isWritable", "classfs.html#aef740268f258708db13a167fa3e35e29", null ],
+    [ "list", "classfs.html#a434ede4d96d754d4fe6a414d898ca6b4", null ],
+    [ "openDirDialog", "classfs.html#a3ff52bc1c1447963f4857743f3d6691b", null ],
+    [ "openFileDialog", "classfs.html#a64cf6097aab0d43f8dad1235c9f9f59d", null ],
+    [ "saveFileDialog", "classfs.html#aadd5023a186dbf28fc1a6cd3c348349a", null ],
+    [ "saveFileDialog", "classfs.html#ae318df5531e338c61218b0159d2b3df0", null ],
+    [ "json", "classfs.html#ac702762511c408220bd691a52388cab9", null ]
+];
